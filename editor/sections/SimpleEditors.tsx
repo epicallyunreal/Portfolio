@@ -225,6 +225,8 @@ export function MetaEditor({
       draft.x_meta[key] = value
     })
   const order = meta.sectionOrder
+  const headlines = meta.headlines
+  const headlineOps = listOps(headlines, (next) => set('headlines', next))
 
   const move = (index: number, delta: number) => {
     const target = index + delta
@@ -236,9 +238,48 @@ export function MetaEditor({
 
   return (
     <div className="space-y-6">
-      <Field label="Site headline" hint="Typed under the name in the hero.">
-        <TextInput value={meta.headline} onChange={(v) => set('headline', v)} />
-      </Field>
+      <div>
+        <h2 className="mb-1 font-mono text-sm uppercase tracking-wider text-faint">
+          Site headlines
+        </h2>
+        <p className="mb-3 text-xs text-faint">
+          Typed under the name in the hero, one every five seconds. A single entry types once and
+          stays. The first is also the page&apos;s og:description.
+        </p>
+        <div className="space-y-4">
+          {headlines.map((line, i) => (
+            <EntryCard
+              key={i}
+              title={line.text}
+              index={i}
+              count={headlines.length}
+              onMove={(d) => headlineOps.move(i, d)}
+              onRemove={() => headlineOps.remove(i)}
+            >
+              <Field label="Text">
+                <TextInput
+                  value={line.text}
+                  onChange={(v) => headlineOps.set(i, { ...line, text: v })}
+                />
+              </Field>
+              <Field
+                label="Emphasis"
+                hint="Words inside the line to light up. Must appear in the text exactly, or the save fails."
+              >
+                <TextInput
+                  value={line.emphasis ?? ''}
+                  onChange={(v) =>
+                    headlineOps.set(i, v ? { ...line, emphasis: v } : { text: line.text })
+                  }
+                />
+              </Field>
+            </EntryCard>
+          ))}
+        </div>
+        <div className="mt-3">
+          <Btn onClick={() => headlineOps.add({ text: '' })}>+ headline</Btn>
+        </div>
+      </div>
       <Field label="CV headline" hint="Header line in the PDF — usually longer than the site one.">
         <TextInput value={meta.cvHeadline} onChange={(v) => set('cvHeadline', v)} />
       </Field>

@@ -47,7 +47,7 @@ function siteIdentity(): Plugin {
         },
         {
           tag: 'meta',
-          attrs: { property: 'og:description', content: x_meta.headline },
+          attrs: { property: 'og:description', content: x_meta.headlines[0].text },
           injectTo: 'head' as const,
         },
         {

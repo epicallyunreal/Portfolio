@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { formatDate, resume, techAsset } from '../lib/data'
+import { formatDate, orderTech, resume, techAsset } from '../lib/data'
 import './cv.css'
 
 /**
@@ -14,7 +14,8 @@ import './cv.css'
 
 const displayUrl = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
 
-const labels = (keys: string[] = []) => keys.map((k) => techAsset(k).label)
+// Same canonical order as the site, so the CV and the page agree.
+const labels = (keys: string[] = []) => orderTech(keys).map((k) => techAsset(k).label)
 
 function certStatusText(cert: (typeof resume.certificates)[number]): string {
   if (cert.x_statusNote) return cert.x_statusNote

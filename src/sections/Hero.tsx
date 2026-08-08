@@ -3,25 +3,76 @@ import { assets, resume } from '../lib/data'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import { useMediaQuery, DESKTOP_QUERY } from '../hooks/useMediaQuery'
 import { ParticleField } from '../components/ParticleField'
+import type { Headline } from '../lib/types'
 
-/** Types the headline once (not looped); instant under reduced motion. */
-function useTypedText(text: string, enabled: boolean) {
-  const [length, setLength] = useState(enabled ? 0 : text.length)
+const TYPE_MS = 26
+const ERASE_MS = 12
+/** How long each headline owns the line, typing and erasing included. */
+const CYCLE_MS = 5000
+const MIN_HOLD_MS = 900
+
+/**
+ * Types one headline at a time and cycles through them: type, hold, erase,
+ * next. A single headline types once and stays, which is what the site did
+ * before this became a list.
+ *
+ * Under reduced motion nothing rotates — auto-advancing text is the kind of
+ * movement that setting asks us to stop — so the first line is shown outright.
+ */
+function useTypedRotation(lines: Headline[], enabled: boolean) {
+  const [index, setIndex] = useState(0)
+  const [length, setLength] = useState(0)
+  const [erasing, setErasing] = useState(false)
+
+  const line = lines[Math.min(index, lines.length - 1)]
+
   useEffect(() => {
-    if (!enabled) {
-      setLength(text.length)
-      return
+    if (!enabled) return
+    const { text } = line
+
+    if (erasing) {
+      if (length === 0) {
+        setErasing(false)
+        setIndex((i) => (i + 1) % lines.length)
+        return
+      }
+      const timer = setTimeout(() => setLength((n) => n - 1), ERASE_MS)
+      return () => clearTimeout(timer)
     }
-    setLength(0)
-    let i = 0
-    const timer = setInterval(() => {
-      i += 1
-      setLength(i)
-      if (i >= text.length) clearInterval(timer)
-    }, 26)
-    return () => clearInterval(timer)
-  }, [text, enabled])
-  return { typed: text.slice(0, length), done: length >= text.length }
+
+    if (length < text.length) {
+      const timer = setTimeout(() => setLength((n) => n + 1), TYPE_MS)
+      return () => clearTimeout(timer)
+    }
+
+    if (lines.length < 2) return
+    // Whatever is left of the 5s after typing and erasing is the hold; a long
+    // line gets the floor rather than a negative wait.
+    const hold = Math.max(MIN_HOLD_MS, CYCLE_MS - text.length * (TYPE_MS + ERASE_MS))
+    const timer = setTimeout(() => setErasing(true), hold)
+    return () => clearTimeout(timer)
+  }, [enabled, lines, line, length, erasing])
+
+  return enabled ? { line, length } : { line: lines[0], length: lines[0].text.length }
+}
+
+/**
+ * The typed prefix, with the emphasised span lifted only as far as it has been
+ * typed — so the highlight arrives with the characters rather than ahead of it.
+ */
+function TypedLine({ line, length }: { line: Headline; length: number }) {
+  const start = line.emphasis ? line.text.indexOf(line.emphasis) : -1
+  if (start < 0) return <>{line.text.slice(0, length)}</>
+  const end = start + (line.emphasis?.length ?? 0)
+  return (
+    <>
+      {line.text.slice(0, Math.min(length, start))}
+      <span className="headline-emphasis font-semibold text-ink">
+        {line.text.slice(start, Math.min(length, end))}
+      </span>
+      {length > end ? line.text.slice(end, length) : null}
+    </>
+  )
 }
 
 /**
@@ -66,7 +117,8 @@ export function Hero() {
   const desktop = useMediaQuery(DESKTOP_QUERY)
   const { basics, x_meta } = resume
   const headshot = assets.images.headshot
-  const { typed, done } = useTypedText(x_meta.headline, !reduced)
+  const headlines = x_meta.headlines
+  const { line, length } = useTypedRotation(headlines, !reduced)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -92,16 +144,19 @@ export function Hero() {
 
           <p className="mt-4 text-lg font-medium text-muted sm:text-xl">{basics.label}</p>
 
-          {/* The invisible copy reserves the final layout size, so typing never
-              shifts the content below it (CLS). */}
-          <p className="relative mt-6 font-mono text-base text-accent sm:text-lg">
-            <span className="sr-only">{x_meta.headline}</span>
-            <span aria-hidden="true" className="invisible">
-              {x_meta.headline}
-            </span>
-            <span aria-hidden="true" className="absolute inset-0">
-              {typed}
-              {!reduced && !done ? <span className="caret" /> : null}
+          {/* Every headline is stacked invisibly in the same grid cell, so the
+              box is as large as the longest one ever needs and neither typing
+              nor the swap to a longer line shifts the content below (CLS). */}
+          <p className="mt-6 grid font-mono text-base text-accent sm:text-lg">
+            <span className="sr-only">{headlines.map((h) => h.text).join(' ')}</span>
+            {headlines.map((h, i) => (
+              <span key={i} aria-hidden="true" className="invisible col-start-1 row-start-1">
+                {h.text}
+              </span>
+            ))}
+            <span aria-hidden="true" className="col-start-1 row-start-1">
+              <TypedLine line={line} length={length} />
+              {reduced ? null : <span className="caret" />}
             </span>
           </p>
 

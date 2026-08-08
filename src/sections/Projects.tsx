@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { resume } from '../lib/data'
+import { orderTech, resume } from '../lib/data'
 import { filterCardClasses } from '../lib/filterStyles'
 import { sectionItems } from '../lib/sections'
 import { useFilter } from '../hooks/useFilter'
@@ -87,7 +87,7 @@ function ProjectCard({ project }: { project: Project }) {
       <div className="mt-auto flex items-end justify-between gap-4 pt-5">
         {project.x_tech && project.x_tech.length > 0 ? (
           <ul className="flex flex-wrap gap-3" aria-label="Technologies used">
-            {project.x_tech.map((key) => (
+            {orderTech(project.x_tech).map((key) => (
               <li
                 key={key}
                 className={`flex items-center rounded p-0.5 ${

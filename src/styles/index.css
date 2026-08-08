@@ -65,6 +65,12 @@
     animation: caret-blink 0.9s steps(1) infinite;
   }
 
+  /* Emphasised words inside the typed headline — lifted out of the accent
+     colour rather than dimming the rest of the line. */
+  .headline-emphasis {
+    text-shadow: 0 0 18px rgba(34, 211, 238, 0.45);
+  }
+
   /* Availability dot: gentle service-health pulse. */
   .status-dot {
     animation: status-pulse 2.4s ease-in-out infinite;

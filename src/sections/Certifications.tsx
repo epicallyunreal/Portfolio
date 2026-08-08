@@ -1,4 +1,4 @@
-import { formatDate, resume } from '../lib/data'
+import { formatDate, orderTech, resume } from '../lib/data'
 import { filterCardClasses } from '../lib/filterStyles'
 import { sectionItems } from '../lib/sections'
 import { useFilter } from '../hooks/useFilter'
@@ -35,7 +35,7 @@ function CertificateCard({ cert }: { cert: Certificate }) {
       {cert.x_note ? <p className="mt-2 text-sm text-muted">{cert.x_note}</p> : null}
       {cert.x_tech && cert.x_tech.length > 0 ? (
         <ul className="mt-4 flex flex-wrap gap-3" aria-label="Related technologies">
-          {cert.x_tech.map((key) => (
+          {orderTech(cert.x_tech).map((key) => (
             <li
               key={key}
               className={`flex items-center rounded p-0.5 ${

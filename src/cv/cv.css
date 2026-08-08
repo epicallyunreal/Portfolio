@@ -38,6 +38,16 @@ body:has(.cv-root) {
 .cv-root {
   font-family: 'Carlito', 'Calibri', sans-serif;
   font-size: 10.5pt;
+  /* Carlito's ti/tt/tf ligature glyphs carry no ToUnicode mapping in the
+     subset Chrome embeds, so pdftotext silently deletes them — "Integration"
+     extracts as "Integra on", "Portfolio" as "Por olio". An ATS reads that
+     text layer, so the words that matter most must survive it. Rendering is
+     visually identical here; only the extraction changes. */
+  font-variant-ligatures: none;
+  font-feature-settings:
+    'liga' 0,
+    'clig' 0,
+    'dlig' 0;
   /* Spec baseline is 1.3; tightened to hold the 2-page budget — this is the
      sanctioned lever when the page count breaks. */
   line-height: 1.26;

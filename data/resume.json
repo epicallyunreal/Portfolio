@@ -7,10 +7,7 @@
     "phone": "",
     "url": "https://nutanprabhat.dev",
     "summary": "Senior software engineer with 4+ years building production systems in Python, Django, and DRF, currently sole engineer on an enterprise client account and owning delivery from concept to production. Recent work includes a two-stage visual retrieval system (CLIP embeddings in Qdrant with a feature-based reranker) lifted from a 41.9% baseline to 97.7% Top-1 accuracy, and a multi-tenant Django/DRF and React SaaS platform. Deep SQL background across query optimisation, stored-procedure rewrites, and data-integrity work on live enterprise systems, alongside REST API design, GCP deployment, and CI/CD.",
-    "location": {
-      "city": "Pune",
-      "countryCode": "IN"
-    },
+    "location": { "city": "Pune", "countryCode": "IN" },
     "profiles": [
       {
         "network": "LinkedIn",
@@ -42,10 +39,8 @@
       ],
       "x_tech": [
         "python",
-        "django",
         "qdrant",
         "pytorch",
-        "postgres",
         "docker",
         "qt",
         "similaritysearch",
@@ -58,8 +53,7 @@
         "reranking",
         "systemdesign",
         "etl",
-        "dsa",
-        "drf"
+        "dsa"
       ]
     },
     {
@@ -79,19 +73,11 @@
       ],
       "x_tech": [
         "unity",
-        "csharp",
-        "nodejs",
         "googlecloud",
         "python",
         "django",
         "drf",
-        "rest",
-        "javascript",
-        "html5",
-        "css3",
         "postgres",
-        "mysql",
-        "mssql",
         "docker",
         "git",
         "github",
@@ -101,12 +87,13 @@
         "claudecode",
         "githubcopilot",
         "cicd",
-        "agile",
         "systemdesign",
         "etl",
         "dsa",
         "codereview",
-        "storedprocedures"
+        "nodejs",
+        "rest",
+        "csharp"
       ]
     },
     {
@@ -130,7 +117,6 @@
         "jquery",
         "csharp",
         "git",
-        "bitbucket",
         "python",
         "django",
         "drf",
@@ -139,12 +125,10 @@
         "javascript",
         "html5",
         "css3",
-        "postgres",
         "mysql",
         "postman",
         "storedprocedures",
         "cicd",
-        "agile",
         "i18n",
         "dsa",
         "codereview",
@@ -167,17 +151,15 @@
         "html5",
         "css3",
         "jquery",
-        "python",
         "nodejs",
         "javascript",
         "mssql",
         "mysql",
         "dsa",
-        "agile",
-        "bitbucket",
         "git",
         "csharp",
-        "storedprocedures"
+        "storedprocedures",
+        "python"
       ]
     }
   ],
@@ -212,19 +194,14 @@
         "django",
         "drf",
         "rest",
-        "postgres",
         "mysql",
-        "react",
         "javascript",
         "html5",
         "css3",
         "git",
         "github",
-        "systemdesign",
         "pytest",
-        "postman",
-        "claude",
-        "claudecode"
+        "postman"
       ]
     },
     {
@@ -239,18 +216,14 @@
         "rest",
         "python",
         "drf",
-        "postgres",
         "mysql",
         "javascript",
         "html5",
         "css3",
         "git",
         "github",
-        "systemdesign",
         "pytest",
-        "postman",
-        "claude",
-        "claudecode"
+        "postman"
       ]
     },
     {
@@ -260,7 +233,7 @@
       "url": "",
       "x_status": "completed",
       "x_note": "prompting fundamentals and AI-assisted workflows",
-      "x_tech": ["claude"]
+      "x_tech": []
     },
     {
       "name": "Claude Code 101",
@@ -268,23 +241,20 @@
       "date": "2026",
       "url": "",
       "x_status": "in-progress",
-      "x_tech": ["claudecode"]
+      "x_tech": []
     },
     {
       "name": "Blockchain Specialization",
       "issuer": "Coursera",
       "date": "2022",
-      "url": "",
+      "url": "https://coursera.org/share/f0f239bf3b0710a9f642e1e91f37db1f",
       "x_status": "completed",
       "x_note": "smart contracts, distributed computing, cryptography",
-      "x_tech": ["python"]
+      "x_tech": ["python", "postman"]
     }
   ],
   "skills": [
-    {
-      "name": "Backend",
-      "keywords": ["python", "django", "drf", "nodejs", "rest"]
-    },
+    { "name": "Backend", "keywords": ["python", "django", "drf", "nodejs", "rest"] },
     {
       "name": "AI Integration",
       "keywords": ["clip", "qdrant", "similaritysearch", "reranking", "pytorch"]
@@ -308,34 +278,16 @@
     },
     {
       "name": "Cloud & DevOps",
-      "keywords": [
-        "docker",
-        "cicd",
-        "googlecloud",
-        "git",
-        "github",
-        "bitbucket",
-        "agile",
-        "githubactions"
-      ]
+      "keywords": ["docker", "cicd", "googlecloud", "git", "github", "githubactions"]
     },
-    {
-      "name": "Architecture",
-      "keywords": ["systemdesign", "distributed", "etl", "i18n", "dsa"]
-    },
-    {
-      "name": "Testing",
-      "keywords": ["pytest", "postman", "codereview"]
-    },
+    { "name": "Architecture", "keywords": ["systemdesign", "etl", "i18n", "dsa"] },
+    { "name": "Testing", "keywords": ["pytest", "postman", "codereview"] },
     {
       "name": "AI-Assisted Development",
       "keywords": ["claude", "claudecode", "githubcopilot"],
       "x_note": "spec-driven, agentic build workflows"
     },
-    {
-      "name": "Also worked with",
-      "keywords": ["csharp", "unity", "qt"]
-    }
+    { "name": "Also worked with", "keywords": ["csharp", "unity", "qt"] }
   ],
   "projects": [
     {
@@ -351,22 +303,43 @@
         "django",
         "drf",
         "react",
-        "vite",
         "postgres",
         "python",
         "rest",
         "elasticsearch",
-        "javascript",
-        "html5",
-        "css3",
         "git",
         "github",
         "systemdesign",
         "etl",
         "pytest",
         "claude",
-        "claudecode",
-        "githubcopilot"
+        "githubcopilot",
+        "typescript",
+        "tailwind",
+        "vite"
+      ],
+      "x_featured": true
+    },
+    {
+      "name": "Portfolio — JSON-driven site, CV generator and live editor",
+      "description": "This site, and the pipeline behind it. Two JSON files are the only source of truth: the build derives the website, the downloadable CV PDF, the Open Graph image, sitemap, robots.txt, CNAME and the HTML head from them, so no name, URL or filename is written into code or config. The interesting part is not the page — it is that CI refuses to publish content that does not hold together.",
+      "url": "https://github.com/epicallyunreal/Portfolio",
+      "highlights": [
+        "Content is schema-validated in CI with cross-file rules on top: every skill key must resolve in the asset registry, a section listed with no data fails, CDN icons must be version-pinned, and the phone number may never reach committed JSON. Failures name the offending key. The same validator runs in the pre-commit hook and inside the editor, so all three agree by construction.",
+        "One dataset, two artifacts: the site and a Calibri-metric CV PDF are rendered from the same JSON — the PDF printed by Puppeteer against a hidden print route using self-hosted Carlito — so the page and the document I email cannot drift apart.",
+        "Performance and accessibility are enforced, not aspired to: Lighthouse thresholds and a 250 KB gzipped JS ceiling both fail the deploy, with reports uploaded as artifacts when they do.",
+        "An in-browser editor with sectional saves, live validation and a field-level old-vs-new diff before writing. It writes the JSON directly when run locally, and on the deployed site detects the absent write endpoint and becomes a working read-only demo that exports instead.",
+        "Built with Claude Code against a written spec — the validation, budgets and single-source-of-truth constraints are what keep AI-assisted output honest."
+      ],
+      "x_tech": [
+        "typescript",
+        "react",
+        "vite",
+        "tailwind",
+        "cicd",
+        "githubactions",
+        "github",
+        "claudecode"
       ],
       "x_featured": true
     },
@@ -381,24 +354,22 @@
       "x_tech": [
         "django",
         "postgres",
-        "javascript",
         "python",
         "drf",
         "rest",
-        "html5",
-        "css3",
         "cicd",
         "git",
         "github",
         "systemdesign",
-        "postman"
+        "postman",
+        "githubcopilot"
       ],
       "x_featured": false
     },
     {
       "name": "LittleLemon API",
       "description": "RESTful API covering models, serializers, endpoints, and authentication/authorization with Djoser.",
-      "url": "https://github.com/epicallyunreal/django-api",
+      "url": "https://github.com/epicallyunreal/LittleLemon",
       "highlights": [
         "Built full CRUD endpoints with role-scoped permissions and token authentication."
       ],
@@ -415,8 +386,7 @@
         "github",
         "pytest",
         "postman",
-        "claudecode",
-        "githubcopilot"
+        "claudecode"
       ],
       "x_featured": false
     },
@@ -430,11 +400,7 @@
     }
   ],
   "awards": [
-    {
-      "title": "HackerRank 5-star — Python, SQL, C++",
-      "awarder": "HackerRank",
-      "date": "2024"
-    },
+    { "title": "HackerRank 5-star — Python, SQL, C++", "awarder": "HackerRank", "date": "2024" },
     {
       "title": "CodeChef — peak rating 1692 across 73 contests",
       "awarder": "CodeChef",
@@ -442,20 +408,25 @@
     }
   ],
   "languages": [
-    {
-      "language": "English",
-      "fluency": "Fluent"
-    },
-    {
-      "language": "Hindi",
-      "fluency": "Native speaker"
-    }
+    { "language": "English", "fluency": "Fluent" },
+    { "language": "Hindi", "fluency": "Native speaker" }
   ],
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.4.0",
-    "headline": "I build backend systems that hold up in production.",
+    "version": "2.6.2",
+    "headlines": [
+      { "text": "I work from problems, not tickets.", "emphasis": "problems" },
+      {
+        "text": "I build systems that change without breaking.",
+        "emphasis": "change without breaking"
+      },
+      { "text": "I'm the engineer you hand the whole thing to.", "emphasis": "the whole thing" },
+      {
+        "text": "Scope, design, build, ship. Usually alone.",
+        "emphasis": "Scope, design, build, ship."
+      }
+    ],
     "cvHeadline": "Senior Software Engineer | Python · Django · REST APIs · React · AI Integration",
     "availability": "Open to relocation (EU) and remote roles",
     "careerStart": "2022-02",

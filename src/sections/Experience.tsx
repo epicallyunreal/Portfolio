@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
-import { formatDate, resume } from '../lib/data'
+import { formatDate, orderTech, resume } from '../lib/data'
 import { filterCardClasses } from '../lib/filterStyles'
 import { sectionItems } from '../lib/sections'
 import { useFilter } from '../hooks/useFilter'
@@ -79,7 +79,7 @@ function WorkCard({ entry }: { entry: WorkEntry }) {
 
       {entry.x_tech && entry.x_tech.length > 0 ? (
         <ul className="mt-5 flex flex-wrap gap-3" aria-label="Technologies used">
-          {entry.x_tech.map((key) => (
+          {orderTech(entry.x_tech).map((key) => (
             <li
               key={key}
               className={`flex items-center rounded p-0.5 ${

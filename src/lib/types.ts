@@ -69,10 +69,17 @@ export interface Project {
   x_featured?: boolean
 }
 
+export interface Headline {
+  text: string
+  /** Substring of `text` lifted as it types. Validation rejects anything not found in `text`. */
+  emphasis?: string
+}
+
 export interface XMeta {
   /** Semver of the resume content — traceability for which CV revision is being shared. */
   version: string
-  headline: string
+  /** Hero taglines, cycled by the typewriter. One entry types once and stays. */
+  headlines: Headline[]
   /** Headline for the CV header — longer than basics.label, which stays for the website. */
   cvHeadline: string
   availability: string

@@ -41,7 +41,7 @@ const html = `<!doctype html>
   </svg>
   <h1>${esc(resume.basics.name)}</h1>
   <p class="label">${esc(resume.basics.label)}</p>
-  <p class="headline">${esc(resume.x_meta.headline)}</p>
+  <p class="headline">${esc(resume.x_meta.headlines[0].text)}</p>
   <p class="url">${esc(resume.basics.url.replace(/^https?:\/\//, ''))}</p>
 </body></html>`
 

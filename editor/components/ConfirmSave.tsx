@@ -51,10 +51,10 @@ export function ConfirmSave({
       role="dialog"
       aria-modal="true"
       aria-label={`Confirm save — ${sectionLabel}`}
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 p-4"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 p-2 sm:p-4"
     >
-      <div className="flex max-h-[85vh] w-full max-w-4xl flex-col rounded-lg border border-line bg-panel">
-        <header className="border-b border-line px-5 py-4">
+      <div className="flex max-h-[92vh] w-full max-w-4xl flex-col rounded-lg border border-line bg-panel sm:max-h-[85vh]">
+        <header className="border-b border-line px-4 py-3 sm:px-5 sm:py-4">
           <h2 className="text-lg font-bold text-ink">Save “{sectionLabel}”</h2>
           <p className="mt-1 font-mono text-xs text-faint">
             v{publishedVersion} → <span className="text-accent">v{nextVersion}</span> ·{' '}
@@ -63,7 +63,7 @@ export function ConfirmSave({
           {note ? <p className="mt-2 text-xs text-amber-300">{note}</p> : null}
         </header>
 
-        <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
+        <div className="min-h-0 flex-1 overflow-y-auto px-4 py-3 sm:px-5 sm:py-4">
           {errors.length > 0 ? (
             <div className="mb-4 rounded border border-red-500/50 bg-red-500/10 p-3">
               <p className="mb-1 font-mono text-xs uppercase tracking-wider text-red-300">
@@ -95,18 +95,13 @@ export function ConfirmSave({
               No content changes — saving would only bump the version.
             </p>
           ) : (
-            <table className="w-full table-fixed border-collapse text-sm">
-              <thead>
-                <tr className="text-left font-mono text-xs uppercase tracking-wider text-faint">
-                  <th className="w-1/3 pb-2">Field</th>
-                  <th className="w-1/3 pb-2">Before</th>
-                  <th className="w-1/3 pb-2">After</th>
-                </tr>
-              </thead>
-              <tbody>
+            <>
+              {/* Three columns cannot fit a phone, so below sm each change
+                  stacks: path, then before, then after. */}
+              <ul className="space-y-3 sm:hidden">
                 {entries.map((entry, i) => (
-                  <tr key={i} className="border-t border-line align-top">
-                    <td className="py-2 pr-3 font-mono text-xs text-muted">
+                  <li key={i} className="rounded border border-line bg-bg p-3">
+                    <p className="break-words font-mono text-xs text-muted">
                       <span
                         className={
                           entry.kind === 'added'
@@ -118,22 +113,60 @@ export function ConfirmSave({
                       >
                         {entry.kind === 'added' ? '+' : entry.kind === 'removed' ? '−' : '~'}{' '}
                       </span>
-                      {entry.path.replace(/^resume\.|^assets\./, (m) => m)}
-                    </td>
-                    <td className="py-2 pr-3 text-xs text-red-200/80">
-                      <span className="line-clamp-4 break-words">{entry.before ?? '—'}</span>
-                    </td>
-                    <td className="py-2 text-xs text-accent2/90">
-                      <span className="line-clamp-4 break-words">{entry.after ?? '—'}</span>
-                    </td>
-                  </tr>
+                      {entry.path}
+                    </p>
+                    <p className="mt-2 break-words text-xs text-red-200/80">
+                      <span className="text-faint">before: </span>
+                      {entry.before ?? '—'}
+                    </p>
+                    <p className="mt-1 break-words text-xs text-accent2/90">
+                      <span className="text-faint">after: </span>
+                      {entry.after ?? '—'}
+                    </p>
+                  </li>
                 ))}
-              </tbody>
-            </table>
+              </ul>
+
+              <table className="hidden w-full table-fixed border-collapse text-sm sm:table">
+                <thead>
+                  <tr className="text-left font-mono text-xs uppercase tracking-wider text-faint">
+                    <th className="w-1/3 pb-2">Field</th>
+                    <th className="w-1/3 pb-2">Before</th>
+                    <th className="w-1/3 pb-2">After</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {entries.map((entry, i) => (
+                    <tr key={i} className="border-t border-line align-top">
+                      <td className="py-2 pr-3 font-mono text-xs text-muted">
+                        <span
+                          className={
+                            entry.kind === 'added'
+                              ? 'text-accent2'
+                              : entry.kind === 'removed'
+                                ? 'text-red-300'
+                                : 'text-accent'
+                          }
+                        >
+                          {entry.kind === 'added' ? '+' : entry.kind === 'removed' ? '−' : '~'}{' '}
+                        </span>
+                        {entry.path}
+                      </td>
+                      <td className="py-2 pr-3 text-xs text-red-200/80">
+                        <span className="line-clamp-4 break-words">{entry.before ?? '—'}</span>
+                      </td>
+                      <td className="py-2 text-xs text-accent2/90">
+                        <span className="line-clamp-4 break-words">{entry.after ?? '—'}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
           )}
         </div>
 
-        <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-5 py-4">
+        <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-4 py-3 sm:px-5 sm:py-4">
           <div className="flex items-center gap-2">
             <span className="font-mono text-xs uppercase tracking-wider text-faint">bump</span>
             {(['patch', 'minor', 'major'] as BumpKind[]).map((kind) => (

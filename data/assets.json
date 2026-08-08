@@ -1,8 +1,6 @@
 {
   "version": 1,
-  "defaults": {
-    "fallback": "/logos/_generic.svg"
-  },
+  "defaults": { "fallback": "/logos/_generic.svg" },
   "tech": {
     "python": {
       "label": "Python",
@@ -15,16 +13,8 @@
       "color": "#44B78B",
       "mono": true
     },
-    "drf": {
-      "label": "Django REST Framework",
-      "src": "/logos/drf.svg",
-      "color": "#A30000"
-    },
-    "rest": {
-      "label": "REST API design",
-      "src": "/logos/rest.svg",
-      "color": "#22D3EE"
-    },
+    "drf": { "label": "Django REST Framework", "src": "/logos/drf.svg", "color": "#A30000" },
+    "rest": { "label": "REST API design", "src": "/logos/rest.svg", "color": "#22D3EE" },
     "nodejs": {
       "label": "Node.js",
       "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/nodejs/nodejs-original.svg",
@@ -52,36 +42,12 @@
       "color": "#005571",
       "mono": true
     },
-    "storedprocedures": {
-      "label": "Stored procedures",
-      "src": "",
-      "color": "#4169E1"
-    },
-    "sqlopt": {
-      "label": "SQL query optimization",
-      "src": "",
-      "color": "#4169E1"
-    },
-    "clip": {
-      "label": "CLIP (ViT-B/16)",
-      "src": "/logos/clip.svg",
-      "color": "#8B5CF6"
-    },
-    "qdrant": {
-      "label": "Qdrant",
-      "src": "/logos/qdrant.svg",
-      "color": "#DC244C"
-    },
-    "similaritysearch": {
-      "label": "Similarity search",
-      "src": "",
-      "color": "#8B5CF6"
-    },
-    "reranking": {
-      "label": "Reranking",
-      "src": "",
-      "color": "#8B5CF6"
-    },
+    "storedprocedures": { "label": "Stored procedures", "src": "", "color": "#4169E1" },
+    "sqlopt": { "label": "SQL query optimization", "src": "", "color": "#4169E1" },
+    "clip": { "label": "CLIP (ViT-B/16)", "src": "/logos/clip.svg", "color": "#8B5CF6" },
+    "qdrant": { "label": "Qdrant", "src": "/logos/qdrant.svg", "color": "#DC244C" },
+    "similaritysearch": { "label": "Similarity search", "src": "", "color": "#8B5CF6" },
+    "reranking": { "label": "Reranking", "src": "", "color": "#8B5CF6" },
     "pytorch": {
       "label": "PyTorch",
       "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/pytorch/pytorch-original.svg",
@@ -127,11 +93,7 @@
       "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/docker/docker-original.svg",
       "color": "#2496ED"
     },
-    "cicd": {
-      "label": "CI/CD",
-      "src": "",
-      "color": "#2088FF"
-    },
+    "cicd": { "label": "CI/CD", "src": "", "color": "#2088FF" },
     "git": {
       "label": "Git",
       "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/git/git-original.svg",
@@ -149,41 +111,10 @@
       "color": "#2088FF",
       "mono": true
     },
-    "bitbucket": {
-      "label": "Bitbucket",
-      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/bitbucket/bitbucket-original.svg",
-      "color": "#0052CC"
-    },
-    "agile": {
-      "label": "Agile",
-      "src": "",
-      "color": "#34D399"
-    },
-    "systemdesign": {
-      "label": "System design (HLD/LLD)",
-      "src": "",
-      "color": "#22D3EE"
-    },
-    "distributed": {
-      "label": "Distributed systems",
-      "src": "",
-      "color": "#34D399"
-    },
-    "etl": {
-      "label": "ETL & data pipelines",
-      "src": "",
-      "color": "#8E75B2"
-    },
-    "i18n": {
-      "label": "Localization (i18n)",
-      "src": "",
-      "color": "#FF6C37"
-    },
-    "dsa": {
-      "label": "Data structures & algorithms",
-      "src": "",
-      "color": "#F05032"
-    },
+    "systemdesign": { "label": "System design (HLD/LLD)", "src": "", "color": "#22D3EE" },
+    "etl": { "label": "ETL & data pipelines", "src": "", "color": "#8E75B2" },
+    "i18n": { "label": "Localization (i18n)", "src": "", "color": "#FF6C37" },
+    "dsa": { "label": "Data structures & algorithms", "src": "", "color": "#F05032" },
     "pytest": {
       "label": "Pytest",
       "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/pytest/pytest-original.svg",
@@ -194,11 +125,7 @@
       "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/postman/postman-original.svg",
       "color": "#FF6C37"
     },
-    "codereview": {
-      "label": "Code review",
-      "src": "",
-      "color": "#34D399"
-    },
+    "codereview": { "label": "Code review", "src": "", "color": "#34D399" },
     "claudecode": {
       "label": "Claude Code",
       "src": "https://cdn.jsdelivr.net/npm/simple-icons@v11.15.0/icons/anthropic.svg",
@@ -251,11 +178,6 @@
       "width": 512,
       "height": 512
     },
-    "og": {
-      "src": "/images/og.png",
-      "alt": "",
-      "width": 1200,
-      "height": 630
-    }
+    "og": { "src": "/images/og.png", "alt": "", "width": 1200, "height": 630 }
   }
 }

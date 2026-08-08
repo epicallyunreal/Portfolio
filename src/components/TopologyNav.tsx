@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   forceCollide,
   forceLink,
@@ -111,6 +111,14 @@ export function TopologyNav({ active }: TopologyNavProps) {
   const { nodes, links } = useGraphLayout(sections)
   const [hovered, setHovered] = useState<SectionId | null>(null)
   const linkRefs = useRef<Map<SectionId, Element | null>>(new Map())
+  const barRefs = useRef<Map<SectionId, HTMLElement | null>>(new Map())
+
+  // The mobile bar scrolls horizontally, so the active section has to be
+  // brought into view as you scroll the page or it drifts off the edge.
+  useEffect(() => {
+    const el = barRefs.current.get(active as SectionId)
+    el?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+  }, [active])
 
   const activate = (id: SectionId) => scrollToSection(id, reduced)
 
@@ -273,13 +281,22 @@ export function TopologyNav({ active }: TopologyNavProps) {
         </div>
       </div>
 
-      {/* Mobile: bottom bar — the graph collapsed onto a horizontal line */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-bg/85 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
-        <ul className="flex items-stretch justify-between px-2" aria-label="Site sections">
+      {/* Mobile: bottom bar. Seven sections cannot fit legibly across a phone,
+          so it scrolls horizontally with full labels rather than truncating
+          every one of them to nothing. */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-bg/95 pb-[env(safe-area-inset-bottom)] lg:hidden">
+        <ul
+          className="flex snap-x snap-mandatory items-stretch gap-1 overflow-x-auto px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          aria-label="Site sections"
+        >
           {sections.map((id) => {
             const isActive = id === active
             return (
-              <li key={id} className="min-w-0 flex-1">
+              <li
+                key={id}
+                ref={(el) => barRefs.current.set(id, el)}
+                className="shrink-0 snap-center"
+              >
                 <a
                   href={`#${id}`}
                   aria-label={`${LABELS[id]}${sectionCount(id) ? ` · ${sectionCount(id)}` : ''}`}
@@ -288,16 +305,16 @@ export function TopologyNav({ active }: TopologyNavProps) {
                     e.preventDefault()
                     activate(id)
                   }}
-                  className="flex flex-col items-center gap-1 rounded px-1 py-2 outline-none focus-visible:ring-2 focus-visible:ring-ink"
+                  className="flex min-h-[44px] flex-col items-center justify-center gap-1 rounded px-3 py-2 outline-none focus-visible:ring-2 focus-visible:ring-ink"
                 >
                   <span
                     aria-hidden="true"
-                    className={`block h-2.5 w-2.5 rounded-full border transition-colors ${
+                    className={`block h-2 w-2 rounded-full border transition-colors ${
                       isActive ? 'border-accent bg-accent' : 'border-muted bg-panel'
                     }`}
                   />
                   <span
-                    className={`w-full truncate text-center font-mono text-[10px] ${
+                    className={`whitespace-nowrap text-center font-mono text-[11px] ${
                       isActive ? 'text-ink' : 'text-muted'
                     }`}
                   >

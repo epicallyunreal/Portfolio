@@ -47,7 +47,6 @@ try {
           ctx.drawImage(img, sx, sy, side, side, 0, 0, target, target)
           resolve({
             webp: canvas.toDataURL('image/webp', 0.86),
-            jpeg: canvas.toDataURL('image/jpeg', 0.86),
             source: `${img.naturalWidth}x${img.naturalHeight}`,
           })
         }
@@ -63,11 +62,12 @@ try {
     writeFileSync(path, buf)
     return { path, kb: (buf.length / 1024).toFixed(1) }
   }
+  // WebP only: it is universally supported now, and a second copy of a
+  // personal photo published for no reason is worth avoiding.
   const webp = write(out.webp, 'webp')
-  const jpeg = write(out.jpeg, 'jpg')
   console.log(
     `✔ ${basename(sourceArg)} (${out.source}, ${(bytes.length / 1024).toFixed(1)} KB) → ` +
-      `${webp.path} (${size}x${size}, ${webp.kb} KB) and ${jpeg.path} (${jpeg.kb} KB), metadata stripped`,
+      `${webp.path} (${size}x${size}, ${webp.kb} KB), metadata stripped`,
   )
 } finally {
   await browser.close()

@@ -15,6 +15,37 @@ export function setPreviewData(nextResume: Resume, nextAssets: Assets) {
   assets = nextAssets
 }
 
+/**
+ * Tech keys render in the order the Skills section lists them — Backend, then
+ * AI Integration, then Databases, and so on — rather than in whatever order
+ * they happened to be tagged in.
+ *
+ * Derived from `skills` rather than stored, so re-tagging or reordering a
+ * group corrects every role, project and certification at once with no data
+ * migration. Keys belonging to no group sort last, keeping their own order.
+ */
+let orderCache: { skills: Resume['skills']; index: Map<string, number> } | null = null
+
+function techOrderIndex(skills: Resume['skills']): Map<string, number> {
+  // Keyed on identity: the editor swaps in a new draft object on every edit,
+  // and this must follow it rather than serve a stale order.
+  if (!orderCache || orderCache.skills !== skills) {
+    orderCache = {
+      skills,
+      index: new Map(skills.flatMap((group) => group.keywords).map((key, i) => [key, i])),
+    }
+  }
+  return orderCache.index
+}
+
+export function orderTech(keys: string[] = [], skills: Resume['skills'] = resume.skills): string[] {
+  const index = techOrderIndex(skills)
+  // Array.prototype.sort is stable, so unknown keys keep their relative order.
+  return [...keys].sort(
+    (a, b) => (index.get(a) ?? Number.MAX_SAFE_INTEGER) - (index.get(b) ?? Number.MAX_SAFE_INTEGER),
+  )
+}
+
 /** Resolve a tech key to its asset entry; unknown keys get the generic fallback. */
 export function techAsset(key: string): TechAsset {
   return (

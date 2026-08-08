@@ -95,7 +95,17 @@ export function validateData({
     )
   }
 
-  // 5. The phone number must never reach committed JSON (it is injected at PDF
+  // 5. A hero emphasis that isn't in its own line highlights nothing — the
+  //    typewriter would just render the line plain, with no visible symptom.
+  resume.x_meta?.headlines?.forEach((line, i) => {
+    if (line.emphasis && !line.text?.includes(line.emphasis)) {
+      errors.push(
+        `resume.json x_meta.headlines[${i}]: emphasis "${line.emphasis}" does not appear in text "${line.text}"`,
+      )
+    }
+  })
+
+  // 6. The phone number must never reach committed JSON (it is injected at PDF
   //    build time from CV_PHONE). Guards against the editor writing it back in.
   if (resume.basics?.phone) {
     errors.push(

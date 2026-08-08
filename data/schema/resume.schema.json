@@ -140,14 +140,31 @@
     "references": { "type": "array" },
     "x_meta": {
       "type": "object",
-      "required": ["version", "headline", "cvHeadline", "availability", "sectionOrder"],
+      "required": ["version", "headlines", "cvHeadline", "availability", "sectionOrder"],
       "properties": {
         "version": {
           "type": "string",
           "pattern": "^\\d+\\.\\d+\\.\\d+$",
           "description": "Semver for the resume content itself — bump on every content change so the shared CV is traceable to a revision. Rendered in the site footer and the PDF footer."
         },
-        "headline": { "type": "string", "minLength": 1 },
+        "headlines": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Hero taglines, typed one at a time on a loop. A single entry types once and stays. The first entry is also the site's og:description.",
+          "items": {
+            "type": "object",
+            "required": ["text"],
+            "additionalProperties": false,
+            "properties": {
+              "text": { "type": "string", "minLength": 1 },
+              "emphasis": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Substring of text to lift visually as it is typed. Must appear verbatim in text."
+              }
+            }
+          }
+        },
         "cvHeadline": {
           "type": "string",
           "minLength": 1,

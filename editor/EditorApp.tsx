@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import App from '../src/App'
-import { setPreviewData } from '../src/lib/data'
+import { orderTech, setPreviewData } from '../src/lib/data'
 import { Btn } from './components/Fields'
 import { ConfirmSave } from './components/ConfirmSave'
 import { SECTIONS, useEditorStore, type EditorData, type SectionKey } from './lib/store'
@@ -11,6 +11,52 @@ import { SkillsEditor } from './sections/SkillsEditor'
 import { ProjectsEditor } from './sections/ProjectsEditor'
 import { CertificationsEditor } from './sections/CertificationsEditor'
 import { AwardsEditor, AssetsEditor, EducationEditor, MetaEditor } from './sections/SimpleEditors'
+
+/** Section picker: a vertical rail on desktop, a scrolling strip on mobile. */
+function SectionList({
+  active,
+  dirty,
+  onSelect,
+  orientation = 'vertical',
+}: {
+  active: SectionKey
+  dirty: Record<SectionKey, boolean>
+  onSelect: (key: SectionKey) => void
+  orientation?: 'vertical' | 'horizontal'
+}) {
+  const horizontal = orientation === 'horizontal'
+  return (
+    <ul
+      className={
+        horizontal
+          ? 'flex gap-1 overflow-x-auto px-2 py-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
+          : 'space-y-1'
+      }
+    >
+      {SECTIONS.map((section) => (
+        <li key={section.key} className={horizontal ? 'shrink-0' : ''}>
+          <button
+            type="button"
+            onClick={() => onSelect(section.key)}
+            aria-current={active === section.key ? 'true' : undefined}
+            className={`flex min-h-[40px] w-full items-center justify-between gap-2 whitespace-nowrap rounded px-3 py-2 text-left text-sm transition-colors ${
+              active === section.key
+                ? 'bg-accent/15 text-accent'
+                : 'text-muted hover:bg-panel hover:text-ink'
+            }`}
+          >
+            <span>{section.label}</span>
+            {dirty[section.key] ? (
+              <span className="text-amber-300" title="Unsaved changes">
+                ●
+              </span>
+            ) : null}
+          </button>
+        </li>
+      ))}
+    </ul>
+  )
+}
 
 /**
  * Content editor for data/resume.json and data/assets.json.
@@ -63,7 +109,12 @@ export default function EditorApp() {
   }, [preview, draft])
 
   const liveErrors = useMemo(() => (draft ? validateDraft(draft) : []), [draft])
-  const techKeys = useMemo(() => Object.keys(draft?.assets.tech ?? {}), [draft])
+  // Listed in the same order the site renders them, so the picker groups
+  // related tech together instead of following object-key order.
+  const techKeys = useMemo(
+    () => orderTech(Object.keys(draft?.assets.tech ?? {}), draft?.resume.skills ?? []),
+    [draft],
+  )
   const groupedKeys = useMemo(
     () => new Set((draft?.resume.skills ?? []).flatMap((group) => group.keywords)),
     [draft],
@@ -171,8 +222,8 @@ export default function EditorApp() {
   return (
     <div className="min-h-screen bg-bg text-ink">
       {/* ---------------------------------------------------------- header */}
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-accent/40 bg-panel">
-        <div className="flex flex-wrap items-center gap-3 px-4 py-3">
+      <header className="sticky top-0 z-50 border-b border-accent/40 bg-panel">
+        <div className="flex flex-wrap items-center gap-2 px-3 py-2 sm:gap-3 sm:px-4 sm:py-3">
           <span className="rounded bg-accent px-2 py-1 font-mono text-xs font-bold text-bg">
             EDIT MODE
           </span>
@@ -184,9 +235,10 @@ export default function EditorApp() {
               DEMO · changes live in this tab
             </span>
           ) : null}
-          <span className="font-mono text-xs text-faint">
-            data/resume.json · data/assets.json · v{saved.resume.x_meta.version}
+          <span className="hidden font-mono text-xs text-faint sm:inline">
+            data/resume.json · data/assets.json ·{' '}
           </span>
+          <span className="font-mono text-xs text-faint">v{saved.resume.x_meta.version}</span>
           {anyDirty ? (
             <span className="rounded-full border border-amber-400/50 px-2 py-0.5 font-mono text-xs text-amber-300">
               ● {dirtyCount} section{dirtyCount === 1 ? '' : 's'} unsaved
@@ -210,7 +262,7 @@ export default function EditorApp() {
             </button>
           ) : null}
 
-          <div className="ml-auto flex flex-wrap items-center gap-2">
+          <div className="flex w-full flex-wrap items-center gap-2 sm:ml-auto sm:w-auto">
             <Btn onClick={() => setPreview((v) => !v)}>
               {preview ? '← back to editing' : 'Preview site'}
             </Btn>
@@ -272,6 +324,20 @@ export default function EditorApp() {
           </div>
         </div>
 
+        {/* A 224px rail would leave under 170px for the form on a phone, so
+            below lg the sections become a horizontally scrolling strip that
+            sticks with the header. */}
+        {!preview ? (
+          <div className="border-t border-line lg:hidden">
+            <SectionList
+              active={active}
+              dirty={dirty}
+              onSelect={switchSection}
+              orientation="horizontal"
+            />
+          </div>
+        ) : null}
+
         {liveErrors.length > 0 && !preview ? (
           <div className="border-t border-red-500/40 bg-red-500/10 px-4 py-2">
             <ul className="space-y-0.5 text-xs text-red-200">
@@ -287,7 +353,7 @@ export default function EditorApp() {
       {/* --------------------------------------------------------- content */}
       {preview ? (
         <div
-          className="pt-16"
+          className=""
           // The CV is generated from committed JSON by CI, so a draft preview
           // must not offer a download that would be stale or missing.
           onClickCapture={(e) => {
@@ -310,34 +376,15 @@ export default function EditorApp() {
           </div>
         </div>
       ) : (
-        <div className="flex min-h-screen pt-16">
-          <nav aria-label="Editor sections" className="w-56 shrink-0 border-r border-line p-3">
-            <ul className="space-y-1">
-              {SECTIONS.map((section) => (
-                <li key={section.key}>
-                  <button
-                    type="button"
-                    onClick={() => switchSection(section.key)}
-                    aria-current={active === section.key ? 'true' : undefined}
-                    className={`flex w-full items-center justify-between rounded px-3 py-2 text-left text-sm transition-colors ${
-                      active === section.key
-                        ? 'bg-accent/15 text-accent'
-                        : 'text-muted hover:bg-panel hover:text-ink'
-                    }`}
-                  >
-                    <span>{section.label}</span>
-                    {dirty[section.key] ? (
-                      <span className="ml-2 text-amber-300" title="Unsaved changes">
-                        ●
-                      </span>
-                    ) : null}
-                  </button>
-                </li>
-              ))}
-            </ul>
+        <div className="flex min-h-screen">
+          <nav
+            aria-label="Editor sections"
+            className="hidden w-56 shrink-0 border-r border-line p-3 lg:block"
+          >
+            <SectionList active={active} dirty={dirty} onSelect={switchSection} />
           </nav>
 
-          <main className="min-w-0 flex-1 p-6">
+          <main className="min-w-0 flex-1 p-4 sm:p-6">
             <div className="mb-6">
               <h1 className="text-2xl font-bold text-ink">{activeSection.label}</h1>
               {activeSection.note ? (
