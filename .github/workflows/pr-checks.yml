@@ -44,8 +44,18 @@ jobs:
       - name: Enforce JS bundle budget
         run: npm run check:bundle
 
-      - name: Lighthouse CI (perf ≥ 90, a11y ≥ 95, LCP < 2.5s, CLS < 0.1)
+      - name: Lighthouse CI (perf ≥ 90, a11y ≥ 95, CLS < 0.1)
         run: npx --yes @lhci/cli@0.14.0 autorun
+
+      # Without this a Lighthouse failure is just a red X — the reports say
+      # which assertion broke and by how much.
+      - name: Upload Lighthouse reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          retention-days: 7
 
       # Note: true path-based PR previews aren't possible on a user site served
       # from Actions-based Pages (one deployment per repo). The built site is
