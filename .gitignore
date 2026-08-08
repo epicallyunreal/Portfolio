@@ -1,0 +1,15 @@
+node_modules
+dist
+*.local
+.DS_Store
+.lighthouseci
+# Generated in CI from data/resume.json — never commit by hand
+public/*_CV.pdf
+
+# Original camera photos: carry EXIF (device, timestamp, GPS).
+# Kept out of public/ so they are never published, and out of git so they are
+# never committed to a public repo. Run scripts/optimize-headshot.mjs on them.
+assets-src/
+
+# Local tool permissions — machine-specific, not useful to anyone else.
+.claude/settings.local.json

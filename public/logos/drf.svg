@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect x="2" y="7" width="28" height="18" rx="4" fill="none" stroke="#A30000" stroke-width="2"/>
+  <text x="16" y="21" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9" font-weight="700" fill="#A30000">DRF</text>
+</svg>

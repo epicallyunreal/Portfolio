@@ -1,0 +1,142 @@
+/* CV print layout — see CV_PDF_Layout_Spec.md. Loaded only on the /cv route. */
+
+/* Carlito is metric-compatible with Calibri (the original CV's font) and
+   self-hosted so the CI runner renders identical metrics. */
+@font-face {
+  font-family: 'Carlito';
+  src: url('/fonts/carlito-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Carlito';
+  src: url('/fonts/carlito-latin-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Carlito';
+  src: url('/fonts/carlito-latin-400-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: block;
+}
+
+@page {
+  size: A4;
+  margin: 12mm 15mm;
+}
+
+body:has(.cv-root) {
+  background: #ffffff;
+  background-image: none;
+  color: #1f1f1f;
+}
+
+.cv-root {
+  font-family: 'Carlito', 'Calibri', sans-serif;
+  font-size: 10.5pt;
+  /* Spec baseline is 1.3; tightened to hold the 2-page budget — this is the
+     sanctioned lever when the page count breaks. */
+  line-height: 1.26;
+  color: #1f1f1f;
+  background: #ffffff;
+  max-width: 180mm;
+  margin: 0 auto;
+}
+
+/* ---- Header block, centred ---- */
+.cv-header {
+  text-align: center;
+}
+.cv-name {
+  font-size: 20pt;
+  font-weight: 700;
+  color: #000000;
+  text-transform: uppercase;
+  margin: 0 0 2pt;
+}
+.cv-headline {
+  font-size: 12pt;
+  color: #333333;
+  margin: 0 0 2pt;
+}
+.cv-contact {
+  font-size: 10pt;
+  color: #1f1f1f;
+  margin: 0 0 1.5pt;
+}
+.cv-links {
+  font-size: 10pt;
+  margin: 0 0 3pt;
+}
+.cv-links a {
+  color: #0563c1;
+  text-decoration: underline;
+}
+
+/* ---- Section headers ---- */
+.cv-section {
+  font-size: 11pt;
+  font-weight: 700;
+  color: #111111;
+  text-transform: uppercase;
+  margin: 8pt 0 3.5pt;
+  border-bottom: 0.75pt solid #8a8a8a;
+  padding-bottom: 2pt;
+  break-after: avoid;
+}
+
+.cv-summary {
+  margin: 0 0 3pt;
+}
+
+/* ---- Job headings ---- */
+.cv-job {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8pt;
+  margin: 5pt 0 2.5pt;
+  break-after: avoid;
+}
+.cv-job-title {
+  font-size: 10.5pt;
+}
+.cv-job-title strong {
+  font-weight: 700;
+}
+.cv-dates {
+  font-size: 10pt;
+  color: #333333;
+  white-space: nowrap;
+}
+
+/* ---- Bullets: hanging indent, wrap to the indent ---- */
+.cv-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cv-bullets li {
+  padding-left: 14pt;
+  text-indent: -9pt;
+  margin: 0 0 1.5pt;
+}
+.cv-bullets li::before {
+  content: '• ';
+}
+
+/* ---- Skill lines & plain lines ---- */
+.cv-line {
+  margin: 0 0 2pt;
+}
+.cv-line strong {
+  font-weight: 700;
+}
+.cv-line a {
+  color: #0563c1;
+  text-decoration: underline;
+}

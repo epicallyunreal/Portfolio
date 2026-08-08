@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    /* Subtle dot grid — circuit-board texture behind everything. */
+    background-image: radial-gradient(rgba(148, 163, 177, 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  ::selection {
+    @apply bg-accent text-bg;
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply mx-auto w-full max-w-content scroll-mt-6 px-6 py-20 sm:px-10 sm:py-24 lg:px-16;
+  }
+
+  /* Monochrome (single-colour) icons need inverting on the dark theme. */
+  .invert-icon {
+    filter: invert(0.88) sepia(0.04) brightness(1.05);
+  }
+
+  /* Hexagon mask + animated gradient border for the headshot. */
+  .hex-frame {
+    padding: 4px;
+    clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+    background: linear-gradient(135deg, #22d3ee, #34d399, #22d3ee);
+    background-size: 200% 200%;
+  }
+  .hex-frame-animated {
+    animation: gradient-shift 6s ease infinite;
+  }
+  .hex-mask {
+    clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+    display: block;
+  }
+
+  /* Hero name: per-character entrance (delay set inline per char). */
+  .char-in {
+    opacity: 0;
+    transform: translateY(0.5em);
+    animation: char-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Headshot entrance: scale only — it's the LCP element, never fade it. */
+  .hex-pop {
+    animation: hex-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Typing caret in the hero. */
+  .caret::after {
+    content: '▍';
+    animation: caret-blink 0.9s steps(1) infinite;
+  }
+
+  /* Availability dot: gentle service-health pulse. */
+  .status-dot {
+    animation: status-pulse 2.4s ease-in-out infinite;
+  }
+
+  /* Sticky section header: opaque, carrying the same dot grid as the body so
+     the pinned strip is seamless against the page behind it. */
+  .section-heading-bar {
+    background-color: theme('colors.bg');
+    background-image: radial-gradient(rgba(148, 163, 177, 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* Master topology graph (SVG): healthy-service pulse on the active node,
+     data flowing along the edges that reach it. */
+  .node-pulse {
+    animation: node-pulse 3s ease-out infinite;
+    transform-origin: 0 0;
+  }
+  .edge-flow {
+    animation: edge-flow 1.2s linear infinite;
+  }
+  /* The outer <g> carries the translate as an SVG attribute; scaling happens
+     on this inner group so CSS transform can't clobber the position. */
+  .node-inner {
+    transition: transform 0.2s ease-out;
+  }
+  .node-inner-lifted {
+    transform: scale(1.22);
+  }
+
+  /* Section item nodes (HTML): the same language at smaller scale. */
+  .node-pulse-ring {
+    animation: pulse-ring 2.6s ease-out infinite;
+  }
+  .chain-flow {
+    background-image: linear-gradient(to bottom, #22d3ee 40%, transparent 40%);
+    background-size: 1px 10px;
+    animation: chain-flow 1s linear infinite;
+  }
+
+  .scroll-cue {
+    display: inline-block;
+    animation: cue-bob 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes char-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hex-pop {
+  from {
+    transform: scale(0.92);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes node-pulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}
+
+@keyframes edge-flow {
+  to {
+    stroke-dashoffset: -15;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(2.1);
+  }
+}
+
+@keyframes chain-flow {
+  to {
+    background-position: 0 10px;
+  }
+}
+
+@keyframes cue-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@media print {
+  nav,
+  canvas,
+  footer,
+  .scroll-cue {
+    display: none !important;
+  }
+  body {
+    background: #ffffff;
+    color: #111111;
+  }
+}

@@ -1,0 +1,7 @@
+#!/bin/sh
+# Bad JSON never reaches CI.
+node scripts/validate-data.mjs || {
+  echo ""
+  echo "pre-commit: data validation failed — fix data/*.json before committing."
+  exit 1
+}

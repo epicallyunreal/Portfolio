@@ -1,0 +1,472 @@
+{
+  "basics": {
+    "name": "Nutan Prabhat",
+    "label": "Senior Software Engineer — Backend & Full-Stack",
+    "image": "/images/headshot.webp",
+    "email": "prabhat9819@gmail.com",
+    "phone": "",
+    "url": "https://nutanprabhat.dev",
+    "summary": "Senior software engineer with 4+ years building production systems in Python, Django, and DRF, currently sole engineer on an enterprise client account and owning delivery from concept to production. Recent work includes a two-stage visual retrieval system (CLIP embeddings in Qdrant with a feature-based reranker) lifted from a 41.9% baseline to 97.7% Top-1 accuracy, and a multi-tenant Django/DRF and React SaaS platform. Deep SQL background across query optimisation, stored-procedure rewrites, and data-integrity work on live enterprise systems, alongside REST API design, GCP deployment, and CI/CD.",
+    "location": {
+      "city": "Pune",
+      "countryCode": "IN"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "nutan-prabhat",
+        "url": "https://www.linkedin.com/in/nutan-prabhat/"
+      },
+      {
+        "network": "GitHub",
+        "username": "epicallyunreal",
+        "url": "https://github.com/epicallyunreal"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Aziro Technologies",
+      "position": "Senior Software Developer",
+      "startDate": "2025-12",
+      "endDate": null,
+      "summary": "Sole engineer on an enterprise client account, owning the full delivery lifecycle.",
+      "highlights": [
+        "Sole engineer on the account — scoping, HLD/LLD design, development, testing, documentation, and delivery.",
+        "Rebuilt a two-stage visual retrieval engine: CLIP ViT-B/16 embeddings in Qdrant for candidate recall, then a feature-based reranker for precision — Top-1 accuracy from a 41.9% baseline to 97.7%.",
+        "Built the held-out evaluation harness behind that result, identifying recall as the true ceiling and redirecting the next phase of work.",
+        "Delivered a Python desktop CAD validation platform end to end — DXF parsing, 2D computational geometry, spatial indexing, PySide6 UI — with one-click batch processing across drawing folders and a second system integrated in.",
+        "Built a JSON-configured rule engine binding validation rules to check and fix functions at runtime, with priority-ordered execution and full audit trails — automating 3+ manual workflows.",
+        "Architected both platforms as configuration-driven: new categories, rules, thresholds, and weights are added through JSON without code changes.",
+        "Produced full system documentation and test coverage for clean client handover."
+      ],
+      "x_tech": [
+        "python",
+        "django",
+        "qdrant",
+        "pytorch",
+        "postgres",
+        "docker",
+        "qt",
+        "similaritysearch",
+        "claudecode",
+        "claude",
+        "githubcopilot",
+        "clip",
+        "git",
+        "github",
+        "reranking",
+        "systemdesign",
+        "etl",
+        "dsa",
+        "drf"
+      ]
+    },
+    {
+      "name": "UnKl Games",
+      "position": "Co-Founder & Game Developer",
+      "startDate": "2024-06",
+      "endDate": "2025-12",
+      "summary": "Co-founded a small studio and shipped a live multiplayer title.",
+      "highlights": [
+        "Built and published Pen Fight 2D, a turn-based multiplayer mobile game in Unity (C#), reaching 10K+ downloads on Google Play.",
+        "Integrated Google Cloud Platform (Authentication, APIs, Analytics) and Unity Cloud Save, building account and progression sync from scratch.",
+        "Built a server-authoritative economy in Node.js with escrow-held fees, idempotent payouts keyed by match ID, dual-client verification, and refund handling.",
+        "Architected real-time multiplayer on Unity Relay and Transport, using separate reliable and unreliable channels and choosing raw transport over the netcode framework.",
+        "Implemented race-safe match negotiation with single start authority, plus turn timers, disconnect forfeits, and version gating before escrow.",
+        "Diagnosed and fixed a cross-device desync from resolution-dependent UI scaling by re-basing the wire protocol on normalised coordinates.",
+        "Ran the full release cycle: internal testing tracks, feedback-driven fixes, production rollout, and post-release updates."
+      ],
+      "x_tech": [
+        "unity",
+        "csharp",
+        "nodejs",
+        "googlecloud",
+        "python",
+        "django",
+        "drf",
+        "rest",
+        "javascript",
+        "html5",
+        "css3",
+        "postgres",
+        "mysql",
+        "mssql",
+        "docker",
+        "git",
+        "github",
+        "githubactions",
+        "postman",
+        "claude",
+        "claudecode",
+        "githubcopilot",
+        "cicd",
+        "agile",
+        "systemdesign",
+        "etl",
+        "dsa",
+        "codereview",
+        "storedprocedures"
+      ]
+    },
+    {
+      "name": "Zenoti",
+      "position": "Software Engineer",
+      "startDate": "2022-08",
+      "endDate": "2024-05",
+      "summary": "Backend and full-stack work on a large multi-tenant enterprise product.",
+      "highlights": [
+        "Primary code reviewer within a year of joining; requested changes on 25+ of 50+ PRs, including work already approved by senior staff. Mentored teammates on defect resolution.",
+        "Delivered 5 client-specific and 2 core-team features end to end; 2 were adopted into the core product.",
+        "Designed a localization abstraction layer: providers switchable through configuration, per-element opt-out control, and coverage extended through API and database layers.",
+        "Diagnosed and optimised SQL queries that had degraded 2–3x, restoring near-baseline response times with no downtime.",
+        "Rewrote legacy stored procedures, including one of 4,000 lines, replacing a destructive save pattern with differential updates to eliminate a data-loss risk.",
+        "Migrated a large ASP.NET codebase to jQuery 3.5+, taking the highest-complexity pages and contributing refactor patterns adopted into shared libraries.",
+        "Extended Elasticsearch type-ahead search with minimum-character filtering and query tuning."
+      ],
+      "x_tech": [
+        "mssql",
+        "elasticsearch",
+        "jquery",
+        "csharp",
+        "git",
+        "bitbucket",
+        "python",
+        "django",
+        "drf",
+        "nodejs",
+        "rest",
+        "javascript",
+        "html5",
+        "css3",
+        "postgres",
+        "mysql",
+        "postman",
+        "storedprocedures",
+        "cicd",
+        "agile",
+        "i18n",
+        "dsa",
+        "codereview",
+        "sqlopt",
+        "github"
+      ]
+    },
+    {
+      "name": "Zenoti",
+      "position": "Software Engineer Intern",
+      "startDate": "2022-02",
+      "endDate": "2022-08",
+      "summary": "Frontend delivery and a permission-model extension that unlocked a major account.",
+      "highlights": [
+        "Contributed production frontend changes across a full UI redesign (HTML, SCSS, jQuery, ASPX).",
+        "Extended a hierarchical permission model so a previously passive intermediate tier could control multiple entity types; delivered as a 2-week proof of concept.",
+        "Provided post-patch production support and resolved high-priority escalations."
+      ],
+      "x_tech": [
+        "html5",
+        "css3",
+        "jquery",
+        "python",
+        "nodejs",
+        "javascript",
+        "mssql",
+        "mysql",
+        "dsa",
+        "agile",
+        "bitbucket",
+        "git",
+        "csharp",
+        "storedprocedures"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Vellore Institute of Technology",
+      "area": "Computer Applications",
+      "studyType": "MCA",
+      "startDate": "2020",
+      "endDate": "2022",
+      "score": "8.7/10"
+    },
+    {
+      "institution": "St. Xavier's College, Ranchi",
+      "area": "Information Technology",
+      "studyType": "B.Sc.",
+      "startDate": "2017",
+      "endDate": "2020",
+      "score": "8.2/10"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Meta Back-End Developer",
+      "issuer": "Coursera",
+      "date": "2026",
+      "url": "",
+      "x_status": "in-progress",
+      "x_statusNote": "capstone complete; certification in progress",
+      "x_tech": [
+        "python",
+        "django",
+        "drf",
+        "rest",
+        "postgres",
+        "mysql",
+        "react",
+        "javascript",
+        "html5",
+        "css3",
+        "git",
+        "github",
+        "systemdesign",
+        "pytest",
+        "postman",
+        "claude",
+        "claudecode"
+      ]
+    },
+    {
+      "name": "Meta Full-Stack Developer",
+      "issuer": "Coursera",
+      "date": "2026-08",
+      "url": "",
+      "x_status": "in-progress",
+      "x_tech": [
+        "react",
+        "django",
+        "rest",
+        "python",
+        "drf",
+        "postgres",
+        "mysql",
+        "javascript",
+        "html5",
+        "css3",
+        "git",
+        "github",
+        "systemdesign",
+        "pytest",
+        "postman",
+        "claude",
+        "claudecode"
+      ]
+    },
+    {
+      "name": "Claude 101",
+      "issuer": "Anthropic",
+      "date": "2026",
+      "url": "",
+      "x_status": "completed",
+      "x_note": "prompting fundamentals and AI-assisted workflows",
+      "x_tech": ["claude"]
+    },
+    {
+      "name": "Claude Code 101",
+      "issuer": "Anthropic",
+      "date": "2026",
+      "url": "",
+      "x_status": "in-progress",
+      "x_tech": ["claudecode"]
+    },
+    {
+      "name": "Blockchain Specialization",
+      "issuer": "Coursera",
+      "date": "2022",
+      "url": "",
+      "x_status": "completed",
+      "x_note": "smart contracts, distributed computing, cryptography",
+      "x_tech": ["python"]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Backend",
+      "keywords": ["python", "django", "drf", "nodejs", "rest"]
+    },
+    {
+      "name": "AI Integration",
+      "keywords": ["clip", "qdrant", "similaritysearch", "reranking", "pytorch"]
+    },
+    {
+      "name": "Databases",
+      "keywords": ["postgres", "mysql", "mssql", "elasticsearch", "storedprocedures", "sqlopt"]
+    },
+    {
+      "name": "Frontend",
+      "keywords": [
+        "react",
+        "javascript",
+        "html5",
+        "css3",
+        "jquery",
+        "typescript",
+        "tailwind",
+        "vite"
+      ]
+    },
+    {
+      "name": "Cloud & DevOps",
+      "keywords": [
+        "docker",
+        "cicd",
+        "googlecloud",
+        "git",
+        "github",
+        "bitbucket",
+        "agile",
+        "githubactions"
+      ]
+    },
+    {
+      "name": "Architecture",
+      "keywords": ["systemdesign", "distributed", "etl", "i18n", "dsa"]
+    },
+    {
+      "name": "Testing",
+      "keywords": ["pytest", "postman", "codereview"]
+    },
+    {
+      "name": "AI-Assisted Development",
+      "keywords": ["claude", "claudecode", "githubcopilot"],
+      "x_note": "spec-driven, agentic build workflows"
+    },
+    {
+      "name": "Also worked with",
+      "keywords": ["csharp", "unity", "qt"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "CreatorHub",
+      "description": "Multi-tenant SaaS platform for creator agencies — tenancy, identity, campaign lifecycle and payouts. Built through spec-driven AI development: I architected the module structure and data models, defined the features and UI, directed the implementation in Claude Code, and tested it end to end.",
+      "url": "https://github.com/epicallyunreal/CreatorHub",
+      "highlights": [
+        "Architected a 12-app module structure separating tenancy, identity, campaigns and billing concerns.",
+        "Designed dual-actor JWT authentication and role-based access control with per-user grant and deny overrides.",
+        "Designed an 11-stage forward-only campaign lifecycle with audit trail and milestone-based approvals."
+      ],
+      "x_tech": [
+        "django",
+        "drf",
+        "react",
+        "vite",
+        "postgres",
+        "python",
+        "rest",
+        "elasticsearch",
+        "javascript",
+        "html5",
+        "css3",
+        "git",
+        "github",
+        "systemdesign",
+        "etl",
+        "pytest",
+        "claude",
+        "claudecode",
+        "githubcopilot"
+      ],
+      "x_featured": true
+    },
+    {
+      "name": "BGMI Tournament Management System",
+      "description": "Tournament platform with UI-driven CRUD workflows, custom leaderboard generation, and JSON data export — plus a companion static frontend reading the exported JSON, deployed to serve a fast public leaderboard with no backend hosting cost.",
+      "url": "https://github.com/epicallyunreal/bgmileaderboard",
+      "highlights": [
+        "Implemented leaderboard generation logic and JSON export as the deployment boundary.",
+        "Rebuilt sorting, filtering and search client-side to remove the need for a hosted backend."
+      ],
+      "x_tech": [
+        "django",
+        "postgres",
+        "javascript",
+        "python",
+        "drf",
+        "rest",
+        "html5",
+        "css3",
+        "cicd",
+        "git",
+        "github",
+        "systemdesign",
+        "postman"
+      ],
+      "x_featured": false
+    },
+    {
+      "name": "LittleLemon API",
+      "description": "RESTful API covering models, serializers, endpoints, and authentication/authorization with Djoser.",
+      "url": "https://github.com/epicallyunreal/django-api",
+      "highlights": [
+        "Built full CRUD endpoints with role-scoped permissions and token authentication."
+      ],
+      "x_tech": [
+        "django",
+        "drf",
+        "rest",
+        "python",
+        "mysql",
+        "javascript",
+        "html5",
+        "css3",
+        "git",
+        "github",
+        "pytest",
+        "postman",
+        "claudecode",
+        "githubcopilot"
+      ],
+      "x_featured": false
+    },
+    {
+      "name": "Handwritten Text Recognition",
+      "description": "Character recognition system built on a neural network trained against the IAM handwriting dataset, covering the full pipeline from image preprocessing through training and evaluation.",
+      "url": "",
+      "highlights": ["Implemented the preprocessing, training and evaluation pipeline end to end."],
+      "x_tech": ["python", "pytorch"],
+      "x_featured": false
+    }
+  ],
+  "awards": [
+    {
+      "title": "HackerRank 5-star — Python, SQL, C++",
+      "awarder": "HackerRank",
+      "date": "2024"
+    },
+    {
+      "title": "CodeChef — peak rating 1692 across 73 contests",
+      "awarder": "CodeChef",
+      "date": "2024"
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Fluent"
+    },
+    {
+      "language": "Hindi",
+      "fluency": "Native speaker"
+    }
+  ],
+  "interests": [],
+  "references": [],
+  "x_meta": {
+    "version": "2.4.0",
+    "headline": "I build backend systems that hold up in production.",
+    "cvHeadline": "Senior Software Engineer | Python · Django · REST APIs · React · AI Integration",
+    "availability": "Open to relocation (EU) and remote roles",
+    "careerStart": "2022-02",
+    "sectionOrder": [
+      "about",
+      "experience",
+      "skills",
+      "projects",
+      "certifications",
+      "awards",
+      "contact"
+    ]
+  }
+}

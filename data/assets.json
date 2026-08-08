@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "defaults": {
+    "fallback": "/logos/_generic.svg"
+  },
+  "tech": {
+    "python": {
+      "label": "Python",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/python/python-original.svg",
+      "color": "#3776AB"
+    },
+    "django": {
+      "label": "Django",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/django/django-plain.svg",
+      "color": "#44B78B",
+      "mono": true
+    },
+    "drf": {
+      "label": "Django REST Framework",
+      "src": "/logos/drf.svg",
+      "color": "#A30000"
+    },
+    "rest": {
+      "label": "REST API design",
+      "src": "/logos/rest.svg",
+      "color": "#22D3EE"
+    },
+    "nodejs": {
+      "label": "Node.js",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/nodejs/nodejs-original.svg",
+      "color": "#339933"
+    },
+    "postgres": {
+      "label": "PostgreSQL",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/postgresql/postgresql-original.svg",
+      "color": "#4169E1"
+    },
+    "mysql": {
+      "label": "MySQL",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/mysql/mysql-original.svg",
+      "color": "#4479A1"
+    },
+    "mssql": {
+      "label": "Microsoft SQL Server",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/microsoftsqlserver/microsoftsqlserver-plain.svg",
+      "color": "#CC2927",
+      "mono": true
+    },
+    "elasticsearch": {
+      "label": "Elasticsearch",
+      "src": "https://cdn.jsdelivr.net/npm/simple-icons@v11.15.0/icons/elasticsearch.svg",
+      "color": "#005571",
+      "mono": true
+    },
+    "storedprocedures": {
+      "label": "Stored procedures",
+      "src": "",
+      "color": "#4169E1"
+    },
+    "sqlopt": {
+      "label": "SQL query optimization",
+      "src": "",
+      "color": "#4169E1"
+    },
+    "clip": {
+      "label": "CLIP (ViT-B/16)",
+      "src": "/logos/clip.svg",
+      "color": "#8B5CF6"
+    },
+    "qdrant": {
+      "label": "Qdrant",
+      "src": "/logos/qdrant.svg",
+      "color": "#DC244C"
+    },
+    "similaritysearch": {
+      "label": "Similarity search",
+      "src": "",
+      "color": "#8B5CF6"
+    },
+    "reranking": {
+      "label": "Reranking",
+      "src": "",
+      "color": "#8B5CF6"
+    },
+    "pytorch": {
+      "label": "PyTorch",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/pytorch/pytorch-original.svg",
+      "color": "#EE4C2C"
+    },
+    "react": {
+      "label": "React",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/react/react-original.svg",
+      "color": "#61DAFB"
+    },
+    "javascript": {
+      "label": "JavaScript",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/javascript/javascript-original.svg",
+      "color": "#F7DF1E"
+    },
+    "typescript": {
+      "label": "TypeScript",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/typescript/typescript-original.svg",
+      "color": "#3178C6"
+    },
+    "html5": {
+      "label": "HTML5",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/html5/html5-original.svg",
+      "color": "#E34F26"
+    },
+    "css3": {
+      "label": "CSS3",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/css3/css3-original.svg",
+      "color": "#1572B6"
+    },
+    "jquery": {
+      "label": "jQuery",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/jquery/jquery-original.svg",
+      "color": "#0769AD"
+    },
+    "googlecloud": {
+      "label": "Google Cloud",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/googlecloud/googlecloud-original.svg",
+      "color": "#4285F4"
+    },
+    "docker": {
+      "label": "Docker",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/docker/docker-original.svg",
+      "color": "#2496ED"
+    },
+    "cicd": {
+      "label": "CI/CD",
+      "src": "",
+      "color": "#2088FF"
+    },
+    "git": {
+      "label": "Git",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/git/git-original.svg",
+      "color": "#F05032"
+    },
+    "github": {
+      "label": "GitHub",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/github/github-original.svg",
+      "color": "#FFFFFF",
+      "mono": true
+    },
+    "githubactions": {
+      "label": "GitHub Actions",
+      "src": "https://cdn.jsdelivr.net/npm/simple-icons@v11.15.0/icons/githubactions.svg",
+      "color": "#2088FF",
+      "mono": true
+    },
+    "bitbucket": {
+      "label": "Bitbucket",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/bitbucket/bitbucket-original.svg",
+      "color": "#0052CC"
+    },
+    "agile": {
+      "label": "Agile",
+      "src": "",
+      "color": "#34D399"
+    },
+    "systemdesign": {
+      "label": "System design (HLD/LLD)",
+      "src": "",
+      "color": "#22D3EE"
+    },
+    "distributed": {
+      "label": "Distributed systems",
+      "src": "",
+      "color": "#34D399"
+    },
+    "etl": {
+      "label": "ETL & data pipelines",
+      "src": "",
+      "color": "#8E75B2"
+    },
+    "i18n": {
+      "label": "Localization (i18n)",
+      "src": "",
+      "color": "#FF6C37"
+    },
+    "dsa": {
+      "label": "Data structures & algorithms",
+      "src": "",
+      "color": "#F05032"
+    },
+    "pytest": {
+      "label": "Pytest",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/pytest/pytest-original.svg",
+      "color": "#0A9EDC"
+    },
+    "postman": {
+      "label": "Postman",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/postman/postman-original.svg",
+      "color": "#FF6C37"
+    },
+    "codereview": {
+      "label": "Code review",
+      "src": "",
+      "color": "#34D399"
+    },
+    "claudecode": {
+      "label": "Claude Code",
+      "src": "https://cdn.jsdelivr.net/npm/simple-icons@v11.15.0/icons/anthropic.svg",
+      "color": "#D97757",
+      "mono": true
+    },
+    "claude": {
+      "label": "Claude",
+      "src": "https://cdn.jsdelivr.net/npm/simple-icons@v14.0.0/icons/claude.svg",
+      "color": "#D97757",
+      "mono": true
+    },
+    "githubcopilot": {
+      "label": "GitHub Copilot",
+      "src": "https://cdn.jsdelivr.net/npm/simple-icons@v11.15.0/icons/githubcopilot.svg",
+      "color": "#8957E5",
+      "mono": true
+    },
+    "vite": {
+      "label": "Vite",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/vitejs/vitejs-original.svg",
+      "color": "#646CFF"
+    },
+    "tailwind": {
+      "label": "Tailwind CSS",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/tailwindcss/tailwindcss-original.svg",
+      "color": "#06B6D4"
+    },
+    "csharp": {
+      "label": "C#",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/csharp/csharp-original.svg",
+      "color": "#512BD4"
+    },
+    "unity": {
+      "label": "Unity",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/unity/unity-original.svg",
+      "color": "#FFFFFF",
+      "mono": true
+    },
+    "qt": {
+      "label": "PySide6 / Qt",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/qt/qt-original.svg",
+      "color": "#41CD52"
+    }
+  },
+  "images": {
+    "headshot": {
+      "src": "/images/headshot.webp",
+      "alt": "Nutan Prabhat",
+      "width": 512,
+      "height": 512
+    },
+    "og": {
+      "src": "/images/og.png",
+      "alt": "",
+      "width": 1200,
+      "height": 630
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "assets.schema.json",
+  "title": "Asset registry (logos & images)",
+  "type": "object",
+  "required": ["version", "defaults", "tech", "images"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "integer", "const": 1 },
+    "defaults": {
+      "type": "object",
+      "required": ["fallback"],
+      "properties": {
+        "fallback": { "type": "string", "minLength": 1 }
+      }
+    },
+    "tech": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["label", "src", "color"],
+        "additionalProperties": false,
+        "properties": {
+          "label": { "type": "string", "minLength": 1 },
+          "src": {
+            "type": "string",
+            "description": "CDN URL or /path under public/. Empty renders a generated initials badge instead of a logo."
+          },
+          "color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+          "mono": {
+            "type": "boolean",
+            "description": "Single-colour icon that needs inverting on the dark theme."
+          }
+        }
+      }
+    },
+    "images": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["src", "alt", "width", "height"],
+        "additionalProperties": false,
+        "properties": {
+          "src": { "type": "string", "minLength": 1 },
+          "alt": { "type": "string" },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 }
+        }
+      }
+    }
+  }
+}

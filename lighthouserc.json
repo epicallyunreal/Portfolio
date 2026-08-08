@@ -1,0 +1,30 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./dist",
+      "numberOfRuns": 1
+    },
+    "assert": {
+      "assertMatrix": [
+        {
+          "comment": "The portfolio itself — the budgets from the build spec, enforced hard.",
+          "matchingUrlPattern": ".*/(index|404)\\.html$",
+          "assertions": {
+            "categories:performance": ["error", { "minScore": 0.9 }],
+            "categories:accessibility": ["error", { "minScore": 0.95 }],
+            "largest-contentful-paint": ["error", { "maxNumericValue": 2500 }],
+            "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }]
+          }
+        },
+        {
+          "comment": "The editor and the print CV are tools, not the portfolio. Accessibility still gates the build; speed does not, since neither is on a visitor's path.",
+          "matchingUrlPattern": ".*/(edit|cv)/index\\.html$",
+          "assertions": {
+            "categories:accessibility": ["error", { "minScore": 0.9 }],
+            "cumulative-layout-shift": ["warn", { "maxNumericValue": 0.1 }]
+          }
+        }
+      ]
+    }
+  }
+}
