@@ -44,6 +44,9 @@ export default function CvPrint() {
     phone,
     basics.email,
   ].filter(Boolean)
+  // The site leads the links line: it is the one address that carries the
+  // others, and the CV is where a reader first meets it.
+  const links = [basics.url, ...basics.profiles.map((p) => p.url)].filter(Boolean)
 
   return (
     <main className="cv-root">
@@ -52,10 +55,10 @@ export default function CvPrint() {
         <p className="cv-headline">{x_meta.cvHeadline}</p>
         <p className="cv-contact">{contactParts.join('  ·  ')}</p>
         <p className="cv-links">
-          {basics.profiles.map((p, i) => (
-            <span key={p.network}>
+          {links.map((url, i) => (
+            <span key={url}>
               {i > 0 ? '  ·  ' : ''}
-              <a href={p.url}>{displayUrl(p.url)}</a>
+              <a href={url}>{displayUrl(url)}</a>
             </span>
           ))}
         </p>
