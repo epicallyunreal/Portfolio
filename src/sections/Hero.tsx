@@ -19,12 +19,17 @@ const MIN_HOLD_MS = 900
  * Under reduced motion nothing rotates — auto-advancing text is the kind of
  * movement that setting asks us to stop — so the first line is shown outright.
  */
+const NO_HEADLINE: Headline = { text: '' }
+
 function useTypedRotation(lines: Headline[], enabled: boolean) {
   const [index, setIndex] = useState(0)
   const [length, setLength] = useState(0)
   const [erasing, setErasing] = useState(false)
 
-  const line = lines[Math.min(index, lines.length - 1)]
+  // The list is never empty in valid data — the schema requires one — but the
+  // editor's live preview renders the draft mid-edit, including the moment
+  // between deleting the last headline and the save that would reject it.
+  const line = lines.length > 0 ? lines[Math.min(index, lines.length - 1)] : NO_HEADLINE
 
   useEffect(() => {
     if (!enabled) return
@@ -53,7 +58,7 @@ function useTypedRotation(lines: Headline[], enabled: boolean) {
     return () => clearTimeout(timer)
   }, [enabled, lines, line, length, erasing])
 
-  return enabled ? { line, length } : { line: lines[0], length: lines[0].text.length }
+  return enabled ? { line, length } : { line, length: line.text.length }
 }
 
 /**
