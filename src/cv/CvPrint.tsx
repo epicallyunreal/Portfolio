@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { formatDate, orderTech, resume, techAsset } from '../lib/data'
 import './cv.css'
 
@@ -16,6 +16,15 @@ const displayUrl = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').repl
 
 // Same canonical order as the site, so the CV and the page agree.
 const labels = (keys: string[] = []) => orderTech(keys).map((k) => techAsset(k).label)
+
+/**
+ * A name that becomes a link when there is somewhere to point at. Entries
+ * carry `url: ""` when no credential or repo is public, so the empty string
+ * has to read as "no link" rather than as a link to the current page.
+ */
+function Linked({ url, children }: { url?: string; children: ReactNode }) {
+  return url ? <a href={url}>{children}</a> : <>{children}</>
+}
 
 function certStatusText(cert: (typeof resume.certificates)[number]): string {
   if (cert.x_statusNote) return cert.x_statusNote
@@ -97,7 +106,9 @@ export default function CvPrint() {
       <h2 className="cv-section">Projects</h2>
       {resume.projects.map((project) => (
         <p key={project.name} className="cv-line">
-          <strong>{project.url ? <a href={project.url}>{project.name}</a> : project.name}</strong>
+          <strong>
+            <Linked url={project.url}>{project.name}</Linked>
+          </strong>
           {project.x_tech && project.x_tech.length > 0
             ? ` — ${labels(project.x_tech).join(', ')}. `
             : ' — '}
@@ -121,8 +132,10 @@ export default function CvPrint() {
           const tail = [...labels(cert.x_tech), ...(cert.x_note ? [cert.x_note] : [])].join(', ')
           return (
             <li key={cert.name}>
-              <strong>{cert.name}</strong> — {cert.issuer} ({certStatusText(cert)})
-              {tail ? ` · ${tail}` : ''}
+              <strong>
+                <Linked url={cert.url}>{cert.name}</Linked>
+              </strong>{' '}
+              — {cert.issuer} ({certStatusText(cert)}){tail ? ` · ${tail}` : ''}
             </li>
           )
         })}

@@ -233,7 +233,7 @@
       "name": "Claude 101",
       "issuer": "Anthropic",
       "date": "2026",
-      "url": "",
+      "url": "https://verify.skilljar.com/c/hceryv3h4rmg",
       "x_status": "completed",
       "x_note": "prompting fundamentals and AI-assisted workflows",
       "x_tech": []
@@ -439,7 +439,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.7.0",
+    "version": "2.7.1",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
