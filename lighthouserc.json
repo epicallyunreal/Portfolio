@@ -2,7 +2,8 @@
   "ci": {
     "collect": {
       "staticDistDir": "./dist",
-      "numberOfRuns": 3
+      "comment": "One run per page. Three runs (a median, to smooth runner noise) tripled the slowest step in the deploy for a gate that is already generous.",
+      "numberOfRuns": 1
     },
     "assert": {
       "assertMatrix": [

@@ -23,19 +23,28 @@ exists, it's that the pipeline around it holds the content honest.
   version-pinned, the phone number must never reach committed JSON). CI fails with the offending
   key named.
 - **One dataset, two artifacts.** The site and a Calibri-metric CV PDF are rendered from the same
-  JSON, so they cannot drift. The PDF is printed from a hidden `/cv` route by Puppeteer in CI.
+  JSON, so they cannot drift. The PDF is printed from a hidden `/cv` route by Puppeteer in CI, and
+  its text layer is checked to survive extraction — an ATS reads that, not the page.
 - **An in-browser editor** at `/edit` with sectional saves, live validation, a field-level
   old-vs-new diff before writing, and semver version bumps.
-- **Enforced budgets.** Lighthouse (perf ≥ 90, a11y ≥ 95, LCP < 2.5 s, CLS < 0.1) and a 250 KB
-  gzipped JS ceiling, both wired into the build.
+- **Enforced budgets.** Lighthouse (performance ≥ 0.90, accessibility ≥ 0.95, CLS < 0.1, with LCP
+  under 4 s as a backstop) and a 250 KB gzipped JS ceiling, both wired into the build.
 - **Cross-filtering.** Click a skill and every role, project and certification using it is listed
   as a link — driven by the tags stored in the JSON.
+- **One ordering, everywhere.** The tech chips on a role, project or certification are sorted by
+  the order of the groups in **Skills** — backend before databases before frontend, and so on, on
+  the page and in the PDF alike. It is derived from the group order rather than stored, so
+  re-tagging a skill re-sorts every place it appears.
+- **A hero that isn't one line.** `x_meta.headlines` is a list; the typewriter cycles it, five
+  seconds each, lifting the `emphasis` substring of each line as it is typed. One entry types once
+  and stays. Validation rejects an emphasis that isn't in its own line, since that would render
+  plain with no visible symptom.
 
 ## The editor
 
 `npm run dev`, then <http://localhost:5173/edit>. It edits everything: header and contact,
-experience, skills, projects, certifications, awards, education, languages, section order and the
-tech/image registry.
+experience, skills, projects, certifications, awards, education, languages, the hero headlines,
+section order and the tech/image registry.
 
 It runs in two modes, detected at load rather than compiled in:
 
@@ -93,6 +102,12 @@ not asserted — the CV grows with the content. The phone number never lives in 
 pass it at build time (`CV_PHONE="+31..." npm run build:pdf`), and in CI it comes from the
 `CV_PHONE` repository secret.
 
+Ligatures are switched off on the print route on purpose. Carlito's `ti`/`tt`/`tf` ligature glyphs
+carry no `ToUnicode` mapping in the subset Chrome embeds, so the page looked right while text
+extraction silently deleted them — "Integration" came out as "Integra on", "Portfolio" as
+"Por olio". A CV is read by keyword matchers before it is read by a person, so the text layer is
+the artifact that matters.
+
 ### Swapping the headshot
 
 Never drop a camera photo straight into `public/` — everything there is published verbatim, and
@@ -129,6 +144,10 @@ additionally needs `base: '/repo/'` in `vite.config.ts`.
 [deploy.yml](.github/workflows/deploy.yml) runs on every push to `main`: install → lint →
 format → typecheck → validate data → build → **generate the CV PDF from resume.json** → bundle
 budget → Lighthouse CI → deploy to GitHub Pages.
+
+Lighthouse audits each of the four pages once. Repeat runs exist to median away runner noise, but
+they were the slowest thing in the deploy and the thresholds are not tight enough to need them; if
+a score ever flakes, `numberOfRuns` in [lighthouserc.json](lighthouserc.json) is the dial.
 
 Because GitHub Pages has no SPA rewrites, the build emits real `edit/index.html` and
 `cv/index.html` files so those deep links resolve instead of 404ing.
