@@ -57,6 +57,14 @@ body:has(.cv-root) {
   margin: 0 auto;
 }
 
+/* Every link in the CV, wherever it sits. Scoped per-section previously,
+   which meant a link in a section nobody had styled yet fell back to the
+   browser default instead of the spec's hyperlink blue. */
+.cv-root a {
+  color: #0563c1;
+  text-decoration: underline;
+}
+
 /* ---- Header block, centred ---- */
 .cv-header {
   text-align: center;
@@ -81,10 +89,6 @@ body:has(.cv-root) {
 .cv-links {
   font-size: 10pt;
   margin: 0 0 3pt;
-}
-.cv-links a {
-  color: #0563c1;
-  text-decoration: underline;
 }
 
 /* ---- Section headers ---- */
@@ -145,8 +149,4 @@ body:has(.cv-root) {
 }
 .cv-line strong {
   font-weight: 700;
-}
-.cv-line a {
-  color: #0563c1;
-  text-decoration: underline;
 }
