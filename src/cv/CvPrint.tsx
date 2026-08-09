@@ -14,8 +14,10 @@ import './cv.css'
 
 const displayUrl = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
 
-// Same canonical order as the site, so the CV and the page agree.
-const labels = (keys: string[] = []) => orderTech(keys).map((k) => techAsset(k).label)
+// Skill-group keywords in the same canonical order as the site, so the CV and
+// the page agree. Only the Technical Skills section names technologies — the
+// project and certification lines stay prose.
+const labels = (keys: string[]) => orderTech(keys).map((k) => techAsset(k).label)
 
 /**
  * A name that becomes a link when there is somewhere to point at. Entries
@@ -108,11 +110,8 @@ export default function CvPrint() {
         <p key={project.name} className="cv-line">
           <strong>
             <Linked url={project.url}>{project.name}</Linked>
-          </strong>
-          {project.x_tech && project.x_tech.length > 0
-            ? ` — ${labels(project.x_tech).join(', ')}. `
-            : ' — '}
-          {project.description}
+          </strong>{' '}
+          — {project.description}
         </p>
       ))}
 
@@ -128,17 +127,14 @@ export default function CvPrint() {
 
       <h2 className="cv-section">Certifications</h2>
       <ul className="cv-bullets">
-        {resume.certificates.map((cert) => {
-          const tail = [...labels(cert.x_tech), ...(cert.x_note ? [cert.x_note] : [])].join(', ')
-          return (
-            <li key={cert.name}>
-              <strong>
-                <Linked url={cert.url}>{cert.name}</Linked>
-              </strong>{' '}
-              — {cert.issuer} ({certStatusText(cert)}){tail ? ` · ${tail}` : ''}
-            </li>
-          )
-        })}
+        {resume.certificates.map((cert) => (
+          <li key={cert.name}>
+            <strong>
+              <Linked url={cert.url}>{cert.name}</Linked>
+            </strong>{' '}
+            — {cert.issuer} ({certStatusText(cert)}){cert.x_note ? ` · ${cert.x_note}` : ''}
+          </li>
+        ))}
       </ul>
 
       {resume.awards && resume.awards.length > 0 ? (
