@@ -92,7 +92,7 @@ npm run lint          # ESLint
 npm run format        # Prettier write
 npm run build         # production build to dist/
 npm run check:bundle  # enforce the < 250 KB gzipped JS budget
-npm run build:pdf     # print the /cv route → public/<Name>_CV.pdf (needs build first)
+npm run build:cv      # print the /cv route → public/<Name>_CV.pdf (needs build first)
 npm run build:og      # regenerate the Open Graph image from resume.json
 ```
 
@@ -101,6 +101,30 @@ The CV follows [CV_PDF_Layout_Spec.md](CV_PDF_Layout_Spec.md), using self-hosted
 not asserted — the CV grows with the content. The phone number never lives in JSON or on the site;
 pass it at build time (`CV_PHONE="+31..." npm run build:pdf`), and in CI it comes from the
 `CV_PHONE` repository secret.
+
+#### Rendering a variant
+
+The same script renders an alternate dataset without touching the repo — useful
+for a CV tailored to one application:
+
+```bash
+npm run build:cv -- --resume /tmp/acme.json --name acme-senior-backend
+```
+
+`--resume`, `--assets` and `--name` each default to the committed values, and
+supplying any of them switches the script into generate mode: output goes to
+`GenerateCV/<name>.pdf` at the repo root and nowhere else — there is no `--out`,
+which is the point. The directory is git-ignored, created on demand, and
+**emptied at the start of every run**, so copy the PDF out before running again.
+The absolute path is the last line of stdout; everything else goes to stderr.
+
+Inputs are read-only and validated against this repo's schemas before anything
+renders, using the same validator as `npm run validate` — a variant with a
+typo'd tech key fails with the JSON pointer rather than producing a plausible
+but wrong CV. `--name` is a filename stem, so it accepts `[A-Za-z0-9._-]` only.
+Exit codes: 1 validation, 2 bad arguments or missing input, 3 render failure.
+
+With no flags the script behaves exactly as before, which is what CI runs.
 
 Ligatures are switched off on the print route on purpose. Carlito's `ti`/`tt`/`tf` ligature glyphs
 carry no `ToUnicode` mapping in the subset Chrome embeds, so the page looked right while text
