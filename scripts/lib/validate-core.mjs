@@ -1,16 +1,25 @@
 /**
  * The single definition of "valid data" for this repo.
  *
- * Used by scripts/validate-data.mjs (CLI, pre-commit, CI) and by the dev-only
- * editor's save endpoint, so the editor cannot write anything CI would reject.
+ * Used by scripts/validate-data.mjs (CLI, pre-commit, CI), by the dev-only
+ * editor's save endpoint, and by the CV build when rendering an alternate
+ * dataset — so none of them can accept what another would reject.
  *
- * Pure: takes the parsed documents and returns an array of readable errors.
- * `fileExists` is injected so the browser can skip filesystem checks.
+ * Pure: takes the parsed documents and returns errors. `fileExists` is
+ * injected so the browser can skip filesystem checks.
+ *
+ * Two shapes, one set of rules:
+ *   validateDataDetailed() → [{ file, pointer, label, message }]
+ *   validateData()         → ["<label>: <message>", ...]
+ *
+ * `pointer` is a JSON pointer into the offending document, for callers that
+ * want to address the exact node. `label` is the human-readable location the
+ * CLI has always printed. Both describe the same error.
  */
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
 
-export function validateData({
+export function validateDataDetailed({
   resume,
   assets,
   resumeSchema,
@@ -19,6 +28,7 @@ export function validateData({
   fileExists = null,
 }) {
   const errors = []
+  const add = (file, pointer, label, message) => errors.push({ file, pointer, label, message })
 
   // 1. Schema validation
   const ajv = new Ajv({ allErrors: true, allowUnionTypes: true })
@@ -30,7 +40,7 @@ export function validateData({
     const validate = ajv.compile(schema)
     if (!validate(data)) {
       for (const err of validate.errors ?? []) {
-        errors.push(`${name}${err.instancePath || '/'}: ${err.message}`)
+        add(name, err.instancePath, `${name}${err.instancePath || '/'}`, err.message)
       }
     }
   }
@@ -38,22 +48,34 @@ export function validateData({
   // 2. Every tech key referenced anywhere must resolve in assets.tech —
   //    otherwise the site silently renders a broken logo.
   const techKeys = new Set(Object.keys(assets.tech ?? {}))
-  const checkTech = (keys, where) => {
-    for (const key of keys ?? []) {
+  const checkTech = (keys, pointer, label) => {
+    // Indexed so the pointer addresses the offending key, not just its array.
+    ;(keys ?? []).forEach((key, k) => {
       if (!techKeys.has(key)) {
-        errors.push(
-          `${where}: unknown tech key "${key}" — add it to assets.json#/tech or fix the typo`,
+        add(
+          'resume.json',
+          `${pointer}/${k}`,
+          label,
+          `unknown tech key "${key}" — add it to assets.json#/tech or fix the typo`,
         )
       }
-    }
+    })
   }
-  resume.work?.forEach((w, i) => checkTech(w.x_tech, `resume.json work[${i}] ("${w.name}")`))
-  resume.projects?.forEach((p, i) =>
-    checkTech(p.x_tech, `resume.json projects[${i}] ("${p.name}")`),
+  resume.work?.forEach((w, i) =>
+    checkTech(w.x_tech, `/work/${i}/x_tech`, `resume.json work[${i}] ("${w.name}")`),
   )
-  resume.skills?.forEach((s, i) => checkTech(s.keywords, `resume.json skills[${i}] ("${s.name}")`))
+  resume.projects?.forEach((p, i) =>
+    checkTech(p.x_tech, `/projects/${i}/x_tech`, `resume.json projects[${i}] ("${p.name}")`),
+  )
+  resume.skills?.forEach((s, i) =>
+    checkTech(s.keywords, `/skills/${i}/keywords`, `resume.json skills[${i}] ("${s.name}")`),
+  )
   resume.certificates?.forEach((c, i) =>
-    checkTech(c.x_tech, `resume.json certificates[${i}] ("${c.name}")`),
+    checkTech(
+      c.x_tech,
+      `/certificates/${i}/x_tech`,
+      `resume.json certificates[${i}] ("${c.name}")`,
+    ),
   )
 
   // 3. A section listed in sectionOrder without data must fail, not render empty.
@@ -66,32 +88,53 @@ export function validateData({
     awards: () => (resume.awards?.length ?? 0) > 0,
     contact: () => Boolean(resume.basics?.email) || (resume.basics?.profiles?.length ?? 0) > 0,
   }
-  for (const section of resume.x_meta?.sectionOrder ?? []) {
+  ;(resume.x_meta?.sectionOrder ?? []).forEach((section, i) => {
     const check = sectionHasData[section]
     if (check && !check()) {
-      errors.push(
-        `resume.json x_meta.sectionOrder: section "${section}" is listed but has no data to render`,
+      add(
+        'resume.json',
+        `/x_meta/sectionOrder/${i}`,
+        'resume.json x_meta.sectionOrder',
+        `section "${section}" is listed but has no data to render`,
       )
     }
-  }
+  })
 
   // 4. CDN sources pinned; local sources must exist under public/.
   for (const [key, entry] of Object.entries(assets.tech ?? {})) {
     if (entry.src?.includes('@latest')) {
-      errors.push(`assets.json tech.${key}: CDN src uses @latest — pin a version (e.g. @v2.16.0)`)
+      add(
+        'assets.json',
+        `/tech/${key}/src`,
+        `assets.json tech.${key}`,
+        'CDN src uses @latest — pin a version (e.g. @v2.16.0)',
+      )
     }
     if (fileExists && entry.src?.startsWith('/') && !fileExists(entry.src)) {
-      errors.push(`assets.json tech.${key}: local src "${entry.src}" not found under public/`)
+      add(
+        'assets.json',
+        `/tech/${key}/src`,
+        `assets.json tech.${key}`,
+        `local src "${entry.src}" not found under public/`,
+      )
     }
   }
   for (const [key, entry] of Object.entries(assets.images ?? {})) {
     if (fileExists && entry.src?.startsWith('/') && !fileExists(entry.src)) {
-      errors.push(`assets.json images.${key}: local src "${entry.src}" not found under public/`)
+      add(
+        'assets.json',
+        `/images/${key}/src`,
+        `assets.json images.${key}`,
+        `local src "${entry.src}" not found under public/`,
+      )
     }
   }
   if (fileExists && assets.defaults?.fallback && !fileExists(assets.defaults.fallback)) {
-    errors.push(
-      `assets.json defaults.fallback: "${assets.defaults.fallback}" not found under public/`,
+    add(
+      'assets.json',
+      '/defaults/fallback',
+      'assets.json defaults.fallback',
+      `"${assets.defaults.fallback}" not found under public/`,
     )
   }
 
@@ -99,8 +142,11 @@ export function validateData({
   //    typewriter would just render the line plain, with no visible symptom.
   resume.x_meta?.headlines?.forEach((line, i) => {
     if (line.emphasis && !line.text?.includes(line.emphasis)) {
-      errors.push(
-        `resume.json x_meta.headlines[${i}]: emphasis "${line.emphasis}" does not appear in text "${line.text}"`,
+      add(
+        'resume.json',
+        `/x_meta/headlines/${i}/emphasis`,
+        `resume.json x_meta.headlines[${i}]`,
+        `emphasis "${line.emphasis}" does not appear in text "${line.text}"`,
       )
     }
   })
@@ -108,10 +154,18 @@ export function validateData({
   // 6. The phone number must never reach committed JSON (it is injected at PDF
   //    build time from CV_PHONE). Guards against the editor writing it back in.
   if (resume.basics?.phone) {
-    errors.push(
-      'resume.json basics.phone: must stay empty — the CV phone comes from the CV_PHONE env var, never from committed JSON',
+    add(
+      'resume.json',
+      '/basics/phone',
+      'resume.json basics.phone',
+      'must stay empty — the CV phone comes from the CV_PHONE env var, never from committed JSON',
     )
   }
 
   return errors
+}
+
+/** The same rules, flattened to the one-line strings the CLI and editor print. */
+export function validateData(input) {
+  return validateDataDetailed(input).map((e) => `${e.label}: ${e.message}`)
 }

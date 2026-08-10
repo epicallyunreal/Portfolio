@@ -16,6 +16,23 @@ export function setPreviewData(nextResume: Resume, nextAssets: Assets) {
 }
 
 /**
+ * The CV build can render an alternate dataset (`build:cv --resume …`). The
+ * data above is compiled into the bundle, so the only way in is to plant it on
+ * the window before any bundle script runs — which is what Puppeteer's
+ * evaluateOnNewDocument does.
+ *
+ * Deliberately narrow: only the /cv print route reads it, so the site itself
+ * always renders the committed JSON no matter what is on the window. Nothing
+ * here is a trust boundary — setting this global already requires running code
+ * in the visitor's own browser.
+ */
+const injected = (globalThis as { __CV_DATA__?: { resume: Resume; assets: Assets } }).__CV_DATA__
+if (injected && typeof location !== 'undefined' && location.pathname.startsWith('/cv')) {
+  resume = injected.resume
+  assets = injected.assets
+}
+
+/**
  * Tech keys render in the order the Skills section lists them — Backend, then
  * AI Integration, then Databases, and so on — rather than in whatever order
  * they happened to be tagged in.
