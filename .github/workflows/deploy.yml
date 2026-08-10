@@ -64,6 +64,11 @@ jobs:
         with:
           name: lighthouse-reports
           path: .lighthouseci/
+          # .lighthouseci is a dotfile directory, and upload-artifact excludes
+          # hidden paths by default — without this the step "succeeds" having
+          # uploaded nothing, which is how a Lighthouse failure became a bare
+          # red X with no reports to read.
+          include-hidden-files: true
           retention-days: 7
 
       - uses: actions/configure-pages@v6
