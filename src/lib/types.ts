@@ -3,7 +3,7 @@
 // in CI catches components that fall out of sync with the JSON shape.
 
 export type SectionId =
-  'about' | 'experience' | 'skills' | 'projects' | 'certifications' | 'awards' | 'contact'
+  'about' | 'experience' | 'skills' | 'projects' | 'certifications' | 'awards' | 'lab' | 'contact'
 
 export interface Profile {
   network: string
@@ -31,6 +31,8 @@ export interface WorkEntry {
   summary?: string
   highlights: string[]
   x_tech?: string[]
+  /** false keeps this off the CV PDF; it still renders on the site. */
+  x_cv?: boolean
 }
 
 export interface Certificate {
@@ -44,6 +46,8 @@ export interface Certificate {
   /** Free-text tail appended after the tech labels in the CV line. */
   x_note?: string
   x_tech?: string[]
+  /** false keeps this off the CV PDF; it still renders on the site. */
+  x_cv?: boolean
 }
 
 export interface Award {
@@ -51,6 +55,8 @@ export interface Award {
   awarder: string
   date: string
   summary?: string
+  /** false keeps this off the CV PDF; it still renders on the site. */
+  x_cv?: boolean
 }
 
 export interface SkillGroup {
@@ -58,15 +64,22 @@ export interface SkillGroup {
   keywords: string[]
   /** Free-text suffix for the group's CV line. */
   x_note?: string
+  /** false keeps this off the CV PDF; it still renders on the site. */
+  x_cv?: boolean
 }
 
 export interface Project {
   name: string
   description: string
+  /** Source repository. */
   url?: string
+  /** Deployed, running instance. */
+  x_live?: string
   highlights?: string[]
   x_tech?: string[]
   x_featured?: boolean
+  /** false keeps this off the CV PDF; it still renders on the site. */
+  x_cv?: boolean
 }
 
 export interface Headline {
@@ -94,6 +107,8 @@ export interface EducationEntry {
   startDate: string
   endDate: string
   score?: string
+  /** false keeps this off the CV PDF; it still renders on the site. */
+  x_cv?: boolean
 }
 
 export interface Resume {
@@ -129,4 +144,36 @@ export interface Assets {
   defaults: { fallback: string }
   tech: Record<string, TechAsset>
   images: Record<string, ImageAsset>
+}
+
+export interface LabItem {
+  name: string
+  /** One line, for the deck nav and the card subtitle. */
+  tagline: string
+  /** The running thing. */
+  url: string
+  /** Source, when public. */
+  repo?: string
+  status?: 'live' | 'wip' | 'archived'
+  /** A shot of the running thing; dimensions are required so nothing shifts. */
+  image?: { src: string; alt: string; width: number; height: number }
+  /** Why it was built. Leads the card — the problem before the feature list. */
+  why: string
+  features?: string[]
+  /** What made it interesting to build, rather than what it does. */
+  notes?: string[]
+  tech?: string[]
+}
+
+export interface Lab {
+  version: number
+  section: {
+    /** DOM id and nav anchor — the CV prints a link to it. */
+    id: string
+    title: string
+    hint?: string
+    /** The single line the CV prints; the items themselves never reach it. */
+    cvNote?: string
+  }
+  items: LabItem[]
 }

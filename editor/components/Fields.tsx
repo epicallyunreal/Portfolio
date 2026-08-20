@@ -242,3 +242,26 @@ export function EntryCard({
     </section>
   )
 }
+
+/**
+ * The one control for `x_cv`. Phrased as "Show on CV" rather than the raw flag
+ * name, and checked by default, because omitted means included — an unchecked
+ * box has to be a deliberate act, not the resting state.
+ */
+export function CvToggle({
+  value,
+  onChange,
+}: {
+  value: boolean | undefined
+  onChange: (next: boolean | undefined) => void
+}) {
+  return (
+    <Toggle
+      checked={value !== false}
+      // Dropping the key when it is true keeps the JSON free of noise that
+      // restates the default on every entry.
+      onChange={(next) => onChange(next ? undefined : false)}
+      label="Show on CV (off = site only)"
+    />
+  )
+}

@@ -16,6 +16,7 @@ const SECTION_COMPONENTS: Record<SectionId, LazyExoticComponent<ComponentType>> 
   projects: lazy(() => import('./sections/Projects')),
   certifications: lazy(() => import('./sections/Certifications')),
   awards: lazy(() => import('./sections/Awards')),
+  lab: lazy(() => import('./sections/Lab')),
   contact: lazy(() => import('./sections/Contact')),
 }
 

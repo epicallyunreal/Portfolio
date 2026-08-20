@@ -61,7 +61,7 @@ export default function Contact() {
     <section id="contact" aria-labelledby="contact-heading" className="section-shell">
       <SectionHeading
         id="contact-heading"
-        index="07"
+        index="08"
         title="Contact"
         hint="No contact form — this site is fully static. Email is the fastest channel."
       />

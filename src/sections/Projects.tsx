@@ -13,6 +13,9 @@ import type { Project } from '../lib/types'
 
 const MAX_TILT_DEG = 6
 
+const LINK_CLASS =
+  'whitespace-nowrap font-mono text-sm text-accent underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent'
+
 function ProjectCard({ project }: { project: Project }) {
   const { selected } = useFilter()
   const reduced = useReducedMotion()
@@ -101,16 +104,32 @@ function ProjectCard({ project }: { project: Project }) {
         ) : (
           <span />
         )}
-        {project.url ? (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noreferrer"
-            className="whitespace-nowrap font-mono text-sm text-accent underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          >
-            repo →
-          </a>
-        ) : null}
+        {/* Two independent destinations: the running app and the source. A
+            project may have either, both, or neither. */}
+        <div className="flex shrink-0 items-center gap-4">
+          {project.x_live ? (
+            <a
+              href={project.x_live}
+              target="_blank"
+              rel="noreferrer"
+              className={LINK_CLASS}
+              aria-label={`Open ${project.name}`}
+            >
+              live →
+            </a>
+          ) : null}
+          {project.url ? (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noreferrer"
+              className={LINK_CLASS}
+              aria-label={`${project.name} source repository`}
+            >
+              repo →
+            </a>
+          ) : null}
+        </div>
       </div>
     </article>
   )

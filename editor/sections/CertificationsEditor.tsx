@@ -1,5 +1,5 @@
 import type { Certificate, Resume } from '../../src/lib/types'
-import { Btn, EntryCard, Field, Select, TextInput } from '../components/Fields'
+import { CvToggle, Btn, EntryCard, Field, Select, TextInput } from '../components/Fields'
 import { listOps } from '../lib/listOps'
 import { TechPicker } from '../components/TechPicker'
 
@@ -82,6 +82,7 @@ export function CertificationsEditor({
               onChange={(v) => ops.set(i, { ...cert, x_tech: v })}
             />
           </Field>
+          <CvToggle value={cert.x_cv} onChange={(v) => ops.set(i, { ...cert, x_cv: v })} />
         </EntryCard>
       ))}
       <Btn onClick={() => ops.add({ ...BLANK })}>+ add certification</Btn>

@@ -7,7 +7,10 @@
     "phone": "",
     "url": "https://nutanprabhat.dev",
     "summary": "Senior software engineer with 4+ years building production systems in Python, Django, and DRF, currently sole engineer on an enterprise client account and owning delivery from concept to production. Recent work includes a two-stage visual retrieval system (CLIP embeddings in Qdrant with a feature-based reranker) lifted from a 41.9% baseline to 97.7% Top-1 accuracy, and a multi-tenant Django/DRF and React SaaS platform. Deep SQL background across query optimisation, stored-procedure rewrites, and data-integrity work on live enterprise systems, alongside REST API design, GCP deployment, and CI/CD.",
-    "location": { "city": "Pune", "countryCode": "IN" },
+    "location": {
+      "city": "Pune",
+      "countryCode": "IN"
+    },
     "profiles": [
       {
         "network": "LinkedIn",
@@ -238,6 +241,16 @@
       "x_tech": ["claudecode", "claude"]
     },
     {
+      "name": "Introduction to Generative AI Learning Path",
+      "issuer": "Coursera",
+      "date": "2026-08",
+      "url": "https://www.coursera.org/account/accomplishments/specialization/4B73N23WEU4Y",
+      "x_status": "completed",
+      "x_note": "Google Cloud — LLM foundations, applications, and responsible AI.",
+      "x_tech": [],
+      "x_cv": false
+    },
+    {
       "name": "Blockchain Specialization",
       "issuer": "Coursera",
       "date": "2021-09",
@@ -248,7 +261,10 @@
     }
   ],
   "skills": [
-    { "name": "Backend", "keywords": ["python", "django", "drf", "nodejs", "rest"] },
+    {
+      "name": "Backend",
+      "keywords": ["python", "django", "drf", "nodejs", "rest"]
+    },
     {
       "name": "AI Integration",
       "keywords": ["clip", "qdrant", "similaritysearch", "reranking", "pytorch"]
@@ -274,14 +290,23 @@
       "name": "Cloud & DevOps",
       "keywords": ["docker", "cicd", "googlecloud", "git", "github", "githubactions"]
     },
-    { "name": "Architecture", "keywords": ["systemdesign", "etl", "i18n", "dsa"] },
-    { "name": "Testing", "keywords": ["pytest", "postman", "codereview"] },
+    {
+      "name": "Architecture",
+      "keywords": ["systemdesign", "etl", "i18n", "dsa"]
+    },
+    {
+      "name": "Testing",
+      "keywords": ["pytest", "postman", "codereview"]
+    },
     {
       "name": "AI-Assisted Development",
       "keywords": ["claude", "claudecode", "githubcopilot"],
       "x_note": "spec-driven, agentic build workflows"
     },
-    { "name": "Also worked with", "keywords": ["csharp", "unity", "qt"] }
+    {
+      "name": "Also worked with",
+      "keywords": ["csharp", "unity", "qt"]
+    }
   ],
   "projects": [
     {
@@ -317,6 +342,7 @@
       "name": "Portfolio",
       "description": "A React and TypeScript site where two JSON files are the only source of truth: the build derives the site, the CV PDF, the Open Graph image, sitemap and HTML head, so nothing about me is written into code. The interesting part isn't the page — it's that CI refuses to publish content that doesn't hold together.",
       "url": "https://github.com/epicallyunreal/Portfolio",
+      "x_live": "https://nutanprabhat.dev",
       "highlights": [
         "One validator backs the CLI, the pre-commit hook and the editor, so all three agree by construction.",
         "Site and Calibri-metric CV PDF render from the same JSON, printed by Puppeteer against a hidden route.",
@@ -335,9 +361,33 @@
       "x_featured": true
     },
     {
+      "name": "XpenseSplitter",
+      "description": "A shared expense splitter for group trips — fully client-side React, no backend and no database. A trip lives in localStorage and moves between devices as a JSON file. Settlement resolves to either every pairwise debt or the fewest transfers that clear everyone.",
+      "url": "https://github.com/epicallyunreal/XpenseSplitter",
+      "x_live": "https://split.nutanprabhat.dev/",
+      "highlights": [
+        "Shares use largest-remainder rounding, so every split sums exactly to the total with no penny drift.",
+        "Importing another trip resolves identity across files first, then flags expenses that already exist.",
+        "Balances are derived from the ledger, never stored, so totals cannot drift from the transactions."
+      ],
+      "x_tech": [
+        "react",
+        "typescript",
+        "vite",
+        "tailwind",
+        "cicd",
+        "githubactions",
+        "git",
+        "github",
+        "claudecode"
+      ],
+      "x_featured": true
+    },
+    {
       "name": "BGMI Tournament Management System",
       "description": "Django and PostgreSQL tournament platform with UI-driven CRUD, custom leaderboard generation, and JSON export — plus a static JavaScript frontend reading that export, serving a fast public leaderboard with no backend hosting cost.",
       "url": "https://github.com/epicallyunreal/bgmileaderboard",
+      "x_live": "https://epicallyunreal.github.io/bgmileaderboard/",
       "highlights": [
         "Implemented leaderboard generation logic and JSON export as the deployment boundary.",
         "Rebuilt sorting, filtering and search client-side to remove the need for a hosted backend."
@@ -391,7 +441,11 @@
     }
   ],
   "awards": [
-    { "title": "HackerRank 5-star — Python, SQL, C++", "awarder": "HackerRank", "date": "2024" },
+    {
+      "title": "HackerRank 5-star — Python, SQL, C++",
+      "awarder": "HackerRank",
+      "date": "2024"
+    },
     {
       "title": "CodeChef — peak rating 1692 across 73 contests",
       "awarder": "CodeChef",
@@ -399,20 +453,32 @@
     }
   ],
   "languages": [
-    { "language": "English", "fluency": "Fluent" },
-    { "language": "Hindi", "fluency": "Native speaker" }
+    {
+      "language": "English",
+      "fluency": "Fluent"
+    },
+    {
+      "language": "Hindi",
+      "fluency": "Native speaker"
+    }
   ],
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.8.2",
+    "version": "2.12.0",
     "headlines": [
-      { "text": "I work from problems, not tickets.", "emphasis": "problems" },
+      {
+        "text": "I work from problems, not tickets.",
+        "emphasis": "problems"
+      },
       {
         "text": "I build systems that change without breaking.",
         "emphasis": "change without breaking"
       },
-      { "text": "I'm the engineer you hand the whole thing to.", "emphasis": "the whole thing" },
+      {
+        "text": "I'm the engineer you hand the whole thing to.",
+        "emphasis": "the whole thing"
+      },
       {
         "text": "Scope, design, build, ship. Usually alone.",
         "emphasis": "Scope, design, build, ship."
@@ -428,6 +494,7 @@
       "projects",
       "certifications",
       "awards",
+      "lab",
       "contact"
     ]
   }
