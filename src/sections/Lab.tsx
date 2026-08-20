@@ -136,11 +136,39 @@ function LabCard({ item }: { item: LabItem }) {
       ) : null}
 
       <div className="p-6 sm:p-8">
-        <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <h3 className="text-2xl font-bold text-ink sm:text-3xl">{item.name}</h3>
-          <span className={`rounded-full border px-3 py-0.5 font-mono text-xs ${status.className}`}>
-            {status.label}
-          </span>
+        {/* The two things a reader might actually want to do are the first
+            things they reach, rather than the reward for scrolling the card. */}
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+          <div className="flex flex-wrap items-baseline gap-3">
+            <h3 className="text-2xl font-bold text-ink sm:text-3xl">{item.name}</h3>
+            <span
+              className={`rounded-full border px-3 py-0.5 font-mono text-xs ${status.className}`}
+            >
+              {status.label}
+            </span>
+          </div>
+          <div className="flex items-center gap-5">
+            <a
+              href={item.url}
+              target="_blank"
+              rel="noreferrer"
+              className={LINK_CLASS}
+              aria-label={`Open ${item.name}`}
+            >
+              open →
+            </a>
+            {item.repo ? (
+              <a
+                href={item.repo}
+                target="_blank"
+                rel="noreferrer"
+                className={LINK_CLASS}
+                aria-label={`${item.name} source repository`}
+              >
+                repo →
+              </a>
+            ) : null}
+          </div>
         </div>
         <p className="mt-2 text-base text-muted">{item.tagline}</p>
 
@@ -192,41 +220,18 @@ function LabCard({ item }: { item: LabItem }) {
           </AnimatePresence>
         </div>
 
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-4">
-          {item.tech && item.tech.length > 0 ? (
-            <ul className="flex flex-wrap gap-3" aria-label="Built with">
-              {orderTech(item.tech).map((key) => (
-                <li key={key} className="flex items-center rounded p-0.5">
-                  <TechLogo techKey={key} size={20} />
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <span />
-          )}
-          <div className="flex items-center gap-5">
-            <a
-              href={item.url}
-              target="_blank"
-              rel="noreferrer"
-              className={LINK_CLASS}
-              aria-label={`Open ${item.name}`}
-            >
-              open →
-            </a>
-            {item.repo ? (
-              <a
-                href={item.repo}
-                target="_blank"
-                rel="noreferrer"
-                className={LINK_CLASS}
-                aria-label={`${item.name} source repository`}
-              >
-                repo →
-              </a>
-            ) : null}
-          </div>
-        </div>
+        {item.tech && item.tech.length > 0 ? (
+          <ul
+            className="mt-5 flex flex-wrap gap-3 border-t border-line pt-4"
+            aria-label="Built with"
+          >
+            {orderTech(item.tech).map((key) => (
+              <li key={key} className="flex items-center rounded p-0.5">
+                <TechLogo techKey={key} size={20} />
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </div>
     </article>
   )
