@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "lab.schema.json",
+  "title": "Lab — hosted tools and experiments, deliberately outside the résumé",
+  "type": "object",
+  "required": ["version", "section", "items"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "section": {
+      "type": "object",
+      "required": ["id", "title"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "description": "DOM id and nav anchor. The hero button links to it."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hint": {
+          "type": "string"
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "tagline", "url", "why"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "tagline": {
+            "type": "string",
+            "minLength": 1,
+            "description": "One line. Used in the deck nav and under the title."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The running thing."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Source, when public."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["live", "wip", "archived"]
+          },
+          "image": {
+            "type": "object",
+            "required": ["src", "alt", "width", "height"],
+            "additionalProperties": false,
+            "description": "A shot of the running thing. Dimensions are required so the card reserves its space and nothing shifts as it loads.",
+            "properties": {
+              "src": {
+                "type": "string",
+                "pattern": "^/",
+                "description": "Path under public/."
+              },
+              "alt": {
+                "type": "string",
+                "minLength": 1
+              },
+              "width": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "height": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "why": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Why it was built. Leads the card — the problem comes before the feature list."
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "What made it interesting to build. Where the engineering, rather than the UI, shows."
+          },
+          "tech": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import type { Project, Resume } from '../../src/lib/types'
 import {
+  CvToggle,
   Btn,
   EntryCard,
   Field,
@@ -54,13 +55,22 @@ export function ProjectsEditor({
                 onChange={(v) => ops.set(i, { ...project, name: v })}
               />
             </Field>
-            <Field label="URL" hint="Repo or live link. Leave empty for no link.">
+            <Field label="Repo URL" hint="Source repository. Empty for no repo link.">
               <TextInput
                 value={project.url ?? ''}
                 onChange={(v) => ops.set(i, { ...project, url: v })}
               />
             </Field>
           </div>
+          <Field
+            label="Live URL"
+            hint="Deployed instance. Shown as a second link, and the one the CV points at."
+          >
+            <TextInput
+              value={project.x_live ?? ''}
+              onChange={(v) => ops.set(i, { ...project, x_live: v })}
+            />
+          </Field>
           <Field label="Description">
             <TextArea
               value={project.description}
@@ -86,6 +96,7 @@ export function ProjectsEditor({
               onChange={(v) => ops.set(i, { ...project, x_tech: v })}
             />
           </Field>
+          <CvToggle value={project.x_cv} onChange={(v) => ops.set(i, { ...project, x_cv: v })} />
         </EntryCard>
       ))}
       <Btn onClick={() => ops.add({ ...BLANK })}>+ add project</Btn>

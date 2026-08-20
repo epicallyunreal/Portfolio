@@ -150,3 +150,9 @@ body:has(.cv-root) {
 .cv-line strong {
   font-weight: 700;
 }
+
+/* The Lab pointer sits apart from the sections above it without earning a
+   heading of its own. */
+.cv-lab {
+  margin-top: 6pt;
+}

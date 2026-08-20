@@ -1,5 +1,13 @@
 import type { Resume, WorkEntry } from '../../src/lib/types'
-import { Btn, EntryCard, Field, StringList, TextArea, TextInput } from '../components/Fields'
+import {
+  CvToggle,
+  Btn,
+  EntryCard,
+  Field,
+  StringList,
+  TextArea,
+  TextInput,
+} from '../components/Fields'
 import { listOps } from '../lib/listOps'
 import { TechPicker } from '../components/TechPicker'
 
@@ -85,6 +93,7 @@ export function ExperienceEditor({
               onChange={(v) => ops.set(i, { ...entry, x_tech: v })}
             />
           </Field>
+          <CvToggle value={entry.x_cv} onChange={(v) => ops.set(i, { ...entry, x_cv: v })} />
         </EntryCard>
       ))}
       <Btn onClick={() => ops.add({ ...BLANK })}>+ add role</Btn>

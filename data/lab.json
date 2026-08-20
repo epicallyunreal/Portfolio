@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "section": {
+    "id": "lab",
+    "title": "Lab",
+    "hint": "Things I built because I wanted them to exist, hosted on my own subdomains. The interesting part is usually the constraint, not the interface."
+  },
+  "items": [
+    {
+      "name": "XpenseSplitter",
+      "tagline": "Shared expense tracking for group trips, with no server and no accounts.",
+      "url": "https://split.nutanprabhat.dev/",
+      "repo": "https://github.com/epicallyunreal/XpenseSplitter",
+      "status": "live",
+      "image": {
+        "src": "/images/lab/xpensesplitter.webp",
+        "alt": "The XpenseSplitter landing screen, headed \"Split the trip. Settle up in seconds.\"",
+        "width": 2856,
+        "height": 1224
+      },
+      "why": "Splitting costs on a trip always ends the same way: a spreadsheet nobody keeps up to date, or an app that wants everyone to make an account before it will accept a number. I wanted one where the maths is provably right and the data never leaves the people on the trip. So there is no server, no database and no sign-up — a trip is a file you can hand to someone.",
+      "features": [
+        "Chronological expense ledger — amount, category, payment type, who paid, and exactly who it splits between.",
+        "Live per-person share preview while you toggle participants in and out of an expense.",
+        "Expense explorer: a read-only view to search, sort and group, so anyone can check they were included or excluded correctly.",
+        "Settlement two ways — every real pairwise debt, or the fewest transfers that clear everyone.",
+        "Autosaves locally; export or import a trip as JSON to move it between devices."
+      ],
+      "notes": [
+        "Money has to land exactly. Shares use largest-remainder rounding, so a split always sums back to the total — no penny drift, and no divide-by-zero when nobody is included.",
+        "Merging a second trip is really an identity problem: the same person has a different id in each file. People are matched by name across the two, shown as plain sentences — \"alice merges into Alice\" — and nothing is rewritten until that mapping is confirmed.",
+        "Duplicates only become findable once identity is settled — an import matching an existing entry on amount, payer and the exact set of sharers is skipped by default. Description and date are ignored on purpose, and anything involving a newly added person is never flagged: no existing entry could have been split with someone who was not there.",
+        "Nothing is stored that can be computed. Totals, balances and settlements are all derived from the raw ledger on read, so there is never a second copy of the truth to fall out of sync with it."
+      ],
+      "tech": ["react", "typescript", "vite", "tailwind"]
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { assets, resume } from '../lib/data'
+import { lab } from '../lib/lab'
+import { scrollToSection } from '../lib/scroll'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import { useMediaQuery, DESKTOP_QUERY } from '../hooks/useMediaQuery'
 import { ParticleField } from '../components/ParticleField'
@@ -189,6 +191,20 @@ export function Hero() {
                 className="rounded-md border border-line bg-panel px-6 py-3 font-semibold text-ink transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 GitHub
+              </a>
+            ) : null}
+            {/* A real href, so it can be copied, opened in a tab and reached by
+                keyboard; the handler only upgrades the jump to Lenis. */}
+            {lab.items.length > 0 ? (
+              <a
+                href={`#${lab.section.id}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToSection(lab.section.id, reduced)
+                }}
+                className="rounded-md border border-line bg-panel px-6 py-3 font-semibold text-ink transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                {lab.section.title}
               </a>
             ) : null}
           </div>

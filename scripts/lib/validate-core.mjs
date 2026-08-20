@@ -22,8 +22,10 @@ import addFormats from 'ajv-formats'
 export function validateDataDetailed({
   resume,
   assets,
+  lab = null,
   resumeSchema,
   assetsSchema,
+  labSchema = null,
   // (publicRelativeSrc) => boolean. Default: skip the check.
   fileExists = null,
 }) {
@@ -36,6 +38,8 @@ export function validateDataDetailed({
   for (const [name, data, schema] of [
     ['resume.json', resume, resumeSchema],
     ['assets.json', assets, assetsSchema],
+    // lab.json is optional: a checkout without it still validates.
+    ...(lab && labSchema ? [['lab.json', lab, labSchema]] : []),
   ]) {
     const validate = ajv.compile(schema)
     if (!validate(data)) {
@@ -48,12 +52,12 @@ export function validateDataDetailed({
   // 2. Every tech key referenced anywhere must resolve in assets.tech —
   //    otherwise the site silently renders a broken logo.
   const techKeys = new Set(Object.keys(assets.tech ?? {}))
-  const checkTech = (keys, pointer, label) => {
+  const checkTech = (keys, pointer, label, file = 'resume.json') => {
     // Indexed so the pointer addresses the offending key, not just its array.
     ;(keys ?? []).forEach((key, k) => {
       if (!techKeys.has(key)) {
         add(
-          'resume.json',
+          file,
           `${pointer}/${k}`,
           label,
           `unknown tech key "${key}" — add it to assets.json#/tech or fix the typo`,
@@ -78,6 +82,23 @@ export function validateDataDetailed({
     ),
   )
 
+  lab?.items?.forEach((item, i) =>
+    checkTech(item.tech, `/items/${i}/tech`, `lab.json items[${i}] ("${item.name}")`, 'lab.json'),
+  )
+
+  // A Lab banner that 404s is invisible until someone looks at the section,
+  // so the file is checked here alongside every other local asset.
+  lab?.items?.forEach((item, i) => {
+    if (fileExists && item.image?.src && !fileExists(item.image.src)) {
+      add(
+        'lab.json',
+        `/items/${i}/image/src`,
+        `lab.json items[${i}] ("${item.name}")`,
+        `image "${item.image.src}" not found under public/`,
+      )
+    }
+  })
+
   // 3. A section listed in sectionOrder without data must fail, not render empty.
   const sectionHasData = {
     about: () => Boolean(resume.basics?.summary),
@@ -87,6 +108,8 @@ export function validateDataDetailed({
     certifications: () => (resume.certificates?.length ?? 0) > 0,
     awards: () => (resume.awards?.length ?? 0) > 0,
     contact: () => Boolean(resume.basics?.email) || (resume.basics?.profiles?.length ?? 0) > 0,
+    // Lab's data lives in lab.json, but the ordering that renders it is here.
+    lab: () => (lab?.items?.length ?? 0) > 0,
   }
   ;(resume.x_meta?.sectionOrder ?? []).forEach((section, i) => {
     const check = sectionHasData[section]
@@ -151,7 +174,29 @@ export function validateDataDetailed({
     }
   })
 
-  // 6. The phone number must never reach committed JSON (it is injected at PDF
+  // 6. x_cv:false hides an entry from the CV. The CV prints these headings
+  //    unconditionally, so excluding every entry in one leaves a bare heading
+  //    over nothing — visible only in the PDF, which nobody re-reads as often
+  //    as the site.
+  for (const [key, heading] of [
+    ['skills', 'Technical Skills'],
+    ['work', 'Work Experience'],
+    ['projects', 'Projects'],
+    ['education', 'Education'],
+    ['certificates', 'Certifications'],
+  ]) {
+    const entries = resume[key] ?? []
+    if (entries.length > 0 && entries.every((e) => e.x_cv === false)) {
+      add(
+        'resume.json',
+        `/${key}`,
+        `resume.json ${key}`,
+        `every entry is x_cv:false, so the CV would print a "${heading}" heading with nothing under it`,
+      )
+    }
+  }
+
+  // 7. The phone number must never reach committed JSON (it is injected at PDF
   //    build time from CV_PHONE). Guards against the editor writing it back in.
   if (resume.basics?.phone) {
     add(

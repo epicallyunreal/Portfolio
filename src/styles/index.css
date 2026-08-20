@@ -59,6 +59,20 @@
     animation: hex-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  /* Lab deck: the one section that is not a stack of panels, so it gets a
+     surface of its own — a faint inset field that separates the deck from the
+     page without competing with the accent used everywhere else. */
+  .lab-deck {
+    background:
+      radial-gradient(120% 100% at 0% 0%, rgba(34, 211, 238, 0.06), transparent 60%),
+      radial-gradient(100% 100% at 100% 100%, rgba(52, 211, 153, 0.05), transparent 55%);
+  }
+  .lab-card {
+    background-color: theme('colors.raised');
+    background-image: radial-gradient(rgba(148, 163, 177, 0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
   /* Typing caret in the hero. */
   .caret::after {
     content: '▍';

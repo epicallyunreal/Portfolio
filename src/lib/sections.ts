@@ -1,4 +1,5 @@
 import { formatDate, resume } from './data'
+import { lab } from './lab'
 import type { SectionId } from './types'
 
 export function slugify(value: string): string {
@@ -20,6 +21,7 @@ export const skillGroupId = (name: string) => `skillgroup-${slugify(name)}`
 export const projectItemId = (name: string) => `proj-${slugify(name)}`
 export const certItemId = (name: string) => `cert-${slugify(name)}`
 export const awardItemId = (title: string) => `award-${slugify(title)}`
+export const labItemId = (name: string) => `lab-${slugify(name)}`
 
 /**
  * The per-section item lists, in JSON (chronological) order. Shared by the
@@ -48,6 +50,12 @@ export function sectionItems(section: SectionId): SectionItem[] {
         id: awardItemId(a.title),
         label: a.title,
         sub: a.awarder,
+      }))
+    case 'lab':
+      return lab.items.map((item) => ({
+        id: labItemId(item.name),
+        label: item.name,
+        sub: item.status ?? 'live',
       }))
     default:
       return []

@@ -12,7 +12,13 @@ import './cv.css'
  * route without it.
  */
 
-const displayUrl = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+// `/index.html` is never worth showing — a URL pasted with the directory
+// index still reads as an address.
+const displayUrl = (url: string) =>
+  url
+    .replace(/^https?:\/\/(www\.)?/, '')
+    .replace(/\/index\.html$/i, '')
+    .replace(/\/$/, '')
 
 // Skill-group keywords in the same canonical order as the site, so the CV and
 // the page agree. Only the Technical Skills section names technologies — the
@@ -27,6 +33,15 @@ const labels = (keys: string[]) => orderTech(keys).map((k) => techAsset(k).label
 function Linked({ url, children }: { url?: string; children: ReactNode }) {
   return url ? <a href={url}>{children}</a> : <>{children}</>
 }
+
+/**
+ * The CV is a subset of the site, not a mirror of it. Anything carrying
+ * `x_cv: false` renders on the page and never reaches the PDF — a place for
+ * work worth showing without lengthening the document a recruiter reads.
+ * Omitted means included, so existing data needs no migration.
+ */
+const onCv = <T extends { x_cv?: boolean }>(items: T[] = []): T[] =>
+  items.filter((item) => item.x_cv !== false)
 
 function certStatusText(cert: (typeof resume.certificates)[number]): string {
   if (cert.x_statusNote) return cert.x_statusNote
@@ -49,7 +64,7 @@ export default function CvPrint() {
     }
   }, [basics.name, x_meta.version])
 
-  const work = [...resume.work].sort((a, b) => (a.startDate < b.startDate ? 1 : -1))
+  const work = [...onCv(resume.work)].sort((a, b) => (a.startDate < b.startDate ? 1 : -1))
   const contactParts = [
     basics.location?.city ? `${basics.location.city}, India` : null,
     phone,
@@ -79,7 +94,7 @@ export default function CvPrint() {
       <p className="cv-summary">{basics.summary}</p>
 
       <h2 className="cv-section">Technical Skills</h2>
-      {resume.skills.map((group) => (
+      {onCv(resume.skills).map((group) => (
         <p key={group.name} className="cv-line">
           <strong>{group.name}:</strong> {labels(group.keywords).join(', ')}
           {group.x_note ? ` — ${group.x_note}` : ''}
@@ -106,17 +121,25 @@ export default function CvPrint() {
       ))}
 
       <h2 className="cv-section">Projects</h2>
-      {resume.projects.map((project) => (
+      {onCv(resume.projects).map((project) => (
         <p key={project.name} className="cv-line">
+          {/* Two destinations, distinguishable at a glance: the name is the
+              source, and a deployed project also shows its domain, which
+              doubles as the label and the link. */}
           <strong>
             <Linked url={project.url}>{project.name}</Linked>
           </strong>{' '}
+          {project.x_live ? (
+            <>
+              [<Linked url={project.x_live}>{displayUrl(project.x_live)}</Linked>]{' '}
+            </>
+          ) : null}
           — {project.description}
         </p>
       ))}
 
       <h2 className="cv-section">Education</h2>
-      {(resume.education ?? []).map((e) => (
+      {onCv(resume.education).map((e) => (
         <p key={e.institution} className="cv-line">
           <strong>
             {e.studyType}, {e.area}
@@ -127,7 +150,7 @@ export default function CvPrint() {
 
       <h2 className="cv-section">Certifications</h2>
       <ul className="cv-bullets">
-        {resume.certificates.map((cert) => (
+        {onCv(resume.certificates).map((cert) => (
           <li key={cert.name}>
             <strong>
               <Linked url={cert.url}>{cert.name}</Linked>
@@ -137,11 +160,16 @@ export default function CvPrint() {
         ))}
       </ul>
 
-      {resume.awards && resume.awards.length > 0 ? (
+      {onCv(resume.awards).length > 0 ? (
         <>
           <h2 className="cv-section">Achievements</h2>
           <ul className="cv-bullets">
-            <li>{resume.awards.map((a) => a.title).join(' · ')}.</li>
+            <li>
+              {onCv(resume.awards)
+                .map((a) => a.title)
+                .join(' · ')}
+              .
+            </li>
           </ul>
         </>
       ) : null}
