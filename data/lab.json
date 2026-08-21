@@ -15,8 +15,8 @@
       "image": {
         "src": "/images/lab/xpensesplitter.webp",
         "alt": "The XpenseSplitter landing screen, headed \"Split the trip. Settle up in seconds.\"",
-        "width": 2856,
-        "height": 1224
+        "width": 2801,
+        "height": 1575
       },
       "why": "Splitting costs on a trip always ends the same way: a spreadsheet nobody keeps up to date, or an app that wants everyone to make an account before it will accept a number. I wanted one where the maths is provably right and the data never leaves the people on the trip. So there is no server, no database and no sign-up — a trip is a file you can hand over, or a link that carries it.",
       "features": [
@@ -27,10 +27,11 @@
         "Many trips side by side, autosaved locally, with a one-file-per-trip zip backup."
       ],
       "notes": [
-        "Money has to land exactly. Shares use largest-remainder rounding, so a split always sums back to the total — no penny drift, and no divide-by-zero when nobody is included.",
-        "Merging is an identity problem before it is an arithmetic one: the same person has a different id in each file, so people are matched by name and confirmed in plain sentences first. Only then can duplicates be found — an entry matching on amount, payer and the exact set of sharers is skipped by default, and anything involving a newly added person is never flagged, since no existing entry could have been split with someone who was not there.",
-        "A share link carries the whole trip in its URL fragment, which browsers never send to the host. No account, no upload, and nothing to expire, because nothing is stored anywhere but the link itself. The two honest consequences are stated in the dialog rather than buried: anyone holding it can read the names and amounts, and it cannot be taken back once sent.",
-        "Every trip carries a lineage id fixed at creation and inherited by each copy, so an arriving link knows which trip it belongs to and which version it is. Seven outcomes fall out of that: an untouched copy updates in place, an edited one is never overwritten, and a forwarded older link cannot roll you back. The edit count behind it advances only on ledger actions, so renaming a trip never makes a copy look modified."
+        "Shares use largest-remainder rounding, so a split always sums back to the total — no penny drift, and no divide-by-zero when nobody is included.",
+        "Merging is an identity problem before an arithmetic one: the same person has a different id in each file, so people are matched by name and confirmed before anything is written.",
+        "Duplicates match on amount, payer and the exact set of sharers. Anyone joining as a new person is never flagged — no existing entry could have been split with them.",
+        "A share link carries the trip in its URL fragment, which browsers never send to a host. Nothing is stored, so nothing expires and nothing can be revoked.",
+        "A lineage id fixed at creation and inherited by every copy lets an arriving link say which version it is: an untouched copy updates, an edited one is never overwritten."
       ],
       "tech": ["react", "typescript", "vite", "tailwind"]
     }

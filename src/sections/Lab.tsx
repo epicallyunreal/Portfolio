@@ -71,7 +71,7 @@ function LabCard({ item }: { item: LabItem }) {
     {
       key: 'why',
       label: 'Why it exists',
-      body: <p className="max-w-[68ch] text-[15px] leading-relaxed text-muted">{item.why}</p>,
+      body: <p className="max-w-[86ch] text-[15px] leading-relaxed text-muted">{item.why}</p>,
     },
     ...(item.features && item.features.length > 0
       ? [
@@ -79,7 +79,7 @@ function LabCard({ item }: { item: LabItem }) {
             key: 'does',
             label: 'What it does',
             body: (
-              <ul className="max-w-[68ch] space-y-2.5">
+              <ul className="max-w-[86ch] space-y-2.5">
                 {item.features.map((feature, i) => (
                   <li key={i} className="flex gap-3 text-[15px] leading-relaxed text-muted">
                     <span
@@ -100,7 +100,7 @@ function LabCard({ item }: { item: LabItem }) {
             key: 'notes',
             label: 'Under the hood',
             body: (
-              <ul className="max-w-[68ch] space-y-3">
+              <ul className="max-w-[86ch] space-y-3">
                 {item.notes.map((note, i) => (
                   <li
                     key={i}
@@ -122,8 +122,9 @@ function LabCard({ item }: { item: LabItem }) {
   return (
     <article className="lab-card overflow-hidden rounded-xl border border-line/90 shadow-lift">
       {item.image ? (
-        // Fills its column at the card's full height on desktop; the top of the
-        // shot is the part worth keeping, so the crop bites from the bottom.
+        // Fills the card's width. The shot is captured at exactly this ratio,
+        // framed to close just after the app's three cards, so object-cover has
+        // nothing to crop and the app stays readable at card size.
         <img
           src={item.image.src}
           alt={item.image.alt}
@@ -131,7 +132,7 @@ function LabCard({ item }: { item: LabItem }) {
           height={item.image.height}
           loading="lazy"
           decoding="async"
-          className="aspect-[21/9] w-full border-b border-line/90 object-cover object-top"
+          className="aspect-[16/9] w-full border-b border-line/90 object-cover object-top"
         />
       ) : null}
 
