@@ -8,7 +8,7 @@
   "items": [
     {
       "name": "XpenseSplitter",
-      "tagline": "Shared expense tracking for group trips, with no server and no accounts.",
+      "tagline": "Shared expense tracking for group trips — no server, no accounts, and trips that travel by link.",
       "url": "https://split.nutanprabhat.dev/",
       "repo": "https://github.com/epicallyunreal/XpenseSplitter",
       "status": "live",
@@ -16,21 +16,21 @@
         "src": "/images/lab/xpensesplitter.webp",
         "alt": "The XpenseSplitter landing screen, headed \"Split the trip. Settle up in seconds.\"",
         "width": 2856,
-        "height": 1224
+        "height": 1377
       },
-      "why": "Splitting costs on a trip always ends the same way: a spreadsheet nobody keeps up to date, or an app that wants everyone to make an account before it will accept a number. I wanted one where the maths is provably right and the data never leaves the people on the trip. So there is no server, no database and no sign-up — a trip is a file you can hand to someone.",
+      "why": "Splitting costs on a trip always ends the same way: a spreadsheet nobody keeps up to date, or an app that wants everyone to make an account before it will accept a number. I wanted one where the maths is provably right and the data never leaves the people on the trip. So there is no server, no database and no sign-up — a trip is a file you can hand over, or a link that carries it.",
       "features": [
         "Chronological expense ledger — amount, category, payment type, who paid, and exactly who it splits between.",
-        "Live per-person share preview while you toggle participants in and out of an expense.",
         "Expense explorer: a read-only view to search, sort and group, so anyone can check they were included or excluded correctly.",
         "Settlement two ways — every real pairwise debt, or the fewest transfers that clear everyone.",
-        "Autosaves locally; export or import a trip as JSON to move it between devices."
+        "Share a whole trip as a link, or merge another one in from a saved trip or a file.",
+        "Many trips side by side, autosaved locally, with a one-file-per-trip zip backup."
       ],
       "notes": [
         "Money has to land exactly. Shares use largest-remainder rounding, so a split always sums back to the total — no penny drift, and no divide-by-zero when nobody is included.",
-        "Merging a second trip is really an identity problem: the same person has a different id in each file. People are matched by name across the two, shown as plain sentences — \"alice merges into Alice\" — and nothing is rewritten until that mapping is confirmed.",
-        "Duplicates only become findable once identity is settled — an import matching an existing entry on amount, payer and the exact set of sharers is skipped by default. Description and date are ignored on purpose, and anything involving a newly added person is never flagged: no existing entry could have been split with someone who was not there.",
-        "Nothing is stored that can be computed. Totals, balances and settlements are all derived from the raw ledger on read, so there is never a second copy of the truth to fall out of sync with it."
+        "Merging is an identity problem before it is an arithmetic one: the same person has a different id in each file, so people are matched by name and confirmed in plain sentences first. Only then can duplicates be found — an entry matching on amount, payer and the exact set of sharers is skipped by default, and anything involving a newly added person is never flagged, since no existing entry could have been split with someone who was not there.",
+        "A share link carries the whole trip in its URL fragment, which browsers never send to the host. No account, no upload, and nothing to expire, because nothing is stored anywhere but the link itself. The two honest consequences are stated in the dialog rather than buried: anyone holding it can read the names and amounts, and it cannot be taken back once sent.",
+        "Every trip carries a lineage id fixed at creation and inherited by each copy, so an arriving link knows which trip it belongs to and which version it is. Seven outcomes fall out of that: an untouched copy updates in place, an edited one is never overwritten, and a forwarded older link cannot roll you back. The edit count behind it advances only on ledger actions, so renaming a trip never makes a copy look modified."
       ],
       "tech": ["react", "typescript", "vite", "tailwind"]
     }

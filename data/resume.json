@@ -362,13 +362,13 @@
     },
     {
       "name": "XpenseSplitter",
-      "description": "A shared expense splitter for group trips — fully client-side React, no backend and no database. A trip lives in localStorage and moves between devices as a JSON file. Settlement resolves to either every pairwise debt or the fewest transfers that clear everyone.",
+      "description": "A shared expense splitter for group trips — fully client-side React, no backend and no database. A trip lives in localStorage and travels as a JSON file or a link that carries it. Settlement resolves to either every pairwise debt or the fewest transfers that clear everyone.",
       "url": "https://github.com/epicallyunreal/XpenseSplitter",
       "x_live": "https://split.nutanprabhat.dev/",
       "highlights": [
         "Shares use largest-remainder rounding, so every split sums exactly to the total with no penny drift.",
         "Importing another trip resolves identity across files first, then flags expenses that already exist.",
-        "Balances are derived from the ledger, never stored, so totals cannot drift from the transactions."
+        "Trips carry a lineage id, so an arriving share link knows which copy is newer without a server."
       ],
       "x_tech": [
         "react",
@@ -465,7 +465,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.12.0",
+    "version": "2.13.0",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
