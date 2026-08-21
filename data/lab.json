@@ -20,18 +20,18 @@
       },
       "why": "Splitting costs on a trip always ends the same way: a spreadsheet nobody keeps up to date, or an app that wants everyone to make an account before it will accept a number. I wanted one where the maths is provably right and the data never leaves the people on the trip. So there is no server, no database and no sign-up — a trip is a file you can hand over, or a link that carries it.",
       "features": [
-        "Chronological expense ledger — amount, category, payment type, who paid, and exactly who it splits between.",
-        "Expense explorer: a read-only view to search, sort and group, so anyone can check they were included or excluded correctly.",
-        "Settlement two ways — every real pairwise debt, or the fewest transfers that clear everyone.",
-        "Share a whole trip as a link, or merge another one in from a saved trip or a file.",
-        "Many trips side by side, autosaved locally, with a one-file-per-trip zip backup."
+        "Chronological ledger — amount, category, who paid, and exactly who splits it.",
+        "Live per-person share preview as you toggle people in and out.",
+        "A read-only explorer to search, sort and group, so anyone can check themselves.",
+        "Settlement two ways: every pairwise debt, or the fewest transfers that clear it.",
+        "Many trips, autosaved locally, with a one-file-per-trip zip backup."
       ],
       "notes": [
-        "Shares use largest-remainder rounding, so a split always sums back to the total — no penny drift, and no divide-by-zero when nobody is included.",
-        "Merging is an identity problem before an arithmetic one: the same person has a different id in each file, so people are matched by name and confirmed before anything is written.",
-        "Duplicates match on amount, payer and the exact set of sharers. Anyone joining as a new person is never flagged — no existing entry could have been split with them.",
-        "A share link carries the trip in its URL fragment, which browsers never send to a host. Nothing is stored, so nothing expires and nothing can be revoked.",
-        "A lineage id fixed at creation and inherited by every copy lets an arriving link say which version it is: an untouched copy updates, an edited one is never overwritten."
+        "Largest-remainder rounding, so a split always sums back to the total.",
+        "Merging is an identity problem first: people are matched across files before writing.",
+        "Duplicates match on amount, payer and the exact set of people sharing.",
+        "A share link carries the trip in its URL fragment, so nothing reaches a host.",
+        "A lineage id tells an arriving link which copy is newer, with no server to arbitrate."
       ],
       "tech": ["react", "typescript", "vite", "tailwind"]
     }
