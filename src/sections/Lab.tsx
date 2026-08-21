@@ -71,7 +71,7 @@ function LabCard({ item }: { item: LabItem }) {
     {
       key: 'why',
       label: 'Why it exists',
-      body: <p className="max-w-[68ch] text-[15px] leading-relaxed text-muted">{item.why}</p>,
+      body: <p className="max-w-[86ch] text-[15px] leading-relaxed text-muted">{item.why}</p>,
     },
     ...(item.features && item.features.length > 0
       ? [
@@ -79,7 +79,7 @@ function LabCard({ item }: { item: LabItem }) {
             key: 'does',
             label: 'What it does',
             body: (
-              <ul className="max-w-[68ch] space-y-2.5">
+              <ul className="max-w-[86ch] space-y-2.5">
                 {item.features.map((feature, i) => (
                   <li key={i} className="flex gap-3 text-[15px] leading-relaxed text-muted">
                     <span
@@ -100,7 +100,7 @@ function LabCard({ item }: { item: LabItem }) {
             key: 'notes',
             label: 'Under the hood',
             body: (
-              <ul className="max-w-[68ch] space-y-3">
+              <ul className="max-w-[86ch] space-y-2.5">
                 {item.notes.map((note, i) => (
                   <li
                     key={i}
@@ -120,118 +120,132 @@ function LabCard({ item }: { item: LabItem }) {
   const active = facets[Math.min(facet, facets.length - 1)]
 
   return (
-    <article className="lab-card overflow-hidden rounded-xl border border-line/90 shadow-lift">
+    <article className="lab-card relative overflow-hidden rounded-xl border border-line/90 shadow-lift xl:aspect-[16/9]">
       {item.image ? (
-        // Fills its column at the card's full height on desktop; the top of the
-        // shot is the part worth keeping, so the crop bites from the bottom.
-        <img
-          src={item.image.src}
-          alt={item.image.alt}
-          width={item.image.width}
-          height={item.image.height}
-          loading="lazy"
-          decoding="async"
-          className="aspect-[21/9] w-full border-b border-line/90 object-cover object-top"
-        />
+        <>
+          {/* Below xl the shot is a banner above the text. From xl it becomes
+              the card's background, which fixes the card's height — so
+              switching facets can no longer move the page under the reader.
+              xl and not lg because the box has to be wide enough for the text:
+              at 1024 the card is 342px tall and the longest facet overflows it
+              by 213px, measured, which a fixed box would silently clip. */}
+          <img
+            src={item.image.src}
+            alt={item.image.alt}
+            width={item.image.width}
+            height={item.image.height}
+            loading="lazy"
+            decoding="async"
+            className="aspect-[16/9] w-full border-b border-line/90 object-cover object-top xl:absolute xl:inset-0 xl:h-full xl:border-b-0"
+          />
+        </>
       ) : null}
-
-      <div className="p-6 sm:p-8">
-        {/* The two things a reader might actually want to do are the first
+      {/* Bottom-anchored from xl: the text sits on the floor of the card and
+          the shot shows above it, so there is a glimpse of the running app and
+          no dead space between the prose and the tech row. The band carries
+          its own gradient, so the scrim follows the text rather than being
+          painted at a fixed height the text may not reach. */}
+      <div className="relative flex h-full flex-col xl:justify-end">
+        <div className="lab-textband p-6 sm:p-8 xl:pt-10">
+          {/* The two things a reader might actually want to do are the first
             things they reach, rather than the reward for scrolling the card. */}
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
-          <div className="flex flex-wrap items-baseline gap-3">
-            <h3 className="text-2xl font-bold text-ink sm:text-3xl">{item.name}</h3>
-            <span
-              className={`rounded-full border px-3 py-0.5 font-mono text-xs ${status.className}`}
-            >
-              {status.label}
-            </span>
-          </div>
-          <div className="flex items-center gap-5">
-            <a
-              href={item.url}
-              target="_blank"
-              rel="noreferrer"
-              className={LINK_CLASS}
-              aria-label={`Open ${item.name}`}
-            >
-              open →
-            </a>
-            {item.repo ? (
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+            <div className="flex flex-wrap items-baseline gap-3">
+              <h3 className="text-2xl font-bold text-ink sm:text-3xl">{item.name}</h3>
+              <span
+                className={`rounded-full border px-3 py-0.5 font-mono text-xs ${status.className}`}
+              >
+                {status.label}
+              </span>
+            </div>
+            <div className="flex items-center gap-5">
               <a
-                href={item.repo}
+                href={item.url}
                 target="_blank"
                 rel="noreferrer"
                 className={LINK_CLASS}
-                aria-label={`${item.name} source repository`}
+                aria-label={`Open ${item.name}`}
               >
-                repo →
+                open →
               </a>
-            ) : null}
+              {item.repo ? (
+                <a
+                  href={item.repo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={LINK_CLASS}
+                  aria-label={`${item.name} source repository`}
+                >
+                  repo →
+                </a>
+              ) : null}
+            </div>
           </div>
-        </div>
-        <p className="mt-2 text-base text-muted">{item.tagline}</p>
+          <p className="mt-2 text-base text-muted">{item.tagline}</p>
 
-        {facets.length > 1 ? (
-          <div
-            role="tablist"
-            aria-label={`${item.name} details`}
-            className="mt-5 flex flex-wrap gap-1.5"
-            onKeyDown={(event) => {
-              const delta = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0
-              if (!delta) return
-              event.preventDefault()
-              setFacet((f) => (f + delta + facets.length) % facets.length)
-            }}
-          >
-            {facets.map((f, i) => (
-              <button
-                key={f.key}
-                role="tab"
-                type="button"
-                aria-selected={i === facet}
-                tabIndex={i === facet ? 0 : -1}
-                onClick={() => setFacet(i)}
-                className={`rounded-md px-3 py-1.5 font-mono text-xs uppercase tracking-[0.14em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
-                  i === facet
-                    ? 'bg-accent/12 text-accent'
-                    : 'text-faint hover:bg-panel hover:text-muted'
-                }`}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
-        ) : null}
-
-        {/* A floor, not a fixed height: switching facets must not make the card
-            jump, but a longer entry is still allowed to breathe. */}
-        <div role="tabpanel" className="mt-4 min-h-[8.5rem]">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={active.key}
-              initial={reduced ? false : { opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduced ? { opacity: 1 } : { opacity: 0, y: -6 }}
-              transition={{ duration: reduced ? 0 : 0.2, ease: EASE_ENTRANCE }}
+          {facets.length > 1 ? (
+            <div
+              role="tablist"
+              aria-label={`${item.name} details`}
+              className="mt-5 flex flex-wrap gap-1.5"
+              onKeyDown={(event) => {
+                const delta = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0
+                if (!delta) return
+                event.preventDefault()
+                setFacet((f) => (f + delta + facets.length) % facets.length)
+              }}
             >
-              {active.body}
-            </motion.div>
-          </AnimatePresence>
-        </div>
+              {facets.map((f, i) => (
+                <button
+                  key={f.key}
+                  role="tab"
+                  type="button"
+                  aria-selected={i === facet}
+                  tabIndex={i === facet ? 0 : -1}
+                  onClick={() => setFacet(i)}
+                  className={`rounded-md px-3 py-1.5 font-mono text-xs uppercase tracking-[0.14em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+                    i === facet
+                      ? 'bg-accent/12 text-accent'
+                      : // Over a photograph rather than a flat panel, so the inactive
+                        // label needs more than the usual faint grey to clear 4.5:1.
+                        'text-muted hover:bg-panel/60 hover:text-ink'
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          ) : null}
 
-        {item.tech && item.tech.length > 0 ? (
-          <ul
-            className="mt-5 flex flex-wrap gap-3 border-t border-line pt-4"
-            aria-label="Built with"
-          >
-            {orderTech(item.tech).map((key) => (
-              <li key={key} className="flex items-center rounded p-0.5">
-                <TechLogo techKey={key} size={20} />
-              </li>
-            ))}
-          </ul>
-        ) : null}
+          {/* A floor, not a fixed height: switching facets must not make the card
+            jump, but a longer entry is still allowed to breathe. */}
+          <div role="tabpanel" className="mt-4 min-h-[8.5rem] xl:min-h-0">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={active.key}
+                initial={reduced ? false : { opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduced ? { opacity: 1 } : { opacity: 0, y: -6 }}
+                transition={{ duration: reduced ? 0 : 0.2, ease: EASE_ENTRANCE }}
+              >
+                {active.body}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {item.tech && item.tech.length > 0 ? (
+            <ul
+              className="mt-5 flex flex-wrap gap-3 border-t border-line/70 pt-4"
+              aria-label="Built with"
+            >
+              {orderTech(item.tech).map((key) => (
+                <li key={key} className="flex items-center rounded p-0.5">
+                  <TechLogo techKey={key} size={20} />
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
       </div>
     </article>
   )

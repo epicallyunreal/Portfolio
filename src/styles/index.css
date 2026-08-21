@@ -73,6 +73,20 @@
     background-size: 22px 22px;
   }
 
+  /* The Lab card's text band. Opaque where the words are, fading out above
+     them so the shot is clean at the top of the card. It rides with the text
+     rather than the card, so a short facet leaves more of the app visible and
+     a long one still gets full cover. */
+  .lab-textband {
+    background: linear-gradient(
+      to top,
+      rgba(10, 15, 20, 0.97) 0%,
+      rgba(10, 15, 20, 0.95) 62%,
+      rgba(10, 15, 20, 0.82) 84%,
+      rgba(10, 15, 20, 0) 100%
+    );
+  }
+
   /* Typing caret in the hero. */
   .caret::after {
     content: '▍';
