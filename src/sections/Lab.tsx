@@ -131,7 +131,7 @@ function LabCard({ item }: { item: LabItem }) {
           height={item.image.height}
           loading="lazy"
           decoding="async"
-          className="aspect-[21/9] w-full border-b border-line/90 object-cover object-bottom"
+          className="aspect-[21/9] w-full border-b border-line/90 object-cover object-top"
         />
       ) : null}
 

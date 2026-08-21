@@ -16,7 +16,7 @@
         "src": "/images/lab/xpensesplitter.webp",
         "alt": "The XpenseSplitter landing screen, headed \"Split the trip. Settle up in seconds.\"",
         "width": 2856,
-        "height": 1377
+        "height": 1224
       },
       "why": "Splitting costs on a trip always ends the same way: a spreadsheet nobody keeps up to date, or an app that wants everyone to make an account before it will accept a number. I wanted one where the maths is provably right and the data never leaves the people on the trip. So there is no server, no database and no sign-up — a trip is a file you can hand over, or a link that carries it.",
       "features": [
