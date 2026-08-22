@@ -1,5 +1,5 @@
 import { useEffect, type ReactNode } from 'react'
-import { formatDate, orderTech, resume, techAsset } from '../lib/data'
+import { formatDate, orderTech, orderedProjects, resume, techAsset } from '../lib/data'
 import './cv.css'
 
 /**
@@ -121,7 +121,7 @@ export default function CvPrint() {
       ))}
 
       <h2 className="cv-section">Projects</h2>
-      {onCv(resume.projects).map((project) => (
+      {onCv(orderedProjects()).map((project) => (
         <p key={project.name} className="cv-line">
           {/* Two destinations, distinguishable at a glance: the name is the
               source, and a deployed project also shows its domain, which

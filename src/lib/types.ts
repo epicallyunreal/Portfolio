@@ -71,6 +71,9 @@ export interface SkillGroup {
 export interface Project {
   name: string
   description: string
+  /** Projects sort newest-first on these; undated entries sort last. */
+  startDate?: string
+  endDate?: string
   /** Source repository. */
   url?: string
   /** Deployed, running instance. */

@@ -33,6 +33,27 @@ if (injected && typeof location !== 'undefined' && location.pathname.startsWith(
 }
 
 /**
+ * Projects newest first, by end date then start date. Derived rather than
+ * relying on the order they happen to sit in the file, so adding one is a
+ * matter of giving it dates rather than remembering where to paste it.
+ *
+ * Equal dates fall back to file order, which is how two projects finished in
+ * the same month keep a deliberate sequence. Undated entries sort last.
+ */
+export function orderedProjects(projects: Resume['projects'] = resume.projects) {
+  const key = (p: Resume['projects'][number]) => p.endDate ?? p.startDate ?? ''
+  return projects
+    .map((project, i) => ({ project, i }))
+    .sort((a, b) => {
+      const byEnd = key(b.project).localeCompare(key(a.project))
+      if (byEnd !== 0) return byEnd
+      const byStart = (b.project.startDate ?? '').localeCompare(a.project.startDate ?? '')
+      return byStart !== 0 ? byStart : a.i - b.i
+    })
+    .map(({ project }) => project)
+}
+
+/**
  * Tech keys render in the order the Skills section lists them — Backend, then
  * AI Integration, then Databases, and so on — rather than in whatever order
  * they happened to be tagged in.

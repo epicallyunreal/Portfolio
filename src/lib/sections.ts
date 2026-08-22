@@ -1,4 +1,4 @@
-import { formatDate, resume } from './data'
+import { formatDate, orderedProjects, resume } from './data'
 import { lab } from './lab'
 import type { SectionId } from './types'
 
@@ -38,7 +38,7 @@ export function sectionItems(section: SectionId): SectionItem[] {
     case 'skills':
       return resume.skills.map((g) => ({ id: skillGroupId(g.name), label: g.name }))
     case 'projects':
-      return resume.projects.map((p) => ({ id: projectItemId(p.name), label: p.name }))
+      return orderedProjects().map((p) => ({ id: projectItemId(p.name), label: p.name }))
     case 'certifications':
       return resume.certificates.map((c) => ({
         id: certItemId(c.name),

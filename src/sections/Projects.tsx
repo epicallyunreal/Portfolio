@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { orderTech, resume } from '../lib/data'
+import { formatDate, orderTech, orderedProjects } from '../lib/data'
 import { filterCardClasses } from '../lib/filterStyles'
 import { sectionItems } from '../lib/sections'
 import { useFilter } from '../hooks/useFilter'
@@ -51,8 +51,17 @@ function ProjectCard({ project }: { project: Project }) {
         project.x_featured ? 'bg-raised' : 'bg-panel'
       } ${filterCardClasses(selected, matches)}`}
     >
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 className="text-xl font-bold text-ink">{project.name}</h3>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-2">
+        {/* Finished-on sits with the title rather than opposite it, so the
+            featured badge keeps the right edge to itself. */}
+        <div className="flex flex-wrap items-baseline gap-x-2.5">
+          <h3 className="text-xl font-bold text-ink">{project.name}</h3>
+          {project.endDate ? (
+            <span className="whitespace-nowrap font-mono text-xs text-faint">
+              {formatDate(project.endDate)}
+            </span>
+          ) : null}
+        </div>
         {project.x_featured ? (
           <span className="rounded-full border border-accent/40 px-2.5 py-0.5 font-mono text-xs text-accent">
             featured
@@ -141,7 +150,7 @@ export default function Projects() {
     <section id="projects" aria-labelledby="projects-heading" className="section-shell">
       <SectionHeading id="projects-heading" index="04" title="Projects" />
       <MasterDetail items={items} ariaLabel="Projects">
-        {resume.projects.map((project, i) => (
+        {orderedProjects().map((project, i) => (
           <div key={items[i].id} id={items[i].id} className="scroll-mt-28">
             <Reveal>
               <ProjectCard project={project} />

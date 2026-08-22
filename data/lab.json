@@ -20,18 +20,20 @@
       },
       "why": "Splitting costs on a trip always ends the same way: a spreadsheet nobody keeps up to date, or an app that wants everyone to make an account before it will accept a number. I wanted one where the maths is provably right and the data never leaves the people on the trip. So there is no server, no database and no sign-up — a trip is a file you can hand over, or a link that carries it.",
       "features": [
-        "Chronological ledger — amount, category, who paid, and exactly who splits it.",
-        "Live per-person share preview as you toggle people in and out.",
-        "A read-only explorer to search, sort and group, so anyone can check themselves.",
-        "Settlement two ways: every pairwise debt, or the fewest transfers that clear it.",
-        "Many trips, autosaved locally, with a one-file-per-trip zip backup."
+        "Chronological ledger — amount, category, payment type, who paid, and who splits it.",
+        "A read-only explorer to search, sort and group; the ledger itself stays unsorted.",
+        "Settlement two ways: every pairwise debt, or the fewest transfers that clear everyone.",
+        "Merge another trip in from a saved trip or a file; the source is left untouched.",
+        "A trip shares as a link — no account, nothing uploaded, and nothing to expire.",
+        "Many trips side by side; switch, rename or delete, and an empty one is never saved."
       ],
       "notes": [
         "Largest-remainder rounding, so a split always sums back to the total.",
-        "Merging is an identity problem first: people are matched across files before writing.",
-        "Duplicates match on amount, payer and the exact set of people sharing.",
-        "A share link carries the trip in its URL fragment, so nothing reaches a host.",
-        "A lineage id tells an arriving link which copy is newer, with no server to arbitrate."
+        "Merging resolves identity first: the same person has a different id in each file.",
+        "The share link lives in the URL fragment, which browsers never send to a host.",
+        "A lineage id tells an arriving link which copy is newer, with no server to arbitrate.",
+        "Sentinels tell a clipped link from a mangled one; neither ever half-decodes a trip.",
+        "The zip is written with the browser's own CompressionStream — no dependency."
       ],
       "tech": ["react", "typescript", "vite", "tailwind"]
     }
