@@ -94,6 +94,7 @@ npm run build         # production build to dist/
 npm run check:bundle  # enforce the < 250 KB gzipped JS budget
 npm run build:cv      # print the /cv route → public/<Name>_CV.pdf (needs build first)
 npm run build:og      # regenerate the Open Graph image from resume.json
+npm run build:favicon # regenerate the monogram favicon from resume.json
 ```
 
 The CV follows [CV_PDF_Layout_Spec.md](CV_PDF_Layout_Spec.md), using self-hosted Carlito
