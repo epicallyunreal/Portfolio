@@ -310,8 +310,59 @@
   ],
   "projects": [
     {
+      "name": "XpenseSplitter",
+      "description": "A shared expense splitter for group trips — fully client-side React, with no backend, no accounts and no database. A trip lives in the browser and travels as a JSON file, or as a link that carries the whole trip inside it.",
+      "startDate": "2026-08",
+      "endDate": "2026-08",
+      "url": "https://github.com/epicallyunreal/XpenseSplitter",
+      "x_live": "https://split.nutanprabhat.dev/",
+      "highlights": [
+        "Chronological ledger — amount, category, payment type, who paid, and exactly who splits it.",
+        "Who owes what, settled two ways: every pairwise debt, or the fewest transfers that clear it.",
+        "A trip shares as a link that carries it — no account, nothing uploaded, nothing to expire."
+      ],
+      "x_tech": [
+        "react",
+        "typescript",
+        "vite",
+        "tailwind",
+        "cicd",
+        "githubactions",
+        "git",
+        "github",
+        "claudecode"
+      ],
+      "x_featured": true
+    },
+    {
+      "name": "Portfolio",
+      "description": "A React and TypeScript site where two JSON files are the only source of truth: the build derives the site, the CV PDF, the Open Graph image, sitemap and HTML head, so nothing about me is written into code. The interesting part isn't the page — it's that CI refuses to publish content that doesn't hold together.",
+      "startDate": "2026-08",
+      "endDate": "2026-08",
+      "url": "https://github.com/epicallyunreal/Portfolio",
+      "x_live": "https://nutanprabhat.dev",
+      "highlights": [
+        "One validator backs the CLI, the pre-commit hook and the editor, so all three agree by construction.",
+        "Site and Calibri-metric CV PDF render from the same JSON, printed by Puppeteer against a hidden route.",
+        "In-browser editor writes files locally and exports downloadable JSON when deployed, with no write path."
+      ],
+      "x_tech": [
+        "typescript",
+        "react",
+        "vite",
+        "tailwind",
+        "cicd",
+        "githubactions",
+        "github",
+        "claudecode"
+      ],
+      "x_featured": true
+    },
+    {
       "name": "CreatorHub",
       "description": "Multi-tenant Django and React SaaS platform for creator agencies — tenancy, identity, campaign lifecycle and payouts. Built through spec-driven AI development: I architected the module structure and data models, defined the features and UI, directed the implementation in Claude Code, then reviewed and hardened it.",
+      "startDate": "2026-05",
+      "endDate": "2026-05",
       "url": "https://github.com/epicallyunreal/CreatorHub",
       "highlights": [
         "Architected a 12-app module structure separating tenancy, identity, campaigns and billing concerns.",
@@ -339,53 +390,10 @@
       "x_featured": true
     },
     {
-      "name": "Portfolio",
-      "description": "A React and TypeScript site where two JSON files are the only source of truth: the build derives the site, the CV PDF, the Open Graph image, sitemap and HTML head, so nothing about me is written into code. The interesting part isn't the page — it's that CI refuses to publish content that doesn't hold together.",
-      "url": "https://github.com/epicallyunreal/Portfolio",
-      "x_live": "https://nutanprabhat.dev",
-      "highlights": [
-        "One validator backs the CLI, the pre-commit hook and the editor, so all three agree by construction.",
-        "Site and Calibri-metric CV PDF render from the same JSON, printed by Puppeteer against a hidden route.",
-        "In-browser editor writes files locally and exports downloadable JSON when deployed, with no write path."
-      ],
-      "x_tech": [
-        "typescript",
-        "react",
-        "vite",
-        "tailwind",
-        "cicd",
-        "githubactions",
-        "github",
-        "claudecode"
-      ],
-      "x_featured": true
-    },
-    {
-      "name": "XpenseSplitter",
-      "description": "A shared expense splitter for group trips — fully client-side React, no backend and no database. A trip lives in localStorage and travels as a JSON file or a link that carries it. Settlement resolves to either every pairwise debt or the fewest transfers that clear everyone.",
-      "url": "https://github.com/epicallyunreal/XpenseSplitter",
-      "x_live": "https://split.nutanprabhat.dev/",
-      "highlights": [
-        "Shares use largest-remainder rounding, so every split sums exactly to the total with no penny drift.",
-        "Importing another trip resolves identity across files first, then flags expenses that already exist.",
-        "Trips carry a lineage id, so an arriving share link knows which copy is newer without a server."
-      ],
-      "x_tech": [
-        "react",
-        "typescript",
-        "vite",
-        "tailwind",
-        "cicd",
-        "githubactions",
-        "git",
-        "github",
-        "claudecode"
-      ],
-      "x_featured": true
-    },
-    {
       "name": "BGMI Tournament Management System",
       "description": "Django and PostgreSQL tournament platform with UI-driven CRUD, custom leaderboard generation, and JSON export — plus a static JavaScript frontend reading that export, serving a fast public leaderboard with no backend hosting cost.",
+      "startDate": "2024-11",
+      "endDate": "2024-12",
       "url": "https://github.com/epicallyunreal/bgmileaderboard",
       "x_live": "https://epicallyunreal.github.io/bgmileaderboard/",
       "highlights": [
@@ -410,6 +418,8 @@
     {
       "name": "LittleLemon API",
       "description": "Django REST Framework API covering models, serializers, endpoints, and authentication with Djoser.",
+      "startDate": "2023-10",
+      "endDate": "2023-12",
       "url": "https://github.com/epicallyunreal/LittleLemon",
       "highlights": [
         "Built full CRUD endpoints with role-scoped permissions and token authentication."
@@ -434,6 +444,8 @@
     {
       "name": "Handwritten Text Recognition",
       "description": "PyTorch character recognition trained on the IAM handwriting dataset, covering preprocessing through training and evaluation.",
+      "startDate": "2021-07",
+      "endDate": "2021-08",
       "url": "",
       "highlights": ["Implemented the preprocessing, training and evaluation pipeline end to end."],
       "x_tech": ["python", "pytorch"],
@@ -465,7 +477,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.13.0",
+    "version": "2.16.0",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",

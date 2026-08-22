@@ -108,8 +108,12 @@ export function validateDataDetailed({
     certifications: () => (resume.certificates?.length ?? 0) > 0,
     awards: () => (resume.awards?.length ?? 0) > 0,
     contact: () => Boolean(resume.basics?.email) || (resume.basics?.profiles?.length ?? 0) > 0,
-    // Lab's data lives in lab.json, but the ordering that renders it is here.
-    lab: () => (lab?.items?.length ?? 0) > 0,
+    // Lab's data lives in lab.json, but the ordering that renders it is here —
+    // so this is only answerable by a caller that was given lab.json. The
+    // editor edits resume and assets only; judging it on a file it cannot open
+    // would raise an error it has no way to fix. The CLI passes lab, so CI and
+    // the pre-commit hook still catch a lab section listed with nothing in it.
+    ...(lab ? { lab: () => (lab.items?.length ?? 0) > 0 } : {}),
   }
   ;(resume.x_meta?.sectionOrder ?? []).forEach((section, i) => {
     const check = sectionHasData[section]
