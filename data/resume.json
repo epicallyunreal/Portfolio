@@ -7,10 +7,7 @@
     "phone": "",
     "url": "https://nutanprabhat.dev",
     "summary": "Senior software engineer with 4+ years building production systems in Python, Django, and DRF, currently sole engineer on an enterprise client account and owning delivery from concept to production. Recent work includes a two-stage visual retrieval system (CLIP embeddings in Qdrant with a feature-based reranker) lifted from a 41.9% baseline to 97.7% Top-1 accuracy, and a multi-tenant Django/DRF and React SaaS platform. Deep SQL background across query optimisation, stored-procedure rewrites, and data-integrity work on live enterprise systems, alongside REST API design, GCP deployment, and CI/CD.",
-    "location": {
-      "city": "Pune",
-      "countryCode": "IN"
-    },
+    "location": { "city": "Pune", "countryCode": "IN" },
     "profiles": [
       {
         "network": "LinkedIn",
@@ -187,11 +184,10 @@
   "certificates": [
     {
       "name": "Meta Back-End Developer",
-      "issuer": "Coursera",
+      "issuer": "Meta",
       "date": "2026-08",
-      "url": "",
-      "x_status": "in-progress",
-      "x_statusNote": "capstone complete; certification in progress",
+      "url": "https://coursera.org/share/f3374dc4a94f5252d5368aa2d51a9ce4",
+      "x_status": "completed",
       "x_tech": [
         "python",
         "django",
@@ -210,7 +206,7 @@
     },
     {
       "name": "Meta Full-Stack Developer",
-      "issuer": "Coursera",
+      "issuer": "Meta",
       "date": "2026-08",
       "url": "",
       "x_status": "in-progress",
@@ -242,17 +238,16 @@
     },
     {
       "name": "Introduction to Generative AI Learning Path",
-      "issuer": "Coursera",
+      "issuer": "Google Cloud",
       "date": "2026-08",
       "url": "https://www.coursera.org/account/accomplishments/specialization/4B73N23WEU4Y",
       "x_status": "completed",
       "x_note": "Google Cloud — LLM foundations, applications, and responsible AI.",
-      "x_tech": [],
-      "x_cv": false
+      "x_tech": []
     },
     {
       "name": "Blockchain Specialization",
-      "issuer": "Coursera",
+      "issuer": "University at Buffalo",
       "date": "2021-09",
       "url": "https://coursera.org/share/f0f239bf3b0710a9f642e1e91f37db1f",
       "x_status": "completed",
@@ -261,10 +256,7 @@
     }
   ],
   "skills": [
-    {
-      "name": "Backend",
-      "keywords": ["python", "django", "drf", "nodejs", "rest"]
-    },
+    { "name": "Backend", "keywords": ["python", "django", "drf", "nodejs", "rest"] },
     {
       "name": "AI Integration",
       "keywords": ["clip", "qdrant", "similaritysearch", "reranking", "pytorch"]
@@ -290,23 +282,14 @@
       "name": "Cloud & DevOps",
       "keywords": ["docker", "cicd", "googlecloud", "git", "github", "githubactions"]
     },
-    {
-      "name": "Architecture",
-      "keywords": ["systemdesign", "etl", "i18n", "dsa"]
-    },
-    {
-      "name": "Testing",
-      "keywords": ["pytest", "postman", "codereview"]
-    },
+    { "name": "Architecture", "keywords": ["systemdesign", "etl", "i18n", "dsa"] },
+    { "name": "Testing", "keywords": ["pytest", "postman", "codereview"] },
     {
       "name": "AI-Assisted Development",
       "keywords": ["claude", "claudecode", "githubcopilot"],
       "x_note": "spec-driven, agentic build workflows"
     },
-    {
-      "name": "Also worked with",
-      "keywords": ["csharp", "unity", "qt"]
-    }
+    { "name": "Also worked with", "keywords": ["csharp", "unity", "qt"] }
   ],
   "projects": [
     {
@@ -453,11 +436,7 @@
     }
   ],
   "awards": [
-    {
-      "title": "HackerRank 5-star — Python, SQL, C++",
-      "awarder": "HackerRank",
-      "date": "2024"
-    },
+    { "title": "HackerRank 5-star — Python, SQL, C++", "awarder": "HackerRank", "date": "2024" },
     {
       "title": "CodeChef — peak rating 1692 across 73 contests",
       "awarder": "CodeChef",
@@ -465,32 +444,20 @@
     }
   ],
   "languages": [
-    {
-      "language": "English",
-      "fluency": "Fluent"
-    },
-    {
-      "language": "Hindi",
-      "fluency": "Native speaker"
-    }
+    { "language": "English", "fluency": "Fluent" },
+    { "language": "Hindi", "fluency": "Native speaker" }
   ],
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.16.0",
+    "version": "2.16.1",
     "headlines": [
-      {
-        "text": "I work from problems, not tickets.",
-        "emphasis": "problems"
-      },
+      { "text": "I work from problems, not tickets.", "emphasis": "problems" },
       {
         "text": "I build systems that change without breaking.",
         "emphasis": "change without breaking"
       },
-      {
-        "text": "I'm the engineer you hand the whole thing to.",
-        "emphasis": "the whole thing"
-      },
+      { "text": "I'm the engineer you hand the whole thing to.", "emphasis": "the whole thing" },
       {
         "text": "Scope, design, build, ship. Usually alone.",
         "emphasis": "Scope, design, build, ship."
