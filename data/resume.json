@@ -228,13 +228,13 @@
       "x_note": "React and Django across the full stack."
     },
     {
-      "name": "Claude 101 & Claude Code 101",
-      "issuer": "Anthropic",
+      "name": "Google AI Essentials Specialization",
+      "issuer": "Google",
       "date": "2026-08",
-      "url": "https://verify.skilljar.com/c/5c65bbxtmrn6",
+      "url": "https://www.coursera.org/account/accomplishments/specialization/4YNB2KO8W7CO",
       "x_status": "completed",
-      "x_note": "Prompting fundamentals & Agentic development workflows.",
-      "x_tech": ["claudecode", "claude"]
+      "x_tech": [],
+      "x_note": "Generative AI and Prompt Engineering."
     },
     {
       "name": "Introduction to Generative AI Learning Path",
@@ -244,6 +244,15 @@
       "x_status": "completed",
       "x_note": "Google Cloud — LLM foundations, applications, and responsible AI.",
       "x_tech": []
+    },
+    {
+      "name": "Claude 101 & Claude Code 101",
+      "issuer": "Anthropic",
+      "date": "2026-08",
+      "url": "https://verify.skilljar.com/c/5c65bbxtmrn6",
+      "x_status": "completed",
+      "x_note": "Prompting fundamentals & Agentic development workflows.",
+      "x_tech": ["claudecode", "claude"]
     },
     {
       "name": "Blockchain Specialization",
@@ -450,7 +459,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.16.1",
+    "version": "2.16.2",
     "headlines": [
       { "text": "I work from problems, not tickets.", "emphasis": "problems" },
       {
