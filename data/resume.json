@@ -242,7 +242,7 @@
       "date": "2026-08",
       "url": "https://www.coursera.org/account/accomplishments/specialization/4B73N23WEU4Y",
       "x_status": "completed",
-      "x_note": "Google Cloud — LLM foundations, applications, and responsible AI.",
+      "x_note": "LLM foundations, applications, and responsible AI.",
       "x_tech": []
     },
     {
@@ -431,7 +431,8 @@
         "postman",
         "claudecode"
       ],
-      "x_featured": false
+      "x_featured": false,
+      "x_cv": false
     },
     {
       "name": "Handwritten Text Recognition",
@@ -459,7 +460,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.16.2",
+    "version": "2.16.4",
     "headlines": [
       { "text": "I work from problems, not tickets.", "emphasis": "problems" },
       {
