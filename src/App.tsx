@@ -3,6 +3,7 @@ import { resume } from './lib/data'
 import { useActiveSection } from './hooks/useActiveSection'
 import { useLenis } from './hooks/useLenis'
 import { useReducedMotion } from './hooks/useReducedMotion'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { FilterProvider } from './components/FilterProvider'
 import { TopologyNav } from './components/TopologyNav'
 import { Hero } from './sections/Hero'
@@ -47,17 +48,23 @@ export default function App() {
 
       <div className="lg:pl-[280px]">
         <header id="hero">
-          <Hero />
+          <ErrorBoundary label="the hero">
+            <Hero />
+          </ErrorBoundary>
         </header>
 
         <main id="main">
           <FilterProvider>
+            {/* One boundary per section: a section that throws is replaced in
+                place, and every other section still renders. */}
             {sections.map((id) => {
               const Section = SECTION_COMPONENTS[id]
               return (
-                <Suspense key={id} fallback={<SectionFallback />}>
-                  <Section />
-                </Suspense>
+                <ErrorBoundary key={id} label={id}>
+                  <Suspense fallback={<SectionFallback />}>
+                    <Section />
+                  </Suspense>
+                </ErrorBoundary>
               )
             })}
           </FilterProvider>
