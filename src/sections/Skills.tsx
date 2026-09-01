@@ -73,7 +73,7 @@ function SkillMatches({ techKey }: { techKey: string }) {
           type="button"
           onClick={clear}
           aria-label={`Stop filtering by ${asset.label}`}
-          className="ml-auto rounded border border-line bg-panel px-2 py-0.5 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+          className="pressable ml-auto rounded border border-line bg-panel px-2 py-0.5 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
         >
           close ×
         </button>
@@ -128,7 +128,7 @@ function SkillTile({ techKey }: { techKey: string }) {
       aria-pressed={isSelected}
       aria-label={`${asset.label} — show where it's used`}
       style={{ '--tile-accent': asset.color } as React.CSSProperties}
-      className={`group flex h-full w-full flex-col items-center gap-2 rounded-lg border p-4 transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+      className={`pressable group flex h-full w-full flex-col items-center gap-2 rounded-lg border p-4 transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
         isSelected
           ? 'scale-[1.06] border-accent bg-raised shadow-glow'
           : 'border-line bg-panel hover:-translate-y-1 hover:border-[var(--tile-accent)]'

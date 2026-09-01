@@ -176,7 +176,11 @@ export function TopologyNav({ active }: TopologyNavProps) {
                       y1={link.source.y}
                       x2={link.target.x}
                       y2={link.target.y}
-                      stroke={touchesActive || touchesHover ? '#22d3ee' : '#1d2b36'}
+                      stroke={
+                        touchesActive || touchesHover
+                          ? 'rgb(var(--c-accent))'
+                          : 'rgb(var(--c-line))'
+                      }
                       strokeOpacity={touchesActive ? 0.55 : touchesHover ? 0.45 : 1}
                       strokeWidth={1.5}
                       className="transition-[stroke,stroke-opacity] duration-200"
@@ -187,7 +191,7 @@ export function TopologyNav({ active }: TopologyNavProps) {
                         y1={from.y}
                         x2={to.x}
                         y2={to.y}
-                        stroke="#34d399"
+                        stroke="rgb(var(--c-accent2))"
                         strokeWidth={1.5}
                         strokeDasharray="3 12"
                         className="edge-flow"
@@ -223,13 +227,18 @@ export function TopologyNav({ active }: TopologyNavProps) {
                   <g transform={`translate(${node.x}, ${node.y})`}>
                     <g className={`node-inner ${isActive || isHovered ? 'node-inner-lifted' : ''}`}>
                       {!reduced && isActive ? (
-                        <circle r={9} fill="none" stroke="#22d3ee" className="node-pulse" />
+                        <circle
+                          r={9}
+                          fill="none"
+                          stroke="rgb(var(--c-accent))"
+                          className="node-pulse"
+                        />
                       ) : null}
                       {/* Focus ring for keyboard users */}
                       <circle
                         r={23}
                         fill="none"
-                        stroke="#e6edf3"
+                        stroke="rgb(var(--c-ink))"
                         strokeWidth={1.5}
                         className="opacity-0 transition-opacity group-focus-visible:opacity-100"
                       />
@@ -237,7 +246,7 @@ export function TopologyNav({ active }: TopologyNavProps) {
                       <circle
                         r={RING_R}
                         fill="none"
-                        stroke={isActive ? '#22d3ee' : '#1d2b36'}
+                        stroke={isActive ? 'rgb(var(--c-accent))' : 'rgb(var(--c-line))'}
                         strokeWidth={2}
                         strokeLinecap="round"
                         strokeDasharray={RING_C}
@@ -247,8 +256,8 @@ export function TopologyNav({ active }: TopologyNavProps) {
                       />
                       <circle
                         r={6}
-                        fill={isActive ? '#22d3ee' : '#101820'}
-                        stroke={isActive ? '#22d3ee' : '#94a3b1'}
+                        fill={isActive ? 'rgb(var(--c-accent))' : 'rgb(var(--c-panel))'}
+                        stroke={isActive ? 'rgb(var(--c-accent))' : 'rgb(var(--c-muted))'}
                         strokeWidth={1.5}
                         className="transition-[fill,stroke] duration-200"
                       />
@@ -257,7 +266,7 @@ export function TopologyNav({ active }: TopologyNavProps) {
                       y={34}
                       textAnchor="middle"
                       className="pointer-events-none select-none font-mono"
-                      fill={isActive || isHovered ? '#e6edf3' : '#94a3b1'}
+                      fill={isActive || isHovered ? 'rgb(var(--c-ink))' : 'rgb(var(--c-muted))'}
                       fontSize={11}
                     >
                       {node.label.toLowerCase()}

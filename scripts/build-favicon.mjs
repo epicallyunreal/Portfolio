@@ -17,8 +17,11 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 import puppeteer from 'puppeteer'
+import { palette } from './lib/palette.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
+// One source of truth: the same --c-* block the site renders from.
+const c = palette()
 const { basics } = JSON.parse(readFileSync(join(root, 'data/resume.json'), 'utf8'))
 
 const marks = basics.name
@@ -36,12 +39,12 @@ writeFileSync(
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="${marks}">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#22d3ee"/>
-      <stop offset="1" stop-color="#34d399"/>
+      <stop offset="0" stop-color="${c.accent}"/>
+      <stop offset="1" stop-color="${c.accent2}"/>
     </linearGradient>
   </defs>
   <polygon points="${hex}" fill="url(#g)"/>
-  <text x="32" y="33" fill="#0a0f14" font-family="ui-sans-serif, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif"
+  <text x="32" y="33" fill="${c.bg}" font-family="ui-sans-serif, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif"
         font-size="30" font-weight="800" letter-spacing="-1.5"
         text-anchor="middle" dominant-baseline="central">${marks}</text>
 </svg>
@@ -55,7 +58,7 @@ const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setui
 const page = await browser.newPage()
 await page.setViewport({ width: 180, height: 180, deviceScaleFactor: 1 })
 await page.setContent(
-  `<body style="margin:0;width:180px;height:180px;background:#0a0f14;display:grid;place-items:center">
+  `<body style="margin:0;width:180px;height:180px;background:${c.bg};display:grid;place-items:center">
      <img src="data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}" width="140" height="140">
    </body>`,
 )

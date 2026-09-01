@@ -143,7 +143,25 @@ function editorEntry(): Plugin {
  * runs read-only. Only the two data files can be written, every save is run
  * through the same validator CI uses, and output is Prettier-formatted so
  * `format:check` still passes afterwards.
+ *
+ * The dev server has no authentication, so the save route also has to care who
+ * is asking: any page open in the same browser knows this origin exists and can
+ * post to it. See `refuseCrossSite`.
  */
+/**
+ * True for origins served from this machine. Parsed rather than string-matched
+ * so `http://localhost.evil.com` cannot pass by starting with the right text.
+ */
+function isLoopbackOrigin(origin: string): boolean {
+  try {
+    // WHATWG URL keeps the brackets on an IPv6 host, so this is '[::1]', not '::1'.
+    const { hostname } = new URL(origin)
+    return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]'
+  } catch {
+    return false
+  }
+}
+
 function editorApi(): Plugin {
   return {
     name: 'editor-api',
@@ -153,6 +171,43 @@ function editorApi(): Plugin {
         res.statusCode = code
         res.setHeader('Content-Type', 'application/json')
         res.end(JSON.stringify(body))
+      }
+
+      /**
+       * Refuse writes that did not come from the editor on this machine.
+       *
+       * Without this, any site open in the same browser could POST here while
+       * `npm run dev` is running and silently rewrite the files under data/.
+       * Nothing stops it reaching the handler: the port is predictable and the
+       * request needs no credentials.
+       *
+       * Two independent guards, because each covers the other's blind spot:
+       *
+       * - Requiring JSON is what actually stops the attack. A form or a
+       *   `text/plain` fetch is a CORS "simple request" and gets sent with no
+       *   preflight; asking for `application/json` forces a preflight that this
+       *   server never answers, so the browser refuses to send the write at all.
+       * - The Origin check catches anything that reaches us with a foreign
+       *   origin regardless. It only rejects when the header is present and
+       *   non-local — same-origin requests may legitimately omit it entirely,
+       *   so a missing Origin cannot be treated as hostile.
+       *
+       * Returns true when the request was refused and already answered.
+       */
+      const refuseCrossSite = (
+        req: import('node:http').IncomingMessage,
+        res: import('node:http').ServerResponse,
+      ) => {
+        if (!(req.headers['content-type'] ?? '').startsWith('application/json')) {
+          send(res, 415, { errors: ['Content-Type: application/json required'] })
+          return true
+        }
+        const origin = req.headers.origin
+        if (origin && !isLoopbackOrigin(origin)) {
+          send(res, 403, { errors: ['cross-site request refused'] })
+          return true
+        }
+        return false
       }
 
       server.middlewares.use('/__editor/data', (_req, res) => {
@@ -168,6 +223,7 @@ function editorApi(): Plugin {
 
       server.middlewares.use('/__editor/save', (req, res) => {
         if (req.method !== 'POST') return send(res, 405, { errors: ['POST only'] })
+        if (refuseCrossSite(req, res)) return
         let raw = ''
         req.on('data', (chunk) => {
           raw += chunk
