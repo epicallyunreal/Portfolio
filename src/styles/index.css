@@ -1,8 +1,46 @@
+/* A registered custom property so the browser interpolates it as an angle.
+   Left unregistered it is plain token substitution, and the conic-gradient
+   would jump from 0deg to 360deg with nothing in between. */
+@property --edge-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* ── Palette ──────────────────────────────────────────────────────────
+       Space-separated RGB channels rather than hex, which is what lets
+       Tailwind's opacity modifiers (`bg-accent/40`) resolve through the
+       <alpha-value> placeholder. These nine values are the whole theme:
+       every colour in the site, including the SVG topology graph and the
+       canvas particle field, reads from them. */
+    --c-bg: 10 15 20;
+    --c-panel: 16 24 32;
+    --c-raised: 20 30 40;
+    --c-ink: 230 237 243;
+    --c-muted: 148 163 177;
+    --c-faint: 123 138 151;
+    --c-accent: 34 211 238;
+    --c-accent2: 52 211 153;
+    --c-line: 29 43 54;
+
+    /* Shared motion tokens. Named once so retuning the feel of the site is one
+       edit rather than a find-and-replace, and so the three speeds stay
+       meaningfully different — a single duration reused everywhere is what
+       makes an interface feel uniformly sluggish. */
+    --dur-press: 110ms; /* press feedback — must read as instant */
+    --dur-hover: 220ms; /* hover state changes */
+    --dur-settle: 420ms; /* larger movement returning to rest */
+    /* Decelerate on arrival — everything here is a surface settling back to
+       rest, not something leaving the screen. */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -14,7 +52,7 @@
   body {
     @apply bg-bg font-sans text-ink antialiased;
     /* Subtle dot grid — circuit-board texture behind everything. */
-    background-image: radial-gradient(rgba(148, 163, 177, 0.07) 1px, transparent 1px);
+    background-image: radial-gradient(rgb(var(--c-muted) / 0.07) 1px, transparent 1px);
     background-size: 28px 28px;
   }
   ::selection {
@@ -23,6 +61,98 @@
 }
 
 @layer components {
+  /* ── Pointer-reactive surfaces ────────────────────────────────────────────
+     --tilt-x/y are written by usePointerTilt. Both default to 0deg here, so a
+     card carrying this class with no hook attached — or under reduced motion,
+     where the hook withholds its handlers — renders flat rather than unstyled.
+     The edge trace below is pure CSS and needs no hook at all. */
+  .tilt-3d {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    position: relative;
+    transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    /* The card's transitions live here rather than split with Tailwind
+       `transition-*` utilities on the element: utilities sit in a later layer
+       and would silently replace this whole declaration, dropping the transform
+       transition and making the card snap back instead of settling.
+       Slow return, quick response — the settle is what sells the weight. */
+    transition:
+      transform var(--dur-settle) var(--ease-out),
+      box-shadow var(--dur-hover) var(--ease-out),
+      border-color var(--dur-hover) var(--ease-out),
+      opacity var(--dur-hover) var(--ease-out);
+  }
+
+  /* On hover a bright segment runs once around the card's edge.
+     Deliberately not a cursor-tracked radial sheen: that effect is on every
+     generated portfolio and says nothing about this one. The topology nav
+     already animates data along its edges (@keyframes edge-flow), so a hovered
+     card reads as an active node in that same graph — the site's own metaphor
+     rather than a lighting effect borrowed from elsewhere.
+
+     Runs once per hover, not on a loop: a continuously animating border is
+     decoration competing with the content it surrounds. */
+  .tilt-3d::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: conic-gradient(
+      from var(--edge-angle),
+      transparent 0deg 296deg,
+      rgb(var(--c-accent) / 0.55) 330deg,
+      rgb(var(--c-accent2) / 0.9) 352deg,
+      transparent 360deg
+    );
+    /* Mask out the middle so the gradient only paints the 1px ring. */
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
+  .tilt-3d:hover::after {
+    /* linear, not the site's ease-out: a pulse travelling a wire moves at a
+       constant rate. Easing makes it decelerate into the last few degrees,
+       which reads as something settling rather than something in transit —
+       and the topology edges it echoes are linear too. */
+    animation: edge-trace 900ms linear;
+  }
+
+  /* Press feedback. Touch devices get no hover state at all, so without this a
+     tap has no acknowledgement. */
+  /* Doubled deliberately. Elements carrying this often also carry a Tailwind
+     `transition-colors`/`transition-all`, which sets transition-property and
+     would drop the transform easing, making the release snap back. Tailwind 3
+     compiles its @layer directives to plain ordered CSS, so raising specificity
+     is enough to win without !important. */
+  .pressable.pressable {
+    transition: transform var(--dur-press) var(--ease-out);
+  }
+  .pressable:active {
+    transform: scale(0.97);
+  }
+
+  /* The hooks already withhold their handlers under reduced motion; this makes
+     the same guarantee in CSS, so a class left on an element cannot animate. */
+  @media (prefers-reduced-motion: reduce) {
+    .tilt-3d,
+    .pressable {
+      transform: none;
+      transition: none;
+    }
+    .tilt-3d::after {
+      display: none;
+    }
+  }
+
   .section-shell {
     @apply mx-auto w-full max-w-content scroll-mt-6 px-6 py-20 sm:px-10 sm:py-24 lg:px-16;
   }
@@ -36,7 +166,12 @@
   .hex-frame {
     padding: 4px;
     clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
-    background: linear-gradient(135deg, #22d3ee, #34d399, #22d3ee);
+    background: linear-gradient(
+      135deg,
+      rgb(var(--c-accent)),
+      rgb(var(--c-accent2)),
+      rgb(var(--c-accent))
+    );
     background-size: 200% 200%;
   }
   .hex-frame-animated {
@@ -64,12 +199,12 @@
      page without competing with the accent used everywhere else. */
   .lab-deck {
     background:
-      radial-gradient(120% 100% at 0% 0%, rgba(34, 211, 238, 0.06), transparent 60%),
-      radial-gradient(100% 100% at 100% 100%, rgba(52, 211, 153, 0.05), transparent 55%);
+      radial-gradient(120% 100% at 0% 0%, rgb(var(--c-accent) / 0.06), transparent 60%),
+      radial-gradient(100% 100% at 100% 100%, rgb(var(--c-accent2) / 0.05), transparent 55%);
   }
   .lab-card {
     background-color: theme('colors.raised');
-    background-image: radial-gradient(rgba(148, 163, 177, 0.05) 1px, transparent 1px);
+    background-image: radial-gradient(rgb(var(--c-muted) / 0.05) 1px, transparent 1px);
     background-size: 22px 22px;
   }
 
@@ -80,10 +215,10 @@
   .lab-textband {
     background: linear-gradient(
       to top,
-      rgba(10, 15, 20, 0.97) 0%,
-      rgba(10, 15, 20, 0.95) 62%,
-      rgba(10, 15, 20, 0.82) 84%,
-      rgba(10, 15, 20, 0) 100%
+      rgb(var(--c-bg) / 0.97) 0%,
+      rgb(var(--c-bg) / 0.95) 62%,
+      rgb(var(--c-bg) / 0.82) 84%,
+      rgb(var(--c-bg) / 0) 100%
     );
   }
 
@@ -96,7 +231,7 @@
   /* Emphasised words inside the typed headline — lifted out of the accent
      colour rather than dimming the rest of the line. */
   .headline-emphasis {
-    text-shadow: 0 0 18px rgba(34, 211, 238, 0.45);
+    text-shadow: 0 0 18px rgb(var(--c-accent) / 0.45);
   }
 
   /* Availability dot: gentle service-health pulse. */
@@ -108,7 +243,7 @@
      the pinned strip is seamless against the page behind it. */
   .section-heading-bar {
     background-color: theme('colors.bg');
-    background-image: radial-gradient(rgba(148, 163, 177, 0.07) 1px, transparent 1px);
+    background-image: radial-gradient(rgb(var(--c-muted) / 0.07) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
@@ -135,7 +270,7 @@
     animation: pulse-ring 2.6s ease-out infinite;
   }
   .chain-flow {
-    background-image: linear-gradient(to bottom, #22d3ee 40%, transparent 40%);
+    background-image: linear-gradient(to bottom, rgb(var(--c-accent)) 40%, transparent 40%);
     background-size: 1px 10px;
     animation: chain-flow 1s linear infinite;
   }
@@ -244,5 +379,24 @@
   body {
     background: #ffffff;
     color: #111111;
+  }
+}
+
+/* One lap of the card's perimeter. Fades in at the start and out at the end so
+   the segment appears and leaves rather than popping. */
+@keyframes edge-trace {
+  0% {
+    --edge-angle: 0deg;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    --edge-angle: 360deg;
+    opacity: 0;
   }
 }

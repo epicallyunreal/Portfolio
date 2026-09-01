@@ -55,6 +55,12 @@ export function ParticleField({ enabled }: { enabled: boolean }) {
         if (p.x < 0 || p.x > width) p.vx *= -1
         if (p.y < 0 || p.y > height) p.vy *= -1
       }
+      // Canvas cannot resolve var(), so the palette is read from the document
+      // and cached per frame. Falls back to the accent's channels if the
+      // property is missing, so the field never renders invisible.
+      const accent =
+        getComputedStyle(document.documentElement).getPropertyValue('--c-accent').trim() ||
+        '201 162 39'
       ctx.lineWidth = 1
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
@@ -64,7 +70,7 @@ export function ParticleField({ enabled }: { enabled: boolean }) {
           const dy = a.y - b.y
           const dist = Math.hypot(dx, dy)
           if (dist < LINK_DISTANCE) {
-            ctx.strokeStyle = `rgba(34, 211, 238, ${(0.14 * (1 - dist / LINK_DISTANCE)).toFixed(3)})`
+            ctx.strokeStyle = `rgb(${accent} / ${(0.14 * (1 - dist / LINK_DISTANCE)).toFixed(3)})`
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)
             ctx.lineTo(b.x, b.y)
@@ -72,7 +78,7 @@ export function ParticleField({ enabled }: { enabled: boolean }) {
           }
         }
       }
-      ctx.fillStyle = 'rgba(34, 211, 238, 0.55)'
+      ctx.fillStyle = `rgb(${accent} / 0.55)`
       for (const p of particles) {
         ctx.beginPath()
         ctx.arc(p.x, p.y, 1.4, 0, Math.PI * 2)

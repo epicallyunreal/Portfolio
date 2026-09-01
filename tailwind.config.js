@@ -3,16 +3,20 @@ export default {
   content: ['./index.html', './src/**/*.{ts,tsx}', './editor/**/*.{ts,tsx}'],
   theme: {
     extend: {
+      // Every colour resolves through a CSS variable so the whole palette can
+      // be swapped in one place. Values are space-separated RGB channels rather
+      // than hex, which is what lets Tailwind's opacity modifiers (`bg-accent/40`)
+      // keep working via the <alpha-value> placeholder.
       colors: {
-        bg: '#0a0f14',
-        panel: '#101820',
-        raised: '#141e28',
-        ink: '#e6edf3',
-        muted: '#94a3b1',
-        faint: '#7b8a97',
-        accent: '#22d3ee',
-        accent2: '#34d399',
-        line: '#1d2b36',
+        bg: 'rgb(var(--c-bg) / <alpha-value>)',
+        panel: 'rgb(var(--c-panel) / <alpha-value>)',
+        raised: 'rgb(var(--c-raised) / <alpha-value>)',
+        ink: 'rgb(var(--c-ink) / <alpha-value>)',
+        muted: 'rgb(var(--c-muted) / <alpha-value>)',
+        faint: 'rgb(var(--c-faint) / <alpha-value>)',
+        accent: 'rgb(var(--c-accent) / <alpha-value>)',
+        accent2: 'rgb(var(--c-accent2) / <alpha-value>)',
+        line: 'rgb(var(--c-line) / <alpha-value>)',
       },
       fontFamily: {
         sans: [
@@ -38,7 +42,7 @@ export default {
         content: '72rem',
       },
       boxShadow: {
-        glow: '0 0 32px rgba(34, 211, 238, 0.16)',
+        glow: '0 0 32px rgb(var(--c-accent) / 0.16)',
         lift: '0 12px 40px rgba(0, 0, 0, 0.45)',
       },
     },

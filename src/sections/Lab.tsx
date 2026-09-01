@@ -47,7 +47,7 @@ function ArrowButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={direction === 'prev' ? 'Previous entry' : 'Next entry'}
-      className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-panel font-mono text-ink transition-colors hover:border-accent disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-line focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      className="pressable flex h-11 w-11 items-center justify-center rounded-full border border-line bg-panel font-mono text-ink transition-colors hover:border-accent disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-line focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       <span aria-hidden="true">{direction === 'prev' ? '←' : '→'}</span>
     </button>
@@ -203,7 +203,7 @@ function LabCard({ item }: { item: LabItem }) {
                   aria-selected={i === facet}
                   tabIndex={i === facet ? 0 : -1}
                   onClick={() => setFacet(i)}
-                  className={`rounded-md px-3 py-1.5 font-mono text-xs uppercase tracking-[0.14em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+                  className={`pressable rounded-md px-3 py-1.5 font-mono text-xs uppercase tracking-[0.14em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                     i === facet
                       ? 'bg-accent/12 text-accent'
                       : // Over a photograph rather than a flat panel, so the inactive
@@ -320,7 +320,7 @@ export default function LabSection() {
                     aria-controls={i === index ? panelId : undefined}
                     tabIndex={i === index ? 0 : -1}
                     onClick={() => go(i)}
-                    className={`scroll-mt-28 rounded-full border px-4 py-2 font-mono text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+                    className={`pressable scroll-mt-28 rounded-full border px-4 py-2 font-mono text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                       i === index
                         ? 'border-accent bg-accent/10 text-accent'
                         : 'border-line bg-panel text-muted hover:border-accent/40 hover:text-ink'

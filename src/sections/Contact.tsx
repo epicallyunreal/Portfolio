@@ -45,7 +45,7 @@ function EmailBlock({ email }: { email: string }) {
         <button
           type="button"
           onClick={copy}
-          className="rounded-md border border-line bg-panel px-6 py-3 font-semibold text-ink transition-colors hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="pressable rounded-md border border-line bg-panel px-6 py-3 font-semibold text-ink transition-colors hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {copied ? '✓ copied' : 'Copy address'}
         </button>

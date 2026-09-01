@@ -2,6 +2,7 @@ import { formatDate, orderTech, resume } from '../lib/data'
 import { filterCardClasses } from '../lib/filterStyles'
 import { sectionItems } from '../lib/sections'
 import { useFilter } from '../hooks/useFilter'
+import { usePointerTilt } from '../hooks/usePointerTilt'
 import { MasterDetail } from '../components/MasterDetail'
 import { Reveal } from '../components/Reveal'
 import { SectionHeading } from '../components/SectionHeading'
@@ -10,12 +11,15 @@ import type { Certificate } from '../lib/types'
 
 function CertificateCard({ cert }: { cert: Certificate }) {
   const { selected } = useFilter()
+  const { ref, tiltProps } = usePointerTilt<HTMLElement>()
   const inProgress = cert.x_status === 'in-progress'
   const matches = selected === null || (cert.x_tech ?? []).includes(selected)
 
   const body = (
     <article
-      className={`h-full rounded-lg bg-panel p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift ${
+      ref={ref}
+      {...tiltProps}
+      className={`tilt-3d h-full rounded-lg bg-panel p-6 hover:shadow-lift ${
         inProgress ? 'border-2 border-dashed' : 'border'
       } ${filterCardClasses(selected, matches)} ${cert.url ? 'hover:border-accent' : 'hover:border-accent/40'}`}
     >

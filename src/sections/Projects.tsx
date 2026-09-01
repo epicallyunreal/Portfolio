@@ -1,53 +1,30 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { formatDate, orderTech, orderedProjects } from '../lib/data'
 import { filterCardClasses } from '../lib/filterStyles'
 import { sectionItems } from '../lib/sections'
 import { useFilter } from '../hooks/useFilter'
-import { useMediaQuery } from '../hooks/useMediaQuery'
-import { useReducedMotion } from '../hooks/useReducedMotion'
+import { usePointerTilt } from '../hooks/usePointerTilt'
 import { MasterDetail } from '../components/MasterDetail'
 import { Reveal } from '../components/Reveal'
 import { SectionHeading } from '../components/SectionHeading'
 import { TechLogo } from '../components/TechLogo'
 import type { Project } from '../lib/types'
 
-const MAX_TILT_DEG = 6
-
 const LINK_CLASS =
   'whitespace-nowrap font-mono text-sm text-accent underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent'
 
 function ProjectCard({ project }: { project: Project }) {
   const { selected } = useFilter()
-  const reduced = useReducedMotion()
-  const finePointer = useMediaQuery('(pointer: fine)')
-  const cardRef = useRef<HTMLElement>(null)
-  const [tilt, setTilt] = useState({ x: 0, y: 0 })
   const [expanded, setExpanded] = useState(false)
+  const { ref, tiltProps } = usePointerTilt<HTMLElement>()
 
   const matches = selected === null || (project.x_tech ?? []).includes(selected)
-  const tiltEnabled = finePointer && !reduced
-
-  const onMouseMove = (e: React.MouseEvent) => {
-    if (!tiltEnabled || !cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const px = (e.clientX - rect.left) / rect.width - 0.5
-    const py = (e.clientY - rect.top) / rect.height - 0.5
-    setTilt({ x: -py * MAX_TILT_DEG, y: px * MAX_TILT_DEG })
-  }
 
   return (
     <article
-      ref={cardRef}
-      onMouseMove={onMouseMove}
-      onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-      style={
-        tiltEnabled
-          ? {
-              transform: `perspective(900px) rotateX(${tilt.x.toFixed(2)}deg) rotateY(${tilt.y.toFixed(2)}deg)`,
-            }
-          : undefined
-      }
-      className={`flex h-full flex-col rounded-lg border p-6 transition-[opacity,border-color,box-shadow] duration-300 will-change-transform hover:shadow-lift ${
+      ref={ref}
+      {...tiltProps}
+      className={`tilt-3d flex h-full flex-col rounded-lg border p-6 hover:shadow-lift ${
         project.x_featured ? 'bg-raised' : 'bg-panel'
       } ${filterCardClasses(selected, matches)}`}
     >
