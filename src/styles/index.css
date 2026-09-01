@@ -19,15 +19,15 @@
        <alpha-value> placeholder. These nine values are the whole theme:
        every colour in the site, including the SVG topology graph and the
        canvas particle field, reads from them. */
-    --c-bg: 10 15 20;
-    --c-panel: 16 24 32;
-    --c-raised: 20 30 40;
-    --c-ink: 230 237 243;
-    --c-muted: 148 163 177;
-    --c-faint: 123 138 151;
-    --c-accent: 34 211 238;
-    --c-accent2: 52 211 153;
-    --c-line: 29 43 54;
+    --c-bg: 18 22 42;
+    --c-panel: 26 32 56;
+    --c-raised: 34 41 68;
+    --c-ink: 228 231 242;
+    --c-muted: 154 162 192;
+    --c-faint: 124 133 166;
+    --c-accent: 147 167 240;
+    --c-accent2: 127 212 232;
+    --c-line: 42 50 82;
 
     /* Shared motion tokens. Named once so retuning the feel of the site is one
        edit rather than a find-and-replace, and so the three speeds stay
