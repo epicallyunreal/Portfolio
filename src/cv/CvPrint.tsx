@@ -54,7 +54,7 @@ export default function CvPrint() {
   const phone = new URLSearchParams(window.location.search).get('phone')
 
   useEffect(() => {
-    document.title = `${basics.name} — CV v${x_meta.version}`
+    document.title = `${basics.name} - CV v${x_meta.version}`
     const meta = document.createElement('meta')
     meta.name = 'robots'
     meta.content = 'noindex'
@@ -97,7 +97,7 @@ export default function CvPrint() {
       {onCv(resume.skills).map((group) => (
         <p key={group.name} className="cv-line">
           <strong>{group.name}:</strong> {labels(group.keywords).join(', ')}
-          {group.x_note ? ` — ${group.x_note}` : ''}
+          {group.x_note ? ` - ${group.x_note}` : ''}
         </p>
       ))}
 
@@ -106,7 +106,7 @@ export default function CvPrint() {
         <div key={`${entry.name}-${entry.startDate}`}>
           <p className="cv-job">
             <span className="cv-job-title">
-              <strong>{entry.position}</strong> — {entry.name}
+              <strong>{entry.position}</strong> - {entry.name}
             </span>
             <span className="cv-dates">
               {formatDate(entry.startDate)} – {formatDate(entry.endDate)}
@@ -132,7 +132,7 @@ export default function CvPrint() {
           <strong>
             <Linked url={project.x_live ?? project.url}>{project.name}</Linked>
           </strong>{' '}
-          — {project.description}
+          - {project.description}
         </p>
       ))}
 
@@ -142,7 +142,7 @@ export default function CvPrint() {
           <strong>
             {e.studyType}, {e.area}
           </strong>{' '}
-          — {e.institution} ({e.startDate} – {e.endDate}){e.score ? ` · GPA ${e.score}` : ''}
+          - {e.institution} ({e.startDate} – {e.endDate}){e.score ? ` · GPA ${e.score}` : ''}
         </p>
       ))}
 
@@ -153,7 +153,7 @@ export default function CvPrint() {
             <strong>
               <Linked url={cert.url}>{cert.name}</Linked>
             </strong>{' '}
-            — {cert.issuer} ({certStatusText(cert)}){cert.x_note ? ` · ${cert.x_note}` : ''}
+            - {cert.issuer} ({certStatusText(cert)}){cert.x_note ? ` · ${cert.x_note}` : ''}
           </li>
         ))}
       </ul>
