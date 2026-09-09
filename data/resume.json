@@ -1,12 +1,12 @@
 {
   "basics": {
     "name": "Nutan Prabhat",
-    "label": "Senior Software Engineer — Backend & Full-Stack",
+    "label": "Senior Software Engineer, Backend & Full-Stack",
     "image": "/images/headshot.webp",
     "email": "prabhat9819@gmail.com",
     "phone": "",
     "url": "https://nutanprabhat.dev",
-    "summary": "Senior software engineer with 4+ years shipping production systems, currently sole engineer on an enterprise client account, owning delivery from scoping to handover. The last ten months have been Python: a two-stage visual retrieval system (CLIP embeddings in Qdrant, feature-based reranker) taken from 41.9% to 97.7% Top-1 accuracy, and a desktop CAD validation platform built end to end. Before that, two years on a multi-tenant SaaS product in C# and ASP.NET, with deep SQL work across query optimisation, stored-procedure rewrites and data-integrity fixes on live enterprise systems.",
+    "summary": "Senior software engineer with 4+ years shipping production systems, currently sole engineer on an enterprise client account, owning delivery from scoping to handover. The Aziro work has been Python: a two-stage visual retrieval system (CLIP embeddings in Qdrant, feature-based reranker) taken from 41.9% to 97.7% Top-1 accuracy, and a desktop CAD validation platform built end to end. Before that, two years on a multi-tenant SaaS product in C# and ASP.NET, with deep SQL work across query optimisation, stored-procedure rewrites and data-integrity fixes on live enterprise systems.",
     "location": {
       "city": "Pune",
       "countryCode": "IN"
@@ -30,13 +30,13 @@
       "position": "Senior Software Developer",
       "startDate": "2025-12",
       "endDate": null,
-      "summary": "Sole engineer on the account — Python throughout, scoping to handover.",
+      "summary": "Sole engineer on the account. Python throughout, scoping to handover.",
       "highlights": [
-        "Sole engineer on the account — scoping, HLD/LLD design, development, testing, documentation, and delivery.",
-        "Rebuilt a two-stage visual retrieval engine: CLIP ViT-B/16 embeddings in Qdrant for candidate recall, then a feature-based reranker for precision — Top-1 accuracy from a 41.9% baseline to 97.7%.",
+        "Sole engineer on the account: scoping, HLD/LLD design, development, testing, documentation, and delivery.",
+        "Rebuilt a two-stage visual retrieval engine: CLIP ViT-B/16 embeddings in Qdrant for candidate recall, then a feature-based reranker for precision. Top-1 accuracy from a 41.9% baseline to 97.7%.",
         "Built the held-out evaluation harness behind that result, identifying recall as the true ceiling and redirecting the next phase of work.",
-        "Delivered a Python desktop CAD validation platform end to end — DXF parsing, 2D computational geometry, spatial indexing, PySide6 UI — with one-click batch processing across drawing folders and a second system integrated in.",
-        "Built a JSON-configured rule engine binding validation rules to check and fix functions at runtime, with priority-ordered execution and full audit trails — automating 3+ manual workflows.",
+        "Delivered a Python desktop CAD validation platform end to end (DXF parsing, 2D computational geometry, spatial indexing, PySide6 UI), with one-click batch processing across drawing folders and a second system integrated in.",
+        "Built a JSON-configured rule engine binding validation rules to check and fix functions at runtime, with priority-ordered execution and full audit trails, automating 3+ manual workflows.",
         "Architected both platforms as configuration-driven: new categories, rules, thresholds, and weights are added through JSON without code changes.",
         "Produced full system documentation and test coverage for clean client handover."
       ],
@@ -319,15 +319,15 @@
   "projects": [
     {
       "name": "XpenseSplitter",
-      "description": "A shared expense splitter for group trips — fully client-side React, with no backend, no accounts and no database. A trip lives in the browser and travels as a JSON file, or as a link that carries the whole trip inside it.",
+      "description": "A shared expense splitter for group trips, fully client-side React, with no backend, no accounts and no database. A trip lives in the browser and travels as a JSON file, or as a link that carries the whole trip inside it.",
       "startDate": "2026-08",
       "endDate": "2026-08",
       "url": "https://github.com/epicallyunreal/XpenseSplitter",
       "x_live": "https://split.nutanprabhat.dev/",
       "highlights": [
-        "Chronological ledger — amount, category, payment type, who paid, and exactly who splits it.",
+        "Chronological ledger: amount, category, payment type, who paid, and exactly who splits it.",
         "Who owes what, settled two ways: every pairwise debt, or the fewest transfers that clear it.",
-        "A trip shares as a link that carries it — no account, nothing uploaded, nothing to expire."
+        "A trip shares as a link that carries it, so no account, nothing uploaded, nothing to expire."
       ],
       "x_tech": [
         "react",
@@ -344,7 +344,7 @@
     },
     {
       "name": "Portfolio",
-      "description": "A React and TypeScript site where two JSON files are the only source of truth: the build derives the site, the CV PDF, the Open Graph image, sitemap and HTML head, so nothing about me is written into code. The interesting part isn't the page — it's that CI refuses to publish content that doesn't hold together.",
+      "description": "A React and TypeScript site where two JSON files are the only source of truth: the build derives the site, the CV PDF, the Open Graph image, sitemap and HTML head, so nothing about me is written into code. The interesting part isn't the page, it's that CI refuses to publish content that doesn't hold together.",
       "startDate": "2026-08",
       "endDate": "2026-08",
       "url": "https://github.com/epicallyunreal/Portfolio",
@@ -368,7 +368,7 @@
     },
     {
       "name": "CreatorHub",
-      "description": "Multi-tenant Django and React SaaS platform for creator agencies — tenancy, identity, campaign lifecycle and payouts. Built through spec-driven AI development: I architected the module structure and data models, defined the features and UI, directed the implementation in Claude Code, then reviewed and hardened it.",
+      "description": "Multi-tenant Django and React SaaS platform for creator agencies: tenancy, identity, campaign lifecycle and payouts. Built through spec-driven AI development: I architected the module structure and data models, defined the features and UI, directed the implementation in Claude Code, then reviewed and hardened it.",
       "startDate": "2026-05",
       "endDate": "2026-05",
       "url": "https://github.com/epicallyunreal/CreatorHub",
@@ -399,7 +399,7 @@
     },
     {
       "name": "BGMI Tournament Management System",
-      "description": "Django and PostgreSQL tournament platform with UI-driven CRUD, custom leaderboard generation, and JSON export — plus a static JavaScript frontend reading that export, serving a fast public leaderboard with no backend hosting cost.",
+      "description": "Django and PostgreSQL tournament platform with UI-driven CRUD, custom leaderboard generation, and JSON export, plus a static JavaScript frontend reading that export, serving a fast public leaderboard with no backend hosting cost.",
       "startDate": "2024-11",
       "endDate": "2024-12",
       "url": "https://github.com/epicallyunreal/bgmileaderboard",
@@ -464,13 +464,13 @@
   ],
   "awards": [
     {
-      "title": "HackerRank 5-star — Python, SQL, C++",
+      "title": "HackerRank 5-star: Python, SQL, C++",
       "awarder": "HackerRank",
       "date": "2024",
       "x_cv": false
     },
     {
-      "title": "CodeChef — peak rating 1692 across 73 contests",
+      "title": "CodeChef, peak rating 1692 across 73 contests",
       "awarder": "CodeChef",
       "date": "2024",
       "x_cv": false
