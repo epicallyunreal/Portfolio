@@ -6,8 +6,11 @@
     "email": "prabhat9819@gmail.com",
     "phone": "",
     "url": "https://nutanprabhat.dev",
-    "summary": "Senior software engineer with 4+ years building production systems in Python, Django, and DRF, currently sole engineer on an enterprise client account and owning delivery from concept to production. Recent work includes a two-stage visual retrieval system (CLIP embeddings in Qdrant with a feature-based reranker) lifted from a 41.9% baseline to 97.7% Top-1 accuracy, and a multi-tenant Django/DRF and React SaaS platform. Deep SQL background across query optimisation, stored-procedure rewrites, and data-integrity work on live enterprise systems, alongside REST API design, GCP deployment, and CI/CD.",
-    "location": { "city": "Pune", "countryCode": "IN" },
+    "summary": "Senior software engineer with 4+ years shipping production systems, currently sole engineer on an enterprise client account, owning delivery from scoping to handover. The last ten months have been Python: a two-stage visual retrieval system (CLIP embeddings in Qdrant, feature-based reranker) taken from 41.9% to 97.7% Top-1 accuracy, and a desktop CAD validation platform built end to end. Before that, two years on a multi-tenant SaaS product in C# and ASP.NET, with deep SQL work across query optimisation, stored-procedure rewrites and data-integrity fixes on live enterprise systems.",
+    "location": {
+      "city": "Pune",
+      "countryCode": "IN"
+    },
     "profiles": [
       {
         "network": "LinkedIn",
@@ -27,7 +30,7 @@
       "position": "Senior Software Developer",
       "startDate": "2025-12",
       "endDate": null,
-      "summary": "Sole engineer on an enterprise client account, owning the full delivery lifecycle.",
+      "summary": "Sole engineer on the account — Python throughout, scoping to handover.",
       "highlights": [
         "Sole engineer on the account — scoping, HLD/LLD design, development, testing, documentation, and delivery.",
         "Rebuilt a two-stage visual retrieval engine: CLIP ViT-B/16 embeddings in Qdrant for candidate recall, then a feature-based reranker for precision — Top-1 accuracy from a 41.9% baseline to 97.7%.",
@@ -61,11 +64,11 @@
       "position": "Co-Founder & Game Developer",
       "startDate": "2024-06",
       "endDate": "2025-12",
-      "summary": "Co-founded a small studio and shipped a live multiplayer title.",
+      "summary": "Unity and C# on the client, server-side JavaScript on Unity Cloud Code.",
       "highlights": [
         "Built and published Pen Fight 2D, a turn-based multiplayer mobile game in Unity (C#), reaching 10K+ downloads on Google Play.",
         "Integrated Google Cloud Platform (Authentication, APIs, Analytics) and Unity Cloud Save, building account and progression sync from scratch.",
-        "Built a server-authoritative economy in Node.js with escrow-held fees, idempotent payouts keyed by match ID, dual-client verification, and refund handling.",
+        "Built a server-authoritative economy on Unity Cloud Code (server-side JavaScript) with escrow-held fees, idempotent payouts keyed by match ID, dual-client verification, and refund handling.",
         "Architected real-time multiplayer on Unity Relay and Transport, using separate reliable and unreliable channels and choosing raw transport over the netcode framework.",
         "Implemented race-safe match negotiation with single start authority, plus turn timers, disconnect forfeits, and version gating before escrow.",
         "Diagnosed and fixed a cross-device desync from resolution-dependent UI scaling by re-basing the wire protocol on normalised coordinates.",
@@ -108,7 +111,7 @@
         "Designed a localization abstraction layer: providers switchable through configuration, per-element opt-out control, and coverage extended through API and database layers.",
         "Diagnosed and optimised SQL queries that had degraded 2–3x, restoring near-baseline response times with no downtime.",
         "Rewrote legacy stored procedures, including one of 4,000 lines, replacing a destructive save pattern with differential updates to eliminate a data-loss risk.",
-        "Migrated a large ASP.NET codebase to jQuery 3.5+, taking the highest-complexity pages and contributing refactor patterns adopted into shared libraries.",
+        "Migrated a large ASP.NET C# codebase to jQuery 3.5+, taking the highest-complexity pages and contributing refactor patterns adopted into shared libraries.",
         "Extended Elasticsearch type-ahead search with minimum-character filtering and query tuning."
       ],
       "x_tech": [
@@ -225,7 +228,8 @@
         "pytest",
         "postman"
       ],
-      "x_note": "React and Django across the full stack."
+      "x_note": "React and Django across the full stack.",
+      "x_statusNote": "in progress"
     },
     {
       "name": "Google AI Essentials Specialization",
@@ -265,7 +269,10 @@
     }
   ],
   "skills": [
-    { "name": "Backend", "keywords": ["python", "django", "drf", "nodejs", "rest"] },
+    {
+      "name": "Backend",
+      "keywords": ["python", "django", "drf", "csharp", "rest"]
+    },
     {
       "name": "AI Integration",
       "keywords": ["clip", "qdrant", "similaritysearch", "reranking", "pytorch"]
@@ -277,11 +284,11 @@
     {
       "name": "Frontend",
       "keywords": [
-        "react",
         "javascript",
+        "jquery",
         "html5",
         "css3",
-        "jquery",
+        "react",
         "typescript",
         "tailwind",
         "vite"
@@ -291,14 +298,23 @@
       "name": "Cloud & DevOps",
       "keywords": ["docker", "cicd", "googlecloud", "git", "github", "githubactions"]
     },
-    { "name": "Architecture", "keywords": ["systemdesign", "etl", "i18n", "dsa"] },
-    { "name": "Testing", "keywords": ["pytest", "postman", "codereview"] },
+    {
+      "name": "Architecture",
+      "keywords": ["systemdesign", "etl", "i18n", "dsa"]
+    },
+    {
+      "name": "Testing",
+      "keywords": ["pytest", "postman", "codereview"]
+    },
     {
       "name": "AI-Assisted Development",
       "keywords": ["claude", "claudecode", "githubcopilot"],
       "x_note": "spec-driven, agentic build workflows"
     },
-    { "name": "Also worked with", "keywords": ["csharp", "unity", "qt"] }
+    {
+      "name": "Also worked with",
+      "keywords": ["unity", "qt"]
+    }
   ],
   "projects": [
     {
@@ -442,38 +458,57 @@
       "url": "",
       "highlights": ["Implemented the preprocessing, training and evaluation pipeline end to end."],
       "x_tech": ["python", "pytorch"],
-      "x_featured": false
+      "x_featured": false,
+      "x_cv": false
     }
   ],
   "awards": [
-    { "title": "HackerRank 5-star — Python, SQL, C++", "awarder": "HackerRank", "date": "2024" },
+    {
+      "title": "HackerRank 5-star — Python, SQL, C++",
+      "awarder": "HackerRank",
+      "date": "2024",
+      "x_cv": false
+    },
     {
       "title": "CodeChef — peak rating 1692 across 73 contests",
       "awarder": "CodeChef",
-      "date": "2024"
+      "date": "2024",
+      "x_cv": false
     }
   ],
   "languages": [
-    { "language": "English", "fluency": "Fluent" },
-    { "language": "Hindi", "fluency": "Native speaker" }
+    {
+      "language": "English",
+      "fluency": "Fluent"
+    },
+    {
+      "language": "Hindi",
+      "fluency": "Native speaker"
+    }
   ],
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.16.5",
+    "version": "2.17.0",
     "headlines": [
-      { "text": "I work from problems, not tickets.", "emphasis": "problems" },
+      {
+        "text": "I work from problems, not tickets.",
+        "emphasis": "problems"
+      },
       {
         "text": "I build systems that change without breaking.",
         "emphasis": "change without breaking"
       },
-      { "text": "I'm the engineer you hand the whole thing to.", "emphasis": "the whole thing" },
+      {
+        "text": "I'm the engineer you hand the whole thing to.",
+        "emphasis": "the whole thing"
+      },
       {
         "text": "Scope, design, build, ship. Usually alone.",
         "emphasis": "Scope, design, build, ship."
       }
     ],
-    "cvHeadline": "Senior Software Engineer | Python · Django · REST APIs · React · AI Integration",
+    "cvHeadline": "Senior Software Engineer | Python · Django · REST APIs · React · SQL · System Design · Claude Code",
     "availability": "Open to relocation (EU) and remote roles",
     "careerStart": "2022-02",
     "sectionOrder": [

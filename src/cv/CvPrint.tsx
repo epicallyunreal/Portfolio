@@ -126,14 +126,12 @@ export default function CvPrint() {
           {/* Two destinations, distinguishable at a glance: the name is the
               source, and a deployed project also shows its domain, which
               doubles as the label and the link. */}
+          {/* One destination per project, carried by the name. A running
+              instance is what a reader will open, so it wins over the repo when
+              a project has both; the site still shows the pair. */}
           <strong>
-            <Linked url={project.url}>{project.name}</Linked>
+            <Linked url={project.x_live ?? project.url}>{project.name}</Linked>
           </strong>{' '}
-          {project.x_live ? (
-            <>
-              [<Linked url={project.x_live}>{displayUrl(project.x_live)}</Linked>]{' '}
-            </>
-          ) : null}
           — {project.description}
         </p>
       ))}
