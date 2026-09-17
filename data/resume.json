@@ -464,6 +464,12 @@
   ],
   "awards": [
     {
+      "title": "HackerRank Orchestrate, September 2026: rank 224 of 3,062 (top 8%) in a 24-hour AI agent hackathon",
+      "awarder": "HackerRank",
+      "date": "2026",
+      "summary": "HackerRank's 24-hour challenge asked for an AI agent that decides whether someone can safely afford a purchase, scored across 250 requests. The submission combined a deterministic 90-day cash-flow engine, including a verifier that re-simulated every recommendation, with Claude reading 16 receipts and payslips and classifying 215 messages in two languages. Eight tagged versions each tested one hypothesis against 25 solved examples. Model cost for the full run was about $3."
+    },
+    {
       "title": "HackerRank 5-star: Python, SQL, C++",
       "awarder": "HackerRank",
       "date": "2024",
@@ -489,7 +495,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.17.0",
+    "version": "2.18.0",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
