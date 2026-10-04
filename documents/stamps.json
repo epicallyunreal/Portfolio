@@ -1,0 +1,22 @@
+{
+  "Nutan_Prabhat_CV.pdf": {
+    "source": "data/cv.json",
+    "version": "2.20.0",
+    "pages": 3,
+    "phone": true,
+    "builtOn": "local",
+    "builtAt": "2026-10-04",
+    "inputs": "04dd32beaeda62c5610e006c6af31edeb08c6cccd83d5c0664e1db4c24e92a50",
+    "sha256": "d37b024eb9948fdd9be381cb53392d93debaac8b643b326bc8d9d5d64b35c14e"
+  },
+  "Nutan_Prabhat_Resume.pdf": {
+    "source": "data/resume.json",
+    "version": "2.20.0",
+    "pages": 1,
+    "phone": true,
+    "builtOn": "local",
+    "builtAt": "2026-10-04",
+    "inputs": "b0f22bdbf60132b3260765b92c693a1fb5611c3713b230fde8f7f8aef5395363",
+    "sha256": "29f7fab5963c4f12932f4a0a3f52352e1189d4ddcfbb2320374186b3d9a30d04"
+  }
+}

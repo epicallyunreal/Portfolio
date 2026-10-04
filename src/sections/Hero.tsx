@@ -183,14 +183,14 @@ export function Hero() {
               download
               className="rounded-md bg-accent px-6 py-3 font-semibold text-bg transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
-              Resume, 1 page
+              Download Resume
             </a>
             <a
               href={`/${__CV_FILENAME__}`}
               download
               className="rounded-md border border-line bg-panel px-6 py-3 font-semibold text-ink transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
-              Full CV
+              Download CV
             </a>
             {github ? (
               <a

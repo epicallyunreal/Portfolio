@@ -3,7 +3,8 @@ dist
 *.local
 .DS_Store
 .lighthouseci
-# Generated in CI from data/cv.json and data/resume.json — never commit by hand
+# Copies of the two site PDFs, for the dev server. The committed ones live in
+# documents/, and `npm run build:pdf` writes these from them.
 public/*_CV.pdf
 public/*_Resume.pdf
 

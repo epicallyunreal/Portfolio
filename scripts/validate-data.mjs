@@ -15,6 +15,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
+import { loadLocalEnv, readStamps, siteDocuments, staleReason } from './lib/pdf-stamps.mjs'
 import { validateData, validateFactsAgree } from './lib/validate-core.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -54,3 +55,26 @@ if (errors.length > 0) {
 console.log(
   '✔ cv.json, resume.json, assets.json and lab.json are valid; all tech keys resolve; the two documents agree on facts.',
 )
+
+// A nudge, never a failure: the deploy renders whatever documents/ lacks. It
+// is said here, where the pre-commit hook prints it, because a PDF rendered in
+// CI is the fallback and the one built on this machine is the plan.
+if (!process.env.CI) {
+  loadLocalEnv(root)
+  const stamps = readStamps(root)
+  for (const { source, file } of siteDocuments({ cv, onePage })) {
+    const reason = staleReason({
+      root,
+      file,
+      source,
+      stamps,
+      phoneAvailable: Boolean(process.env.CV_PHONE),
+      onCi: false,
+    })
+    if (reason) {
+      console.warn(
+        `⚠ documents/${file} ${reason}. Run \`npm run build && npm run build:pdf\` and commit documents/, or the deploy will render it in CI.`,
+      )
+    }
+  }
+}

@@ -3,7 +3,7 @@
 The downloadable CV on the portfolio must be visually identical to the Word/PDF version already in circulation. This document specifies that layout precisely so it can be reproduced in a print stylesheet.
 
 **Source of truth:** `data/cv.json`. Nothing in the PDF is hardcoded.
-**Recommended implementation:** a hidden `/cv` route rendered with print CSS, exported by Puppeteer in CI (`scripts/build-resume-pdf.mjs`) to `public/Nutan_Prabhat_CV.pdf`.
+**Recommended implementation:** a hidden `/cv` route rendered with print CSS, exported by Puppeteer (`scripts/build-resume-pdf.mjs`) to `documents/Nutan_Prabhat_CV.pdf`.
 
 The original is generated with the `docx` library, so all measurements below are converted from twips (1 twip = 1/20 pt) into points and millimetres.
 
@@ -17,7 +17,7 @@ The original is generated with the `docx` library, so all measurements below are
 | Margin — top / bottom | 34pt (≈ 12 mm)                               |
 | Margin — left / right | 42.5pt (≈ 15 mm)                             |
 | Columns               | Single. No tables, no sidebars, no graphics. |
-| Target length         | **Exactly 2 pages** with current content     |
+| Target length         | The CV has no cap. The Resume is **1 page**. |
 
 ```css
 @page {
@@ -198,8 +198,8 @@ Add an `awards` array (a standard JSON Resume key) and extend `resume.schema.jso
 2. Launch Puppeteer, navigate to `/cv?print=1` — a route that renders only the CV, with the site chrome, nav and animations suppressed.
 3. Wait for `document.fonts.ready` before printing, or the self-hosted font may not have loaded and the layout will shift.
 4. `page.pdf({ format: 'A4', printBackground: false, margin: 0 })` — margins come from `@page`, not from Puppeteer, so they aren't applied twice.
-5. Write to `public/Nutan_Prabhat_CV.pdf`.
-6. **Assert the output is exactly 2 pages.** Fail the build otherwise — this catches content growth silently pushing the CV to three pages, which is the most likely regression.
+5. Write to `documents/Nutan_Prabhat_CV.pdf`.
+6. **Report the page count.** The CV is the full record and runs as long as its content, so nothing asserts a length. The one-page Resume is checked by eye whenever its content changes.
 
 The `/cv` route must be excluded from the sitemap and marked `noindex`.
 
@@ -207,7 +207,7 @@ The `/cv` route must be excluded from the sitemap and marked `noindex`.
 
 ## 8. Acceptance criteria
 
-- [ ] Output is exactly 2 pages of A4.
+- [ ] The Resume is exactly 1 page of A4. The CV runs as long as its content.
 - [ ] Text is selectable and copyable — not rasterised.
 - [ ] The PDF parses cleanly as plain text (`pdftotext`) with sections in the order above; this is what ATS parsers see.
 - [ ] No section header is orphaned at the foot of a page.

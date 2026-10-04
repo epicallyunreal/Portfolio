@@ -2,27 +2,35 @@
  * Renders the /cv route to a PDF. Two modes, decided by whether any flag is
  * present.
  *
- * Default (no flags): renders two documents and copies both into dist/. This
- * is what CI runs.
- *   data/cv.json     → public/<Name>_CV.pdf      the full document, also the site's data
- *   data/resume.json → public/<Name>_Resume.pdf  the one-page version, planted on the
- *                                                window the same way an alternate
- *                                                dataset is in generate mode
+ * Default (no flags, or only --force): puts the two documents the site serves
+ * into dist/. This is what CI runs.
+ *   data/cv.json     → documents/<Name>_CV.pdf      the full document, also the site's data
+ *   data/resume.json → documents/<Name>_Resume.pdf  the one-page version
+ *
+ * documents/ is committed, and a PDF already there is served as it is. One is
+ * rendered only when it is missing or stale, which scripts/lib/pdf-stamps.mjs
+ * decides from documents/stamps.json. So a PDF built on the owner's machine
+ * is what deploys, and CI renders only what nobody built. When CI does render,
+ * the deploy workflow commits the result back to documents/. --force renders
+ * both regardless.
  *
  * Generate (--resume / --assets / --name): renders whichever inputs were
  * given, defaulting the rest to data/cv.json and data/assets.json, and writes
  * to GenerateCV/ at the repo root — never anywhere else. The caller does not
  * choose the destination.
  *
- * How an alternate dataset reaches the page: data/*.json is compiled into the
- * bundle, so the data is planted on the window with evaluateOnNewDocument,
- * which runs before any bundle script. src/lib/data.ts picks it up, but only
- * on the /cv path. Nothing in dist/ is rewritten.
+ * How the data reaches the page: data/*.json is compiled into the bundle, so
+ * the document is planted on the window with evaluateOnNewDocument, which runs
+ * before any bundle script. src/lib/data.ts picks it up, but only on the /cv
+ * path. Nothing in dist/ is rewritten. Both modes plant the file as it is on
+ * disk, so what prints is never the older data a stale dist/ was built from —
+ * a stamp could not honestly vouch for that.
  *
  * Per CV_PDF_Layout_Spec.md the margins come from @page in the print CSS, and
- * the phone number comes only from CV_PHONE (a repo secret in CI), passed as a
- * query parameter — never from committed JSON. Page count is reported, not
- * asserted: the CV legitimately grows and shrinks with the content.
+ * the phone number comes only from CV_PHONE (a repo secret in CI, .env.local
+ * on the owner's machine), passed as a query parameter — never from the JSON.
+ * Page count is reported, not asserted: the CV legitimately grows and shrinks
+ * with the content.
  *
  * Every step is bounded by a timeout and logged. An earlier version spawned
  * `npx vite preview` with its output piped nowhere and no timeouts anywhere —
@@ -30,10 +38,13 @@
  * allowed, with nothing in the log to say where. Hence: no child process, and
  * nothing here can wait forever.
  *
- * Requires `npm run build` first. Run locally: `CV_PHONE=+91... npm run build:cv`.
+ * Requires `npm run build` first, because the print code comes from dist/.
+ * Run locally: `npm run build && npm run build:pdf`, with CV_PHONE in
+ * .env.local or in the environment.
  */
 import { createServer } from 'node:http'
 import {
+  appendFileSync,
   copyFileSync,
   existsSync,
   mkdirSync,
@@ -42,13 +53,24 @@ import {
   readFileSync,
   rmSync,
   statSync,
+  writeFileSync,
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { fileURLToPath } from 'node:url'
 import { dirname, extname, join, normalize, resolve } from 'node:path'
 import puppeteer from 'puppeteer'
 import { PDFDocument } from 'pdf-lib'
-import { cvFileName, resumeFileName } from './lib/site-meta.mjs'
+import { cvFileName } from './lib/site-meta.mjs'
+import {
+  DOCUMENTS_DIR,
+  STAMPS_FILE,
+  inputsHash,
+  loadLocalEnv,
+  readStamps,
+  sha256,
+  siteDocuments,
+  staleReason,
+} from './lib/pdf-stamps.mjs'
 import { validateDataDetailed } from './lib/validate-core.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -72,34 +94,42 @@ const usage = (message) => new ExitError(EXIT.USAGE, message)
 
 const HELP = `Render the CV to PDF.
 
+  npm run build:pdf [-- --force]
   npm run build:cv -- [--resume <path>] [--assets <path>] [--name <slug>]
 
+  --force           Render both site documents even if documents/ is current
   --resume <path>   Document to render           (default: data/cv.json)
   --assets <path>   Asset registry for labels    (default: data/assets.json)
   --name <slug>     Output filename stem, no extension
                     (default: derived from the résumé's basics.name)
   --help            Show this message
 
-With no flags, writes public/<Name>_CV.pdf from data/cv.json and
-public/<Name>_Resume.pdf from data/resume.json, and copies both into dist/ —
-the default the site build and CI depend on.
+With no flags, serves documents/<Name>_CV.pdf (from data/cv.json) and
+documents/<Name>_Resume.pdf (from data/resume.json): each is copied into dist/
+as committed, and rendered first only if it is missing or older than its data.
+This is the default the site build and CI depend on.
 
-With any flag, reads the given inputs and writes to GenerateCV/<name>.pdf at
-the repo root. That directory is emptied at the start of every run, so only
-one generated CV exists at a time; copy it out before running again. The
-absolute output path is the last line of stdout.
+With --resume, --assets or --name, reads the given inputs and writes to
+GenerateCV/<name>.pdf at the repo root. That directory is emptied at the start
+of every run, so only one generated CV exists at a time; copy it out before
+running again. The absolute output path is the last line of stdout.
 
 Input paths resolve against the current working directory and are read-only.
-Schemas always come from this repo. The phone number comes from CV_PHONE.`
+Schemas always come from this repo. The phone number comes from CV_PHONE, in
+the environment or in .env.local.`
 
 /* ------------------------------------------------------------------ args */
 
 function parseArgs(argv) {
-  const opts = { resume: null, assets: null, name: null, help: false }
+  const opts = { resume: null, assets: null, name: null, help: false, force: false }
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i]
     if (arg === '--help' || arg === '-h') {
       opts.help = true
+      continue
+    }
+    if (arg === '--force') {
+      opts.force = true
       continue
     }
     const eq = arg.indexOf('=')
@@ -281,45 +311,110 @@ async function main() {
   // output path a caller wants to capture.
   const note = generate ? (...args) => console.error(...args) : (...args) => console.log(...args)
 
+  if (generate && opts.force) {
+    throw usage('--force applies to the site documents, so it takes no other flag')
+  }
+
   if (!existsSync(join(dist, 'index.html'))) {
     console.error('✖ dist/index.html not found — run `npm run build` before build:cv.')
     return EXIT.VALIDATION
   }
-  if (!process.env.CV_PHONE) {
-    console.error('⚠ CV_PHONE is not set — the PDF will omit the phone number.')
+  loadLocalEnv(root)
+  const warnIfNoPhone = () => {
+    if (!process.env.CV_PHONE) {
+      console.error('⚠ CV_PHONE is not set — the PDF will omit the phone number.')
+    }
   }
 
   if (!generate) {
     const cv = JSON.parse(readFileSync(join(root, 'data/cv.json'), 'utf8'))
     const onePage = JSON.parse(readFileSync(join(root, 'data/resume.json'), 'utf8'))
     const assets = JSON.parse(readFileSync(join(root, 'data/assets.json'), 'utf8'))
-    // The CV is the bundle's own data; the one-page resume is planted on the
-    // window, which is the only way an alternate document reaches the page.
-    const jobs = [
-      { source: 'data/cv.json', doc: cv, outFile: cvFileName(cv.basics.name), inject: null },
-      {
-        source: 'data/resume.json',
-        doc: onePage,
-        outFile: resumeFileName(onePage.basics.name),
-        inject: { resume: onePage, assets },
-      },
-    ]
-    for (const job of jobs) {
-      const outPath = join(root, 'public', job.outFile)
-      try {
-        await renderPdf({ outPath, inject: job.inject, note })
-      } catch {
-        return EXIT.RENDER
+    const documents = siteDocuments({ cv, onePage })
+    const docsDir = join(root, DOCUMENTS_DIR)
+    const onCi = Boolean(process.env.CI)
+    const stamps = readStamps(root)
+    const saveStamps = () =>
+      writeFileSync(join(root, STAMPS_FILE), `${JSON.stringify(stamps, null, 2)}\n`)
+    /** Whether documents/ now differs from what was checked out. */
+    let changed = false
+    mkdirSync(docsDir, { recursive: true })
+
+    // A PDF named for someone else is a leftover: a fork that has put its own
+    // name in cv.json, or a rename. It was never going to be served, and
+    // keeping it would carry one person's CV around in another's repository.
+    const expected = new Set(documents.map((d) => d.file))
+    for (const entry of readdirSync(docsDir)) {
+      if (!entry.endsWith('.pdf') || expected.has(entry)) continue
+      rmSync(join(docsDir, entry))
+      note(`✂ documents/${entry} removed, because no document here is named that`)
+      changed = true
+    }
+    for (const file of Object.keys(stamps)) {
+      if (expected.has(file)) continue
+      delete stamps[file]
+      changed = true
+    }
+
+    for (const { source, doc, file } of documents) {
+      const kept = join(docsDir, file)
+      const reason = opts.force
+        ? 'is being rebuilt, as --force asks'
+        : staleReason({
+            root,
+            file,
+            source,
+            stamps,
+            phoneAvailable: Boolean(process.env.CV_PHONE),
+            onCi,
+          })
+
+      if (reason) {
+        note(`↻ documents/${file} ${reason}. Rendering it from ${source}.`)
+        warnIfNoPhone()
+        try {
+          await renderPdf({ outPath: kept, inject: { resume: doc, assets }, note })
+        } catch {
+          return EXIT.RENDER
+        }
+        const bytes = readFileSync(kept)
+        stamps[file] = {
+          source,
+          version: doc.x_meta.version,
+          pages: (await PDFDocument.load(bytes)).getPageCount(),
+          phone: Boolean(process.env.CV_PHONE),
+          builtOn: onCi ? 'ci' : 'local',
+          builtAt: new Date().toISOString().slice(0, 10),
+          inputs: inputsHash(root, source),
+          sha256: sha256(bytes),
+        }
+        // Saved per document, so a failure on the second one leaves the first
+        // one's stamp describing the file that is actually there.
+        saveStamps()
+        changed = true
       }
-      const pages = (await PDFDocument.load(readFileSync(outPath))).getPageCount()
-      // The deploy artifact is dist/ — carry the PDF into it.
-      copyFileSync(outPath, join(dist, job.outFile))
+
+      // dist/ is what deploys. public/ is what the dev server serves, and the
+      // copy there is git-ignored.
+      copyFileSync(kept, join(dist, file))
+      copyFileSync(kept, join(root, 'public', file))
+      const stamp = stamps[file]
+      const where = stamp.builtOn === 'ci' ? 'in CI' : 'locally'
       note(
-        `✔ public/${job.outFile} generated from ${job.source} (${pages} pages, v${job.doc.x_meta.version})`,
+        `✔ ${file} ${reason ? 'rendered' : 'served as committed'} ` +
+          `(built ${where} on ${stamp.builtAt}, ${stamp.pages} pages, v${stamp.version})`,
       )
+    }
+
+    if (changed) saveStamps()
+    // The deploy workflow commits documents/ back only when this says so.
+    if (process.env.GITHUB_OUTPUT) {
+      appendFileSync(process.env.GITHUB_OUTPUT, `changed=${changed}\n`)
     }
     return EXIT.OK
   }
+
+  warnIfNoPhone()
 
   // Argument errors first: cheaper to hit, cheaper to fix, and a bad --name
   // should not be masked by whatever the data happens to say.

@@ -339,7 +339,7 @@ Two workflows. This is the part that makes the project more than a page.
 ### `deploy.yml` — on push to `main`
 
 1. Everything in `pr-checks` except the preview.
-2. **`scripts/build-resume-pdf.mjs`** — render `cv.json` to `public/Nutan_Prabhat_CV.pdf` (Puppeteer against a print-styled route, or React-PDF). This is the single-source-of-truth detail: one JSON produces both the site and the downloadable CV.
+2. **`scripts/build-resume-pdf.mjs`** — serve `documents/Nutan_Prabhat_CV.pdf`, rendering it from `cv.json` only when it is missing or stale (Puppeteer against a print-styled route). This is the single-source-of-truth detail: one JSON produces both the site and the downloadable CV.
 3. Upload the artifact and deploy with `actions/deploy-pages@v4`.
 4. Use concurrency control so overlapping pushes don't race.
 

@@ -450,11 +450,10 @@
         "git",
         "github",
         "pytest",
-        "postman",
-        "claudecode"
+        "postman"
       ],
       "x_featured": false,
-      "x_cv": false
+      "x_cv": true
     },
     {
       "name": "Handwritten Text Recognition",
@@ -465,7 +464,7 @@
       "highlights": ["Implemented the preprocessing, training and evaluation pipeline end to end."],
       "x_tech": ["python", "pytorch"],
       "x_featured": false,
-      "x_cv": false
+      "x_cv": true
     }
   ],
   "awards": [
@@ -478,14 +477,12 @@
     {
       "title": "HackerRank 5-star: Python, SQL, C++",
       "awarder": "HackerRank",
-      "date": "2024",
-      "x_cv": false
+      "date": "2024"
     },
     {
       "title": "CodeChef, peak rating 1692 across 73 contests",
       "awarder": "CodeChef",
-      "date": "2024",
-      "x_cv": false
+      "date": "2024"
     }
   ],
   "languages": [
@@ -501,7 +498,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.19.0",
+    "version": "2.20.0",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
@@ -523,6 +520,7 @@
     "cvHeadline": "Senior Software Engineer | Python · Django · C# / .NET · SQL · React · System Design · Claude Code",
     "availability": "Open to relocation (EU) and remote roles",
     "careerStart": "2022-02",
+    "cvFull": true,
     "sectionOrder": [
       "about",
       "experience",
