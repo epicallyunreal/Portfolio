@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import bundledResume from '../../data/resume.json'
+import bundledResume from '../../data/cv.json'
 import bundledAssets from '../../data/assets.json'
 import { EDITOR_SESSION_KEY } from '../../src/lib/editorSession'
 import type { Assets, Resume } from '../../src/lib/types'
@@ -18,7 +18,7 @@ export type SectionKey =
 export interface SectionDef {
   key: SectionKey
   label: string
-  /** Top-level resume.json keys this section owns. */
+  /** Top-level cv.json keys this section owns. */
   resumeKeys: (keyof Resume)[]
   /** True when the section owns the whole of assets.json. */
   ownsAssets?: boolean
@@ -56,7 +56,7 @@ export interface EditorData {
   assets: Assets
 }
 
-export type DataFile = 'resume.json' | 'assets.json'
+export type DataFile = 'cv.json' | 'assets.json'
 
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value))
 
@@ -216,13 +216,13 @@ export function useEditorStore() {
   /**
    * Files that differ from what is committed — always measured against the
    * published baseline, never the previous save. An early save may have
-   * touched assets.json while later ones only touched resume.json; both still
+   * touched assets.json while later ones only touched cv.json; both still
    * need downloading.
    */
   const changedFiles = useMemo<DataFile[]>(() => {
     if (!published || !saved) return []
     const files: DataFile[] = []
-    if (stable(saved.resume) !== stable(published.resume)) files.push('resume.json')
+    if (stable(saved.resume) !== stable(published.resume)) files.push('cv.json')
     if (stable(saved.assets) !== stable(published.assets)) files.push('assets.json')
     return files
   }, [published, saved])

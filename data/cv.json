@@ -34,8 +34,12 @@
       "highlights": [
         "Sole engineer on an enterprise client account, owning scoping, HLD/LLD, build, test, documentation and handover.",
         "Raised Top-1 accuracy of a two-stage visual retrieval system from 41.9% to 97.7% by growing the feature-based reranker from 3 to 8 features and tuning it against MRR, with CLIP ViT-B/16 embeddings in Qdrant handling recall.",
-        "Delivered a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, PySide6 and a JSON rule engine, automating 3+ manual workflows.",
-        "Built floor-plan variations that move doors and windows and heal the 2D geometry by rebuilding walls and rooms, integrated a client system into the app, and agreed changes and new configurations directly with the client."
+        "Delivered a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, spatial indexing and a PySide6 interface, plus one-click batch processing across drawing folders.",
+        "Built a JSON rule engine that binds validation rules to check and fix functions at runtime, with priority-ordered execution and full audit trails, automating 3+ manual workflows.",
+        "Built floor-plan variations that move and resize doors and windows and heal the 2D geometry by rebuilding walls and rooms, and integrated a client system into the CAD app.",
+        "Kept both platforms configuration-driven, so new categories, thresholds and weights go in through JSON.",
+        "Worked directly with the client, agreeing changes in discussion and adding new configurations from their inputs.",
+        "Produced full system documentation and test coverage for a clean client handover."
       ],
       "x_tech": [
         "python",
@@ -63,9 +67,14 @@
       "endDate": "2025-12",
       "summary": "Unity and C# on the client, server-side JavaScript on Unity Cloud Code.",
       "highlights": [
-        "Shipped Pen Fight 2D, a turn-based multiplayer game in Unity and C#, to 10K+ downloads on Google Play.",
-        "Built a server-authoritative economy in server-side JavaScript on Unity Cloud Code for shop, assets and upgrades.",
-        "Architected real-time multiplayer and friend challenges on Unity Matchmaker, Lobby and Relay, and a master-follower physics simulation that handles race conditions on nearly every action."
+        "Shipped Pen Fight 2D, a turn-based multiplayer mobile game in Unity and C#, to 10K+ downloads on Google Play.",
+        "Built a server-authoritative economy in server-side JavaScript on Unity Cloud Code, covering shop, assets, upgrades, a progression chart and notifications.",
+        "Architected real-time multiplayer and friend challenges on Unity Matchmaker, Lobby and Relay.",
+        "Built a master-follower physics simulation that handles race conditions on nearly every action.",
+        "Added race-safe match negotiation with a single start authority, turn timers, disconnect forfeits and version gating.",
+        "Integrated Google Cloud for authentication, APIs and analytics, plus Unity Cloud Save for account and progress sync.",
+        "Fixed a cross-device desync from resolution-dependent UI scaling by sending normalised coordinates over the wire.",
+        "Ran the full release cycle, from internal test tracks and feedback fixes to production rollout and updates."
       ],
       "x_tech": [
         "unity",
@@ -99,11 +108,13 @@
       "endDate": "2024-05",
       "summary": "Backend and full-stack work on a large multi-tenant enterprise product.",
       "highlights": [
-        "Became primary code reviewer within a year, requesting changes on 25+ of 50+ PRs including work approved by senior staff, and flagged 40+ changes that would have become defects.",
+        "Became primary code reviewer within a year, requesting changes on 25+ of 50+ PRs including work approved by senior staff, and flagged 40+ changes that would have become defects. Mentored teammates on defect resolution.",
         "Designed and owned a localization abstraction layer for a 500+ page C# and ASP.NET product, with providers switchable by configuration, per-element opt-out and coverage through the API and database layers.",
         "Delivered 5 client-specific and 2 core features end to end, and 2 of them were adopted into the core product.",
-        "Restored SQL queries degraded 2 to 3x to near-baseline response times with no downtime on a live system.",
-        "Removed a data-loss risk by rewriting legacy stored procedures, one of them 4,000 lines, to use differential updates."
+        "Restored SQL queries that had degraded 2 to 3x to near-baseline response times, with no downtime on a live system.",
+        "Removed a data-loss risk by rewriting legacy stored procedures, one of them 4,000 lines, replacing a destructive save with differential updates.",
+        "Migrated the highest-complexity pages of a large ASP.NET C# codebase to jQuery 3.5+, contributing refactor patterns adopted into shared libraries.",
+        "Extended Elasticsearch type-ahead search with minimum-character filtering and query tuning."
       ],
       "x_tech": [
         "mssql",
@@ -137,7 +148,9 @@
       "endDate": "2022-08",
       "summary": "Frontend delivery and a permission-model extension that unlocked a major account.",
       "highlights": [
-        "Extended a hierarchical permission model as a 2-week proof of concept and shipped UI changes in a full redesign."
+        "Contributed production frontend changes across a full UI redesign in HTML, SCSS, jQuery and ASPX.",
+        "Extended a hierarchical permission model so a previously passive intermediate tier could control multiple entity types, delivered as a 2-week proof of concept.",
+        "Provided post-patch production support and resolved high-priority escalations."
       ],
       "x_tech": [
         "html5",
@@ -194,8 +207,7 @@
         "pytest",
         "postman"
       ],
-      "x_note": "Django, DRF and relational databases. Meta Full-Stack in progress.",
-      "x_cv": true
+      "x_note": "Django, DRF and relational database fundamentals."
     },
     {
       "name": "Meta Full-Stack Developer",
@@ -218,9 +230,8 @@
         "pytest",
         "postman"
       ],
-      "x_note": "React and Django.",
-      "x_statusNote": "in progress",
-      "x_cv": true
+      "x_note": "React and Django across the full stack.",
+      "x_statusNote": "in progress"
     },
     {
       "name": "Google AI Essentials Specialization",
@@ -229,8 +240,7 @@
       "url": "https://www.coursera.org/account/accomplishments/specialization/4YNB2KO8W7CO",
       "x_status": "completed",
       "x_tech": [],
-      "x_note": "Generative AI and Prompt Engineering.",
-      "x_cv": false
+      "x_note": "Generative AI and Prompt Engineering."
     },
     {
       "name": "Introduction to Generative AI Learning Path",
@@ -238,8 +248,8 @@
       "date": "2026-08",
       "url": "https://www.coursera.org/account/accomplishments/specialization/4B73N23WEU4Y",
       "x_status": "completed",
-      "x_tech": [],
-      "x_cv": true
+      "x_note": "LLM foundations and responsible AI.",
+      "x_tech": []
     },
     {
       "name": "Claude 101 & Claude Code 101",
@@ -247,8 +257,8 @@
       "date": "2026-08",
       "url": "https://verify.skilljar.com/c/5c65bbxtmrn6",
       "x_status": "completed",
-      "x_tech": ["claudecode", "claude"],
-      "x_cv": true
+      "x_note": "Prompting fundamentals & Agentic development workflows.",
+      "x_tech": ["claudecode", "claude"]
     },
     {
       "name": "Blockchain Specialization",
@@ -257,8 +267,7 @@
       "url": "https://coursera.org/share/f0f239bf3b0710a9f642e1e91f37db1f",
       "x_status": "completed",
       "x_note": "Smart contracts and decentralised application design.",
-      "x_tech": ["python", "postman"],
-      "x_cv": false
+      "x_tech": ["python", "postman"]
     }
   ],
   "skills": [
@@ -267,53 +276,52 @@
       "keywords": ["python", "csharp", "cpp", "javascript", "sql"]
     },
     {
-      "name": "Backend & DB",
-      "keywords": [
-        "django",
-        "drf",
-        "aspnet",
-        "rest",
-        "systemdesign",
-        "dsa",
-        "postgres",
-        "mysql",
-        "mssql",
-        "elasticsearch"
-      ]
+      "name": "Backend",
+      "keywords": ["django", "drf", "aspnet", "rest", "systemdesign", "dsa", "etl", "i18n"]
+    },
+    {
+      "name": "Databases",
+      "keywords": ["postgres", "mysql", "mssql", "elasticsearch", "storedprocedures", "sqlopt"]
     },
     {
       "name": "AI",
-      "keywords": ["vectordb", "retrieval", "claudecode"],
+      "keywords": [
+        "vectordb",
+        "retrieval",
+        "clip",
+        "qdrant",
+        "similaritysearch",
+        "reranking",
+        "pytorch"
+      ],
       "x_note": "learning LLMs and RAG with LangChain, Pydantic and LangGraph agents"
     },
     {
-      "name": "Frontend & tooling",
-      "keywords": [
-        "react",
-        "typescript",
-        "jquery",
-        "html5",
-        "css3",
-        "docker",
-        "cicd",
-        "githubactions",
-        "googlecloud",
-        "pytest",
-        "git"
-      ]
+      "name": "Frontend",
+      "keywords": ["react", "typescript", "jquery", "html5", "css3", "tailwind", "vite"]
+    },
+    {
+      "name": "Cloud & DevOps",
+      "keywords": ["docker", "cicd", "googlecloud", "git", "github", "githubactions"]
+    },
+    {
+      "name": "Testing",
+      "keywords": ["pytest", "postman", "codereview"]
+    },
+    {
+      "name": "AI-Assisted Development",
+      "keywords": ["claude", "claudecode", "githubcopilot"],
+      "x_note": "spec-driven, agentic build workflows"
+    },
+    {
+      "name": "Also worked with",
+      "keywords": ["unity", "qt"]
     }
   ],
   "projects": [
     {
-      "name": "HackerRank Orchestrate",
-      "description": "Ranked 224 of 3,062 (top 8%) in the September 2026 edition, a 24-hour AI agent hackathon.",
-      "startDate": "2026-09",
-      "endDate": "2026-09",
-      "url": "https://www.hackerrank.com/contests/hackerrank-orchestrate-september26/challenges/buy-or-wait/leaderboard?username=Nutan_Prabhat"
-    },
-    {
       "name": "XpenseSplitter",
-      "description": "Client-side React expense splitter for trips, where a trip travels as a JSON file or a share link.",
+      "description": "A shared expense splitter for group trips, fully client-side React with no backend, no accounts and no database. A trip lives in the browser and travels as a JSON file, or as a link that carries the whole trip inside it.",
       "startDate": "2026-08",
       "endDate": "2026-08",
       "url": "https://github.com/epicallyunreal/XpenseSplitter",
@@ -339,7 +347,7 @@
     },
     {
       "name": "Portfolio",
-      "description": "A React and TypeScript site where two JSON files are the only source of truth: the build derives the site, the CV PDF, the Open Graph image, sitemap and HTML head, so nothing about me is written into code. The interesting part isn't the page, it's that CI refuses to publish content that doesn't hold together.",
+      "description": "A React and TypeScript site where two JSON files are the only source of truth. The build derives the site, the CV PDF, the Open Graph image, sitemap and HTML head from them, and CI blocks content that doesn't hold together.",
       "startDate": "2026-08",
       "endDate": "2026-08",
       "url": "https://github.com/epicallyunreal/Portfolio",
@@ -360,11 +368,11 @@
         "claudecode"
       ],
       "x_featured": true,
-      "x_cv": false
+      "x_cv": true
     },
     {
       "name": "CreatorHub",
-      "description": "Personal multi-tenant Django and React agency platform, designed by me and built with Claude Code.",
+      "description": "Personal multi-tenant Django and React platform for creator agencies, covering tenancy, identity, campaign lifecycle and payouts. I designed the modules and data models and directed the build in Claude Code. It isn't deployed.",
       "startDate": "2026-05",
       "endDate": "2026-05",
       "url": "https://github.com/epicallyunreal/CreatorHub",
@@ -396,7 +404,7 @@
     },
     {
       "name": "BGMI Tournament Management System",
-      "description": "Django and PostgreSQL platform with leaderboards and a static JS front end.",
+      "description": "Django and PostgreSQL tournament platform with UI-driven CRUD, custom leaderboard generation and JSON export, plus a static JavaScript frontend serving a public leaderboard with no hosting cost.",
       "startDate": "2024-11",
       "endDate": "2024-12",
       "url": "https://github.com/epicallyunreal/bgmileaderboard",
@@ -419,7 +427,7 @@
         "githubcopilot"
       ],
       "x_featured": false,
-      "x_cv": false
+      "x_cv": true
     },
     {
       "name": "LittleLemon API",
@@ -465,8 +473,7 @@
       "title": "HackerRank Orchestrate, September 2026: rank 224 of 3,062 (top 8%) in a 24-hour AI agent hackathon",
       "awarder": "HackerRank",
       "date": "2026",
-      "summary": "HackerRank's 24-hour challenge asked for an AI agent that decides whether someone can safely afford a purchase, scored across 250 requests. The submission combined a deterministic 90-day cash-flow engine, including a verifier that re-simulated every recommendation, with Claude reading 16 receipts and payslips and classifying 215 messages in two languages. Eight tagged versions each tested one hypothesis against 25 solved examples. Model cost for the full run was about $3.",
-      "x_cv": false
+      "summary": "HackerRank's 24-hour challenge asked for an AI agent that decides whether someone can safely afford a purchase, scored across 250 requests. The submission combined a deterministic 90-day cash-flow engine, including a verifier that re-simulated every recommendation, with Claude reading 16 receipts and payslips and classifying 215 messages in two languages. Eight tagged versions each tested one hypothesis against 25 solved examples. Model cost for the full run was about $3."
     },
     {
       "title": "HackerRank 5-star: Python, SQL, C++",
@@ -481,7 +488,16 @@
       "x_cv": false
     }
   ],
-  "languages": [],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Fluent"
+    },
+    {
+      "language": "Hindi",
+      "fluency": "Native speaker"
+    }
+  ],
   "interests": [],
   "references": [],
   "x_meta": {
@@ -516,14 +532,6 @@
       "awards",
       "lab",
       "contact"
-    ],
-    "cvCertsInline": true,
-    "techLabels": {
-      "drf": "DRF",
-      "rest": "REST APIs",
-      "systemdesign": "System design",
-      "mssql": "SQL Server",
-      "dsa": "DSA"
-    }
+    ]
   }
 }

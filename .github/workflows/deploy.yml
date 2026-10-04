@@ -45,7 +45,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Generate resume PDF from resume.json (printed from /cv)
+      - name: Generate the CV and Resume PDFs from cv.json and resume.json (printed from /cv)
         run: npm run build:pdf
         env:
           CV_PHONE: ${{ secrets.CV_PHONE }}
@@ -53,7 +53,7 @@ jobs:
       - name: Enforce JS bundle budget
         run: npm run check:bundle
 
-      - name: Lighthouse CI (perf ≥ 90, a11y ≥ 95, CLS < 0.1)
+      - name: Lighthouse CI (perf ≥ 85, a11y ≥ 95, CLS < 0.1)
         run: npx --yes @lhci/cli@0.14.0 autorun
 
       # Without this a Lighthouse failure is just a red X — the reports say

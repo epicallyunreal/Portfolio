@@ -7,11 +7,16 @@ database, no runtime API calls.
 [nutanprabhat.dev/edit](https://nutanprabhat.dev/edit) · **Print CV:**
 [/cv](https://nutanprabhat.dev/cv)
 
-Two JSON files are the only source of truth. [data/resume.json](data/resume.json) holds every
-string a visitor reads; [data/assets.json](data/assets.json) maps skill keys to logos and images.
-From those, the build produces the website, the downloadable CV PDF, the Open Graph image, the
-sitemap, robots.txt and the HTML `<head>` — nothing is written into code or config, so pointing
-the whole thing at different content is a JSON-only edit.
+Three JSON files are the only source of truth. [data/cv.json](data/cv.json) holds every string a
+visitor reads and is also the full CV; [data/resume.json](data/resume.json) is the one-page
+version of the same career, printed to a PDF and nothing else; [data/assets.json](data/assets.json)
+maps skill keys to logos and images. From those, the build produces the website, both downloadable
+PDFs, the Open Graph image, the sitemap, robots.txt and the HTML `<head>` — nothing is written into
+code or config, so pointing the whole thing at different content is a JSON-only edit.
+
+The two documents follow one schema and are held to the same rules, plus one more: `npm run
+validate` fails if they disagree on a fact — name, contact, employer, title, dates, education or
+version. Wording, bullet selection and `x_cv` flags may differ; a date may not.
 
 Built with Claude Code, which is rather the point: the interesting part isn't that a portfolio
 exists, it's that the pipeline around it holds the content honest.
@@ -67,7 +72,7 @@ Two details that matter:
   session. Ten saves on top of v2.4.0 still produce v2.4.1 — because that is what the file will be
   when you commit it. Only a real deploy moves the baseline.
 - **Download diffs against the committed data, not the previous save.** If an early save touched
-  `assets.json` and later ones only touched `resume.json`, you still get both files.
+  `assets.json` and later ones only touched `cv.json`, you still get both files.
 
 So the workflow is: edit from any device, download, drop the files into the repo through GitHub's
 web UI, and CI redeploys — with validation as the gate, so a bad edit fails the build rather than
@@ -92,9 +97,9 @@ npm run lint          # ESLint
 npm run format        # Prettier write
 npm run build         # production build to dist/
 npm run check:bundle  # enforce the < 250 KB gzipped JS budget
-npm run build:cv      # print the /cv route → public/<Name>_CV.pdf (needs build first)
-npm run build:og      # regenerate the Open Graph image from resume.json
-npm run build:favicon # regenerate the monogram favicon from resume.json
+npm run build:cv      # print the /cv route → public/<Name>_CV.pdf and <Name>_Resume.pdf (needs build first)
+npm run build:og      # regenerate the Open Graph image from cv.json
+npm run build:favicon # regenerate the monogram favicon from cv.json
 ```
 
 The CV follows [CV_PDF_Layout_Spec.md](CV_PDF_Layout_Spec.md), using self-hosted Carlito
@@ -152,8 +157,8 @@ exact path, and correct dimensions are what keep CLS near zero.
 
 Nothing is hardcoded to a particular person, which is what makes the validation meaningful:
 
-1. `data/resume.json` drives everything a visitor reads. The page title, meta description, Open
-   Graph tags, canonical URL, sitemap, robots.txt, the CNAME file and the CV filename are all
+1. `data/cv.json` drives everything a visitor reads. The page title, meta description, Open
+   Graph tags, canonical URL, sitemap, robots.txt, the CNAME file and both PDF filenames are all
    derived from it at build time.
 2. `data/assets.json` maps skill keys to logos. A skill with an empty `src` renders a generated
    initials badge, so concepts like "System design" need no artwork.
@@ -167,7 +172,7 @@ additionally needs `base: '/repo/'` in `vite.config.ts`.
 ## Deployment
 
 [deploy.yml](.github/workflows/deploy.yml) runs on every push to `main`: install → lint →
-format → typecheck → validate data → build → **generate the CV PDF from resume.json** → bundle
+format → typecheck → validate data → build → **generate the CV and Resume PDFs** → bundle
 budget → Lighthouse CI → deploy to GitHub Pages.
 
 Lighthouse audits each of the four pages once. Repeat runs exist to median away runner noise, but

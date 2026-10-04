@@ -7,5 +7,6 @@ declare module 'virtual:editor-entry' {
   export default component
 }
 
-/** CV filename derived from resume.json at build time (see vite.config.ts). */
+/** Download filenames derived from cv.json at build time (see vite.config.ts). */
 declare const __CV_FILENAME__: string
+declare const __RESUME_FILENAME__: string

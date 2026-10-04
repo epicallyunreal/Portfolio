@@ -2,7 +2,7 @@
 
 The downloadable CV on the portfolio must be visually identical to the Word/PDF version already in circulation. This document specifies that layout precisely so it can be reproduced in a print stylesheet.
 
-**Source of truth:** `data/resume.json`. Nothing in the PDF is hardcoded.
+**Source of truth:** `data/cv.json`. Nothing in the PDF is hardcoded.
 **Recommended implementation:** a hidden `/cv` route rendered with print CSS, exported by Puppeteer in CI (`scripts/build-resume-pdf.mjs`) to `public/Nutan_Prabhat_CV.pdf`.
 
 The original is generated with the `docx` library, so all measurements below are converted from twips (1 twip = 1/20 pt) into points and millimetres.
@@ -82,7 +82,7 @@ Converted from the original. Margins are _bottom_ unless noted.
 
 - Name is uppercase in the rendered output.
 - Separator between contact items is `  ·  ` (two spaces either side of a middot).
-- **Phone appears in the PDF but never on the website.** `basics.phone` is empty in `resume.json` by design — inject the number at PDF build time from a repository secret or a build-time env var (`CV_PHONE`), never from committed JSON.
+- **Phone appears in the PDF but never on the website.** `basics.phone` is empty in `cv.json` by design — inject the number at PDF build time from a repository secret or a build-time env var (`CV_PHONE`), never from committed JSON.
 
 ### 4.2 Section header
 
@@ -148,7 +148,7 @@ Project names that have a `url` are hyperlinked on the name only, not the descri
 
 ## 5. Section order and JSON mapping
 
-| #   | PDF section          | Source in `resume.json`                                                                                  |
+| #   | PDF section          | Source in `cv.json`                                                                                      |
 | --- | -------------------- | -------------------------------------------------------------------------------------------------------- |
 | 1   | _(header)_           | `basics.name`, `x_meta.cvHeadline`, `basics.location`, `basics.email`, `basics.profiles`, `CV_PHONE` env |
 | 2   | PROFESSIONAL SUMMARY | `basics.summary`                                                                                         |
@@ -157,7 +157,7 @@ Project names that have a `url` are hyperlinked on the name only, not the descri
 | 5   | PROJECTS             | `projects[]` — `name`, `description`, `url`                                                              |
 | 6   | EDUCATION            | `education[]` — `studyType`, `area`, `institution`, dates, `score`                                       |
 | 7   | CERTIFICATIONS       | `certificates[]` — `name`, `issuer`, `date`, `x_status`                                                  |
-| 8   | ACHIEVEMENTS         | `awards[]` — **not yet in resume.json, see §6**                                                          |
+| 8   | ACHIEVEMENTS         | `awards[]` — **not yet in cv.json, see §6**                                                              |
 | 9   | LANGUAGES            | `languages[]` — comma-joined `language` values                                                           |
 
 **Rendering rules**
@@ -169,7 +169,7 @@ Project names that have a `url` are hyperlinked on the name only, not the descri
 
 ---
 
-## 6. Two gaps to close in `resume.json`
+## 6. Two gaps to close in `cv.json`
 
 The current file cannot yet produce the full CV. Both need adding before the PDF build is complete.
 
@@ -212,6 +212,6 @@ The `/cv` route must be excluded from the sitemap and marked `noindex`.
 - [ ] The PDF parses cleanly as plain text (`pdftotext`) with sections in the order above; this is what ATS parsers see.
 - [ ] No section header is orphaned at the foot of a page.
 - [ ] No job heading is separated from its first bullet.
-- [ ] Adding a certificate to `resume.json` changes the PDF on the next push, with no code change.
+- [ ] Adding a certificate to `cv.json` changes the PDF on the next push, with no code change.
 - [ ] The phone number appears in the PDF and nowhere in the deployed HTML or JSON.
 - [ ] Font renders as Carlito/Calibri metrics on the CI runner, not a fallback.

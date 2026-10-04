@@ -28,15 +28,19 @@ export function validateDataDetailed({
   labSchema = null,
   // (publicRelativeSrc) => boolean. Default: skip the check.
   fileExists = null,
+  // Which document `resume` is, for the messages: the site's cv.json, or the
+  // one-page resume.json. Both follow the same schema and the same rules.
+  resumeFile = 'cv.json',
 }) {
   const errors = []
   const add = (file, pointer, label, message) => errors.push({ file, pointer, label, message })
+  const R = resumeFile
 
   // 1. Schema validation
   const ajv = new Ajv({ allErrors: true, allowUnionTypes: true })
   addFormats(ajv)
   for (const [name, data, schema] of [
-    ['resume.json', resume, resumeSchema],
+    [R, resume, resumeSchema],
     ['assets.json', assets, assetsSchema],
     // lab.json is optional: a checkout without it still validates.
     ...(lab && labSchema ? [['lab.json', lab, labSchema]] : []),
@@ -52,7 +56,7 @@ export function validateDataDetailed({
   // 2. Every tech key referenced anywhere must resolve in assets.tech —
   //    otherwise the site silently renders a broken logo.
   const techKeys = new Set(Object.keys(assets.tech ?? {}))
-  const checkTech = (keys, pointer, label, file = 'resume.json') => {
+  const checkTech = (keys, pointer, label, file = R) => {
     // Indexed so the pointer addresses the offending key, not just its array.
     ;(keys ?? []).forEach((key, k) => {
       if (!techKeys.has(key)) {
@@ -66,20 +70,16 @@ export function validateDataDetailed({
     })
   }
   resume.work?.forEach((w, i) =>
-    checkTech(w.x_tech, `/work/${i}/x_tech`, `resume.json work[${i}] ("${w.name}")`),
+    checkTech(w.x_tech, `/work/${i}/x_tech`, `${R} work[${i}] ("${w.name}")`),
   )
   resume.projects?.forEach((p, i) =>
-    checkTech(p.x_tech, `/projects/${i}/x_tech`, `resume.json projects[${i}] ("${p.name}")`),
+    checkTech(p.x_tech, `/projects/${i}/x_tech`, `${R} projects[${i}] ("${p.name}")`),
   )
   resume.skills?.forEach((s, i) =>
-    checkTech(s.keywords, `/skills/${i}/keywords`, `resume.json skills[${i}] ("${s.name}")`),
+    checkTech(s.keywords, `/skills/${i}/keywords`, `${R} skills[${i}] ("${s.name}")`),
   )
   resume.certificates?.forEach((c, i) =>
-    checkTech(
-      c.x_tech,
-      `/certificates/${i}/x_tech`,
-      `resume.json certificates[${i}] ("${c.name}")`,
-    ),
+    checkTech(c.x_tech, `/certificates/${i}/x_tech`, `${R} certificates[${i}] ("${c.name}")`),
   )
 
   lab?.items?.forEach((item, i) =>
@@ -119,9 +119,9 @@ export function validateDataDetailed({
     const check = sectionHasData[section]
     if (check && !check()) {
       add(
-        'resume.json',
+        R,
         `/x_meta/sectionOrder/${i}`,
-        'resume.json x_meta.sectionOrder',
+        `${R} x_meta.sectionOrder`,
         `section "${section}" is listed but has no data to render`,
       )
     }
@@ -170,9 +170,9 @@ export function validateDataDetailed({
   resume.x_meta?.headlines?.forEach((line, i) => {
     if (line.emphasis && !line.text?.includes(line.emphasis)) {
       add(
-        'resume.json',
+        R,
         `/x_meta/headlines/${i}/emphasis`,
-        `resume.json x_meta.headlines[${i}]`,
+        `${R} x_meta.headlines[${i}]`,
         `emphasis "${line.emphasis}" does not appear in text "${line.text}"`,
       )
     }
@@ -192,9 +192,9 @@ export function validateDataDetailed({
     const entries = resume[key] ?? []
     if (entries.length > 0 && entries.every((e) => e.x_cv === false)) {
       add(
-        'resume.json',
+        R,
         `/${key}`,
-        `resume.json ${key}`,
+        `${R} ${key}`,
         `every entry is x_cv:false, so the CV would print a "${heading}" heading with nothing under it`,
       )
     }
@@ -204,9 +204,9 @@ export function validateDataDetailed({
   //    build time from CV_PHONE). Guards against the editor writing it back in.
   if (resume.basics?.phone) {
     add(
-      'resume.json',
+      R,
       '/basics/phone',
-      'resume.json basics.phone',
+      `${R} basics.phone`,
       'must stay empty — the CV phone comes from the CV_PHONE env var, never from committed JSON',
     )
   }
@@ -217,4 +217,47 @@ export function validateDataDetailed({
 /** The same rules, flattened to the one-line strings the CLI and editor print. */
 export function validateData(input) {
   return validateDataDetailed(input).map((e) => `${e.label}: ${e.message}`)
+}
+
+/**
+ * cv.json and resume.json are two wordings of one career. Every fact a
+ * background check or a screening call would compare must match; wording,
+ * bullet selection and x_cv flags are free to differ. Returns the same
+ * one-line strings validateData() does.
+ */
+export function validateFactsAgree({ cv, resume }) {
+  const errors = []
+  const same = (label, a, b) => {
+    if (JSON.stringify(a) !== JSON.stringify(b)) {
+      errors.push(
+        `cv.json and resume.json disagree on ${label}: ${JSON.stringify(a)} vs ${JSON.stringify(b)}`,
+      )
+    }
+  }
+  same('x_meta.version', cv.x_meta?.version, resume.x_meta?.version)
+  for (const key of ['name', 'email', 'phone', 'url']) {
+    same(`basics.${key}`, cv.basics?.[key], resume.basics?.[key])
+  }
+  same('basics.location', cv.basics?.location, resume.basics?.location)
+  same(
+    'basics.profiles',
+    (cv.basics?.profiles ?? []).map((p) => p.url),
+    (resume.basics?.profiles ?? []).map((p) => p.url),
+  )
+  // Employment history as a set of (employer, title, start, end) — the shape
+  // a reference check reads. Order and bullets are each document's own.
+  const jobs = (doc) =>
+    (doc.work ?? [])
+      .map((w) => `${w.name} | ${w.position} | ${w.startDate} – ${w.endDate ?? 'present'}`)
+      .sort()
+  same('work history', jobs(cv), jobs(resume))
+  const degrees = (doc) =>
+    (doc.education ?? [])
+      .map(
+        (e) =>
+          `${e.studyType} ${e.area} | ${e.institution} | ${e.startDate}–${e.endDate} | ${e.score ?? ''}`,
+      )
+      .sort()
+  same('education', degrees(cv), degrees(resume))
+  return errors
 }

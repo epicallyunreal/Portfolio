@@ -4,8 +4,10 @@ import './cv.css'
 
 /**
  * The CV as a print-styled page, rendered at /cv (excluded from the sitemap,
- * marked noindex). Puppeteer prints this route to public/<Name>_CV.pdf
- * in CI — one resume.json, two artifacts.
+ * marked noindex). Puppeteer prints this route twice in CI: once as the site's
+ * own data (cv.json, the full document) to public/<Name>_CV.pdf, and once with
+ * data/resume.json planted on the window to public/<Name>_Resume.pdf, the
+ * one-page version.
  *
  * The phone number is never committed: the build passes it via the ?phone=
  * query parameter from the CV_PHONE secret, so the deployed site renders this
@@ -22,8 +24,10 @@ const displayUrl = (url: string) =>
 
 // Skill-group keywords in the same canonical order as the site, so the CV and
 // the page agree. Only the Technical Skills section names technologies — the
-// project and certification lines stay prose.
-const labels = (keys: string[]) => orderTech(keys).map((k) => techAsset(k).label)
+// project and certification lines stay prose. A document may shorten a label
+// for print (x_meta.techLabels); the site never sees those.
+const labels = (keys: string[]) =>
+  orderTech(keys).map((k) => resume.x_meta.techLabels?.[k] ?? techAsset(k).label)
 
 /**
  * A name that becomes a link when there is somewhere to point at. Entries
@@ -65,11 +69,13 @@ export default function CvPrint() {
   }, [basics.name, x_meta.version])
 
   const work = [...onCv(resume.work)].sort((a, b) => (a.startDate < b.startDate ? 1 : -1))
-  const contactParts = [
-    basics.location?.city ? `${basics.location.city}, India` : null,
-    phone,
-    basics.email,
-  ].filter(Boolean)
+  // Phone and email are links, so someone reading the PDF on a phone can call
+  // or write with one tap. The visible text is unchanged, which is what an
+  // applicant-tracking parser reads.
+  const contactParts: { text: string; href?: string }[] = []
+  if (basics.location?.city) contactParts.push({ text: `${basics.location.city}, India` })
+  if (phone) contactParts.push({ text: phone, href: `tel:${phone.replace(/[^+\d]/g, '')}` })
+  if (basics.email) contactParts.push({ text: basics.email, href: `mailto:${basics.email}` })
   // The site leads the links line: it is the one address that carries the
   // others, and the CV is where a reader first meets it.
   const links = [basics.url, ...basics.profiles.map((p) => p.url)].filter(Boolean)
@@ -79,7 +85,14 @@ export default function CvPrint() {
       <header className="cv-header">
         <h1 className="cv-name">{basics.name}</h1>
         <p className="cv-headline">{x_meta.cvHeadline}</p>
-        <p className="cv-contact">{contactParts.join('  ·  ')}</p>
+        <p className="cv-contact">
+          {contactParts.map((part, i) => (
+            <span key={part.text}>
+              {i > 0 ? '  ·  ' : ''}
+              <Linked url={part.href}>{part.text}</Linked>
+            </span>
+          ))}
+        </p>
         <p className="cv-links">
           {links.map((url, i) => (
             <span key={url}>
@@ -147,16 +160,34 @@ export default function CvPrint() {
       ))}
 
       <h2 className="cv-section">Certifications</h2>
-      <ul className="cv-bullets">
-        {onCv(resume.certificates).map((cert) => (
-          <li key={cert.name}>
-            <strong>
-              <Linked url={cert.url}>{cert.name}</Linked>
-            </strong>{' '}
-            - {cert.issuer} ({certStatusText(cert)}){cert.x_note ? ` · ${cert.x_note}` : ''}
-          </li>
-        ))}
-      </ul>
+      {x_meta.cvCertsInline ? (
+        // One running line instead of a list, for a CV that has to hold to a
+        // single page. Each name still links to its credential; the date and
+        // the note are what give way.
+        <p className="cv-line">
+          {onCv(resume.certificates).map((cert, i) => (
+            <span key={cert.name}>
+              {i > 0 ? ', ' : ''}
+              <strong>
+                <Linked url={cert.url}>{cert.name}</Linked>
+              </strong>{' '}
+              ({cert.issuer}
+              {cert.x_status === 'in-progress' ? `, ${certStatusText(cert)}` : ''})
+            </span>
+          ))}
+        </p>
+      ) : (
+        <ul className="cv-bullets">
+          {onCv(resume.certificates).map((cert) => (
+            <li key={cert.name}>
+              <strong>
+                <Linked url={cert.url}>{cert.name}</Linked>
+              </strong>{' '}
+              - {cert.issuer} ({certStatusText(cert)}){cert.x_note ? ` · ${cert.x_note}` : ''}
+            </li>
+          ))}
+        </ul>
+      )}
 
       {onCv(resume.awards).length > 0 ? (
         <>
