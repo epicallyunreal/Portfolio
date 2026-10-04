@@ -442,8 +442,7 @@
         "git",
         "github",
         "pytest",
-        "postman",
-        "claudecode"
+        "postman"
       ],
       "x_featured": false,
       "x_cv": false
@@ -485,7 +484,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.19.0",
+    "version": "2.20.0",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",

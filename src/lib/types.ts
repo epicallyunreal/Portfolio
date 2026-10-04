@@ -100,6 +100,8 @@ export interface XMeta {
   cvHeadline: string
   /** Print certifications as one comma-separated line on the CV — for a variant that must fit a single page. */
   cvCertsInline?: boolean
+  /** Print the long form: project dates, addresses and highlights, one line per award with its summary, language fluency. */
+  cvFull?: boolean
   /** Tech key → shorter label, used only when this document is printed. The site keeps assets.json's labels. */
   techLabels?: Record<string, string>
   availability: string

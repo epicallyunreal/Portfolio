@@ -28,8 +28,8 @@ exists, it's that the pipeline around it holds the content honest.
   version-pinned, the phone number must never reach committed JSON). CI fails with the offending
   key named.
 - **One dataset, two artifacts.** The site and a Calibri-metric CV PDF are rendered from the same
-  JSON, so they cannot drift. The PDF is printed from a hidden `/cv` route by Puppeteer in CI, and
-  its text layer is checked to survive extraction — an ATS reads that, not the page.
+  JSON, so they cannot drift. The PDF is printed from a hidden `/cv` route by Puppeteer, and its
+  text layer is checked to survive extraction — an ATS reads that, not the page.
 - **An in-browser editor** at `/edit` with sectional saves, live validation, a field-level
   old-vs-new diff before writing, and semver version bumps.
 - **Enforced budgets.** Lighthouse (performance ≥ 0.90, accessibility ≥ 0.95, CLS < 0.1, with LCP
@@ -97,16 +97,37 @@ npm run lint          # ESLint
 npm run format        # Prettier write
 npm run build         # production build to dist/
 npm run check:bundle  # enforce the < 250 KB gzipped JS budget
-npm run build:cv      # print the /cv route → public/<Name>_CV.pdf and <Name>_Resume.pdf (needs build first)
+npm run build:pdf     # serve documents/<Name>_CV.pdf and <Name>_Resume.pdf, rendering any that are stale (needs build first)
 npm run build:og      # regenerate the Open Graph image from cv.json
 npm run build:favicon # regenerate the monogram favicon from cv.json
 ```
 
 The CV follows [CV_PDF_Layout_Spec.md](CV_PDF_Layout_Spec.md), using self-hosted Carlito
 (metrically identical to Calibri) so CI renders the same layout as Word. Page count is reported,
-not asserted — the CV grows with the content. The phone number never lives in JSON or on the site;
-pass it at build time (`CV_PHONE="+31..." npm run build:pdf`), and in CI it comes from the
-`CV_PHONE` repository secret.
+not asserted. The CV is the full record and runs as long as its content, with `x_meta.cvFull`
+printing every project's dates, addresses and highlights. The Resume is the one-page version.
+
+The phone number never lives in JSON or on the site. Keep it in a git-ignored `.env.local`
+(`CV_PHONE="+31..."`) or pass it at build time, and in CI it comes from the `CV_PHONE` repository
+secret. The PDFs themselves do carry it, in `documents/` exactly as in the copies the site serves.
+
+#### Where the PDFs come from
+
+The two PDFs the site serves are committed, in [documents/](documents/), next to `stamps.json`,
+which records what each was printed from. `npm run build:pdf` copies a PDF into `dist/` as it is
+while its stamp still holds: the same data, the same print code, the same file. It renders one
+only when the stamp no longer holds. So the PDF built on your own machine is the one that deploys,
+and CI renders only what nobody built, which is a PDF that is missing or older than the JSON it
+prints. When CI does render one, the deploy commits it back to `documents/`, so the folder always
+holds exactly what the site is serving.
+
+After a content change the routine is `npm run build && npm run build:pdf`, then commit
+`documents/` with the JSON. `npm run validate` warns, without failing, when a committed PDF has
+fallen behind. `npm run build:pdf -- --force` renders both regardless. A locally built PDF
+replaces one CI made the next time the build runs on your machine, and CI never replaces a local
+build that is still current. A PDF in `documents/` named for anyone other than `basics.name` is
+deleted by the build, so a fork stops carrying the previous owner's CV as soon as it has its own
+name in `cv.json`.
 
 #### Rendering a variant
 
@@ -130,7 +151,7 @@ typo'd tech key fails with the JSON pointer rather than producing a plausible
 but wrong CV. `--name` is a filename stem, so it accepts `[A-Za-z0-9._-]` only.
 Exit codes: 1 validation, 2 bad arguments or missing input, 3 render failure.
 
-With no flags the script behaves exactly as before, which is what CI runs.
+With no flags the script serves the two site documents as described above, which is what CI runs.
 
 Ligatures are switched off on the print route on purpose. Carlito's `ti`/`tt`/`tf` ligature glyphs
 carry no `ToUnicode` mapping in the subset Chrome embeds, so the page looked right while text
@@ -172,8 +193,11 @@ additionally needs `base: '/repo/'` in `vite.config.ts`.
 ## Deployment
 
 [deploy.yml](.github/workflows/deploy.yml) runs on every push to `main`: install → lint →
-format → typecheck → validate data → build → **generate the CV and Resume PDFs** → bundle
-budget → Lighthouse CI → deploy to GitHub Pages.
+format → typecheck → validate data → build → **serve the CV and Resume PDFs from `documents/`,
+rendering any that are missing or stale** → bundle budget → Lighthouse CI → deploy to GitHub
+Pages. If a PDF had to be rendered, a separate `save-documents` job commits it back to
+`documents/`. That job is the only one holding a write token, and its push cannot start another
+run.
 
 Lighthouse audits each of the four pages once. Repeat runs exist to median away runner noise, but
 they were the slowest thing in the deploy and the thresholds are not tight enough to need them; if
@@ -185,7 +209,7 @@ Because GitHub Pages has no SPA rewrites, the build emits real `edit/index.html`
 First-time setup:
 
 1. Push to `main`, then Settings → Pages → Source: **GitHub Actions**.
-2. Add the `CV_PHONE` repository secret, or the deployed CV will have no phone number.
+2. Add the `CV_PHONE` repository secret, or a PDF rendered in CI will have no phone number.
 3. For a custom domain: point DNS at GitHub's four `185.199.10x.153` A records (proxy off if
    you're on Cloudflare, SSL mode Full), set the domain under Settings → Pages, and enable
    _Enforce HTTPS_. The CNAME file is generated from `basics.url`, so it survives every deploy.

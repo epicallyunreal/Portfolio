@@ -19,6 +19,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    outputs:
+      documents-changed: ${{ steps.pdf.outputs.changed }}
     steps:
       - uses: actions/checkout@v7
 
@@ -45,10 +47,27 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Generate the CV and Resume PDFs from cv.json and resume.json (printed from /cv)
+      # documents/ holds the PDFs built on the owner's machine, and those are
+      # what deploy. One is rendered here only when it is missing or older than
+      # the data it prints.
+      - name: Serve the CV and Resume PDFs from documents/, rendering any that are missing or stale
+        id: pdf
         run: npm run build:pdf
         env:
           CV_PHONE: ${{ secrets.CV_PHONE }}
+
+      # Only when something was rendered above. documents/ is handed to the one
+      # job that holds a write token, so nothing npm installed runs beside it.
+      - name: Hand the rendered PDFs to the save job
+        if: steps.pdf.outputs.changed == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: rendered-documents
+          path: documents/
+          if-no-files-found: error
+          # A re-run of this job uploads under the same name.
+          overwrite: true
+          retention-days: 1
 
       - name: Enforce JS bundle budget
         run: npm run check:bundle
@@ -87,3 +106,39 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+
+  # A PDF rendered in CI is committed back, so the next deploy finds it in
+  # documents/ and serves it without rendering. The push uses GITHUB_TOKEN,
+  # which never starts another workflow run, so this cannot loop.
+  save-documents:
+    needs: build
+    if: needs.build.outputs.documents-changed == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      # Replaced whole, so a PDF the build removed is removed here too.
+      - name: Clear documents/
+        run: rm -rf documents
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: rendered-documents
+          path: documents
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --all documents
+          if git diff --cached --quiet; then
+            echo "documents/ already matches what the build rendered."
+            exit 0
+          fi
+          git commit -m "Save the PDFs rendered in CI"
+          # main moving on in the meantime is not a failure: the deploy queued
+          # behind that push renders and saves again.
+          git push || echo "::warning::Could not save the rendered PDFs. The next deploy will render them again."

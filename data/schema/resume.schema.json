@@ -358,6 +358,10 @@
           "type": "boolean",
           "description": "true: the CV prints certifications as one comma-separated line, each name linked, with the issuer in brackets — for a variant that must fit a single page. Omitted or false: one bullet per certification."
         },
+        "cvFull": {
+          "type": "boolean",
+          "description": "true: the CV prints its long form, with nothing held back for length. Each project gets its dates, both of its addresses and its highlights, each award gets a line of its own with its summary, and languages show fluency. Omitted or false: the compact layout, one line per project and one line for all awards."
+        },
         "techLabels": {
           "type": "object",
           "additionalProperties": { "type": "string", "minLength": 1 },
