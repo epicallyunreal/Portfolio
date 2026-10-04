@@ -1,5 +1,5 @@
 /**
- * Writes public/favicon.svg from data/resume.json.
+ * Writes public/favicon.svg from data/cv.json.
  * Run when the name changes: `npm run build:favicon`. Committed, like the OG
  * image — a browser asks for it before any JavaScript runs, so it cannot be
  * derived at render time.
@@ -22,7 +22,7 @@ import { palette } from './lib/palette.mjs'
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 // One source of truth: the same --c-* block the site renders from.
 const c = palette()
-const { basics } = JSON.parse(readFileSync(join(root, 'data/resume.json'), 'utf8'))
+const { basics } = JSON.parse(readFileSync(join(root, 'data/cv.json'), 'utf8'))
 
 const marks = basics.name
   .split(/\s+/)
@@ -86,5 +86,5 @@ const stamped = html.replace(
 )
 if (stamped !== html) writeFileSync(htmlPath, stamped)
 
-console.log(`✔ public/favicon.svg + favicon.png generated from data/resume.json ("${marks}")`)
+console.log(`✔ public/favicon.svg + favicon.png generated from data/cv.json ("${marks}")`)
 console.log(`✔ index.html icon hrefs stamped ?v=${stamp}`)

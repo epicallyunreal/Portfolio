@@ -59,7 +59,7 @@ function SectionList({
 }
 
 /**
- * Content editor for data/resume.json and data/assets.json.
+ * Content editor for data/cv.json and data/assets.json.
  *
  * Runs in two modes, detected at load rather than compiled in:
  *  - `npm run dev` — the dev server exposes a read/write endpoint, so saves
@@ -138,7 +138,7 @@ export default function EditorApp() {
   const downloadChanged = () => {
     if (!saved || changedFiles.length === 0) return
     for (const name of changedFiles) {
-      const doc = name === 'resume.json' ? saved.resume : saved.assets
+      const doc = name === 'cv.json' ? saved.resume : saved.assets
       const url = URL.createObjectURL(
         new Blob([JSON.stringify(doc, null, 2) + '\n'], { type: 'application/json' }),
       )
@@ -236,7 +236,7 @@ export default function EditorApp() {
             </span>
           ) : null}
           <span className="hidden font-mono text-xs text-faint sm:inline">
-            data/resume.json · data/assets.json ·{' '}
+            data/cv.json · data/assets.json ·{' '}
           </span>
           <span className="font-mono text-xs text-faint">v{saved.resume.x_meta.version}</span>
           {anyDirty ? (

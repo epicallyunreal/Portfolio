@@ -1,5 +1,5 @@
 /**
- * Everything about the site's identity is derived from data/resume.json, so a
+ * Everything about the site's identity is derived from data/cv.json, so a
  * fork only ever edits JSON — no name, URL or filename is written into code,
  * config, or the HTML shell.
  *
@@ -7,14 +7,20 @@
  * and the app itself.
  */
 
-/** "Nutan Prabhat" → "Nutan_Prabhat_CV.pdf" */
+const nameSlug = (name) =>
+  String(name ?? '')
+    .trim()
+    .replace(/\s+/g, '_')
+    .replace(/[^A-Za-z0-9_-]/g, '') || 'Resume'
+
+/** "Nutan Prabhat" → "Nutan_Prabhat_CV.pdf" — the full document, from cv.json. */
 export function cvFileName(name) {
-  const slug =
-    String(name ?? '')
-      .trim()
-      .replace(/\s+/g, '_')
-      .replace(/[^A-Za-z0-9_-]/g, '') || 'Resume'
-  return `${slug}_CV.pdf`
+  return `${nameSlug(name)}_CV.pdf`
+}
+
+/** "Nutan Prabhat" → "Nutan_Prabhat_Resume.pdf" — the one-page version, from resume.json. */
+export function resumeFileName(name) {
+  return `${nameSlug(name)}_Resume.pdf`
 }
 
 /** basics.url → "https://example.dev" (no trailing slash) */

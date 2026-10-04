@@ -3,7 +3,7 @@ import { Component, type ErrorInfo, type ReactNode } from 'react'
 /**
  * Catches a render crash and shows a readable panel instead of a blank page.
  *
- * This site renders whatever is in resume.json, and /edit lets a visitor change
+ * This site renders whatever is in cv.json, and /edit lets a visitor change
  * that JSON and preview it live. Schema validation catches the shapes it knows
  * about, but it cannot catch every value a component might choke on — an empty
  * headlines array once left the hero indexing `lines[-1]`. Without a boundary

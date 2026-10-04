@@ -2,13 +2,17 @@
  * Renders the /cv route to a PDF. Two modes, decided by whether any flag is
  * present.
  *
- * Default (no flags): reads data/resume.json and data/assets.json, writes
- * public/<Name>_CV.pdf and copies it into dist/. This is what CI runs, and it
- * behaves exactly as it did before flags existed.
+ * Default (no flags): renders two documents and copies both into dist/. This
+ * is what CI runs.
+ *   data/cv.json     → public/<Name>_CV.pdf      the full document, also the site's data
+ *   data/resume.json → public/<Name>_Resume.pdf  the one-page version, planted on the
+ *                                                window the same way an alternate
+ *                                                dataset is in generate mode
  *
  * Generate (--resume / --assets / --name): renders whichever inputs were
- * given, defaulting the rest to data/, and writes to GenerateCV/ at the repo
- * root — never anywhere else. The caller does not choose the destination.
+ * given, defaulting the rest to data/cv.json and data/assets.json, and writes
+ * to GenerateCV/ at the repo root — never anywhere else. The caller does not
+ * choose the destination.
  *
  * How an alternate dataset reaches the page: data/*.json is compiled into the
  * bundle, so the data is planted on the window with evaluateOnNewDocument,
@@ -44,7 +48,7 @@ import { fileURLToPath } from 'node:url'
 import { dirname, extname, join, normalize, resolve } from 'node:path'
 import puppeteer from 'puppeteer'
 import { PDFDocument } from 'pdf-lib'
-import { cvFileName } from './lib/site-meta.mjs'
+import { cvFileName, resumeFileName } from './lib/site-meta.mjs'
 import { validateDataDetailed } from './lib/validate-core.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -70,14 +74,15 @@ const HELP = `Render the CV to PDF.
 
   npm run build:cv -- [--resume <path>] [--assets <path>] [--name <slug>]
 
-  --resume <path>   Résumé data to render        (default: data/resume.json)
+  --resume <path>   Document to render           (default: data/cv.json)
   --assets <path>   Asset registry for labels    (default: data/assets.json)
   --name <slug>     Output filename stem, no extension
                     (default: derived from the résumé's basics.name)
   --help            Show this message
 
-With no flags, writes public/<Name>_CV.pdf and copies it into dist/ — the
-default the site build and CI depend on.
+With no flags, writes public/<Name>_CV.pdf from data/cv.json and
+public/<Name>_Resume.pdf from data/resume.json, and copies both into dist/ —
+the default the site build and CI depend on.
 
 With any flag, reads the given inputs and writes to GenerateCV/<name>.pdf at
 the repo root. That directory is emptied at the start of every run, so only
@@ -285,20 +290,34 @@ async function main() {
   }
 
   if (!generate) {
-    const resume = JSON.parse(readFileSync(join(root, 'data/resume.json'), 'utf8'))
-    const outFile = cvFileName(resume.basics.name)
-    const outPath = join(root, 'public', outFile)
-    try {
-      await renderPdf({ outPath, inject: null, note })
-    } catch {
-      return EXIT.RENDER
+    const cv = JSON.parse(readFileSync(join(root, 'data/cv.json'), 'utf8'))
+    const onePage = JSON.parse(readFileSync(join(root, 'data/resume.json'), 'utf8'))
+    const assets = JSON.parse(readFileSync(join(root, 'data/assets.json'), 'utf8'))
+    // The CV is the bundle's own data; the one-page resume is planted on the
+    // window, which is the only way an alternate document reaches the page.
+    const jobs = [
+      { source: 'data/cv.json', doc: cv, outFile: cvFileName(cv.basics.name), inject: null },
+      {
+        source: 'data/resume.json',
+        doc: onePage,
+        outFile: resumeFileName(onePage.basics.name),
+        inject: { resume: onePage, assets },
+      },
+    ]
+    for (const job of jobs) {
+      const outPath = join(root, 'public', job.outFile)
+      try {
+        await renderPdf({ outPath, inject: job.inject, note })
+      } catch {
+        return EXIT.RENDER
+      }
+      const pages = (await PDFDocument.load(readFileSync(outPath))).getPageCount()
+      // The deploy artifact is dist/ — carry the PDF into it.
+      copyFileSync(outPath, join(dist, job.outFile))
+      note(
+        `✔ public/${job.outFile} generated from ${job.source} (${pages} pages, v${job.doc.x_meta.version})`,
+      )
     }
-    const pages = (await PDFDocument.load(readFileSync(outPath))).getPageCount()
-    // The deploy artifact is dist/ — carry the PDF into it.
-    copyFileSync(outPath, join(dist, outFile))
-    note(
-      `✔ public/${outFile} generated from data/resume.json (${pages} pages, v${resume.x_meta.version})`,
-    )
     return EXIT.OK
   }
 
@@ -306,7 +325,7 @@ async function main() {
   // should not be masked by whatever the data happens to say.
   const explicitStem = opts.name === null ? null : checkName(opts.name)
 
-  const resume = readJsonInput('resume', opts.resume ?? 'data/resume.json')
+  const resume = readJsonInput('resume', opts.resume ?? 'data/cv.json')
   const assets = readJsonInput('assets', opts.assets ?? 'data/assets.json')
 
   // Emptied here, before validating rather than just before rendering: any run

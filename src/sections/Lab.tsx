@@ -11,7 +11,7 @@ import { TechLogo } from '../components/TechLogo'
 import type { LabItem } from '../lib/types'
 
 /**
- * The Lab renders from lab.json, not resume.json — see src/lib/lab.ts for why.
+ * The Lab renders from lab.json, not cv.json — see src/lib/lab.ts for why.
  *
  * Every other section is a vertical list of cards competing for the reader's
  * scroll. This one is a deck: one entry at a time, given the whole width,

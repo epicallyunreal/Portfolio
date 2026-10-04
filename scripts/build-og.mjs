@@ -1,5 +1,5 @@
 /**
- * Renders public/images/og.png (1200×630) from data/resume.json via Puppeteer.
+ * Renders public/images/og.png (1200×630) from data/cv.json via Puppeteer.
  * Run manually when name/headline changes: `npm run build:og`. The output is
  * committed — link scrapers need it at a stable URL.
  */
@@ -12,7 +12,7 @@ import { palette } from './lib/palette.mjs'
 // One source of truth: the same --c-* block the site renders from.
 const c = palette()
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const resume = JSON.parse(readFileSync(join(root, 'data/resume.json'), 'utf8'))
+const resume = JSON.parse(readFileSync(join(root, 'data/cv.json'), 'utf8'))
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
 const html = `<!doctype html>
@@ -58,4 +58,4 @@ try {
 } finally {
   await browser.close()
 }
-console.log('✔ public/images/og.png generated from data/resume.json')
+console.log('✔ public/images/og.png generated from data/cv.json')

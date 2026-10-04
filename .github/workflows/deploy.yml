@@ -45,7 +45,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Generate resume PDF from resume.json (printed from /cv)
+      - name: Generate the CV and Resume PDFs from cv.json and resume.json (printed from /cv)
         run: npm run build:pdf
         env:
           CV_PHONE: ${{ secrets.CV_PHONE }}

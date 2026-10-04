@@ -98,6 +98,10 @@ export interface XMeta {
   headlines: Headline[]
   /** Headline for the CV header — longer than basics.label, which stays for the website. */
   cvHeadline: string
+  /** Print certifications as one comma-separated line on the CV — for a variant that must fit a single page. */
+  cvCertsInline?: boolean
+  /** Tech key → shorter label, used only when this document is printed. The site keeps assets.json's labels. */
+  techLabels?: Record<string, string>
   availability: string
   careerStart?: string
   sectionOrder: SectionId[]

@@ -1,4 +1,7 @@
-import resumeJson from '../../data/resume.json'
+// cv.json is the full document (JSON Resume schema) that feeds the site and
+// the CV PDF. data/resume.json is the one-page version, printed to a PDF
+// only, so the site never imports it.
+import resumeJson from '../../data/cv.json'
 import assetsJson from '../../data/assets.json'
 import type { Assets, Resume, TechAsset } from './types'
 

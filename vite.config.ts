@@ -2,12 +2,21 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from
 import { join } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
-import { cvFileName, isGithubPagesHost, siteHost, siteOrigin } from './scripts/lib/site-meta.mjs'
+import {
+  cvFileName,
+  isGithubPagesHost,
+  resumeFileName,
+  siteHost,
+  siteOrigin,
+} from './scripts/lib/site-meta.mjs'
 
 const readJson = (rel: string) => JSON.parse(readFileSync(rel, 'utf8'))
 
+// `resume` is the JSON Resume document the site is built from; its file is
+// cv.json. data/resume.json is the one-page print variant and is not a site
+// input, so it is not listed here.
 const DATA_FILES = {
-  resume: 'data/resume.json',
+  resume: 'data/cv.json',
   assets: 'data/assets.json',
 } as const
 
@@ -16,7 +25,7 @@ const SPA_ROUTES = ['edit', 'cv']
 
 /**
  * The HTML shell, CNAME, sitemap and robots.txt are all generated from
- * data/resume.json — the site's identity (name, headline, URL) is never
+ * data/cv.json — the site's identity (name, headline, URL) is never
  * written into code or config, so forking is a JSON-only edit.
  */
 function siteIdentity(): Plugin {
@@ -246,7 +255,7 @@ function editorApi(): Plugin {
             if (errors.length > 0) return send(res, 422, { errors })
 
             const prettier = await import('prettier')
-            const config = (await prettier.resolveConfig('data/resume.json')) ?? {}
+            const config = (await prettier.resolveConfig('data/cv.json')) ?? {}
             for (const [key, file] of Object.entries(DATA_FILES)) {
               const doc = key === 'resume' ? resume : assets
               const formatted = await prettier.format(JSON.stringify(doc), {
@@ -271,9 +280,10 @@ export default defineConfig({
   base: '/',
   plugins: [react(), siteIdentity(), editorEntry(), editorApi()],
   define: {
-    // The CV filename is derived from the name in resume.json, so the download
+    // The download filenames are derived from the name in cv.json, so the
     // link and the generated file can never drift apart.
     __CV_FILENAME__: JSON.stringify(cvFileName(readJson(DATA_FILES.resume).basics.name)),
+    __RESUME_FILENAME__: JSON.stringify(resumeFileName(readJson(DATA_FILES.resume).basics.name)),
   },
   build: {
     target: 'es2020',

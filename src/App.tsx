@@ -73,8 +73,7 @@ export default function App() {
         <footer className="border-t border-line px-6 pb-28 pt-10 text-center font-mono text-xs text-faint lg:pb-10">
           <p>
             © {new Date().getFullYear()} {resume.basics.name} · fully static · every string on this
-            page comes from resume.json{' '}
-            <span className="text-accent">v{resume.x_meta.version}</span>
+            page comes from cv.json <span className="text-accent">v{resume.x_meta.version}</span>
           </p>
           <p className="mt-2">
             built with an in-browser editor —{' '}

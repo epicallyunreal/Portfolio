@@ -54,7 +54,8 @@ Name the repo **`nutan-prabhat.github.io`**. A user-site repo deploys at the dom
 │   ├── deploy.yml            # build → validate → deploy to Pages
 │   └── pr-checks.yml         # lint, typecheck, schema validation, Lighthouse
 ├── data/
-│   ├── resume.json           # JSON Resume schema — content
+│   ├── cv.json               # JSON Resume schema — the full document, feeds the site and the CV PDF
+│   ├── resume.json           # the one-page version of the same career, printed to a PDF only
 │   ├── assets.json           # logo/image registry — presentation
 │   └── schema/
 │       ├── resume.schema.json
@@ -64,7 +65,7 @@ Name the repo **`nutan-prabhat.github.io`**. A user-site repo deploys at the dom
 │   └── logos/                # local SVGs for anything not on a CDN
 ├── scripts/
 │   ├── validate-data.mjs     # Ajv validation, run in CI and pre-commit
-│   └── build-resume-pdf.mjs  # resume.json → PDF, run in CI
+│   └── build-resume-pdf.mjs  # cv.json and resume.json → PDFs, run in CI
 ├── src/
 │   ├── components/
 │   ├── sections/
@@ -81,7 +82,7 @@ Name the repo **`nutan-prabhat.github.io`**. A user-site repo deploys at the dom
 
 Two JSON files, deliberately separated: **content** and **presentation**. Content changes often; the asset registry rarely.
 
-### 4.1 `data/resume.json` — JSON Resume schema
+### 4.1 `data/cv.json` — JSON Resume schema
 
 Use the **JSON Resume** standard (`https://jsonresume.org/schema`). It's an established schema, which means the CI validation is meaningful rather than self-invented, and the data stays portable.
 
@@ -159,7 +160,7 @@ Top-level keys: `basics`, `work`, `education`, `certificates`, `skills`, `projec
 
 **Rules for the app:**
 
-- Never hardcode content. Every string a visitor reads comes from `resume.json`.
+- Never hardcode content. Every string a visitor reads comes from `cv.json`.
 - `x_status: "in-progress"` renders a distinct badge — do not show in-progress certs as complete.
 - `endDate: null` → "Present".
 - Sections render in `x_meta.sectionOrder`. Adding a section to the array without data should fail validation, not render empty.
@@ -204,7 +205,7 @@ Maps a stable key to an image source. Each entry supports either a CDN URL or a 
 
 **Rules:**
 
-- `x_tech` keys in `resume.json` must exist in `assets.tech` — CI fails otherwise. This prevents silent broken logos.
+- `x_tech` keys in `cv.json` must exist in `assets.tech` — CI fails otherwise. This prevents silent broken logos.
 - Prefer devicon for dev tooling, simple-icons for brands, local SVG for anything missing (Qdrant, CLIP, Aziro).
 - Pin CDN versions in production (`@v2.16.0`, not `@latest`) so a CDN change can't break the site silently.
 - Every image needs `alt`, `width`, `height` — layout shift is a Lighthouse failure.
@@ -338,7 +339,7 @@ Two workflows. This is the part that makes the project more than a page.
 ### `deploy.yml` — on push to `main`
 
 1. Everything in `pr-checks` except the preview.
-2. **`scripts/build-resume-pdf.mjs`** — render `resume.json` to `public/Nutan_Prabhat_CV.pdf` (Puppeteer against a print-styled route, or React-PDF). This is the single-source-of-truth detail: one JSON produces both the site and the downloadable CV.
+2. **`scripts/build-resume-pdf.mjs`** — render `cv.json` to `public/Nutan_Prabhat_CV.pdf` (Puppeteer against a print-styled route, or React-PDF). This is the single-source-of-truth detail: one JSON produces both the site and the downloadable CV.
 3. Upload the artifact and deploy with `actions/deploy-pages@v4`.
 4. Use concurrency control so overlapping pushes don't race.
 
@@ -378,12 +379,12 @@ OG image and meta tags, favicon, 404 page, `sitemap.xml`, `robots.txt`, print st
 
 ## 11. Acceptance criteria
 
-- [ ] Adding a certificate to `resume.json` and pushing puts it live with no component change.
+- [ ] Adding a certificate to `cv.json` and pushing puts it live with no component change.
 - [ ] A typo'd `x_tech` key fails CI with a message naming the key.
 - [ ] The site is fully usable with `prefers-reduced-motion: reduce`.
 - [ ] The site is fully navigable by keyboard, including the topology nav.
 - [ ] Lighthouse ≥ 90 performance, ≥ 95 accessibility on mobile emulation.
-- [ ] The downloadable CV is generated in CI from `resume.json`, not committed by hand.
+- [ ] The downloadable CV is generated in CI from `cv.json`, not committed by hand.
 - [ ] No phone number anywhere in the deployed output.
 - [ ] Nothing a visitor reads is hardcoded in a component.
 
@@ -392,6 +393,6 @@ OG image and meta tags, favicon, 404 page, `sitemap.xml`, `robots.txt`, print st
 ## 12. Notes
 
 - **Don't publish your phone number.** The site is public and scraped continuously. Email and LinkedIn are enough.
-- **Keep `resume.json` in sync with the real CV.** Divergence between your site and the document you email is exactly the inconsistency a screener notices.
+- **Keep `cv.json` in sync with the real CV.** Divergence between your site and the document you email is exactly the inconsistency a screener notices.
 - **Pin CDN versions** before you consider this finished.
 - Consider a custom domain later; it's a DNS record plus a `CNAME` file and looks materially more professional than a `github.io` subdomain.

@@ -354,6 +354,15 @@
           "minLength": 1,
           "description": "Headline for the CV header — longer than basics.label, which stays for the website."
         },
+        "cvCertsInline": {
+          "type": "boolean",
+          "description": "true: the CV prints certifications as one comma-separated line, each name linked, with the issuer in brackets — for a variant that must fit a single page. Omitted or false: one bullet per certification."
+        },
+        "techLabels": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 1 },
+          "description": "Tech key → shorter label, applied only when this document is printed as a PDF. Lets the one-page resume.json say \"DRF\" where the site and assets.json say \"Django REST Framework\"."
+        },
         "availability": {
           "type": "string"
         },

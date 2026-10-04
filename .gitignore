@@ -3,8 +3,9 @@ dist
 *.local
 .DS_Store
 .lighthouseci
-# Generated in CI from data/resume.json — never commit by hand
+# Generated in CI from data/cv.json and data/resume.json — never commit by hand
 public/*_CV.pdf
+public/*_Resume.pdf
 
 # `build:cv` with flags writes here, and wipes it on every run.
 GenerateCV/
