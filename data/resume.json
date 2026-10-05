@@ -27,7 +27,7 @@
   "work": [
     {
       "name": "Aziro (formerly MSys Technologies)",
-      "position": "Senior Software Developer",
+      "position": "Senior Software Engineer",
       "startDate": "2025-12",
       "endDate": null,
       "summary": "Sole engineer on the account. Python throughout, scoping to handover.",
@@ -484,7 +484,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.20.0",
+    "version": "2.20.1",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
