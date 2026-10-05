@@ -27,7 +27,7 @@
   "work": [
     {
       "name": "Aziro (formerly MSys Technologies)",
-      "position": "Senior Software Developer",
+      "position": "Senior Software Engineer",
       "startDate": "2025-12",
       "endDate": null,
       "summary": "Sole engineer on the account. Python throughout, scoping to handover.",
@@ -35,7 +35,7 @@
         "Sole engineer on an enterprise client account, owning scoping, HLD/LLD, build, test, documentation and handover.",
         "Raised Top-1 accuracy of a two-stage visual retrieval system from 41.9% to 97.7% by growing the feature-based reranker from 3 to 8 features and tuning it against MRR, with CLIP ViT-B/16 embeddings in Qdrant handling recall.",
         "Delivered a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, PySide6 and a JSON rule engine, automating 3+ manual workflows.",
-        "Built floor-plan variations that move doors and windows and heal the 2D geometry by rebuilding walls and rooms, integrated a client system into the app, and agreed changes and new configurations directly with the client."
+        "Built floor-plan variations, 25 per room layout, that move doors and windows and heal 2D geometry by rebuilding walls and rooms, integrated a client system, and agreed changes and configurations directly with the client."
       ],
       "x_tech": [
         "python",
@@ -63,7 +63,7 @@
       "endDate": "2025-12",
       "summary": "Unity and C# on the client, server-side JavaScript on Unity Cloud Code.",
       "highlights": [
-        "Shipped Pen Fight 2D, a turn-based multiplayer game in Unity and C#, to 10K+ downloads on Google Play.",
+        "Shipped Pen Fight 2D, a turn-based multiplayer game in Unity and C#, to 10K+ downloads and 500+ MAU.",
         "Built a server-authoritative economy in server-side JavaScript on Unity Cloud Code for shop, assets and upgrades.",
         "Architected real-time multiplayer and friend challenges on Unity Matchmaker, Lobby and Relay, and a master-follower physics simulation that handles race conditions on nearly every action."
       ],
@@ -100,7 +100,7 @@
       "summary": "Backend and full-stack work on a large multi-tenant enterprise product.",
       "highlights": [
         "Became primary code reviewer within a year, requesting changes on 25+ of 50+ PRs including work approved by senior staff, and flagged 40+ changes that would have become defects.",
-        "Designed and owned a localization abstraction layer for a 500+ page C# and ASP.NET product, with providers switchable by configuration, per-element opt-out and coverage through the API and database layers.",
+        "Designed and owned a localization abstraction layer for a 500+ page C# and ASP.NET product in 5+ languages, with providers switchable by configuration, per-element opt-out and coverage through the API and database layers.",
         "Delivered 5 client-specific and 2 core features end to end, and 2 of them were adopted into the core product.",
         "Restored SQL queries degraded 2 to 3x to near-baseline response times with no downtime on a live system.",
         "Removed a data-loss risk by rewriting legacy stored procedures, one of them 4,000 lines, to use differential updates."
@@ -484,7 +484,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.20.0",
+    "version": "2.21.0",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
