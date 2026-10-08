@@ -72,7 +72,7 @@
         "Architected real-time multiplayer and friend challenges on Unity Matchmaker, Lobby and Relay.",
         "Built a master-follower physics simulation that handles race conditions on nearly every action.",
         "Added race-safe match negotiation with a single start authority, turn timers, disconnect forfeits and version gating.",
-        "Integrated Google Cloud for authentication, APIs and analytics, plus Unity Cloud Save for account and progress sync.",
+        "Integrated Google Cloud for authentication and APIs, plus Unity Cloud Save for account and progress sync.",
         "Fixed a cross-device desync from resolution-dependent UI scaling by sending normalised coordinates over the wire.",
         "Ran the full release cycle, from internal test tracks and feedback fixes to production rollout and updates."
       ],
@@ -498,7 +498,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.21.0",
+    "version": "2.21.1",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
