@@ -69,11 +69,8 @@
       "highlights": [
         "Shipped Pen Fight 2D, a turn-based multiplayer mobile game in Unity and C#, to 10K+ downloads on Google Play and 500+ monthly active players.",
         "Built a server-authoritative economy in server-side JavaScript on Unity Cloud Code, covering shop, assets, upgrades, a progression chart and notifications.",
-        "Architected real-time multiplayer and friend challenges on Unity Matchmaker, Lobby and Relay.",
-        "Built a master-follower physics simulation that handles race conditions on nearly every action.",
-        "Added race-safe match negotiation with a single start authority, turn timers, disconnect forfeits and version gating.",
+        "Directed the 2.0 update, which adds real-time multiplayer and friend challenges on Unity Lobby and Relay, with master-follower physics, race-safe match negotiation, turn timers and disconnect forfeits.",
         "Integrated Google Cloud for authentication and APIs, plus Unity Cloud Save for account and progress sync.",
-        "Fixed a cross-device desync from resolution-dependent UI scaling by sending normalised coordinates over the wire.",
         "Ran the full release cycle, from internal test tracks and feedback fixes to production rollout and updates."
       ],
       "x_tech": [
