@@ -65,7 +65,7 @@
       "highlights": [
         "Shipped Pen Fight 2D, a turn-based multiplayer game in Unity and C#, to 10K+ downloads and 500+ MAU.",
         "Built a server-authoritative economy in server-side JavaScript on Unity Cloud Code for shop, assets and upgrades.",
-        "Directed the 2.0 update adding real-time multiplayer and friend challenges on Unity Lobby and Relay, with master-follower physics."
+        "Architected real-time multiplayer and friend challenges on Unity Lobby and Relay, and built a master-follower physics simulation that handles race conditions on nearly every action."
       ],
       "x_tech": [
         "unity",
