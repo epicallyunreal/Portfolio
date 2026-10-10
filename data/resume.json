@@ -6,7 +6,7 @@
     "email": "prabhat9819@gmail.com",
     "phone": "",
     "url": "https://nutanprabhat.dev",
-    "summary": "Senior software engineer with 4+ years building and owning production systems. Looking for a backend or full-stack role with ownership of complex systems. Brings a founder's mindset, direct client delivery and AI-assisted development.",
+    "summary": "Senior software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I work directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, restored degraded SQL queries on a multi-tenant SaaS product used by 30,000+ businesses.",
     "location": {
       "city": "Pune",
       "countryCode": "IN"
@@ -33,9 +33,9 @@
       "summary": "Sole engineer on the account. Python throughout, scoping to handover.",
       "highlights": [
         "Sole engineer on an enterprise client account, owning scoping, HLD/LLD, build, test, documentation and handover.",
+        "Worked directly with client stakeholders, agreeing changes and integrating their system into the CAD app.",
         "Raised Top-1 accuracy of a two-stage visual retrieval system from 41.9% to 97.7% by growing the feature-based reranker from 3 to 8 features and tuning it against MRR, with CLIP ViT-B/16 embeddings in Qdrant handling recall.",
-        "Delivered a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, PySide6 and a JSON rule engine, automating 3+ manual workflows.",
-        "Built floor-plan variations, 25 per room layout, that move doors and windows and heal 2D geometry by rebuilding walls and rooms, integrated a client system, and agreed changes and configurations directly with the client."
+        "Delivered a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, PySide6 and a JSON rule engine with full audit trails, automating 3+ manual workflows."
       ],
       "x_tech": [
         "python",
@@ -64,7 +64,7 @@
       "summary": "Unity and C# on the client, server-side JavaScript on Unity Cloud Code.",
       "highlights": [
         "Shipped Pen Fight 2D, a turn-based multiplayer game in Unity and C#, to 10K+ downloads and 500+ MAU.",
-        "Built a server-authoritative economy in server-side JavaScript on Unity Cloud Code for shop, assets and upgrades.",
+        "Built a serverless, server-authoritative economy on Unity Cloud Code and integrated Google Cloud auth and APIs.",
         "Architected real-time multiplayer and friend challenges on Unity Lobby and Relay, and built a master-follower physics simulation that handles race conditions on nearly every action."
       ],
       "x_tech": [
@@ -99,11 +99,11 @@
       "endDate": "2024-05",
       "summary": "Backend and full-stack work on a large multi-tenant enterprise product.",
       "highlights": [
-        "Became primary code reviewer in just over a year, requesting changes on 25+ of 50+ PRs including work approved by senior staff, and flagged 40+ changes that would have become defects.",
+        "Became primary code reviewer in just over a year, requesting changes on 25+ of 50+ PRs including work approved by senior staff, flagged 40+ changes that would have become defects and mentored teammates on defect resolution.",
+        "Restored SQL queries degraded 2 to 3x to near-baseline response times with no downtime on a live system, and queried server logs in New Relic to trace bugs in test and production.",
+        "Removed a data-loss risk by rewriting legacy stored procedures, one of them 4,000 lines, to use differential updates.",
         "Designed and owned a localization abstraction layer for a 500+ page C# and ASP.NET product in 5+ languages, with providers switchable by configuration, per-element opt-out and coverage through the API and database layers.",
-        "Delivered 5 client-specific and 2 core features end to end, and 2 of them were adopted into the core product.",
-        "Restored SQL queries degraded 2 to 3x to near-baseline response times with no downtime on a live system.",
-        "Removed a data-loss risk by rewriting legacy stored procedures, one of them 4,000 lines, to use differential updates."
+        "Delivered 5 client-specific and 2 core features end to end, and 2 of them were adopted into the core product."
       ],
       "x_tech": [
         "mssql",
@@ -220,7 +220,7 @@
       ],
       "x_note": "React and Django.",
       "x_statusNote": "in progress",
-      "x_cv": true
+      "x_cv": false
     },
     {
       "name": "Google AI Essentials Specialization",
@@ -239,7 +239,7 @@
       "url": "https://www.coursera.org/account/accomplishments/specialization/4B73N23WEU4Y",
       "x_status": "completed",
       "x_tech": [],
-      "x_cv": true
+      "x_cv": false
     },
     {
       "name": "Claude 101 & Claude Code 101",
@@ -264,17 +264,15 @@
   "skills": [
     {
       "name": "Languages",
-      "keywords": ["python", "csharp", "cpp", "javascript", "sql"]
+      "keywords": ["python", "sql", "csharp", "javascript"]
     },
     {
-      "name": "Backend & DB",
+      "name": "Backend & data",
       "keywords": [
         "django",
         "drf",
-        "aspnet",
         "rest",
         "systemdesign",
-        "dsa",
         "postgres",
         "mysql",
         "mssql",
@@ -282,31 +280,19 @@
       ]
     },
     {
-      "name": "AI",
-      "keywords": ["vectordb", "retrieval", "claudecode"],
-      "x_note": "learning LLMs and RAG with LangChain, Pydantic and LangGraph agents"
+      "name": "AI & retrieval",
+      "keywords": ["qdrant", "clip", "reranking", "retrieval", "claudecode"],
+      "x_note": "learning LLMs, RAG and agents"
     },
     {
-      "name": "Frontend & tooling",
-      "keywords": [
-        "react",
-        "typescript",
-        "jquery",
-        "html5",
-        "css3",
-        "docker",
-        "cicd",
-        "githubactions",
-        "googlecloud",
-        "pytest",
-        "git"
-      ]
+      "name": "Cloud & tooling",
+      "keywords": ["googlecloud", "docker", "cicd", "githubactions", "pytest", "git", "react"]
     }
   ],
   "projects": [
     {
       "name": "HackerRank Orchestrate",
-      "description": "Ranked 224 of 3,062 (top 8%) in the September 2026 edition, a 24-hour AI agent hackathon.",
+      "description": "Ranked 224 of 3,062 (top 8%) in a 24-hour AI agent hackathon, built with Claude Code.",
       "startDate": "2026-09",
       "endDate": "2026-09",
       "url": "https://www.hackerrank.com/contests/hackerrank-orchestrate-september26/challenges/buy-or-wait/leaderboard?username=Nutan_Prabhat"
@@ -335,7 +321,7 @@
         "claudecode"
       ],
       "x_featured": true,
-      "x_cv": true
+      "x_cv": false
     },
     {
       "name": "Portfolio",
@@ -364,7 +350,7 @@
     },
     {
       "name": "CreatorHub",
-      "description": "Personal multi-tenant Django and React agency platform, designed by me and built with Claude Code.",
+      "description": "Designed modules and data models for a multi-tenant Django RBAC platform, built with Claude Code.",
       "startDate": "2026-05",
       "endDate": "2026-05",
       "url": "https://github.com/epicallyunreal/CreatorHub",
@@ -484,7 +470,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.21.2",
+    "version": "2.22.0",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
@@ -503,7 +489,7 @@
         "emphasis": "Scope, design, build, ship."
       }
     ],
-    "cvHeadline": "Senior Software Engineer | Python · Django · C# / .NET · SQL · React · System Design · Claude Code",
+    "cvHeadline": "Senior Software Engineer | Python · Django · REST APIs · SQL · Retrieval · Claude Code",
     "availability": "Open to relocation (EU) and remote roles",
     "careerStart": "2022-02",
     "sectionOrder": [
