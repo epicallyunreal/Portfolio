@@ -65,7 +65,7 @@
       "highlights": [
         "Shipped Pen Fight 2D, a turn-based multiplayer game in Unity and C#, to 10K+ downloads and 500+ MAU.",
         "Built a server-authoritative economy in server-side JavaScript on Unity Cloud Code for shop, assets and upgrades.",
-        "Architected real-time multiplayer and friend challenges on Unity Matchmaker, Lobby and Relay, and a master-follower physics simulation that handles race conditions on nearly every action."
+        "Architected real-time multiplayer and friend challenges on Unity Lobby and Relay, and built a master-follower physics simulation that handles race conditions on nearly every action."
       ],
       "x_tech": [
         "unity",
@@ -484,7 +484,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.21.0",
+    "version": "2.21.1",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
