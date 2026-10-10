@@ -108,7 +108,7 @@
       "endDate": "2024-05",
       "summary": "Backend and full-stack work on a large multi-tenant enterprise product.",
       "highlights": [
-        "Became primary code reviewer within a year, requesting changes on 25+ of 50+ PRs including work approved by senior staff, and flagged 40+ changes that would have become defects. Mentored teammates on defect resolution.",
+        "Became primary code reviewer in just over a year, requesting changes on 25+ of 50+ PRs including work approved by senior staff, and flagged 40+ changes that would have become defects. Mentored teammates on defect resolution.",
         "Designed and owned a localization abstraction layer for a 500+ page C# and ASP.NET product, with providers switchable by configuration, per-element opt-out and coverage through the API and database layers. It launched with 5+ languages, including French and Canadian French.",
         "Delivered 5 client-specific and 2 core features end to end, and 2 of them were adopted into the core product.",
         "Restored SQL queries that had degraded 2 to 3x to near-baseline response times, with no downtime on a live system.",
@@ -498,7 +498,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.21.1",
+    "version": "2.21.2",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
