@@ -36,7 +36,7 @@
         "Raised Top-1 accuracy of a two-stage visual retrieval system from 41.9% to 97.7% by growing the feature-based reranker from 3 to 8 features and tuning it against MRR, with CLIP ViT-B/16 embeddings in Qdrant handling recall.",
         "Delivered a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, spatial indexing and a PySide6 interface, plus one-click batch processing across drawing folders.",
         "Built a JSON rule engine that binds validation rules to check and fix functions at runtime, with priority-ordered execution and full audit trails, automating 3+ manual workflows.",
-        "Built floor-plan variations that move and resize doors and windows and heal the 2D geometry by rebuilding walls and rooms, starting at 25 variants per room layout from 5 door and 5 window positions.",
+        "Built geometry augmentation that generates controlled variations of each drawing and heals the 2D geometry after every change.",
         "Kept both platforms configuration-driven, so new categories, thresholds and weights go in through JSON.",
         "Worked directly with the client, agreeing changes in discussion, adding new configurations from their inputs and integrating their system into the CAD app.",
         "Produced full system documentation and test coverage for a clean client handover."
@@ -498,7 +498,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.22.0",
+    "version": "2.22.1",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
