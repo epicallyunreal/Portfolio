@@ -6,11 +6,8 @@
     "email": "prabhat9819@gmail.com",
     "phone": "",
     "url": "https://nutanprabhat.dev",
-    "summary": "Senior software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I work directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, restored degraded SQL queries on a multi-tenant SaaS product used by 30,000+ businesses.",
-    "location": {
-      "city": "Pune",
-      "countryCode": "IN"
-    },
+    "summary": "Senior software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I work directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, restored degraded SQL queries on a multi-tenant SaaS product used by 30,000+ businesses. I build with Claude Code daily and am learning agents and RAG with LangChain and LangGraph.",
+    "location": { "city": "Pune", "countryCode": "IN" },
     "profiles": [
       {
         "network": "LinkedIn",
@@ -175,6 +172,25 @@
   ],
   "certificates": [
     {
+      "name": "MCP: Advanced Topics",
+      "issuer": "Anthropic",
+      "date": "2026-10",
+      "url": "https://academy.claude.com/verify/77c8ae57cbb9ce51f851d6d336a33ca7",
+      "x_status": "completed",
+      "x_note": "Sampling, notifications, roots, and the STDIO and StreamableHTTP transports.",
+      "x_tech": ["claude"],
+      "x_cv": true
+    },
+    {
+      "name": "Claude Code in Action",
+      "issuer": "Anthropic",
+      "date": "2026-09",
+      "url": "https://academy.claude.com/verify/2dd0b61d742f22f8519ed66e687cd8e5",
+      "x_status": "completed",
+      "x_tech": ["claudecode", "claude"],
+      "x_cv": true
+    },
+    {
       "name": "Meta Back-End Developer",
       "issuer": "Meta",
       "date": "2026-08",
@@ -196,6 +212,44 @@
       ],
       "x_note": "Django, DRF and relational databases. Meta Full-Stack in progress.",
       "x_cv": true
+    },
+    {
+      "name": "Introduction to MCP",
+      "issuer": "Anthropic",
+      "date": "2026-09",
+      "url": "https://academy.claude.com/verify/3147bc7882d6055353a8fb8dae2e4b17",
+      "x_status": "completed",
+      "x_tech": ["claude"],
+      "x_cv": false
+    },
+    {
+      "name": "Introduction to Generative AI Learning Path",
+      "issuer": "Google Cloud",
+      "date": "2026-08",
+      "url": "https://www.coursera.org/account/accomplishments/specialization/4B73N23WEU4Y",
+      "x_status": "completed",
+      "x_tech": [],
+      "x_cv": false
+    },
+    {
+      "name": "Claude Code 101",
+      "issuer": "Anthropic",
+      "date": "2026-09",
+      "url": "https://academy.claude.com/verify/bff9c08a35c54545a5b5e18ac20bd96c",
+      "x_status": "completed",
+      "x_note": "Agentic development workflows.",
+      "x_tech": ["claudecode", "claude"],
+      "x_cv": false
+    },
+    {
+      "name": "Claude 101",
+      "issuer": "Anthropic",
+      "date": "2026-08",
+      "url": "https://academy.claude.com/verify/15953c05c6ff524ab956f8e320dd41cb",
+      "x_status": "completed",
+      "x_note": "Prompting fundamentals.",
+      "x_tech": ["claude"],
+      "x_cv": false
     },
     {
       "name": "Meta Full-Stack Developer",
@@ -233,24 +287,6 @@
       "x_cv": false
     },
     {
-      "name": "Introduction to Generative AI Learning Path",
-      "issuer": "Google Cloud",
-      "date": "2026-08",
-      "url": "https://www.coursera.org/account/accomplishments/specialization/4B73N23WEU4Y",
-      "x_status": "completed",
-      "x_tech": [],
-      "x_cv": false
-    },
-    {
-      "name": "Claude 101 & Claude Code 101",
-      "issuer": "Anthropic",
-      "date": "2026-08",
-      "url": "https://verify.skilljar.com/c/5c65bbxtmrn6",
-      "x_status": "completed",
-      "x_tech": ["claudecode", "claude"],
-      "x_cv": true
-    },
-    {
       "name": "Blockchain Specialization",
       "issuer": "University at Buffalo",
       "date": "2021-09",
@@ -262,10 +298,7 @@
     }
   ],
   "skills": [
-    {
-      "name": "Languages",
-      "keywords": ["python", "sql", "csharp", "javascript"]
-    },
+    { "name": "Languages", "keywords": ["python", "sql", "csharp", "javascript"] },
     {
       "name": "Backend & data",
       "keywords": [
@@ -470,26 +503,20 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.22.1",
+    "version": "2.23.0",
     "headlines": [
-      {
-        "text": "I work from problems, not tickets.",
-        "emphasis": "problems"
-      },
+      { "text": "I work from problems, not tickets.", "emphasis": "problems" },
       {
         "text": "I build systems that change without breaking.",
         "emphasis": "change without breaking"
       },
-      {
-        "text": "I'm the engineer you hand the whole thing to.",
-        "emphasis": "the whole thing"
-      },
+      { "text": "I'm the engineer you hand the whole thing to.", "emphasis": "the whole thing" },
       {
         "text": "Scope, design, build, ship. Usually alone.",
         "emphasis": "Scope, design, build, ship."
       }
     ],
-    "cvHeadline": "Senior Software Engineer | Python · Django · REST APIs · SQL · Retrieval · Claude Code",
+    "cvHeadline": "Senior Software Engineer | Python · REST APIs · SQL · Client-embedded delivery · Retrieval · Claude Code",
     "availability": "Open to relocation (EU) and remote roles",
     "careerStart": "2022-02",
     "sectionOrder": [
