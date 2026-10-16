@@ -503,7 +503,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.23.0",
+    "version": "2.23.1",
     "headlines": [
       { "text": "I work from problems, not tickets.", "emphasis": "problems" },
       {
@@ -516,7 +516,7 @@
         "emphasis": "Scope, design, build, ship."
       }
     ],
-    "cvHeadline": "Senior Software Engineer | Python · REST APIs · SQL · Client-embedded delivery · Retrieval · Claude Code",
+    "cvHeadline": "Senior Software Engineer | Backend · Python · Django · REST APIs · SQL · Retrieval · Claude Code",
     "availability": "Open to relocation (EU) and remote roles",
     "careerStart": "2022-02",
     "sectionOrder": [
