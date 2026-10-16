@@ -1,22 +1,22 @@
 {
   "Nutan_Prabhat_CV.pdf": {
     "source": "data/cv.json",
-    "version": "2.23.0",
+    "version": "2.23.1",
     "pages": 3,
     "phone": true,
     "builtOn": "local",
-    "builtAt": "2026-10-15",
-    "inputs": "f72129b6e500eeb4b68e957da318a8a6fa6bbe52268c89a7467d77f863eef0ad",
-    "sha256": "e20819857a917f0adb8eb82de563e19736df223421ecb56aa570466e3231b386"
+    "builtAt": "2026-10-16",
+    "inputs": "23eaa52a41cbd885efa3fb44055d60f7e07fd9df9c6313fe0ce94db65331392d",
+    "sha256": "62fb6e944cd1a53a8ee637117f70accb89025dc427455c4a31c4d43fd120d241"
   },
   "Nutan_Prabhat_Resume.pdf": {
     "source": "data/resume.json",
-    "version": "2.23.0",
+    "version": "2.23.1",
     "pages": 1,
     "phone": true,
     "builtOn": "local",
-    "builtAt": "2026-10-15",
-    "inputs": "0cb5f4582bd2a60dc4a59e4ff5d69ca1a3252ee6f809032d762d26194d607d02",
-    "sha256": "1e569b0181f28b26d50c64309cf39e0d784957d1125af364f8a5562431e1cc9f"
+    "builtAt": "2026-10-16",
+    "inputs": "3a5b05031fca3e0a7cedf0baea1e6c4528cd1a7674bfa687b56b13728a959c9e",
+    "sha256": "a12926db994457feb18ce274dee592d10e47da631fbdcb165f5e36c3ccda8898"
   }
 }
