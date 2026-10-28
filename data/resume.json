@@ -6,7 +6,7 @@
     "email": "prabhat9819@gmail.com",
     "phone": "",
     "url": "https://nutanprabhat.dev",
-    "summary": "Senior software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I work directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, restored degraded SQL queries on a multi-tenant SaaS product used by 30,000+ businesses. I build with Claude Code daily and am learning agents and RAG with LangChain and LangGraph.",
+    "summary": "Senior software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I worked directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, restored degraded SQL queries on a multi-tenant SaaS product used by 30,000+ businesses. I build with Claude Code daily and am learning agents and RAG with LangChain and LangGraph.",
     "location": { "city": "Pune", "countryCode": "IN" },
     "profiles": [
       {
@@ -26,7 +26,7 @@
       "name": "Aziro (formerly MSys Technologies)",
       "position": "Senior Software Engineer",
       "startDate": "2025-12",
-      "endDate": null,
+      "endDate": "2026-10",
       "summary": "Sole engineer on the account. Python throughout, scoping to handover.",
       "highlights": [
         "Sole engineer on an enterprise client account, owning scoping, HLD/LLD, build, test, documentation and handover.",
@@ -503,7 +503,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.23.1",
+    "version": "2.24.0",
     "headlines": [
       { "text": "I work from problems, not tickets.", "emphasis": "problems" },
       {
