@@ -1,12 +1,12 @@
 {
   "basics": {
     "name": "Nutan Prabhat",
-    "label": "Senior Software Engineer, Backend & Full-Stack",
+    "label": "Software Engineer, Backend & Full-Stack",
     "image": "/images/headshot.webp",
     "email": "prabhat9819@gmail.com",
     "phone": "",
     "url": "https://nutanprabhat.dev",
-    "summary": "Senior software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I worked directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, restored degraded SQL queries on a multi-tenant SaaS product used by 30,000+ businesses. I build with Claude Code daily and am learning agents and RAG with LangChain and LangGraph.",
+    "summary": "Software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I worked directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, restored degraded SQL queries on a multi-tenant SaaS product used by 30,000+ businesses. I build with Claude Code daily and am learning agents and RAG with LangChain and LangGraph.",
     "location": { "city": "Pune", "countryCode": "IN" },
     "profiles": [
       {
@@ -503,7 +503,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.24.0",
+    "version": "2.25.0",
     "headlines": [
       { "text": "I work from problems, not tickets.", "emphasis": "problems" },
       {
@@ -516,7 +516,7 @@
         "emphasis": "Scope, design, build, ship."
       }
     ],
-    "cvHeadline": "Senior Software Engineer | Backend · Python · Django · REST APIs · SQL · Retrieval · Claude Code",
+    "cvHeadline": "Software Engineer | Backend · Python · Django · REST APIs · SQL · Retrieval · Claude Code",
     "availability": "Open to relocation (EU) and remote roles",
     "careerStart": "2022-02",
     "sectionOrder": [
