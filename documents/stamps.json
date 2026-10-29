@@ -6,8 +6,8 @@
     "phone": true,
     "builtOn": "local",
     "builtAt": "2026-10-29",
-    "inputs": "57b309ae6b1722b9f7bae83a8d4330d3d2f130ff8f9fa8cd18ce9aff03a046d3",
-    "sha256": "8b29e5f4bb9ccd0e628d5eb32410a6c4afb3124dda012e8bf5b28fb334ad5d2e"
+    "inputs": "27d360d07eefe1d7b48e5f790343752742c0cf9721f669123b0508f23bfc8e15",
+    "sha256": "120fa643dd4972e695bde9b0632448e41f1ec3cc10ee1f8b7a1a2f8458078dc3"
   },
   "Nutan_Prabhat_Resume.pdf": {
     "source": "data/resume.json",

@@ -32,13 +32,12 @@
       "endDate": "2026-10",
       "summary": "Sole engineer on the account. Python throughout, scoping to handover.",
       "highlights": [
-        "Sole engineer on an enterprise client account, owning scoping, HLD/LLD, build, client-system integration, test, documentation and handover.",
+        "Sole engineer on an enterprise client account, owning scoping, HLD/LLD, build, test, documentation and handover.",
         "Raised Top-1 accuracy of a two-stage visual retrieval system from 41.9% to 97.7% by growing the feature-based reranker from 3 to 8 features and tuning it against MRR, with CLIP ViT-B/16 embeddings in Qdrant handling recall.",
-        "Delivered a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, spatial indexing and a PySide6 interface, plus one-click batch processing across multiple folders.",
+        "Delivered a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, spatial indexing, a PySide6 interface and an integration with the client's system, plus one-click batch processing across multiple folders.",
         "Automated 3+ manual workflows by building a JSON rule engine that binds validation rules to check and fix functions at runtime, with priority-ordered execution and full audit trails.",
         "Replaced the manual creation of CAD file variations by building rule-based geometry augmentation that generates controlled variations of each file and heals the 2D geometry after every change.",
-        "Kept both platforms configuration-driven, so new categories, thresholds and weights go in through JSON.",
-        "Produced full system documentation for a clean client handover."
+        "Kept both platforms configuration-driven, so new categories, thresholds and weights go in through JSON."
       ],
       "x_tech": [
         "python",
