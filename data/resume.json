@@ -6,7 +6,7 @@
     "email": "prabhat9819@gmail.com",
     "phone": "",
     "url": "https://nutanprabhat.dev",
-    "summary": "Software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I worked directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, restored degraded SQL queries on a multi-tenant SaaS product used by 30,000+ businesses. I build with Claude Code daily and am learning agents and RAG with LangChain and LangGraph.",
+    "summary": "Software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I worked directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, on a 500+ page multi-tenant SaaS product used by 30,000+ businesses, I worked on UI revamp, added an integration layer to localization and restored degraded SQL queries. I build with Claude Code daily and am learning agents and RAG with LangChain and LangGraph.",
     "location": { "city": "Pune", "countryCode": "IN" },
     "profiles": [
       {
@@ -30,9 +30,9 @@
       "summary": "Sole engineer on the account. Python throughout, scoping to handover.",
       "highlights": [
         "Sole engineer on an enterprise client account, owning scoping, HLD/LLD, build, test, documentation and handover.",
-        "Worked directly with client stakeholders, agreeing changes and integrating their system into the CAD app.",
         "Raised Top-1 accuracy of a two-stage visual retrieval system from 41.9% to 97.7% by growing the feature-based reranker from 3 to 8 features and tuning it against MRR, with CLIP ViT-B/16 embeddings in Qdrant handling recall.",
-        "Delivered a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, PySide6 and a JSON rule engine with full audit trails, automating 3+ manual workflows."
+        "Automated 3+ manual workflows by delivering a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, PySide6, a JSON rule engine with full audit trails and an integration with the client's system.",
+        "Replaced manual CAD-variation work with rule-based geometry augmentation that heals the 2D geometry."
       ],
       "x_tech": [
         "python",
@@ -60,9 +60,9 @@
       "endDate": "2025-12",
       "summary": "Unity and C# on the client, server-side JavaScript on Unity Cloud Code.",
       "highlights": [
-        "Shipped Pen Fight 2D, a turn-based multiplayer game in Unity and C#, to 10K+ downloads and 500+ MAU.",
+        "Reached 10K+ downloads and 500+ MAU with no paid ads by shipping Pen Fight 2D, a turn-based Unity game.",
         "Built a serverless, server-authoritative economy on Unity Cloud Code and integrated Google Cloud auth and APIs.",
-        "Architected real-time multiplayer and friend challenges on Unity Lobby and Relay, and built a master-follower physics simulation that handles race conditions on nearly every action."
+        "Architected online multiplayer and friend challenges on Unity Lobby and Relay, and built a master-follower physics simulation that handles race conditions on nearly every action."
       ],
       "x_tech": [
         "unity",
@@ -96,11 +96,10 @@
       "endDate": "2024-05",
       "summary": "Backend and full-stack work on a large multi-tenant enterprise product.",
       "highlights": [
-        "Became primary code reviewer in just over a year, requesting changes on 25+ of 50+ PRs including work approved by senior staff, flagged 40+ changes that would have become defects and mentored teammates on defect resolution.",
-        "Restored SQL queries degraded 2 to 3x to near-baseline response times with no downtime on a live system, and queried server logs in New Relic to trace bugs in test and production.",
+        "Flagged 40+ would-be defects as primary code reviewer, reached in just over a year, requesting changes on 25+ of 50+ PRs including senior-approved work, and mentored teammates on defect resolution.",
+        "Restored SQL queries degraded 2 to 3x to near-baseline response times with no downtime, by adding an index and gating a stored procedure's longer path behind a setting.",
         "Removed a data-loss risk by rewriting legacy stored procedures, one of them 4,000 lines, to use differential updates.",
-        "Designed and owned a localization abstraction layer for a 500+ page C# and ASP.NET product in 5+ languages, with providers switchable by configuration, per-element opt-out and coverage through the API and database layers.",
-        "Delivered 5 client-specific and 2 core features end to end, and 2 of them were adopted into the core product."
+        "Designed and owned a localization integration layer in JavaScript and C# that launched with 5+ languages, with providers switchable by configuration, per-element opt-out and coverage through the API and database layers."
       ],
       "x_tech": [
         "mssql",
@@ -134,7 +133,7 @@
       "endDate": "2022-08",
       "summary": "Frontend delivery and a permission-model extension that unlocked a major account.",
       "highlights": [
-        "Extended a hierarchical permission model as a 2-week proof of concept and shipped UI changes in a full redesign."
+        "Unlocked a major account by extending a hierarchical permission model as a 2-week proof of concept."
       ],
       "x_tech": [
         "html5",
@@ -411,7 +410,7 @@
         "vite"
       ],
       "x_featured": true,
-      "x_cv": true
+      "x_cv": false
     },
     {
       "name": "BGMI Tournament Management System",
@@ -503,7 +502,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.25.0",
+    "version": "2.26.0",
     "headlines": [
       { "text": "I work from problems, not tickets.", "emphasis": "problems" },
       {

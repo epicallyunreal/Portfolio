@@ -6,7 +6,7 @@
     "email": "prabhat9819@gmail.com",
     "phone": "",
     "url": "https://nutanprabhat.dev",
-    "summary": "Software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I worked directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, restored degraded SQL queries on a multi-tenant SaaS product used by 30,000+ businesses. I build with Claude Code daily and am learning agents and RAG with LangChain and LangGraph. Looking for forward deployed and backend roles.",
+    "summary": "Software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I worked directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, on a 500+ page multi-tenant SaaS product used by 30,000+ businesses, I worked on UI revamp, added an integration layer to localization and restored degraded SQL queries. I build with Claude Code daily and am learning agents and RAG with LangChain and LangGraph. Looking for forward deployed and backend roles.",
     "location": {
       "city": "Pune",
       "countryCode": "IN"
@@ -34,12 +34,10 @@
       "highlights": [
         "Sole engineer on an enterprise client account, owning scoping, HLD/LLD, build, test, documentation and handover.",
         "Raised Top-1 accuracy of a two-stage visual retrieval system from 41.9% to 97.7% by growing the feature-based reranker from 3 to 8 features and tuning it against MRR, with CLIP ViT-B/16 embeddings in Qdrant handling recall.",
-        "Delivered a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, spatial indexing and a PySide6 interface, plus one-click batch processing across drawing folders.",
-        "Built a JSON rule engine that binds validation rules to check and fix functions at runtime, with priority-ordered execution and full audit trails, automating 3+ manual workflows.",
-        "Built geometry augmentation that generates controlled variations of each drawing and heals the 2D geometry after every change.",
-        "Kept both platforms configuration-driven, so new categories, thresholds and weights go in through JSON.",
-        "Worked directly with the client, agreeing changes in discussion, adding new configurations from their inputs and integrating their system into the CAD app.",
-        "Produced full system documentation for a clean client handover."
+        "Delivered a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, spatial indexing, a PySide6 interface and an integration with the client's system, plus one-click batch processing across multiple folders.",
+        "Automated 3+ manual workflows by building a JSON rule engine that binds validation rules to check and fix functions at runtime, with priority-ordered execution and full audit trails.",
+        "Replaced the manual creation of CAD file variations by building rule-based geometry augmentation that generates controlled variations of each file and heals the 2D geometry after every change.",
+        "Kept both platforms configuration-driven, so new categories, thresholds and weights go in through JSON."
       ],
       "x_tech": [
         "python",
@@ -67,9 +65,9 @@
       "endDate": "2025-12",
       "summary": "Unity and C# on the client, server-side JavaScript on Unity Cloud Code.",
       "highlights": [
-        "Shipped Pen Fight 2D, a turn-based multiplayer mobile game in Unity and C#, to 10K+ downloads on Google Play and 500+ monthly active players.",
+        "Reached 10K+ downloads on Google Play and 500+ monthly active players with no paid ads by building and shipping Pen Fight 2D, a turn-based multiplayer mobile game in Unity and C#, end to end.",
         "Built a server-authoritative economy in server-side JavaScript on Unity Cloud Code, covering shop, assets, upgrades, a progression chart and notifications.",
-        "Architected real-time multiplayer and friend challenges on Unity Lobby and Relay.",
+        "Architected online multiplayer and friend challenges on Unity Lobby and Relay.",
         "Built a master-follower physics simulation that handles race conditions on nearly every action.",
         "Architected race-safe match negotiation with a single start authority, turn timers, disconnect forfeits and version gating.",
         "Integrated Google Cloud for authentication and APIs, plus Unity Cloud Save for account and progress sync.",
@@ -108,10 +106,9 @@
       "endDate": "2024-05",
       "summary": "Backend and full-stack work on a large multi-tenant enterprise product.",
       "highlights": [
-        "Became primary code reviewer in just over a year, requesting changes on 25+ of 50+ PRs including work approved by senior staff, and flagged 40+ changes that would have become defects. Mentored teammates on defect resolution.",
-        "Designed and owned a localization abstraction layer for a 500+ page C# and ASP.NET product, with providers switchable by configuration, per-element opt-out and coverage through the API and database layers. It launched with 5+ languages, including French and Canadian French.",
-        "Delivered 5 client-specific and 2 core features end to end, and 2 of them were adopted into the core product.",
-        "Restored SQL queries that had degraded 2 to 3x to near-baseline response times on a live system with no downtime, by adding an index and gating a stored procedure's longer path behind the setting that needs it.",
+        "Flagged 40+ would-be defects as primary code reviewer, reached in just over a year, requesting changes on 25+ of 50+ PRs including senior-approved work, and mentored teammates on defect resolution.",
+        "Designed and owned a localization integration layer in JavaScript and C# that launched with 5+ languages, including French and Canadian French, with providers switchable by configuration, per-element opt-out and coverage through the API and database layers.",
+        "Restored SQL queries degraded 2 to 3x to near-baseline response times with no downtime, by adding an index and gating a stored procedure's longer path behind a setting.",
         "Removed a data-loss risk by rewriting legacy stored procedures, one of them 4,000 lines, replacing a destructive save that deleted and re-inserted every row with differential updates.",
         "Migrated the highest-complexity pages of a large ASP.NET C# codebase to jQuery 3.5+, contributing refactor patterns adopted into shared libraries.",
         "Extended Elasticsearch type-ahead search with minimum-character filtering and query tuning."
@@ -149,7 +146,7 @@
       "summary": "Frontend delivery and a permission-model extension that unlocked a major account.",
       "highlights": [
         "Contributed production frontend changes across a full UI redesign in HTML, SCSS, jQuery and ASPX.",
-        "Extended a hierarchical permission model so a previously passive intermediate tier could control multiple entity types, delivered as a 2-week proof of concept.",
+        "Unlocked a major account by extending a hierarchical permission model so a previously passive intermediate tier could control multiple entity types, delivered as a 2-week proof of concept.",
         "Provided post-patch production support and resolved high-priority escalations."
       ],
       "x_tech": [
@@ -537,7 +534,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.25.0",
+    "version": "2.26.0",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
