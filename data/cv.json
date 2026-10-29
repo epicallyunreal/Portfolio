@@ -111,7 +111,7 @@
         "Became primary code reviewer in just over a year, requesting changes on 25+ of 50+ PRs including work approved by senior staff, and flagged 40+ changes that would have become defects. Mentored teammates on defect resolution.",
         "Designed and owned a localization abstraction layer for a 500+ page C# and ASP.NET product, with providers switchable by configuration, per-element opt-out and coverage through the API and database layers. It launched with 5+ languages, including French and Canadian French.",
         "Delivered 5 client-specific and 2 core features end to end, and 2 of them were adopted into the core product.",
-        "Restored SQL queries that had degraded 2 to 3x to near-baseline response times on a live system with no downtime, by adding an index and gating a stored procedure's longer path behind the setting that needs it.",
+        "Restored SQL queries degraded 2 to 3x to near-baseline response times with no downtime, by adding an index and moving a stored procedure's longer path behind a per-business flag.",
         "Removed a data-loss risk by rewriting legacy stored procedures, one of them 4,000 lines, replacing a destructive save that deleted and re-inserted every row with differential updates.",
         "Migrated the highest-complexity pages of a large ASP.NET C# codebase to jQuery 3.5+, contributing refactor patterns adopted into shared libraries.",
         "Extended Elasticsearch type-ahead search with minimum-character filtering and query tuning."
