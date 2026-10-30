@@ -505,6 +505,12 @@
   ],
   "awards": [
     {
+      "title": "HackerRank Orchestrate, October 2026: rank 176 of 4,094 (top 5%) in a 24-hour AI agent hackathon",
+      "awarder": "HackerRank",
+      "date": "2026",
+      "summary": "HackerRank's 24-hour challenge asked for an AI agent that works out whether a company really deleted someone's data, scored across 518 requests, using logs, database snapshots, PDFs and screenshots. The submission combined a deterministic audit engine with Claude reading free-text requests in several languages, PDFs and screenshots, and a critic reviewing every finished answer. The critic caught 76 of 79 seeded faults, and 10 held-out samples, never opened, scored 0.848 against 0.851 on development samples. Built with Claude Code, with four reviewer agents at each stage. Model cost for the final run was about $16."
+    },
+    {
       "title": "HackerRank Orchestrate, September 2026: rank 224 of 3,062 (top 8%) in a 24-hour AI agent hackathon",
       "awarder": "HackerRank",
       "date": "2026",
@@ -534,7 +540,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.26.0",
+    "version": "2.27.0",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",

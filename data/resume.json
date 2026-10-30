@@ -31,7 +31,7 @@
       "highlights": [
         "Sole engineer on an enterprise client account, owning scoping, HLD/LLD, build, test, documentation and handover.",
         "Raised Top-1 accuracy of a two-stage visual retrieval system from 41.9% to 97.7% by growing the feature-based reranker from 3 to 8 features and tuning it against MRR, with CLIP ViT-B/16 embeddings in Qdrant handling recall.",
-        "Automated 3+ manual workflows by delivering a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, PySide6, a JSON rule engine with full audit trails and an integration with the client's system.",
+        "Automated 3+ manual workflows by delivering a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, PySide6, a JSON rule engine with audit trails and a client integration.",
         "Replaced manual CAD-variation work with rule-based geometry augmentation that heals the 2D geometry."
       ],
       "x_tech": [
@@ -324,10 +324,10 @@
   "projects": [
     {
       "name": "HackerRank Orchestrate",
-      "description": "Ranked 224 of 3,062 (top 8%) in a 24-hour AI agent hackathon, built with Claude Code.",
+      "description": "Ranked 176 of 4,094 (top 5%) in a 24-hour AI agent hackathon, built with Claude Code. A critic caught 76 of 79 seeded faults, and 10 held-out samples scored 0.848 against 0.851 on development samples.",
       "startDate": "2026-09",
-      "endDate": "2026-09",
-      "url": "https://www.hackerrank.com/contests/hackerrank-orchestrate-september26/challenges/buy-or-wait/leaderboard?username=Nutan_Prabhat"
+      "endDate": "2026-10",
+      "url": "https://www.hackerrank.com/contests/hackerrank-orchestrate-october26/challenges/ghost-data-still-exists/leaderboard?username=Nutan_Prabhat"
     },
     {
       "name": "XpenseSplitter",
@@ -479,6 +479,13 @@
   ],
   "awards": [
     {
+      "title": "HackerRank Orchestrate, October 2026: rank 176 of 4,094 (top 5%) in a 24-hour AI agent hackathon",
+      "awarder": "HackerRank",
+      "date": "2026",
+      "summary": "HackerRank's 24-hour challenge asked for an AI agent that works out whether a company really deleted someone's data, scored across 518 requests, using logs, database snapshots, PDFs and screenshots. The submission combined a deterministic audit engine with Claude reading free-text requests in several languages, PDFs and screenshots, and a critic reviewing every finished answer. The critic caught 76 of 79 seeded faults, and 10 held-out samples, never opened, scored 0.848 against 0.851 on development samples. Built with Claude Code, with four reviewer agents at each stage. Model cost for the final run was about $16.",
+      "x_cv": false
+    },
+    {
       "title": "HackerRank Orchestrate, September 2026: rank 224 of 3,062 (top 8%) in a 24-hour AI agent hackathon",
       "awarder": "HackerRank",
       "date": "2026",
@@ -502,7 +509,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.26.0",
+    "version": "2.27.0",
     "headlines": [
       { "text": "I work from problems, not tickets.", "emphasis": "problems" },
       {
