@@ -44,10 +44,14 @@ body:has(.cv-root) {
      text layer, so the words that matter most must survive it. Rendering is
      visually identical here; only the extraction changes. */
   font-variant-ligatures: none;
+  /* Kerning pulls "P." and "P," together, and the shifted glyph reads as a
+     word gap: "ASP.NET" extracts as "ASP .NET" and "OOP," as "OOP ,". */
+  font-kerning: none;
   font-feature-settings:
     'liga' 0,
     'clig' 0,
-    'dlig' 0;
+    'dlig' 0,
+    'kern' 0;
   /* Spec baseline is 1.3; tightened so the one-page Resume holds its page —
      this is the sanctioned lever when the page count breaks. */
   line-height: 1.26;
