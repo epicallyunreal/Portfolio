@@ -283,6 +283,16 @@
       "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/sass/sass-original.svg",
       "color": "#CC6699"
     },
+    "gulp": {
+      "label": "Gulp",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/gulp/gulp-plain.svg",
+      "color": "#CF4647"
+    },
+    "npm": {
+      "label": "npm",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/npm/npm-original-wordmark.svg",
+      "color": "#CB3837"
+    },
     "visualstudio": {
       "label": "Visual Studio",
       "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/visualstudio/visualstudio-original.svg",
