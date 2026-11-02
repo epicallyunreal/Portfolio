@@ -220,6 +220,16 @@
           "summary": {
             "type": "string"
           },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Proof of the award, linked from the site's card. The PDFs don't print it."
+          },
+          "x_urlLabel": {
+            "type": "string",
+            "minLength": 1,
+            "description": "What the link on the card says, such as leaderboard or profile."
+          },
           "x_cv": {
             "type": "boolean",
             "description": "Omit or true: appears on the site and in the CV PDF. false: site only — the CV never sees it."
