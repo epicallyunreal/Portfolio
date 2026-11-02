@@ -75,7 +75,6 @@
         "django",
         "drf",
         "postgres",
-        "docker",
         "git",
         "github",
         "githubactions",
@@ -528,23 +527,31 @@
       "title": "HackerRank Orchestrate, October 2026: rank 176 of 4,094 (top 5%) in a 24-hour AI agent hackathon",
       "awarder": "HackerRank",
       "date": "2026",
+      "url": "https://www.hackerrank.com/contests/hackerrank-orchestrate-october26/challenges/ghost-data-still-exists/leaderboard?username=Nutan_Prabhat",
+      "x_urlLabel": "leaderboard",
       "summary": "HackerRank's 24-hour challenge asked for an AI agent that works out whether a company really deleted someone's data, scored across 518 requests, using logs, database snapshots, PDFs and screenshots. The submission combined a deterministic audit engine with Claude reading free-text requests in several languages, PDFs and screenshots, and a critic reviewing every finished answer. The critic caught 76 of 79 seeded faults, and 10 held-out samples, never opened, scored 0.848 against 0.851 on development samples. Built with Claude Code, with four reviewer agents at each stage. Model cost for the final run was about $16."
     },
     {
       "title": "HackerRank Orchestrate, September 2026: rank 224 of 3,062 (top 8%) in a 24-hour AI agent hackathon",
       "awarder": "HackerRank",
       "date": "2026",
+      "url": "https://www.hackerrank.com/contests/hackerrank-orchestrate-september26/challenges/buy-or-wait/leaderboard?username=Nutan_Prabhat",
+      "x_urlLabel": "leaderboard",
       "summary": "HackerRank's 24-hour challenge asked for an AI agent that decides whether someone can safely afford a purchase, scored across 250 requests. The submission combined a deterministic 90-day cash-flow engine, including a verifier that re-simulated every recommendation, with Claude reading 16 receipts and payslips and classifying 215 messages in two languages. Eight tagged versions each tested one hypothesis against 25 solved examples. Model cost for the full run was about $3."
     },
     {
       "title": "HackerRank 5-star: Python, SQL, C++",
       "awarder": "HackerRank",
-      "date": "2024"
+      "date": "2024",
+      "url": "https://www.hackerrank.com/profile/Nutan_Prabhat",
+      "x_urlLabel": "profile"
     },
     {
-      "title": "CodeChef, peak rating 1692 across 73 contests",
+      "title": "CodeChef, peak rating 1692 across 19 contests",
       "awarder": "CodeChef",
-      "date": "2024"
+      "date": "2024",
+      "url": "https://www.codechef.com/users/epicallyunreal",
+      "x_urlLabel": "profile"
     }
   ],
   "languages": [
@@ -560,7 +567,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.28.2",
+    "version": "2.28.3",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",

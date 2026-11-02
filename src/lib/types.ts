@@ -55,6 +55,10 @@ export interface Award {
   awarder: string
   date: string
   summary?: string
+  /** Proof of the award, linked from the site's card. The PDFs don't print it. */
+  url?: string
+  /** What that link says, such as "leaderboard". */
+  x_urlLabel?: string
   /** false keeps this off the CV PDF; it still renders on the site. */
   x_cv?: boolean
 }

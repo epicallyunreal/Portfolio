@@ -50,6 +50,22 @@ export function AwardsEditor({
               onChange={(v) => ops.set(i, { ...award, summary: v || undefined })}
             />
           </Field>
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="md:col-span-2">
+              <Field label="Link">
+                <TextInput
+                  value={award.url ?? ''}
+                  onChange={(v) => ops.set(i, { ...award, url: v || undefined })}
+                />
+              </Field>
+            </div>
+            <Field label="Link label">
+              <TextInput
+                value={award.x_urlLabel ?? ''}
+                onChange={(v) => ops.set(i, { ...award, x_urlLabel: v || undefined })}
+              />
+            </Field>
+          </div>
         </EntryCard>
       ))}
       <Btn onClick={() => ops.add({ ...BLANK_AWARD })}>+ add award</Btn>
