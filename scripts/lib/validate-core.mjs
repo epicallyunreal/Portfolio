@@ -211,6 +211,21 @@ export function validateDataDetailed({
     )
   }
 
+  // 8. ** marks a skim point in a work highlight. An unpaired one prints as
+  //    literal asterisks on both the site and the PDF.
+  resume.work?.forEach((entry, i) => {
+    entry.highlights?.forEach((highlight, j) => {
+      if ((highlight.match(/\*\*/g) ?? []).length % 2 === 1) {
+        add(
+          R,
+          `/work/${i}/highlights/${j}`,
+          `${R} work[${i}].highlights[${j}]`,
+          `unpaired ** in "${highlight}"`,
+        )
+      }
+    })
+  })
+
   return errors
 }
 

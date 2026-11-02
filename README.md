@@ -27,7 +27,7 @@ exists, it's that the pipeline around it holds the content honest.
   (every skill key must resolve, a section listed with no data fails, CDN URLs must be
   version-pinned, the phone number must never reach committed JSON). CI fails with the offending
   key named.
-- **One dataset, two artifacts.** The site and a Calibri-metric CV PDF are rendered from the same
+- **One dataset, two artifacts.** The site and the CV PDF are rendered from the same
   JSON, so they cannot drift. The PDF is printed from a hidden `/cv` route by Puppeteer, and its
   text layer is checked to survive extraction — an ATS reads that, not the page.
 - **An in-browser editor** at `/edit` with sectional saves, live validation, a field-level
@@ -102,8 +102,8 @@ npm run build:og      # regenerate the Open Graph image from cv.json
 npm run build:favicon # regenerate the monogram favicon from cv.json
 ```
 
-The CV follows [CV_PDF_Layout_Spec.md](CV_PDF_Layout_Spec.md), using self-hosted Carlito
-(metrically identical to Calibri) so CI renders the same layout as Word. Page count is reported,
+The CV follows [CV_PDF_Layout_Spec.md](CV_PDF_Layout_Spec.md), using self-hosted Tinos
+(metrically identical to Times New Roman) so CI renders the same layout as a local build. Page count is reported,
 not asserted. The CV is the full record and runs as long as its content, with `x_meta.cvFull`
 printing every project's dates, addresses and highlights. The Resume is the one-page version.
 
@@ -153,8 +153,8 @@ Exit codes: 1 validation, 2 bad arguments or missing input, 3 render failure.
 
 With no flags the script serves the two site documents as described above, which is what CI runs.
 
-Ligatures are switched off on the print route on purpose. Carlito's `ti`/`tt`/`tf` ligature glyphs
-carry no `ToUnicode` mapping in the subset Chrome embeds, so the page looked right while text
+Ligatures are switched off on the print route on purpose. The previous print font, Carlito, had
+`ti`/`tt`/`tf` ligature glyphs with no `ToUnicode` mapping in the subset Chrome embeds, so the page looked right while text
 extraction silently deleted them — "Integration" came out as "Integra on", "Portfolio" as
 "Por olio". A CV is read by keyword matchers before it is read by a person, so the text layer is
 the artifact that matters.
@@ -225,7 +225,7 @@ take ideas from it, ask me about it. Please don't redeploy it as your own.
 
 Third-party components keep their own licences:
 
-- [Carlito](https://github.com/googlefonts/carlito) — SIL Open Font License 1.1, redistributed in
+- [Tinos](https://github.com/googlefonts/tinos) — SIL Open Font License 1.1, redistributed in
   `public/fonts/` with its licence text at [`public/fonts/OFL.txt`](public/fonts/OFL.txt).
 - [devicon](https://github.com/devicons/devicon) (MIT) and
   [simple-icons](https://github.com/simple-icons/simple-icons) (CC0) — loaded from jsDelivr at

@@ -1,24 +1,24 @@
 /* CV print layout — see CV_PDF_Layout_Spec.md. Loaded only on the /cv route. */
 
-/* Carlito is metric-compatible with Calibri (the original CV's font) and
-   self-hosted so the CI runner renders identical metrics. */
+/* Tinos is metric-compatible with Times New Roman and self-hosted so the CI
+   runner renders identical metrics. */
 @font-face {
-  font-family: 'Carlito';
-  src: url('/fonts/carlito-latin-400-normal.woff2') format('woff2');
+  font-family: 'Tinos';
+  src: url('/fonts/tinos-latin-400-normal.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: block;
 }
 @font-face {
-  font-family: 'Carlito';
-  src: url('/fonts/carlito-latin-700-normal.woff2') format('woff2');
+  font-family: 'Tinos';
+  src: url('/fonts/tinos-latin-700-normal.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: block;
 }
 @font-face {
-  font-family: 'Carlito';
-  src: url('/fonts/carlito-latin-400-italic.woff2') format('woff2');
+  font-family: 'Tinos';
+  src: url('/fonts/tinos-latin-400-italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: block;
@@ -36,13 +36,13 @@ body:has(.cv-root) {
 }
 
 .cv-root {
-  font-family: 'Carlito', 'Calibri', sans-serif;
-  font-size: 10.5pt;
-  /* Carlito's ti/tt/tf ligature glyphs carry no ToUnicode mapping in the
-     subset Chrome embeds, so pdftotext silently deletes them — "Integration"
-     extracts as "Integra on", "Portfolio" as "Por olio". An ATS reads that
-     text layer, so the words that matter most must survive it. Rendering is
-     visually identical here; only the extraction changes. */
+  font-family: 'Tinos', 'Times New Roman', serif;
+  font-size: 10pt;
+  /* A ligature glyph can carry no ToUnicode mapping in the subset Chrome embeds,
+     so pdftotext silently deletes it. Carlito, the previous print font, lost
+     ti/tt/tf this way — "Integration" extracted as "Integra on", "Portfolio" as
+     "Por olio". An ATS reads that text layer, so the words that matter most must
+     survive it. Rendering is visually identical here; only the extraction changes. */
   font-variant-ligatures: none;
   /* Kerning pulls "P." and "P," together, and the shifted glyph reads as a
      word gap: "ASP.NET" extracts as "ASP .NET" and "OOP," as "OOP ,". */
@@ -52,13 +52,27 @@ body:has(.cv-root) {
     'clig' 0,
     'dlig' 0,
     'kern' 0;
-  /* Spec baseline is 1.3; tightened so the one-page Resume holds its page —
-     this is the sanctioned lever when the page count breaks. */
-  line-height: 1.26;
+  /* Baseline to baseline as a multiple of the font size, so every size scales
+     with it. The Resume runs tight to hold one page; the CV takes more room. */
+  line-height: var(--cv-leading);
   color: #1f1f1f;
   background: #ffffff;
   max-width: 180mm;
   margin: 0 auto;
+  --cv-leading: 1;
+  --cv-section-before: 5pt;
+  --cv-section-after: 2pt;
+  --cv-section-rule-gap: 1pt;
+  --cv-job-before: 3pt;
+  --cv-job-after: 2pt;
+}
+.cv-root--full {
+  --cv-leading: 1.1;
+  --cv-section-before: 7pt;
+  --cv-section-after: 3pt;
+  --cv-section-rule-gap: 1.5pt;
+  --cv-job-before: 4pt;
+  --cv-job-after: 2pt;
 }
 
 /* Every link in the CV, wherever it sits. Scoped per-section previously,
@@ -74,14 +88,14 @@ body:has(.cv-root) {
   text-align: center;
 }
 .cv-name {
-  font-size: 20pt;
+  font-size: 16pt;
   font-weight: 700;
   color: #000000;
   text-transform: uppercase;
   margin: 0 0 2pt;
 }
 .cv-headline {
-  font-size: 12pt;
+  font-size: 11.5pt;
   color: #333333;
   margin: 0 0 2pt;
 }
@@ -101,9 +115,9 @@ body:has(.cv-root) {
   font-weight: 700;
   color: #111111;
   text-transform: uppercase;
-  margin: 8pt 0 3.5pt;
+  margin: var(--cv-section-before) 0 var(--cv-section-after);
   border-bottom: 0.75pt solid #8a8a8a;
-  padding-bottom: 2pt;
+  padding-bottom: var(--cv-section-rule-gap);
   break-after: avoid;
 }
 
@@ -117,11 +131,11 @@ body:has(.cv-root) {
   justify-content: space-between;
   align-items: baseline;
   gap: 8pt;
-  margin: 5pt 0 2.5pt;
+  margin: var(--cv-job-before) 0 var(--cv-job-after);
   break-after: avoid;
 }
 .cv-job-title {
-  font-size: 10.5pt;
+  font-size: 11pt;
 }
 .cv-job-title strong {
   font-weight: 700;
@@ -140,13 +154,19 @@ body:has(.cv-root) {
 }
 .cv-bullets li {
   padding-left: 14pt;
-  text-indent: -9pt;
+  /* The width of '• ', so wrapped lines start exactly under the first line's text. */
+  text-indent: -0.6em;
   margin: 0 0 1.5pt;
   /* A document longer than one page breaks between bullets, never through one. */
   break-inside: avoid;
 }
 .cv-bullets li::before {
   content: '• ';
+}
+
+/* A hyphenated or slashed term stays on one line, so a parser never reads it in two parts. */
+.cv-whole {
+  white-space: nowrap;
 }
 
 /* ---- Skill lines & plain lines ---- */
@@ -170,10 +190,4 @@ body:has(.cv-root) {
 /* A short section kept whole, heading and lines together. */
 .cv-keep {
   break-inside: avoid;
-}
-
-/* The Lab pointer sits apart from the sections above it without earning a
-   heading of its own. */
-.cv-lab {
-  margin-top: 6pt;
 }

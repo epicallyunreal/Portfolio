@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from 'react'
+import { Emphasised } from '../components/Emphasised'
 import { formatDate, orderTech, orderedProjects, resume, techAsset } from '../lib/data'
 import './cv.css'
 
@@ -31,6 +32,23 @@ const displayUrl = (url: string) =>
 // for print (x_meta.techLabels); the site never sees those.
 const labels = (keys: string[]) =>
   orderTech(keys).map((k) => resume.x_meta.techLabels?.[k] ?? techAsset(k).label)
+
+/**
+ * A browser may end a line after a hyphen or a slash, which splits a term like
+ * multi-tenant or CI/CD in the text a parser reads. Here a line only ends
+ * between words.
+ */
+function keepWhole(text: string): ReactNode {
+  return text.split(/(\S*[-/]\S*)/).map((part, i) =>
+    i % 2 === 1 ? (
+      <span key={i} className="cv-whole">
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  )
+}
 
 /**
  * A name that becomes a link when there is somewhere to point at. Entries
@@ -88,14 +106,19 @@ export default function CvPrint() {
   // applicant-tracking parser reads.
   const contactParts: { text: string; href?: string }[] = []
   if (basics.location?.city) contactParts.push({ text: `${basics.location.city}, India` })
+  if (x_meta.cvAvailability) contactParts.push({ text: x_meta.cvAvailability })
   if (phone) contactParts.push({ text: phone, href: `tel:${phone.replace(/[^+\d]/g, '')}` })
   if (basics.email) contactParts.push({ text: basics.email, href: `mailto:${basics.email}` })
   // The site leads the links line: it is the one address that carries the
   // others, and the CV is where a reader first meets it.
   const links = [basics.url, ...basics.profiles.map((p) => p.url)].filter(Boolean)
+  // One page cannot spare a heading for one line, so the short form folds its
+  // achievements into the certifications section. The long form keeps them apart.
+  const awards = onCv(resume.awards)
+  const foldAwards = !x_meta.cvFull && awards.length > 0
 
   return (
-    <main className="cv-root">
+    <main className={x_meta.cvFull ? 'cv-root cv-root--full' : 'cv-root'}>
       <header className="cv-header">
         <h1 className="cv-name">{basics.name}</h1>
         <p className="cv-headline">{x_meta.cvHeadline}</p>
@@ -118,13 +141,13 @@ export default function CvPrint() {
       </header>
 
       <h2 className="cv-section">Professional Summary</h2>
-      <p className="cv-summary">{basics.summary}</p>
+      <p className="cv-summary">{keepWhole(basics.summary)}</p>
 
       <h2 className="cv-section">Technical Skills</h2>
       {onCv(resume.skills).map((group) => (
         <p key={group.name} className="cv-line">
-          <strong>{group.name}:</strong> {labels(group.keywords).join(', ')}
-          {group.x_note ? ` - ${group.x_note}` : ''}
+          <strong>{group.name}:</strong> {keepWhole(labels(group.keywords).join(', '))}
+          {group.x_note ? <> - {keepWhole(group.x_note)}</> : null}
         </p>
       ))}
 
@@ -133,7 +156,9 @@ export default function CvPrint() {
         <div key={`${entry.name}-${entry.startDate}`}>
           <p className="cv-job">
             <span className="cv-job-title">
-              <strong>{entry.position}</strong> - {entry.name}
+              <strong>
+                {entry.position} - {entry.name}
+              </strong>
             </span>
             <span className="cv-dates">
               {formatDate(entry.startDate)} – {formatDate(entry.endDate)}
@@ -141,7 +166,9 @@ export default function CvPrint() {
           </p>
           <ul className="cv-bullets">
             {entry.highlights.map((h, i) => (
-              <li key={i}>{h}</li>
+              <li key={i}>
+                <Emphasised text={h} render={keepWhole} />
+              </li>
             ))}
           </ul>
         </div>
@@ -172,11 +199,11 @@ export default function CvPrint() {
                     ))}
                   </p>
                 ) : null}
-                <p className="cv-line">{project.description}</p>
+                <p className="cv-line">{keepWhole(project.description)}</p>
                 {project.highlights && project.highlights.length > 0 ? (
                   <ul className="cv-bullets">
                     {project.highlights.map((h, i) => (
-                      <li key={i}>{h}</li>
+                      <li key={i}>{keepWhole(h)}</li>
                     ))}
                   </ul>
                 ) : null}
@@ -188,10 +215,8 @@ export default function CvPrint() {
               {/* One destination per project, carried by the name. A running
                   instance is what a reader will open, so it wins over the repo
                   when a project has both; the site still shows the pair. */}
-              <strong>
-                <Linked url={project.x_live ?? project.url}>{project.name}</Linked>
-              </strong>{' '}
-              - {project.description}
+              <Linked url={project.x_live ?? project.url}>{project.name}</Linked> -{' '}
+              {keepWhole(project.description)}
             </p>
           ))}
 
@@ -210,7 +235,17 @@ export default function CvPrint() {
       </div>
 
       <div className="cv-keep">
-        <h2 className="cv-section">Certifications</h2>
+        <h2 className="cv-section">
+          {foldAwards ? 'Achievements and Certifications' : 'Certifications'}
+        </h2>
+        {foldAwards
+          ? awards.map((a) => (
+              <p key={a.title} className="cv-line">
+                {a.title}
+                {a.summary ? <> - {keepWhole(a.summary)}</> : null}
+              </p>
+            ))
+          : null}
         {x_meta.cvCertsInline ? (
           // One running line instead of a list, for a CV that has to hold to a
           // single page. Each name still links to its credential; the date and
@@ -219,10 +254,7 @@ export default function CvPrint() {
             {onCv(resume.certificates).map((cert, i) => (
               <span key={cert.name}>
                 {i > 0 ? ', ' : ''}
-                <strong>
-                  <Linked url={cert.url}>{cert.name}</Linked>
-                </strong>{' '}
-                ({cert.issuer}
+                <Linked url={cert.url}>{keepWhole(cert.name)}</Linked> ({cert.issuer}
                 {cert.x_status === 'in-progress' ? `, ${certStatusText(cert)}` : ''})
               </span>
             ))}
@@ -231,36 +263,25 @@ export default function CvPrint() {
           <ul className="cv-bullets">
             {onCv(resume.certificates).map((cert) => (
               <li key={cert.name}>
-                <strong>
-                  <Linked url={cert.url}>{cert.name}</Linked>
-                </strong>{' '}
-                - {cert.issuer} ({certStatusText(cert)}){cert.x_note ? ` · ${cert.x_note}` : ''}
+                <Linked url={cert.url}>{keepWhole(cert.name)}</Linked> - {cert.issuer} (
+                {certStatusText(cert)}){cert.x_note ? <> · {keepWhole(cert.x_note)}</> : null}
               </li>
             ))}
           </ul>
         )}
       </div>
 
-      {onCv(resume.awards).length > 0 ? (
+      {x_meta.cvFull && awards.length > 0 ? (
         <div className="cv-keep">
           <h2 className="cv-section">Achievements</h2>
           <ul className="cv-bullets">
-            {x_meta.cvFull ? (
-              onCv(resume.awards).map((a) => (
-                <li key={a.title}>
-                  <strong>{a.title}</strong>
-                  {awardYear(a)}
-                  {a.summary ? `. ${a.summary}` : ''}
-                </li>
-              ))
-            ) : (
-              <li>
-                {onCv(resume.awards)
-                  .map((a) => a.title)
-                  .join(' · ')}
-                .
+            {awards.map((a) => (
+              <li key={a.title}>
+                <strong>{keepWhole(a.title)}</strong>
+                {awardYear(a)}
+                {a.summary ? <>. {keepWhole(a.summary)}</> : null}
               </li>
-            )}
+            ))}
           </ul>
         </div>
       ) : null}

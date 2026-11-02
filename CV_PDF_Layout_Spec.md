@@ -1,11 +1,11 @@
 # CV PDF — Layout Specification
 
-The downloadable CV on the portfolio must be visually identical to the Word/PDF version already in circulation. This document specifies that layout precisely so it can be reproduced in a print stylesheet.
+This document specifies the layout of the downloadable CV and Resume, so it can be reproduced in a print stylesheet. It began as a copy of the original Word CV. The font, type sizes and spacing have since been changed on purpose.
 
 **Source of truth:** `data/cv.json`. Nothing in the PDF is hardcoded.
 **Recommended implementation:** a hidden `/cv` route rendered with print CSS, exported by Puppeteer (`scripts/build-resume-pdf.mjs`) to `documents/Nutan_Prabhat_CV.pdf`.
 
-The original is generated with the `docx` library, so all measurements below are converted from twips (1 twip = 1/20 pt) into points and millimetres.
+All measurements below are in points and millimetres.
 
 ---
 
@@ -30,28 +30,27 @@ The original is generated with the `docx` library, so all measurements below are
 
 ## 2. Typography
 
-Base font is **Calibri**. Calibri is not present on Linux CI runners, so **self-host a metric-compatible font** in the repo rather than relying on the system — `Carlito` is metrically identical to Calibri and open-licensed. Ship it as WOFF2 under `public/fonts/` and `@font-face` it in the print stylesheet. Do not substitute Arial or Helvetica; the metrics differ enough to change the page count.
+Base font is **Times New Roman**, self-hosted as `Tinos`, which is metrically identical and open-licensed, because Times New Roman is not present on Linux CI runners. Ship it as WOFF2 under `public/fonts/` and `@font-face` it in the print stylesheet. A different font changes the page count, so re-measure the Resume after any swap and set the bullet indent to that font's width of `• `.
 
-| Element                  | Size   | Weight  | Colour                             |
-| ------------------------ | ------ | ------- | ---------------------------------- |
-| Name                     | 20pt   | Bold    | `#000000`                          |
-| Headline (under name)    | 12pt   | Regular | `#333333`                          |
-| Contact / links line     | 10pt   | Regular | `#1F1F1F`                          |
-| Section header           | 11pt   | Bold    | `#111111`                          |
-| Body text, bullets       | 10.5pt | Regular | `#1F1F1F`                          |
-| Job title                | 10.5pt | Bold    | `#1F1F1F`                          |
-| Company name             | 10.5pt | Regular | `#1F1F1F`                          |
-| Date range               | 10pt   | Regular | `#333333`                          |
-| Skill label (`Backend:`) | 10.5pt | Bold    | `#1F1F1F`                          |
-| Link text                | 10pt   | Regular | Default hyperlink blue, underlined |
+| Element                  | Size   | Weight                   | Colour                             |
+| ------------------------ | ------ | ------------------------ | ---------------------------------- |
+| Name                     | 16pt   | Bold                     | `#000000`                          |
+| Headline (under name)    | 11.5pt | Regular                  | `#333333`                          |
+| Contact / links line     | 10pt   | Regular                  | `#1F1F1F`                          |
+| Section header           | 11pt   | Bold                     | `#111111`                          |
+| Body text, bullets       | 10pt   | Regular, bold highlights | `#1F1F1F`                          |
+| Job title and company    | 11pt   | Bold                     | `#1F1F1F`                          |
+| Date range               | 10pt   | Regular                  | `#333333`                          |
+| Skill label (`Backend:`) | 10pt   | Bold                     | `#1F1F1F`                          |
+| Link text                | 10pt   | Regular                  | Default hyperlink blue, underlined |
 
-Body line-height: **1.3**. Tune only if the page count breaks — this is the lever that matters most.
+Baseline to baseline is **10pt on the Resume** (line-height 1) and **11pt on the CV** (line-height 1.1). Tune only if the page count breaks — this is the lever that matters most.
 
 ---
 
 ## 3. Spacing scale
 
-Converted from the original. Margins are _bottom_ unless noted.
+Margins are _bottom_ unless noted. Where two values are given, the first is the Resume and the second is the CV.
 
 | Element                          | Space before | Space after |
 | -------------------------------- | ------------ | ----------- |
@@ -59,10 +58,10 @@ Converted from the original. Margins are _bottom_ unless noted.
 | Headline                         | —            | 2pt         |
 | Contact line                     | —            | 1.5pt       |
 | Links line                       | —            | 3pt         |
-| Section header                   | 10pt         | 4pt         |
+| Section header                   | 5pt / 7pt    | 2pt / 3pt   |
 | Summary paragraph                | —            | 3pt         |
-| Job heading                      | 6pt          | 3pt         |
-| Bullet                           | —            | 2pt         |
+| Job heading                      | 3pt / 4pt    | 2pt         |
+| Bullet                           | —            | 1.5pt       |
 | Skill line                       | —            | 2pt         |
 | Plain line (education, projects) | —            | 2pt         |
 
@@ -73,14 +72,14 @@ Converted from the original. Margins are _bottom_ unless noted.
 ### 4.1 Header block — centred
 
 ```
-                        NUTAN PRABHAT                          ← 20pt bold, uppercase
-   Senior Software Engineer | Python · Django · REST APIs      ← 12pt, #333
-              · React · AI Integration
-     Pune, India  ·  +91-XXXXXXXXXX  ·  email@example.com      ← 10pt
+                        NUTAN PRABHAT                          ← 16pt bold, uppercase
+     Software Engineer | Backend and Full-Stack | C#, .NET     ← 11.5pt, #333, one line
+  Pune, India  ·  Availability  ·  +91-XXXXXXXXXX  ·  email    ← 10pt
       linkedin.com/in/nutan-prabhat · github.com/username      ← 10pt, hyperlinked
 ```
 
 - Name is uppercase in the rendered output.
+- The availability text comes from `x_meta.cvAvailability` and is left out when empty.
 - Separator between contact items is `  ·  ` (two spaces either side of a middot).
 - **Phone appears in the PDF but never on the website.** `basics.phone` is empty in `cv.json` by design — inject the number at PDF build time from a repository secret or a build-time env var (`CV_PHONE`), never from committed JSON.
 
@@ -94,9 +93,9 @@ Uppercase, bold, 11pt, with a hairline rule directly beneath:
   font-weight: 700;
   color: #111;
   text-transform: uppercase;
-  margin: 10pt 0 4pt;
+  margin: 5pt 0 2pt; /* CV: 7pt 0 3pt */
   border-bottom: 0.75pt solid #8a8a8a;
-  padding-bottom: 2pt;
+  padding-bottom: 1pt; /* CV: 1.5pt */
   break-after: avoid; /* never orphan a header at a page foot */
 }
 ```
@@ -105,10 +104,10 @@ Uppercase, bold, 11pt, with a hairline rule directly beneath:
 
 ### 4.3 Job heading
 
-Title bold, company regular after an em dash, dates flushed right on the same line:
+Title and company bold, joined by a hyphen, dates flushed right on the same line:
 
 ```
-Senior Software Developer — Aziro Technologies          Dec 2025 – Present
+Senior Software Engineer - Aziro (formerly MSys Technologies)          Dec 2025 – Oct 2026
 ```
 
 Use flexbox with `justify-content: space-between`, not tabs or tables. Date range uses an **en dash** with spaces, and `null` `endDate` renders as `Present`. Apply `break-after: avoid` so a heading never separates from its first bullet.
@@ -118,12 +117,12 @@ Use flexbox with `justify-content: space-between`, not tabs or tables. Date rang
 ```css
 .bullet {
   padding-left: 14pt;
-  text-indent: -9pt; /* hanging indent */
-  margin-bottom: 2pt;
+  text-indent: -0.6em; /* the width of '• ' in Tinos */
+  margin-bottom: 1.5pt;
 }
 ```
 
-Marker is `•`. Bullets wrap to the hanging indent, not back to the margin.
+Marker is `•`. Bullets wrap to the hanging indent, not back to the margin. A work highlight marks its skim points `**like this**` in the JSON, and those print bold.
 
 ### 4.5 Skill line
 
@@ -157,7 +156,7 @@ Project names that have a `url` are hyperlinked on the name only, not the descri
 | 5   | PROJECTS             | `projects[]` — `name`, `description`, `url`                                                              |
 | 6   | EDUCATION            | `education[]` — `studyType`, `area`, `institution`, dates, `score`                                       |
 | 7   | CERTIFICATIONS       | `certificates[]` — `name`, `issuer`, `date`, `x_status`                                                  |
-| 8   | ACHIEVEMENTS         | `awards[]` — **not yet in cv.json, see §6**                                                              |
+| 8   | ACHIEVEMENTS         | `awards[]`, full CV only. The one-page Resume prints these first under ACHIEVEMENTS AND CERTIFICATIONS   |
 | 9   | LANGUAGES            | `languages[]` — comma-joined `language` values                                                           |
 
 **Rendering rules**
@@ -214,4 +213,4 @@ The `/cv` route must be excluded from the sitemap and marked `noindex`.
 - [ ] No job heading is separated from its first bullet.
 - [ ] Adding a certificate to `cv.json` changes the PDF on the next push, with no code change.
 - [ ] The phone number appears in the PDF and nowhere in the deployed HTML or JSON.
-- [ ] Font renders as Carlito/Calibri metrics on the CI runner, not a fallback.
+- [ ] Font renders as Tinos on the CI runner, not a fallback.
