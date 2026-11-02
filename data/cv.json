@@ -6,7 +6,7 @@
     "email": "prabhat9819@gmail.com",
     "phone": "",
     "url": "https://nutanprabhat.dev",
-    "summary": "Software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I worked directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, on a 500+ page multi-tenant SaaS product used by 30,000+ businesses, I worked on UI revamp, added an integration layer to localization and restored degraded SQL queries. I build with Claude Code daily and am learning agents and RAG with LangChain and LangGraph. Looking for forward deployed and backend roles.",
+    "summary": "I have 4.5+ years of backend and full stack experience, 3.5+ of them in C#. My work covers collaboration across teams on Zenoti's multi-tenant ASP.NET SaaS product used by 30,000+ businesses, ownership of a game from idea to 10K+ downloads, and problem solving that raised a Python retrieval system's Top-1 accuracy from 41.9% to 97.7%. Claude Code is part of my daily work, and with it I ranked top 5% of 4,094 in a 24-hour AI agent hackathon.",
     "location": {
       "city": "Pune",
       "countryCode": "IN"
@@ -32,12 +32,10 @@
       "endDate": "2026-10",
       "summary": "Sole engineer on the account. Python throughout, scoping to handover.",
       "highlights": [
-        "Sole engineer on an enterprise client account, owning scoping, HLD/LLD, build, test, documentation and handover.",
-        "Raised Top-1 accuracy of a two-stage visual retrieval system from 41.9% to 97.7% by growing the feature-based reranker from 3 to 8 features and tuning it against MRR, with CLIP ViT-B/16 embeddings in Qdrant handling recall.",
-        "Delivered a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, spatial indexing, a PySide6 interface and an integration with the client's system, plus one-click batch processing across multiple folders.",
-        "Automated 3+ manual workflows by building a JSON rule engine that binds validation rules to check and fix functions at runtime, with priority-ordered execution and full audit trails.",
-        "Replaced the manual creation of CAD file variations by building rule-based geometry augmentation that generates controlled variations of each file and heals the 2D geometry after every change.",
-        "Kept both platforms configuration-driven, so new categories, thresholds and weights go in through JSON."
+        "Raised a Python visual retrieval system's **Top-1 accuracy from 41.9% to 97.7%** by growing its reranker from 3 to 8 features, tuned against MRR, with CLIP embeddings in Qdrant for recall. Re-keyed the Qdrant index, extracted the new features from images and set each weight through an evaluation harness.",
+        "**Sole engineer on an enterprise client account**, owning scoping, HLD/LLD, build, test, documentation and handover.",
+        "Delivered a config-driven desktop **CAD processing platform** in Python and PySide6 end to end, with DXF parsing, 2D geometry, spatial indexing and an integration with the client's system.",
+        "**Automated 3+ manual workflows** by building a JSON rule engine with 10+ rules, priority-ordered execution and audit trails. Made batch processing of CAD files **one click, with each file's full output set and audits in under 30 seconds**."
       ],
       "x_tech": [
         "python",
@@ -60,19 +58,15 @@
     },
     {
       "name": "UnKl Games",
-      "position": "Co-Founder & Game Developer",
+      "position": "Co-Founder & Developer",
       "startDate": "2024-06",
       "endDate": "2025-12",
       "summary": "Unity and C# on the client, server-side JavaScript on Unity Cloud Code.",
       "highlights": [
-        "Reached 10K+ downloads on Google Play and 500+ monthly active players with no paid ads by building and shipping Pen Fight 2D, a turn-based multiplayer mobile game in Unity and C#, end to end.",
-        "Built a server-authoritative economy in server-side JavaScript on Unity Cloud Code, covering shop, assets, upgrades, a progression chart and notifications.",
-        "Architected online multiplayer and friend challenges on Unity Lobby and Relay.",
-        "Built a master-follower physics simulation that handles race conditions on nearly every action.",
-        "Architected race-safe match negotiation with a single start authority, turn timers, disconnect forfeits and version gating.",
-        "Integrated Google Cloud for authentication and APIs, plus Unity Cloud Save for account and progress sync.",
-        "Designed the fix for a cross-device desync from resolution-dependent UI scaling, sending normalised coordinates over the wire.",
-        "Ran the full release cycle, from internal test tracks and feedback fixes to production rollout and updates."
+        "Reached **10K+ downloads and peaks of 500+ daily and 2,500+ monthly active players with no paid ads** by writing and shipping Pen Fight 2D, a turn-based multiplayer mobile game in C# and Unity.",
+        "Owned the **full SDLC from ideation to production**, through internal testing, bug fixes, a closed beta and new features.",
+        "Designed a **server-authoritative economy** in JavaScript on Unity Cloud Code, covering shop, upgrades, progression and notifications. Integrated Google Cloud auth and APIs, and Unity Cloud Save for progress sync.",
+        "Architected **online multiplayer** and friend challenges on Unity Lobby and Relay. Wrote a master-follower physics simulation, and designed race-safe match negotiation with a single start authority, turn timers, disconnect forfeits and version gating."
       ],
       "x_tech": [
         "unity",
@@ -106,12 +100,13 @@
       "endDate": "2024-05",
       "summary": "Backend and full-stack work on a large multi-tenant enterprise product.",
       "highlights": [
-        "Flagged 40+ would-be defects as primary code reviewer, reached in just over a year, requesting changes on 25+ of 50+ PRs including senior-approved work, and mentored teammates on defect resolution.",
-        "Designed and owned a localization integration layer in JavaScript and C# that launched with 5+ languages, including French and Canadian French, with providers switchable by configuration, per-element opt-out and coverage through the API and database layers.",
-        "Restored SQL queries degraded 2 to 3x to near-baseline response times with no downtime, by adding an index and gating a stored procedure's longer path behind a setting.",
-        "Removed a data-loss risk by rewriting legacy stored procedures, one of them 4,000 lines, replacing a destructive save that deleted and re-inserted every row with differential updates.",
-        "Migrated the highest-complexity pages of a large ASP.NET C# codebase to jQuery 3.5+, contributing refactor patterns adopted into shared libraries.",
-        "Extended Elasticsearch type-ahead search with minimum-character filtering and query tuning."
+        "Shipped **full-stack features in ASP.NET, C#, JavaScript, jQuery and SQL**, several with a product-wide footprint, and traced production bugs through server logs.",
+        "Removed **data-loss risk** by replacing delete-and-reinsert saves with differential updates in **SQL Server stored procedures**, one 4,000 lines long.",
+        "Caught **40+ would-be defects** before merge as the team's **primary code reviewer**, a role reached in just over a year, requesting changes on 25+ of 50+ PRs and mentoring teammates.",
+        "Stopped **2 to 3x query slowdowns** in localization changes from reaching release, restoring queries to near baseline with an index and a setting to gate the stored procedures' longer path.",
+        "Removed page-by-page localization integration by designing and owning a **plug-and-play integration layer**. **One call on a module's Master page localizes that module**, and the provider is initialized through one settings page.",
+        "Handled per-element opt-out keywords and the manual translation route through the same layer, and used async calls for provider responses on DOM load.",
+        "Made localization changes for **5+ languages**, which impacted the web app, REST APIs, databases, and mobile and iOS apps. Owned **date and time format localization across the whole product**."
       ],
       "x_tech": [
         "mssql",
@@ -145,9 +140,7 @@
       "endDate": "2022-08",
       "summary": "Frontend delivery and a permission-model extension that unlocked a major account.",
       "highlights": [
-        "Contributed production frontend changes across a full UI redesign in HTML, SCSS, jQuery and ASPX.",
-        "Unlocked a major account by extending a hierarchical permission model so a previously passive intermediate tier could control multiple entity types, delivered as a 2-week proof of concept.",
-        "Provided post-patch production support and resolved high-priority escalations."
+        "**Unlocked a major account** by extending a hierarchical permission model in C# and .NET as a 2-week proof of concept. Contributed production frontend changes across a full UI redesign in HTML, CSS, SCSS, jQuery and ASPX."
       ],
       "x_tech": [
         "html5",
@@ -309,28 +302,50 @@
   "skills": [
     {
       "name": "Languages",
-      "keywords": ["python", "csharp", "cpp", "javascript", "sql"]
+      "keywords": ["csharp", "python", "javascript", "typescript", "sql", "cpp"]
     },
     {
-      "name": "Backend",
-      "keywords": ["django", "drf", "aspnet", "rest", "systemdesign", "dsa", "etl", "i18n"]
+      "name": "Backend development",
+      "keywords": [
+        "aspnet",
+        "dotnetcore",
+        "dotnetframework",
+        "mvc",
+        "entityframework",
+        "rest",
+        "microservices",
+        "etl",
+        "i18n",
+        "django",
+        "drf"
+      ]
+    },
+    {
+      "name": "Frontend",
+      "keywords": ["react", "jquery", "html5", "css3", "scss", "tailwind", "vite"]
     },
     {
       "name": "Databases",
-      "keywords": ["postgres", "mysql", "mssql", "elasticsearch", "storedprocedures", "sqlopt"]
+      "keywords": ["postgres", "mysql", "mssql", "storedprocedures", "sqlopt", "querytuning"]
     },
     {
-      "name": "AI",
+      "name": "Retrieval & embeddings",
+      "keywords": ["vectordb", "clip", "qdrant", "similaritysearch", "reranking", "pytorch"]
+    },
+    {
+      "name": "Generative AI",
       "keywords": [
-        "vectordb",
-        "retrieval",
-        "clip",
-        "qdrant",
-        "similaritysearch",
-        "reranking",
-        "pytorch"
-      ],
-      "x_note": "learning LLMs and RAG with LangChain, Pydantic and LangGraph agents"
+        "llm",
+        "rag",
+        "aiagents",
+        "langchain",
+        "pydantic",
+        "langgraph",
+        "orchestration",
+        "mcp",
+        "promptengineering",
+        "llmevaluation"
+      ]
     },
     {
       "name": "Cloud & DevOps",
@@ -338,11 +353,21 @@
     },
     {
       "name": "Testing",
-      "keywords": ["pytest", "postman", "codereview"]
+      "keywords": ["pytest", "postman"]
     },
     {
-      "name": "Frontend",
-      "keywords": ["react", "typescript", "jquery", "html5", "css3", "tailwind", "vite"]
+      "name": "Engineering",
+      "keywords": [
+        "systemdesign",
+        "designpatterns",
+        "oop",
+        "dsa",
+        "codereview",
+        "unittesting",
+        "agile",
+        "scrum",
+        "jira"
+      ]
     },
     {
       "name": "AI-Assisted Development",
@@ -351,7 +376,7 @@
     },
     {
       "name": "Also worked with",
-      "keywords": ["unity", "qt"]
+      "keywords": ["unity", "qt", "visualstudio"]
     }
   ],
   "projects": [
@@ -390,7 +415,7 @@
       "x_live": "https://nutanprabhat.dev",
       "highlights": [
         "One validator backs the CLI, the pre-commit hook and the editor, so all three agree by construction.",
-        "Site and Calibri-metric CV PDF render from the same JSON, printed by Puppeteer against a hidden route.",
+        "Site and CV PDF render from the same JSON, printed by Puppeteer against a hidden route.",
         "In-browser editor writes files locally and exports downloadable JSON when deployed, with no write path."
       ],
       "x_tech": [
@@ -540,7 +565,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.27.0",
+    "version": "2.28.0",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
@@ -559,7 +584,7 @@
         "emphasis": "Scope, design, build, ship."
       }
     ],
-    "cvHeadline": "Software Engineer | Backend · Python · Django · REST APIs · SQL · Retrieval · Claude Code",
+    "cvHeadline": "Software Engineer | Backend and Full-Stack | C#, .NET, Python, SQL | Vector DB, AI-assisted development",
     "availability": "Open to relocation (EU) and remote roles",
     "careerStart": "2022-02",
     "cvFull": true,
@@ -572,6 +597,12 @@
       "awards",
       "lab",
       "contact"
-    ]
+    ],
+    "cvAvailability": "Immediate joiner · Open to relocation",
+    "techLabels": {
+      "dsa": "Data Structures and Algorithms",
+      "mssql": "MSSQL Server",
+      "googlecloud": "Google Cloud (GCP)"
+    }
   }
 }

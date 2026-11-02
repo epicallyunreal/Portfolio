@@ -6,6 +6,7 @@ import { sectionItems } from '../lib/sections'
 import { useFilter } from '../hooks/useFilter'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import { EASE_ENTRANCE, STAGGER } from '../lib/motion'
+import { Emphasised } from '../components/Emphasised'
 import { MasterDetail } from '../components/MasterDetail'
 import { Reveal } from '../components/Reveal'
 import { SectionHeading } from '../components/SectionHeading'
@@ -45,7 +46,7 @@ function WorkCard({ entry }: { entry: WorkEntry }) {
                 key={i}
                 className="border-l-2 border-accent/40 pl-4 text-sm leading-relaxed text-muted"
               >
-                {highlight}
+                <Emphasised text={highlight} className="font-semibold text-ink" />
               </li>
             ))}
             {expanded
@@ -57,7 +58,7 @@ function WorkCard({ entry }: { entry: WorkEntry }) {
                     transition={{ duration: 0.3, ease: EASE_ENTRANCE, delay: i * STAGGER }}
                     className="border-l-2 border-accent/40 pl-4 text-sm leading-relaxed text-muted"
                   >
-                    {highlight}
+                    <Emphasised text={highlight} className="font-semibold text-ink" />
                   </motion.li>
                 ))
               : null}

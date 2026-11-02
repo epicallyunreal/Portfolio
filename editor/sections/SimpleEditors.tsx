@@ -286,6 +286,9 @@ export function MetaEditor({
       <Field label="Availability">
         <TextInput value={meta.availability} onChange={(v) => set('availability', v)} />
       </Field>
+      <Field label="CV availability" hint="Contact line in the PDF, after the location.">
+        <TextInput value={meta.cvAvailability ?? ''} onChange={(v) => set('cvAvailability', v)} />
+      </Field>
       <Field label="Career start" hint="YYYY-MM — drives the years-of-experience stat.">
         <TextInput value={meta.careerStart ?? ''} onChange={(v) => set('careerStart', v)} />
       </Field>

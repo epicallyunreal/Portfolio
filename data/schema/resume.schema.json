@@ -370,6 +370,10 @@
         "availability": {
           "type": "string"
         },
+        "cvAvailability": {
+          "type": "string",
+          "description": "Status printed on the CV contact line, after the location. The site keeps availability."
+        },
         "careerStart": {
           "type": "string",
           "pattern": "^\\d{4}(-\\d{2})?$"

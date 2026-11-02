@@ -105,6 +105,8 @@ export interface XMeta {
   /** Tech key → shorter label, used only when this document is printed. The site keeps assets.json's labels. */
   techLabels?: Record<string, string>
   availability: string
+  /** Status on the printed contact line, after the location. The site keeps availability. */
+  cvAvailability?: string
   careerStart?: string
   sectionOrder: SectionId[]
 }

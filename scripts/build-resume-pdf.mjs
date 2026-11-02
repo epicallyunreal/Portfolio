@@ -275,7 +275,7 @@ async function renderPdf({ outPath, inject, note }) {
       page.goto(url, { waitUntil: 'networkidle0' }),
     )
 
-    // The self-hosted Carlito must be loaded before printing or metrics shift.
+    // The self-hosted print font must be loaded before printing or metrics shift.
     await withTimeout(
       'fonts ready',
       page.evaluate(() => document.fonts.ready),
