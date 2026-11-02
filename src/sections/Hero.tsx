@@ -149,7 +149,18 @@ export function Hero() {
             <StaggeredName name={basics.name} reduced={reduced} />
           </h1>
 
-          <p className="mt-4 text-lg font-medium text-muted sm:text-xl">{basics.label}</p>
+          {/* A hyphenated term stays whole, so the line never wraps at "Full-". */}
+          <p className="mt-4 text-lg font-medium text-muted sm:text-xl">
+            {basics.label.split(/(\S*-\S*)/).map((part, i) =>
+              i % 2 === 1 ? (
+                <span key={i} className="whitespace-nowrap">
+                  {part}
+                </span>
+              ) : (
+                part
+              ),
+            )}
+          </p>
 
           {/* Every headline is stacked invisibly in the same grid cell, so the
               box is as large as the longest one ever needs and neither typing

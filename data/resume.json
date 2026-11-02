@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Nutan Prabhat",
-    "label": "Software Engineer, Backend & Full-Stack",
+    "label": "Software Engineer, Backend & Full-Stack with AI",
     "image": "/images/headshot.webp",
     "email": "prabhat9819@gmail.com",
     "phone": "",
@@ -409,7 +409,7 @@
     },
     {
       "name": "Portfolio",
-      "description": "React and TypeScript site built with Claude Code. Two JSON files drive the site and the CV PDF, and GitHub Actions blocks content that doesn't hold together.",
+      "description": "React and TypeScript site built with Claude Code. Three JSON files drive the site and the CV PDF, and GitHub Actions blocks content that doesn't hold together.",
       "startDate": "2026-08",
       "endDate": "2026-08",
       "url": "https://github.com/epicallyunreal/Portfolio",
@@ -567,7 +567,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.28.0",
+    "version": "2.28.1",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
@@ -584,6 +584,10 @@
       {
         "text": "Scope, design, build, ship. Usually alone.",
         "emphasis": "Scope, design, build, ship."
+      },
+      {
+        "text": "Too late to invent AI, Just in time to use it.",
+        "emphasis": "Just in time"
       }
     ],
     "cvHeadline": "Software Engineer | Backend and Full-Stack | C#, .NET, Python, SQL | Vector DB, AI-assisted development",
