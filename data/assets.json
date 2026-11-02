@@ -244,7 +244,7 @@
       "color": "#4169E1"
     },
     "vectordb": {
-      "label": "Vector DB",
+      "label": "Vector databases",
       "src": "",
       "color": "#DC244C"
     },
@@ -252,6 +252,126 @@
       "label": "Retrieval",
       "src": "",
       "color": "#DC244C"
+    },
+    "dotnetcore": {
+      "label": ".NET Core",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/dotnetcore/dotnetcore-original.svg",
+      "color": "#512BD4"
+    },
+    "dotnetframework": {
+      "label": ".NET Framework",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/dot-net/dot-net-original.svg",
+      "color": "#512BD4"
+    },
+    "mvc": {
+      "label": "MVC",
+      "src": "",
+      "color": "#512BD4"
+    },
+    "entityframework": {
+      "label": "Entity Framework",
+      "src": "",
+      "color": "#512BD4"
+    },
+    "jira": {
+      "label": "Jira",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/jira/jira-original.svg",
+      "color": "#0052CC"
+    },
+    "scss": {
+      "label": "SCSS",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/sass/sass-original.svg",
+      "color": "#CC6699"
+    },
+    "visualstudio": {
+      "label": "Visual Studio",
+      "src": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/visualstudio/visualstudio-original.svg",
+      "color": "#5C2D91"
+    },
+    "agile": {
+      "label": "Agile",
+      "src": "",
+      "color": "#0EA5E9"
+    },
+    "scrum": {
+      "label": "Scrum",
+      "src": "",
+      "color": "#16A34A"
+    },
+    "oop": {
+      "label": "OOP",
+      "src": "",
+      "color": "#8B5CF6"
+    },
+    "llm": {
+      "label": "LLMs",
+      "src": "",
+      "color": "#D97757"
+    },
+    "rag": {
+      "label": "RAG",
+      "src": "",
+      "color": "#0EA5E9"
+    },
+    "aiagents": {
+      "label": "AI agents",
+      "src": "",
+      "color": "#8B5CF6"
+    },
+    "langchain": {
+      "label": "LangChain",
+      "src": "",
+      "color": "#2F6F6B"
+    },
+    "langgraph": {
+      "label": "LangGraph",
+      "src": "",
+      "color": "#2F6F6B"
+    },
+    "pydantic": {
+      "label": "Pydantic",
+      "src": "",
+      "color": "#E92063"
+    },
+    "orchestration": {
+      "label": "Orchestration",
+      "src": "",
+      "color": "#8B5CF6"
+    },
+    "mcp": {
+      "label": "MCP",
+      "src": "",
+      "color": "#D97757"
+    },
+    "promptengineering": {
+      "label": "Prompt engineering",
+      "src": "",
+      "color": "#D97757"
+    },
+    "llmevaluation": {
+      "label": "LLM evaluation",
+      "src": "",
+      "color": "#D97757"
+    },
+    "querytuning": {
+      "label": "Query tuning",
+      "src": "",
+      "color": "#CC2927"
+    },
+    "unittesting": {
+      "label": "Unit testing",
+      "src": "",
+      "color": "#16A34A"
+    },
+    "designpatterns": {
+      "label": "Design patterns",
+      "src": "",
+      "color": "#64748B"
+    },
+    "microservices": {
+      "label": "Microservices",
+      "src": "",
+      "color": "#0EA5E9"
     }
   },
   "images": {

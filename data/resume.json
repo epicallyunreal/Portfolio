@@ -6,8 +6,11 @@
     "email": "prabhat9819@gmail.com",
     "phone": "",
     "url": "https://nutanprabhat.dev",
-    "summary": "Software engineer with 4+ years building and owning backend and full-stack systems in Python and C#. At Aziro I worked directly with an enterprise client as sole engineer and raised a retrieval system's Top-1 accuracy from 41.9% to 97.7%. At Zenoti, on a 500+ page multi-tenant SaaS product used by 30,000+ businesses, I worked on UI revamp, added an integration layer to localization and restored degraded SQL queries. I build with Claude Code daily and am learning agents and RAG with LangChain and LangGraph.",
-    "location": { "city": "Pune", "countryCode": "IN" },
+    "summary": "I have 4.5+ years of backend and full stack experience, 3.5+ of them in C#. My work covers collaboration across teams on Zenoti's multi-tenant ASP.NET SaaS product used by 30,000+ businesses, ownership of a game from idea to 10K+ downloads, and problem solving that raised a Python retrieval system's Top-1 accuracy from 41.9% to 97.7%. Claude Code is part of my daily work, and with it I ranked top 5% of 4,094 in a 24-hour AI agent hackathon.",
+    "location": {
+      "city": "Pune",
+      "countryCode": "IN"
+    },
     "profiles": [
       {
         "network": "LinkedIn",
@@ -29,10 +32,9 @@
       "endDate": "2026-10",
       "summary": "Sole engineer on the account. Python throughout, scoping to handover.",
       "highlights": [
-        "Sole engineer on an enterprise client account, owning scoping, HLD/LLD, build, test, documentation and handover.",
-        "Raised Top-1 accuracy of a two-stage visual retrieval system from 41.9% to 97.7% by growing the feature-based reranker from 3 to 8 features and tuning it against MRR, with CLIP ViT-B/16 embeddings in Qdrant handling recall.",
-        "Automated 3+ manual workflows by delivering a config-driven Python desktop CAD validation platform end to end, with DXF parsing, 2D computational geometry, PySide6, a JSON rule engine with audit trails and a client integration.",
-        "Replaced manual CAD-variation work with rule-based geometry augmentation that heals the 2D geometry."
+        "Raised a Python visual retrieval system's **Top-1 accuracy from 41.9% to 97.7%** by growing its reranker from 3 to 8 features, tuned against MRR, with CLIP embeddings in Qdrant for recall. Re-keyed the Qdrant index, extracted the new features from images and set each weight through an evaluation harness.",
+        "**Sole engineer on an enterprise client account**, owning scoping, HLD/LLD, build, test, documentation and handover.",
+        "Delivered a config-driven **Python CAD processing platform** end to end, with DXF parsing, spatial indexing, PySide6 and an integration with the client's system. **Automated 3+ manual workflows** with a JSON rule engine running 10+ rules in priority order, with audit trails. Made batch processing **one click, with each file's full output set in under 30 seconds**."
       ],
       "x_tech": [
         "python",
@@ -55,14 +57,14 @@
     },
     {
       "name": "UnKl Games",
-      "position": "Co-Founder & Game Developer",
+      "position": "Co-Founder & Developer",
       "startDate": "2024-06",
       "endDate": "2025-12",
       "summary": "Unity and C# on the client, server-side JavaScript on Unity Cloud Code.",
       "highlights": [
-        "Reached 10K+ downloads and 500+ MAU with no paid ads by shipping Pen Fight 2D, a turn-based Unity game.",
-        "Built a serverless, server-authoritative economy on Unity Cloud Code and integrated Google Cloud auth and APIs.",
-        "Architected online multiplayer and friend challenges on Unity Lobby and Relay, and built a master-follower physics simulation that handles race conditions on nearly every action."
+        "Reached **10K+ downloads and peaks of 500+ DAU and 2,500+ MAU with no paid ads** by writing and shipping Pen Fight 2D, a turn-based game in C# and Unity.",
+        "Owned the **full SDLC from ideation to production**, through internal testing, bug fixes, a closed beta and new features.",
+        "Designed a **serverless, server-authoritative economy** on Unity Cloud Code with Google Cloud auth. Architected race-safe **online multiplayer** and friend challenges on Unity Lobby and Relay, with master-follower physics."
       ],
       "x_tech": [
         "unity",
@@ -96,10 +98,12 @@
       "endDate": "2024-05",
       "summary": "Backend and full-stack work on a large multi-tenant enterprise product.",
       "highlights": [
-        "Flagged 40+ would-be defects as primary code reviewer, reached in just over a year, requesting changes on 25+ of 50+ PRs including senior-approved work, and mentored teammates on defect resolution.",
-        "Restored SQL queries degraded 2 to 3x to near-baseline response times with no downtime, by adding an index and gating a stored procedure's longer path behind a setting.",
-        "Removed a data-loss risk by rewriting legacy stored procedures, one of them 4,000 lines, to use differential updates.",
-        "Designed and owned a localization integration layer in JavaScript and C# that launched with 5+ languages, with providers switchable by configuration, per-element opt-out and coverage through the API and database layers."
+        "Shipped **full-stack features in ASP.NET, C#, JavaScript, jQuery and SQL**, several with a product-wide footprint, and traced production bugs through server logs.",
+        "Removed **data-loss risk** by replacing delete-and-reinsert saves with differential updates in **SQL Server stored procedures**, one 4,000 lines long.",
+        "Caught **40+ would-be defects** before merge as the team's **primary code reviewer**, a role reached in just over a year, requesting changes on 25+ of 50+ PRs and mentoring teammates.",
+        "Stopped **2 to 3x query slowdowns** in localization changes from reaching release, restoring queries to near baseline with an index and a setting to gate the stored procedures' longer path.",
+        "Removed page-by-page localization integration by designing and owning a **plug-and-play integration layer**. **One call on a module's Master page localizes that module**, and the provider is initialized through one settings page.",
+        "Made localization changes for **5+ languages**, which impacted the web app, REST APIs, databases, and mobile and iOS apps. Owned **product-wide date and time format localization**. Used async calls for provider responses on DOM load."
       ],
       "x_tech": [
         "mssql",
@@ -133,7 +137,7 @@
       "endDate": "2022-08",
       "summary": "Frontend delivery and a permission-model extension that unlocked a major account.",
       "highlights": [
-        "Unlocked a major account by extending a hierarchical permission model as a 2-week proof of concept."
+        "**Unlocked a major account** by extending a hierarchical permission model in C# and .NET as a 2-week proof of concept. Contributed production frontend changes across a full UI redesign in HTML, CSS, SCSS, jQuery and ASPX."
       ],
       "x_tech": [
         "html5",
@@ -297,34 +301,82 @@
     }
   ],
   "skills": [
-    { "name": "Languages", "keywords": ["python", "sql", "csharp", "javascript"] },
     {
-      "name": "Backend & data",
+      "name": "Languages",
+      "keywords": ["csharp", "python", "sql", "javascript", "typescript"]
+    },
+    {
+      "name": "Backend",
       "keywords": [
-        "django",
-        "drf",
+        "aspnet",
+        "dotnetcore",
+        "dotnetframework",
+        "mvc",
+        "entityframework",
         "rest",
-        "systemdesign",
-        "postgres",
-        "mysql",
-        "mssql",
-        "elasticsearch"
+        "microservices",
+        "django",
+        "drf"
       ]
     },
     {
-      "name": "AI & retrieval",
-      "keywords": ["qdrant", "clip", "reranking", "retrieval", "claudecode"],
-      "x_note": "learning LLMs, RAG and agents"
+      "name": "Databases",
+      "keywords": ["mssql", "storedprocedures", "sqlopt", "postgres", "mysql"]
+    },
+    {
+      "name": "Frontend",
+      "keywords": ["react", "jquery", "html5", "css3", "scss"]
+    },
+    {
+      "name": "Retrieval & embeddings",
+      "keywords": ["vectordb", "qdrant", "clip", "reranking", "pytorch"]
+    },
+    {
+      "name": "Generative AI",
+      "keywords": [
+        "llm",
+        "rag",
+        "aiagents",
+        "langchain",
+        "langgraph",
+        "orchestration",
+        "mcp",
+        "promptengineering",
+        "llmevaluation"
+      ]
+    },
+    {
+      "name": "Engineering",
+      "keywords": [
+        "systemdesign",
+        "designpatterns",
+        "oop",
+        "dsa",
+        "codereview",
+        "unittesting",
+        "agile",
+        "scrum"
+      ]
     },
     {
       "name": "Cloud & tooling",
-      "keywords": ["googlecloud", "docker", "cicd", "githubactions", "pytest", "git", "react"]
+      "keywords": [
+        "googlecloud",
+        "docker",
+        "cicd",
+        "githubactions",
+        "pytest",
+        "git",
+        "jira",
+        "visualstudio",
+        "claudecode"
+      ]
     }
   ],
   "projects": [
     {
       "name": "HackerRank Orchestrate",
-      "description": "Ranked 176 of 4,094 (top 5%) in a 24-hour AI agent hackathon, built with Claude Code. A critic caught 76 of 79 seeded faults, and 10 held-out samples scored 0.848 against 0.851 on development samples.",
+      "description": "Ranked 176 of 4,094 (top 5%). The task was an agent that proves whether a person's deleted data is truly gone and plans the fix, across 518 requests. A Python engine audits logs and database snapshots, Claude reads the requests, PDFs and screenshots, and a critic over every row caught 76 of 79 seeded faults. Built with Claude Code.",
       "startDate": "2026-09",
       "endDate": "2026-10",
       "url": "https://www.hackerrank.com/contests/hackerrank-orchestrate-october26/challenges/ghost-data-still-exists/leaderboard?username=Nutan_Prabhat"
@@ -357,14 +409,14 @@
     },
     {
       "name": "Portfolio",
-      "description": "A React and TypeScript site where two JSON files are the only source of truth: the build derives the site, the CV PDF, the Open Graph image, sitemap and HTML head, so nothing about me is written into code. The interesting part isn't the page, it's that CI refuses to publish content that doesn't hold together.",
+      "description": "React and TypeScript site built with Claude Code. Two JSON files drive the site and the CV PDF, and GitHub Actions blocks content that doesn't hold together.",
       "startDate": "2026-08",
       "endDate": "2026-08",
       "url": "https://github.com/epicallyunreal/Portfolio",
       "x_live": "https://nutanprabhat.dev",
       "highlights": [
         "One validator backs the CLI, the pre-commit hook and the editor, so all three agree by construction.",
-        "Site and Calibri-metric CV PDF render from the same JSON, printed by Puppeteer against a hidden route.",
+        "Site and CV PDF render from the same JSON, printed by Puppeteer against a hidden route.",
         "In-browser editor writes files locally and exports downloadable JSON when deployed, with no write path."
       ],
       "x_tech": [
@@ -378,7 +430,7 @@
         "claudecode"
       ],
       "x_featured": true,
-      "x_cv": false
+      "x_cv": true
     },
     {
       "name": "CreatorHub",
@@ -437,11 +489,11 @@
         "githubcopilot"
       ],
       "x_featured": false,
-      "x_cv": false
+      "x_cv": true
     },
     {
       "name": "LittleLemon API",
-      "description": "Django REST Framework API covering models, serializers, endpoints, and authentication with Djoser.",
+      "description": "Django REST Framework API covering models, serializers, endpoints, authentication and unit tests.",
       "startDate": "2023-10",
       "endDate": "2023-12",
       "url": "https://github.com/epicallyunreal/LittleLemon",
@@ -463,21 +515,27 @@
         "postman"
       ],
       "x_featured": false,
-      "x_cv": false
+      "x_cv": true
     },
     {
       "name": "Handwritten Text Recognition",
-      "description": "PyTorch character recognition trained on the IAM handwriting dataset, covering preprocessing through training and evaluation.",
+      "description": "PyTorch character recognition trained on the IAM handwriting dataset.",
       "startDate": "2021-07",
       "endDate": "2021-08",
       "url": "",
       "highlights": ["Implemented the preprocessing, training and evaluation pipeline end to end."],
       "x_tech": ["python", "pytorch"],
       "x_featured": false,
-      "x_cv": false
+      "x_cv": true
     }
   ],
   "awards": [
+    {
+      "title": "Competitive programming",
+      "awarder": "HackerRank and CodeChef",
+      "date": "2024",
+      "summary": "HackerRank 5-star in Python and SQL, CodeChef peak rating 1692 across 73 contests."
+    },
     {
       "title": "HackerRank Orchestrate, October 2026: rank 176 of 4,094 (top 5%) in a 24-hour AI agent hackathon",
       "awarder": "HackerRank",
@@ -509,20 +567,26 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.27.0",
+    "version": "2.28.0",
     "headlines": [
-      { "text": "I work from problems, not tickets.", "emphasis": "problems" },
+      {
+        "text": "I work from problems, not tickets.",
+        "emphasis": "problems"
+      },
       {
         "text": "I build systems that change without breaking.",
         "emphasis": "change without breaking"
       },
-      { "text": "I'm the engineer you hand the whole thing to.", "emphasis": "the whole thing" },
+      {
+        "text": "I'm the engineer you hand the whole thing to.",
+        "emphasis": "the whole thing"
+      },
       {
         "text": "Scope, design, build, ship. Usually alone.",
         "emphasis": "Scope, design, build, ship."
       }
     ],
-    "cvHeadline": "Software Engineer | Backend · Python · Django · REST APIs · SQL · Retrieval · Claude Code",
+    "cvHeadline": "Software Engineer | Backend and Full-Stack | C#, .NET, Python, SQL | Vector DB, AI-assisted development",
     "availability": "Open to relocation (EU) and remote roles",
     "careerStart": "2022-02",
     "sectionOrder": [
@@ -540,8 +604,11 @@
       "drf": "DRF",
       "rest": "REST APIs",
       "systemdesign": "System design",
-      "mssql": "SQL Server",
-      "dsa": "DSA"
-    }
+      "mssql": "MSSQL Server",
+      "dsa": "Data Structures and Algorithms",
+      "googlecloud": "Google Cloud (GCP)",
+      "sqlopt": "Query optimization"
+    },
+    "cvAvailability": "Immediate joiner · Open to relocation"
   }
 }
