@@ -322,7 +322,15 @@
     },
     {
       "name": "Databases",
-      "keywords": ["postgres", "mysql", "mssql", "storedprocedures", "sqlopt", "querytuning", "nosql"]
+      "keywords": [
+        "postgres",
+        "mysql",
+        "mssql",
+        "storedprocedures",
+        "sqlopt",
+        "querytuning",
+        "nosql"
+      ]
     },
     {
       "name": "Retrieval & embeddings",
