@@ -6,7 +6,7 @@
     "email": "prabhat9819@gmail.com",
     "phone": "",
     "url": "https://nutanprabhat.dev",
-    "summary": "I have 4.5+ years of backend and full stack experience, 3.5+ of them in C#. My work covers collaboration across teams on Zenoti's multi-tenant ASP.NET SaaS product used by 30,000+ businesses, ownership of a game from idea to 10K+ downloads, and problem solving that raised a Python retrieval system's Top-1 accuracy from 41.9% to 97.7%. Claude Code is part of my daily work, and with it I ranked top 5% of 4,094 in a 24-hour AI agent hackathon.",
+    "summary": "I have 4.5+ years of backend and full stack experience, 3.5+ of them in C#. My work covers cross-team collaboration on Zenoti's multi-tenant ASP.NET SaaS product used by 30,000+ businesses, ownership of a game from idea to 10K+ downloads, and problem solving that raised a Python retrieval system's Top-1 accuracy from 41.9% to 97.7%. Claude Code is part of my daily work, and with it I ranked top 5% of 4,094 in a 24-hour AI agent hackathon.",
     "location": {
       "city": "Pune",
       "countryCode": "IN"
@@ -33,7 +33,7 @@
       "summary": "Sole engineer on the account. Python throughout, scoping to handover.",
       "highlights": [
         "Raised a Python visual retrieval system's **Top-1 accuracy from 41.9% to 97.7%** by growing its reranker from 3 to 8 features, tuned against MRR, with CLIP embeddings in Qdrant for recall. Re-keyed the Qdrant index, extracted the new features from images and set each weight through an evaluation harness.",
-        "**Sole engineer on an enterprise client account**, owning scoping, HLD/LLD, build, test, documentation and handover.",
+        "**Sole engineer on an enterprise client account**, owning requirements, HLD/LLD, build, test, documentation and handover.",
         "Delivered a config-driven **Python CAD processing platform** end to end, with DXF parsing, spatial indexing, PySide6 and an integration with the client's system. **Automated 3+ manual workflows** with a JSON rule engine running 10+ rules in priority order, with audit trails. Made batch processing **one click, with each file's full output set in under 30 seconds**."
       ],
       "x_tech": [
@@ -96,10 +96,10 @@
       "endDate": "2024-05",
       "summary": "Backend and full-stack work on a large multi-tenant enterprise product.",
       "highlights": [
-        "Shipped **full-stack features in ASP.NET, C#, JavaScript, jQuery and SQL**, several with a product-wide footprint, and traced production bugs through server logs.",
-        "Removed **data-loss risk** by replacing delete-and-reinsert saves with differential updates in **SQL Server stored procedures**, one 4,000 lines long.",
+        "Shipped **full-stack features in ASP.NET, C#, JavaScript, jQuery and SQL**, several with a product-wide footprint, and used server logs for debugging production issues.",
+        "Removed **data-loss risk** by refactoring delete-and-reinsert saves into differential updates in **SQL Server stored procedures**, one 4,000 lines long.",
         "Caught **40+ would-be defects** before merge as the team's **primary code reviewer**, a role reached in just over a year, requesting changes on 25+ of 50+ PRs and mentoring teammates.",
-        "Stopped **2 to 3x query slowdowns** in localization changes from reaching release, restoring queries to near baseline with an index and a setting to gate the stored procedures' longer path.",
+        "Stopped **2 to 3x query performance regressions** in localization changes from reaching release, restoring queries to near baseline with an index and a setting to gate the stored procedures' longer path.",
         "Removed page-by-page localization integration by designing and owning a **plug-and-play integration layer**. **One call on a module's Master page localizes that module**, and the provider is initialized through one settings page.",
         "Made localization changes for **5+ languages**, which impacted the web app, REST APIs, databases, and mobile and iOS apps. Owned **product-wide date and time format localization**. Used async calls for provider responses on DOM load."
       ],
@@ -299,7 +299,7 @@
   "skills": [
     {
       "name": "Languages",
-      "keywords": ["csharp", "python", "sql", "javascript", "typescript"]
+      "keywords": ["csharp", "python", "sql", "javascript", "typescript", "xml"]
     },
     {
       "name": "Backend",
@@ -317,7 +317,7 @@
     },
     {
       "name": "Databases",
-      "keywords": ["mssql", "storedprocedures", "sqlopt", "postgres", "mysql"]
+      "keywords": ["mssql", "storedprocedures", "sqlopt", "postgres", "mysql", "nosql"]
     },
     {
       "name": "Frontend",
@@ -569,7 +569,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.28.3",
+    "version": "2.29.0",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",

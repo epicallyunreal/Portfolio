@@ -248,6 +248,16 @@
       "src": "",
       "color": "#DC244C"
     },
+    "xml": {
+      "label": "XML",
+      "src": "",
+      "color": "#005FAD"
+    },
+    "nosql": {
+      "label": "NoSQL",
+      "src": "",
+      "color": "#47A248"
+    },
     "retrieval": {
       "label": "Retrieval",
       "src": "",
