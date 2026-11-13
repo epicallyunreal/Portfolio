@@ -6,7 +6,7 @@
     "email": "prabhat9819@gmail.com",
     "phone": "",
     "url": "https://nutanprabhat.dev",
-    "summary": "I have 4.5+ years of backend and full stack experience, 3.5+ of them in C#. My work covers cross-team collaboration on Zenoti's multi-tenant ASP.NET SaaS product used by 30,000+ businesses, ownership of a game from idea to 10K+ downloads, and problem solving that raised a Python retrieval system's Top-1 accuracy from 41.9% to 97.7%. Claude Code is part of my daily work, and with it I ranked top 5% of 4,094 in a 24-hour AI agent hackathon.",
+    "summary": "I have 4.5+ years of backend and full-stack experience, 3.5+ of them in C# across ASP.NET and Unity. My work covers cross-team collaboration on Zenoti's multi-tenant ASP.NET SaaS product used by 30,000+ businesses, ownership of a game from idea to 10K+ downloads, and problem solving that raised a Python retrieval system's Top-1 accuracy from 41.9% to 97.7%. Claude Code is part of my daily work, and with it I ranked top 5% of 4,094 in a 24-hour AI agent hackathon.",
     "location": {
       "city": "Pune",
       "countryCode": "IN"
@@ -32,9 +32,9 @@
       "endDate": "2026-10",
       "summary": "Sole engineer on the account. Python throughout, scoping to handover.",
       "highlights": [
-        "Raised a Python visual retrieval system's **Top-1 accuracy from 41.9% to 97.7%** by growing its reranker from 3 to 8 features, tuned against MRR, with CLIP embeddings in Qdrant for recall. Re-keyed the Qdrant index, extracted the new features from images and set each weight through an evaluation harness.",
         "**Sole engineer on an enterprise client account**, owning requirements, HLD/LLD, build, test, documentation and handover.",
-        "Delivered a config-driven **Python CAD processing platform** end to end, with DXF parsing, spatial indexing, PySide6 and an integration with the client's system. **Automated 3+ manual workflows** with a JSON rule engine running 10+ rules in priority order, with audit trails. Made batch processing **one click, with each file's full output set in under 30 seconds**."
+        "Raised a Python visual retrieval system's **Top-1 accuracy from 41.9% to 97.7%** by growing its reranker from 3 to 8 features, tuned against MRR, with CLIP embeddings in Qdrant for recall. Re-keyed the Qdrant index, extracted the new features from images and set each weight through an evaluation harness.",
+        "Delivered a config-driven **Python CAD processing platform** end to end, with DXF parsing, spatial indexing, PySide6 and an integration with the client's system. **Automated 3+ manual workflows** with a JSON rule engine running 10+ rules in priority order, with audit trails. Added a **one-click batch mode** next to the step-by-step review mode, running every stage in **under 30 seconds per file**."
       ],
       "x_tech": [
         "python",
@@ -62,8 +62,8 @@
       "endDate": "2025-12",
       "summary": "Unity and C# on the client, server-side JavaScript on Unity Cloud Code.",
       "highlights": [
-        "Reached **10K+ downloads and peaks of 500+ DAU and 2,500+ MAU with no paid ads** by writing and shipping Pen Fight 2D, a turn-based game in C# and Unity.",
-        "Owned the **full SDLC from ideation to production**, through internal testing, bug fixes, a closed beta and new features.",
+        "Shipped Pen Fight 2D (C#, Unity) to **10K+ downloads and peaks of 500+ DAU and 2,500+ MAU with no paid ads**.",
+        "Owned the **full SDLC from ideation to production**, through testing, bug fixes, a 22-tester closed beta and new features.",
         "Designed a **serverless, server-authoritative economy** on Unity Cloud Code with Google Cloud auth. Architected race-safe **online multiplayer** and friend challenges on Unity Lobby and Relay, with master-follower physics."
       ],
       "x_tech": [
@@ -96,12 +96,12 @@
       "endDate": "2024-05",
       "summary": "Backend and full-stack work on a large multi-tenant enterprise product.",
       "highlights": [
-        "Shipped **full-stack features in ASP.NET, C#, JavaScript, jQuery and SQL**, several with a product-wide footprint, and used server logs for debugging production issues.",
+        "Shipped **full-stack features in ASP.NET, C#, JavaScript and SQL**, many of them in the product-wide jQuery upgrade and localization, and used server logs for debugging production issues.",
         "Removed **data-loss risk** by refactoring delete-and-reinsert saves into differential updates in **SQL Server stored procedures**, one 4,000 lines long.",
-        "Caught **40+ would-be defects** before merge as the team's **primary code reviewer**, a role reached in just over a year, requesting changes on 25+ of 50+ PRs and mentoring teammates.",
-        "Stopped **2 to 3x query performance regressions** in localization changes from reaching release, restoring queries to near baseline with an index and a setting to gate the stored procedures' longer path.",
-        "Removed page-by-page localization integration by designing and owning a **plug-and-play integration layer**. **One call on a module's Master page localizes that module**, and the provider is initialized through one settings page.",
-        "Made localization changes for **5+ languages**, which impacted the web app, REST APIs, databases, and mobile and iOS apps. Owned **product-wide date and time format localization**. Used async calls for provider responses on DOM load."
+        "Caught **40+ would-be defects** before merge as the team's **primary code reviewer**, a role reached in just over a year, requesting changes on 25+ of 50+ PRs and helping teammates with coding and debugging.",
+        "Stopped **2 to 3x query performance regressions** in localization changes from reaching release, restoring queries to within 1.2x of baseline with an index and a setting to gate the stored procedures' longer path.",
+        "Designed and owned a **plug-and-play localization integration layer** that cut each module's localization time by **60%**. **One call on a module's Master page localizes that module**.",
+        "Made localization changes for **5+ languages**, which impacted the web app, REST APIs and databases. Owned **product-wide date and time format localization**. Used async calls for provider responses on DOM load."
       ],
       "x_tech": [
         "mssql",
@@ -282,7 +282,7 @@
       "url": "https://www.coursera.org/account/accomplishments/specialization/4YNB2KO8W7CO",
       "x_status": "completed",
       "x_tech": [],
-      "x_note": "Generative AI and Prompt Engineering.",
+      "x_note": "Generative AI and prompt engineering.",
       "x_cv": false
     },
     {
@@ -291,7 +291,7 @@
       "date": "2021-09",
       "url": "https://coursera.org/share/f0f239bf3b0710a9f642e1e91f37db1f",
       "x_status": "completed",
-      "x_note": "Smart contracts and decentralised application design.",
+      "x_note": "Smart contracts and decentralized application design.",
       "x_tech": ["python", "postman"],
       "x_cv": false
     }
@@ -385,8 +385,8 @@
       "url": "https://github.com/epicallyunreal/XpenseSplitter",
       "x_live": "https://split.nutanprabhat.dev/",
       "highlights": [
-        "Chronological ledger: amount, category, payment type, who paid, and exactly who splits it.",
-        "Who owes what, settled two ways: every pairwise debt, or the fewest transfers that clear it.",
+        "Chronological ledger of amount, category, payment type, who paid and exactly who splits it.",
+        "Settles who owes what two ways, as every pairwise debt or as the fewest transfers that clear it.",
         "A trip shares as a link that carries it, so no account, nothing uploaded, nothing to expire."
       ],
       "x_tech": [
@@ -520,7 +520,7 @@
       "highlights": ["Implemented the preprocessing, training and evaluation pipeline end to end."],
       "x_tech": ["python", "pytorch"],
       "x_featured": false,
-      "x_cv": true
+      "x_cv": false
     }
   ],
   "awards": [
@@ -569,7 +569,7 @@
   "interests": [],
   "references": [],
   "x_meta": {
-    "version": "2.29.0",
+    "version": "2.30.0",
     "headlines": [
       {
         "text": "I work from problems, not tickets.",
@@ -592,7 +592,7 @@
         "emphasis": "Just in time"
       }
     ],
-    "cvHeadline": "Software Engineer | Backend and Full-Stack | C#, .NET, Python, SQL | Vector DB, AI-assisted development",
+    "cvHeadline": "Software Engineer | Backend and Full-Stack | C#, ASP.NET, SQL Server, Python | AI-assisted development",
     "availability": "Open to relocation (EU) and remote roles",
     "careerStart": "2022-02",
     "sectionOrder": [
@@ -610,7 +610,7 @@
       "drf": "DRF",
       "rest": "REST APIs",
       "systemdesign": "System design",
-      "mssql": "MSSQL Server",
+      "mssql": "MS SQL Server",
       "dsa": "Data Structures and Algorithms",
       "googlecloud": "Google Cloud (GCP)",
       "sqlopt": "Query optimization"
